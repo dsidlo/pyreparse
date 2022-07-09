@@ -44,7 +44,7 @@ due to a need to tweak the main regexp, or possible a corrupt input line.
                for line in txt_file:
                    match_def, matched_fields = prp.match(line)
             ```
-      2. With or without Callback, you can trigger logic when name-regexp fields match using (see [tests](src/pyreparse/tests/test_pyreparse.py?plain=1#254) as an example)...
+      2. With or without Callback, you can trigger logic when name-regexp fields match using (see [tests](src/pyreparse/tests/test_pyreparse.py?plain=57#L254) as an example)...
          1. ```
             from pyreparse import PyReParse as PRP
             
