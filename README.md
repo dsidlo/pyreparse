@@ -35,7 +35,7 @@ due to a need to tweak the main regexp, or possible a corrupt input line.
    4. TODO: callback
       1. On match, run the stated callback function to perform validations and processing logic. In fact, all processig logic can be implemented within callbacks.
    5. Write processing logic...
-      1. If all processing logic is implemented as callbacks, the main logic would look like...
+      1. If all processing logic is implemented as callbacks, the main logic would look like... <i>(TODO: Callbacks implemented soon...)</i>
          1. ``` 
             with open(file_path, 'r') as txt_file:
                for line in txt_file:

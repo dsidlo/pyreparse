@@ -16,15 +16,15 @@ class TestPyReParse(unittest.TestCase):
 
     rtrpc = PyReParse
 
-    in_line_0 = r'''**BP0420170101REPOREPOPAID-NSFPOSF00016-38864369
+    in_line_0 = r'''**BP0420170101REPOREPOPAID-NSFPOSF00016-95214549
 '''
-    in_line_1 = r'''IPPOSFEE             FILE DATE: 12/31/15              SAN MATEO CREDIT UNION                 RPPOSRPT                    PAGE:    1
+    in_line_1 = r'''IPPOSFEE             FILE DATE: 12/31/15              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
 '''
     in_line_2 = r'''RUN DATE: 01/01/16   RUN TIME:  00:14:18            Paid-NSF POS Fees Charged
 '''
     in_line_3 = r'''------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------                                                                  
 '''
-    in_line_4 = r'''   342568-80  $  0.00    VALLARTA SUPERMARK ARVIN  $     5.41  01/02/16    $     0.00  120104028       71567  ZERO OVERDRAFT FEE                                                         
+    in_line_4 = r'''   394654-54  $  0.00    VALLARTA SUPERMARK ARVIN  $     5.41  01/02/16    $     0.00  658524658       56546  ZERO OVERDRAFT FEE                                                         
 
 '''
 
@@ -179,18 +179,10 @@ class TestPyReParse(unittest.TestCase):
     expected_value_3_2 = {'run_date': '01/01/16', 'run_time': '00:14:18'}
 
     expected_value_4_1 = ['tx_line']
-    expected_value_4_2 = {'ac_num': '342568',
-                          'ac_type': '80',
-                          'balance': '$     0.00',
-                          'fee_code': '  ',
-                          'fee_type': 'ZERO OVERDRAFT '
-                                      'FEE                                                         ',
-                          'nsf_fee': '$  0.00',
-                          'trace_num': '120104028 ',
-                          'tx_amt': '$     5.41',
-                          'tx_date': '01/02/16',
-                          'tx_desc': 'VALLARTA SUPERMARK ARVIN',
-                          'tx_seq': '71567'}
+    expected_value_4_2 = {'ac_num': '394654', 'ac_type': '54', 'balance': '$     0.00', 'fee_code': '  ',
+                          'fee_type': 'ZERO OVERDRAFT FEE                                                         ',
+                          'nsf_fee': '$  0.00', 'trace_num': '658524658 ', 'tx_amt': '$     5.41',
+                          'tx_date': '01/02/16', 'tx_desc': 'VALLARTA SUPERMARK ARVIN', 'tx_seq': '56546'}
 
     def test_load_re(self):
         rtp = PyReParse()
