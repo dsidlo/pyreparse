@@ -1,0 +1,2491 @@
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38864369
+
+
+IPPOSFEE             FILE DATE: 12/31/16              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  00:17:32            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   102402- 3  $  0.00    MENDO MILL CLEARLAKE CAU  $    56.73  01/03/17    $     0.00  51459893       89141  ZERO OVERDRAFT FEE
+   264146- 1  $  0.00    COSTCO WHSE #1106 ANN AR  $    58.08  01/03/17    $     0.00  48947945       89252  ZERO OVERDRAFT FEE
+   936432-80  $  0.00    CHIPOTLE 0430 REDWOOD CI  $    19.08  01/03/17    $     0.00  108627684       89294  ZERO OVERDRAFT FEE
+   433773-80  $  0.00    MICROSOFT *STORE 800-642  $     2.49  01/03/17    $     0.00  790289566       89203  ZERO OVERDRAFT FEE
+   602854-80  $ 30.00    CHIPOTLE 1517 SAN MATEO   $     8.96  01/03/17   -$    87.09  724224213       89313  POS/ATM COURTESY FEE
+   536445-80  $  0.00    50140NVCCRMGMHQ 500 N SI  $   503.00  01/03/17    $     0.00  143494292       89011  ZERO OVERDRAFT FEE
+   302291-80  $ 30.00    ULTRON PROCESS  SAN PABL  $   104.00  01/03/17   -$   736.65  897042244       89516  POS/ATM COURTESY FEE
+   192424-80  $  0.00    MINI MART 297 SAN BRUNO   $    20.64  01/03/17    $     0.00  730892110       88999  ZERO OVERDRAFT FEE
+   725821-80  $  0.00    PALACE STARBUCKS LAS VEG  $     6.19  01/03/17    $     0.00  638306401       89410  ZERO OVERDRAFT FEE
+   335170-80  $  0.00    GASSYS DIGITAL SVCS AMZ8  $     2.58  01/03/17    $     0.00  020816806       89281  ZERO OVERDRAFT FEE
+   834521-80  $  0.00    GASSYS VIDEO ON DEMAND 8  $     2.99  01/03/17    $     0.00  52059880       89241  ZERO OVERDRAFT FEE
+   184671-81  $  0.00    7-ELEVEN 600 E. 3RD ST.   $    31.04  01/03/17    $     0.00  324932          89493  ZERO OVERDRAFT FEE
+   678696-80  $  0.00    BETTY BURGERS SANTA CRUZ  $    11.09  01/03/17    $     0.00  930947005       89046  ZERO OVERDRAFT FEE
+   941128-80  $  0.00    5 STAR LIQUOR NEWARK CAU  $    32.94  01/03/17    $     0.00  899976178       89099  ZERO OVERDRAFT FEE
+   764804-80  $ 30.00    CHIPOTLE 1517 SAN MATEO   $    20.98  01/03/17   -$    17.00  560810127       89371  POS/ATM COURTESY FEE
+   392812-80  $  0.00    HASSETT ACE HARDWARE R R  $    20.14  01/03/17    $     0.00  87529870       89158  ZERO OVERDRAFT FEE
+   358696-80  $  0.00    UberUS_A 1455 Market St   $     5.90  01/03/17    $     9.85  1214452       89595  ZERO OVERDRAFT FEE
+   452975-80  $  0.00    FIVE GUYS #CA-1545 SAN B  $    11.96  01/03/17    $     0.00  86867469       89085  ZERO OVERDRAFT FEE
+   941755-80  $  0.00    FIVE GUYS #CA-1545 SAN B  $     7.61  01/03/17    $     0.00  277459814       89086  ZERO OVERDRAFT FEE
+   262183-80  $  0.00    7-ELEVEN 293 87TH ST US   $     3.49  01/03/17    $     0.00  246249          88989  ZERO OVERDRAFT FEE
+   580922-80  $  0.00    ARCO 06136 1200 GENEVA A  $    23.32  01/03/17    $     0.00  38157           89599  ZERO OVERDRAFT FEE
+   393789-80  $  0.00    CHIPOTLE 1617 PALO ALTO   $    12.65  01/03/17   -$     6.46  15554874       89353  ZERO OVERDRAFT FEE
+   581416-80  $  0.00    CCSF MTA IPS PRKNG METES  $     2.25  01/03/17    $     0.00  727596500       89331  ZERO OVERDRAFT FEE
+   323169-80  $  0.00    OLD NAVY US 5753 REDWOOD  $     0.47  01/03/17    $     0.00  544961045       89594  ZERO OVERDRAFT FEE
+   631058-80  $  0.00    UberUS_A 1455 Market St   $     6.55  01/03/17    $     0.00  358838034       89021  ZERO OVERDRAFT FEE
+   982918-80  $  0.00    UberUS_A 1455 Market St   $     7.39  01/03/17    $     0.00  971698835       89116  ZERO OVERDRAFT FEE
+ 82025114-80  $  0.00    RALEY'S #412 GRANITE BAY  $    52.81  01/03/17    $     0.00  443137254       89031  ZERO OVERDRAFT FEE
+
+             -----------
+
+
+Total NSF:   $     90.00
+Total ODT:   $      0.00
+
+Grand Total: $     90.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38864370
+
+
+IPSHBFEE             FILE DATE: 12/31/16              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  00:17:46            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+     No Feeable Transactions Found
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38864372
+
+
+IPPOSFEE             FILE DATE: 12/31/16              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  00:47:55            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   997881-80  $  0.00    IPSY *GLAM BAG 888-769-4  $    10.90  01/03/17    $     0.00  595611996       89850  ZERO OVERDRAFT FEE
+   717594-81  $  0.00    LA COCINA BAR AND GRILLT  $    97.20  01/03/17    $ 1,067.52  32463030       90133  ZERO OVERDRAFT FEE
+   755413-80  $  0.00    CHEVRON 0097927 HALF MOO  $    64.00  01/03/17    $     0.00  265514947       89710  ZERO OVERDRAFT FEE
+   262773-80  $  0.00    EL TORO LOCO PACIFICA CA  $    64.43  01/03/17    $     0.00  179496950       90113  ZERO OVERDRAFT FEE
+   674980-80  $ 30.00    IPSY *GLAM BAG 888-769-4  $    10.98  01/03/17   -$   725.13  895471827       89649  POS/ATM COURTESY FEE
+   591077-80  $  0.00    IPSY *GLAM BAG 888-769-4  $    10.88  01/03/17    $     0.00  131699653       89644  ZERO OVERDRAFT FEE
+   142692-80  $  0.00    SAN MATEO AUTO SERVICESS  $    20.00  01/03/17    $     0.00  910596781       90152  ZERO OVERDRAFT FEE
+   713561-81  $  0.00    REDBOX *DVD RENTAL OAKBR  $     3.27  01/03/17    $     0.00  774693654       89672  ZERO OVERDRAFT FEE
+   835264-80  $  0.00    COMCAST CALIFORN CS 1X 8  $   226.30  01/03/17    $     0.00  995199039       89837  ZERO OVERDRAFT FEE
+   620783-80  $ 30.00    IPSY *GLAM BAG 888-769-4  $    10.90  01/03/17   -$     2.86  625939930       90068  POS/ATM COURTESY FEE
+   078972-80  $ 30.00    TMOBILE*POSTPAID PDA 800  $   100.00  01/03/17   -$   589.56  945276427       90093  POS/ATM COURTESY FEE
+   433863-80  $  0.00    APL* ITUNES.COM/BILL 866  $    14.99  01/03/17    $     0.00  67731280       89915  ZERO OVERDRAFT FEE
+   349606-80  $  0.00    SAN MATEO AU* SAN MATEO   $    41.04  01/03/17    $     0.00  325280753       90072  ZERO OVERDRAFT FEE
+   840877-80  $ 30.00    IPSY *GLAM BAG 888-769-4  $    10.88  01/03/17   -$    52.39  785469900       89862  POS/ATM COURTESY FEE
+   795198-80  $  0.00    SQ *PHILZ COFFEE Palo Al  $    10.00  01/03/17    $     0.00  36516994       89700  ZERO OVERDRAFT FEE
+   183041-80  $  0.00    APL* ITUNES.COM/BILL 866  $     9.98  01/03/17    $     0.00  057355064       89977  ZERO OVERDRAFT FEE
+   330401-80  $ 30.00    IPSY *GLAM BAG 888-769-4  $    10.88  01/03/17   -$    10.88  388705584       89696  POS/ATM COURTESY FEE
+   226286-80  $ 30.00    COMCAST CALIFORN CS 1X 8  $   283.01  01/03/17   -$   706.59  081309691       89808  POS/ATM COURTESY FEE
+   999558-81  $ 30.00    Experian *CreditRepo866-  $    21.95  01/03/17   -$     3.52  523787437       90227  POS/ATM COURTESY FEE
+   015613-80  $  0.00    GASSYS Video On Demand A  $     2.99  01/03/17    $     0.00  6044064       89687  ZERO OVERDRAFT FEE
+   282525-80  $  0.00    GASSYS Video On Demand A  $     2.99  01/03/17    $     0.00  160142409       90252  ZERO OVERDRAFT FEE
+   206530-80  $  0.00    7-ELEVEN 217 SUTTER STRE  $    14.59  01/03/17    $     0.00  187730          90143  ZERO OVERDRAFT FEE
+   165628-80  $  0.00    IPSY *GLAM BAG 888-769-4  $    10.88  01/03/17    $     0.00  71507040       90046  ZERO OVERDRAFT FEE
+   781942-80  $  0.00    CHEVRON 0207718 MENLO PA  $     6.43  01/03/17    $     0.00  891379481       89711  ZERO OVERDRAFT FEE
+   829289-80  $ 30.00    KINGSISLE *WIZARD101 512  $     9.95  01/03/17   -$   626.87  16735140       90102  POS/ATM COURTESY FEE
+   760632-80  $  0.00    UberUS_A 1455 Market St   $     5.00  01/03/17    $     0.00  020277225       90001  ZERO OVERDRAFT FEE
+   903002-80  $ 30.00    APL* ITUNES.COM/BILL 866  $     9.99  01/03/17   -$   694.69  925985940       89932  POS/ATM COURTESY FEE
+   008397-80  $  0.00    IPSY *GLAM BAG 888-769-4  $    10.88  01/03/17    $     0.00  54267712       90050  ZERO OVERDRAFT FEE
+   968403-80  $  0.00    IPSY *GLAM BAG 888-769-4  $    10.73  01/03/17    $     0.00  797865301       90049  ZERO OVERDRAFT FEE
+   964989-80  $  0.00  J APL* ITUNES.COM/BILL 866  $     7.99  01/03/17   -$     3.35  334413052       89876  WAIVED PAID-NSF FEE
+   575989-80  $ 30.00    IPSY *GLAM BAG 888-769-4  $    10.85  01/03/17   -$    12.78  793949269       89851  POS/ATM COURTESY FEE
+   819060-80  $  0.00    GOOGLE *Music g.co/payhe  $     1.29  01/03/17    $     0.00  131773099       90057  ZERO OVERDRAFT FEE
+   101024-80  $ 30.00    PCA*SAN PABLO LYTTON SAN  $   519.50  01/03/17   -$   513.61  694801590       90142  POS/ATM COURTESY FEE
+   140210-80  $  0.00    108CompanyKitchen877280M  $     9.84  01/03/17    $     0.00  014270179       90160  ZERO OVERDRAFT FEE
+   119457-80  $  0.00    UberUS_A 1455 Market St   $    52.43  01/03/17    $    17.27  610496132       90169  ZERO OVERDRAFT FEE
+   931903-80  $  0.00    COMCAST CALIFORN CS 1X 8  $   386.48  01/03/17    $     0.00  278707109       89802  ZERO OVERDRAFT FEE
+   009230-80  $  0.00    APL* ITUNES.COM/BILL 866  $    40.97  01/03/17    $     0.00  70524013       89981  ZERO OVERDRAFT FEE
+   878200-80  $  0.00    SAN MATEO AU* SAN MATEO   $    75.00  01/03/17    $ 2,251.79  720092184       90059  ZERO OVERDRAFT FEE
+   877450-80  $  0.00    7-ELEVEN 2200 BAYSHORE B  $     6.27  01/03/17    $     0.00  380193          90249  ZERO OVERDRAFT FEE
+   979892-80  $  0.00    A WIRELESS PACIFICA PACI  $   219.98  01/03/17   -$    37.38  782690531       90085  ZERO OVERDRAFT FEE
+   346664-80  $ 30.00    MEDIAVEX.COM MONTREAL QC  $    39.99  01/03/17   -$    29.30  680364893       90193  POS/ATM COURTESY FEE
+   782557-80  $ 30.00    IPSY *GLAM BAG 888-769-4  $    10.98  01/03/17   -$     8.54  187914411       89866  POS/ATM COURTESY FEE
+   151619-80  $ 30.00    IPSY *GLAM BAG 888-769-4  $    10.88  01/03/17   -$     7.37  069784422       90240  POS/ATM COURTESY FEE
+   876672-80  $  0.00    APL* ITUNES.COM/BILL 866  $     9.99  01/03/17    $     0.00  811230988       89933  ZERO OVERDRAFT FEE
+   070558-80  $ 30.00    HARRAH'S RENO NRCCHR04NR  $   504.99  01/03/17   -$   102.43  04470829       89769  POS/ATM COURTESY FEE
+   680048-80  $  0.00    IPSY *GLAM BAG 888-769-4  $    10.88  01/03/17    $     0.00  31021847       89903  ZERO OVERDRAFT FEE
+   196375-80  $ 30.00    IDT*BOSS INTL CALLING  8  $     5.00  01/03/17   -$   760.33  955161877       89754  POS/ATM COURTESY FEE
+
+             -----------
+
+
+Total NSF:   $    480.00
+Total ODT:   $      0.00
+
+Grand Total: $    480.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38864373
+
+
+IPSHBFEE             FILE DATE: 12/31/16              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  00:48:10            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+     No Feeable Transactions Found
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38864375
+
+
+IPPOSFEE             FILE DATE: 12/31/16              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  01:18:18            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   836696-80  $  0.00    CVS/PHARMACY #09 09812-S  $    20.65  01/03/17    $     2.03  868840876       90368  ZERO OVERDRAFT FEE
+   136271-83  $  0.00    BUCA DI BEPPO-PALO ALTOP  $    38.05  01/03/17    $     0.00  810347309       90379  ZERO OVERDRAFT FEE
+   510386-81  $  0.00    UberUS_A 1455 Market St   $     9.88  01/03/17    $     0.00  487004004       90391  ZERO OVERDRAFT FEE
+   742528-84  $  0.00    HLU*Hulu 90448370-U HULU  $    11.99  01/03/17    $     0.00  345138908       90412  ZERO OVERDRAFT FEE
+   017906-80  $  0.00    Evine  *117887077 800-67  $     9.86  01/03/17    $     0.00  052026464       90421  ZERO OVERDRAFT FEE
+   547931-80  $  0.00    Evine  *116594241.2of6 8  $     6.33  01/03/17    $     0.00  425466876       90426  ZERO OVERDRAFT FEE
+   945847-80  $  0.00    Evine  *117868383 800-67  $     7.40  01/03/17    $     0.00  078677074       90433  ZERO OVERDRAFT FEE
+   788834-80  $  0.00    Evine  *117886306 800-67  $     6.31  01/03/17    $     0.00  503638824       90435  ZERO OVERDRAFT FEE
+   888858-80  $  0.00    UberUS_A 1455 Market St   $     8.22  01/03/17    $     0.00  90361205       90343  ZERO OVERDRAFT FEE
+   165940-80  $  0.00    UberUS_A 1455 Market St   $    10.37  01/03/17    $     0.00  21800889       90392  ZERO OVERDRAFT FEE
+   372876-80  $ 30.00    HOLLY GAS AND DIESEL SAN  $    40.00  01/03/17   -$   704.96  839526446       90438  POS/ATM COURTESY FEE
+   113368-80  $  0.00    UberUS_A 1455 Market St   $     5.75  01/03/17    $     0.00  604903745       90464  ZERO OVERDRAFT FEE
+
+             -----------
+
+
+Total NSF:   $     30.00
+Total ODT:   $      0.00
+
+Grand Total: $     30.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38864376
+
+
+IPSHBFEE             FILE DATE: 12/31/16              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  01:18:33            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+     No Feeable Transactions Found
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38864378
+
+
+IPPOSFEE             FILE DATE: 12/31/16              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  01:48:41            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   001755-81  $  0.00    HOLIDAY MARKET CANTON MI  $    39.04  01/03/17    $     0.00  165500281       90922  ZERO OVERDRAFT FEE
+   696127-80  $  0.00    H&M #249 SAN MATEO CAUS   $     5.35  01/03/17    $    82.90  087060540       90628  ZERO OVERDRAFT FEE
+   622881-80  $  0.00    VICTORIA'S SECRET 0078 S  $    88.67  01/03/17    $    16.64  407458611       90864  ZERO OVERDRAFT FEE
+   099594-80  $ 30.00    TJ MAXX #842 FAIRFIELD C  $    30.29  01/03/17   -$   176.26  052123875       91122  POS/ATM COURTESY FEE
+   360483-80  $  0.00    CHEVRON 0093591 408-888-  $    13.00  01/03/17    $     0.00  062091316       90903  ZERO OVERDRAFT FEE
+   080612-80  $  0.00    BURGER KING #6292 REDWOO  $     8.27  01/03/17    $     0.00  320341878       90791  ZERO OVERDRAFT FEE
+   585209-80  $ 30.00    MCDONALD'S F7841 HAYWARD  $    46.12  01/03/17   -$   753.61  618040802       91210  POS/ATM COURTESY FEE
+   997072-80  $  0.00    LITTLE CAESARS 1374 000M  $     8.68  01/03/17    $     0.00  77515211       91007  ZERO OVERDRAFT FEE
+   283081-80  $ 30.00    IPSY *GLAM BAG 888-769-4  $    10.98  01/03/17   -$   766.11  112542452       91185  POS/ATM COURTESY FEE
+   149459-80  $  0.00    WINGSTOP 0613 MILLBRAE C  $    25.06  01/03/17    $     0.00  986924823       91131  ZERO OVERDRAFT FEE
+   268946-80  $  0.00    BURGER KING #6028 SAN JO  $    12.38  01/03/17    $     0.00  861518439       90804  ZERO OVERDRAFT FEE
+   519696-80  $  0.00    MCDONALD'S F13001 MILLBR  $    28.69  01/03/17    $     0.00  102045497       91293  ZERO OVERDRAFT FEE
+   403514-80  $  0.00    UberUS_A 1455 Market St   $    32.58  01/03/17    $     0.00  776105168       91263  ZERO OVERDRAFT FEE
+   064376-80  $  0.00    UberUS_A 1455 Market St   $    16.81  01/03/17    $     0.00  25882544       91287  ZERO OVERDRAFT FEE
+   349335-80  $  0.00  J CMSVEND*CV SAN JOSE SAN   $     1.50  01/03/17   -$    36.66  436677303       91023  WAIVED PAID-NSF FEE
+   143116-80  $  0.00  J CMSVEND*CV SAN JOSE SAN   $     0.75  01/03/17   -$    37.41  820268071       91024  WAIVED PAID-NSF FEE
+   668136-80  $  0.00  J CMSVEND*CV SAN JOSE SAN   $     0.75  01/03/17   -$    38.16  221526746       91141  WAIVED PAID-NSF FEE
+   816796-80  $  0.00  J CMSVEND*CV SAN JOSE SAN   $     1.00  01/03/17   -$    39.16  896107294       91143  WAIVED PAID-NSF FEE
+   860433-80  $  0.00    JACK IN THE BOX #0469  R  $    15.65  01/03/17    $    39.18  887216230       90623  ZERO OVERDRAFT FEE
+   635045-80  $  0.00    APPLE STORE  #R231 SAN M  $    86.31  01/03/17    $     0.00  258007805       91163  ZERO OVERDRAFT FEE
+   708099-80  $  0.00    GASSYS Video On Demand A  $    19.99  01/03/17    $     0.00  478756923       91189  ZERO OVERDRAFT FEE
+   619930-80  $  0.00    JACK IN THE BOX #0409  S  $     9.78  01/03/17    $     0.00  780188626       90543  ZERO OVERDRAFT FEE
+   303020-80  $  0.00    H&M #178 DENVER COUS      $    10.75  01/03/17    $     0.00  208613187       90767  ZERO OVERDRAFT FEE
+   871406-80  $  0.00    7-ELEVEN 3998 18TH STREE  $     2.09  01/03/17    $     0.00  343658          91253  ZERO OVERDRAFT FEE
+   325841-80  $  0.00    STEAK-N-SHAKE#0629 Q99 G  $    10.42  01/03/17    $     0.00  501619406       91064  ZERO OVERDRAFT FEE
+   247094-81  $  0.00    DRAFTKINGS 6175007995  6  $    26.00  01/03/17    $     0.00  52921740       91132  ZERO OVERDRAFT FEE
+   434270-80  $ 30.00    CHEVRON 0097289 SAN JOSE  $    39.07  01/03/17   -$    34.19  526375530       90898  POS/ATM COURTESY FEE
+   665791-80  $  0.00    JACK IN THE BOX 495 SAN   $    13.15  01/03/17    $     0.00  060394576       90629  ZERO OVERDRAFT FEE
+   277612-80  $  0.00    JACK IN THE BOX #0438  R  $     8.58  01/03/17    $     0.00  717964457       90714  ZERO OVERDRAFT FEE
+   425741-80  $  0.00    JACK IN THE BOX #0494  C  $     8.50  01/03/17    $     0.00  028034255       90705  ZERO OVERDRAFT FEE
+   458201-80  $  0.00    MCDONALD'S F3632 SAN JOS  $    19.05  01/03/17    $     0.00  378813233       91291  ZERO OVERDRAFT FEE
+   631294-80  $  0.00    JACK IN THE BOX #0525  R  $     1.30  01/03/17    $     0.00  204027409       90574  ZERO OVERDRAFT FEE
+   010905-80  $  0.00    UberUS_A 1455 Market St   $    11.57  01/03/17    $     0.00  791211771       90732  ZERO OVERDRAFT FEE
+   037366-80  $  0.00    GOOGLE *Scopely Inc g.co  $     1.99  01/03/17    $     0.00  179284775       91177  ZERO OVERDRAFT FEE
+   251566-81  $  0.00    UberUS_A 1455 Market St   $    14.13  01/03/17    $     0.00  75155417       90612  ZERO OVERDRAFT FEE
+   572997-80  $ 30.00    CHEVRON 0206855 MENLO PA  $    30.34  01/03/17   -$     5.57  5133328       90889  POS/ATM COURTESY FEE
+   780097-80  $ 30.00    TMOBILE*POSTPAID IVR 800  $   130.43  01/03/17   -$    91.69  788937045       91188  POS/ATM COURTESY FEE
+   802913-80  $  0.00    JACK IN THE BOX #0469  R  $    22.39  01/03/17    $     0.00  287192276       90774  ZERO OVERDRAFT FEE
+   196927-80  $  0.00    JACK IN THE BOX #448 SOU  $    10.79  01/03/17    $     0.00  924762549       90757  ZERO OVERDRAFT FEE
+   475142-80  $  0.00    LITTLE CAESARS 1385 000L  $     1.00  01/03/17    $     0.00  284462700       91088  ZERO OVERDRAFT FEE
+
+             -----------
+
+
+Total NSF:   $    180.00
+Total ODT:   $      0.00
+
+Grand Total: $    180.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38864379
+
+
+IPSHBFEE             FILE DATE: 12/31/16              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  01:48:57            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+     No Feeable Transactions Found
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38864381
+
+
+IPPOSFEE             FILE DATE: 12/31/16              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  02:19:06            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   125705-81  $  0.00    PANDA EXPRESS #1865 REDW  $    17.55  01/03/17    $    63.59  619098282       92039  ZERO OVERDRAFT FEE
+   329292-80  $  0.00    KFC/LJS #283 CAMPBELL CA  $    16.10  01/03/17    $     0.00  096274172       91907  ZERO OVERDRAFT FEE
+   731978-80  $  0.00    BASKIN #360101 Q35 REDWO  $    14.22  01/03/17    $     0.00  14933721       92698  ZERO OVERDRAFT FEE
+   037709-80  $  0.00    CHEESECAKE SAN JOSE SANT  $    83.57  01/03/17    $     2.03  139609721       92846  ZERO OVERDRAFT FEE
+   638826-80  $  0.00    MCDONALDS  F17109 REDWOO  $    21.91  01/03/17    $     0.00  87357585       91480  ZERO OVERDRAFT FEE
+   251626-83  $  0.00    CHEF KWAN'S MENLO PARK C  $    39.02  01/03/17    $     0.00  811812072       92683  ZERO OVERDRAFT FEE
+   694632-80  $  0.00    TRADER JOE'S #187  QPS S  $   108.59  01/03/17    $     9.99  165069805       92346  ZERO OVERDRAFT FEE
+   422474-80  $ 30.00    AT&T*BILL PAYMENT 111-11  $   127.90  01/03/17   -$   463.68  038597366       92240  POS/ATM COURTESY FEE
+   875578-80  $  0.00    CHEESECAKE PALO ALTO PAL  $    20.14  01/03/17    $     0.00  357925906       92752  ZERO OVERDRAFT FEE
+   071538-80  $ 30.00    BEVERAGES & MORE #34 RED  $   178.29  01/03/17   -$   344.28  38743009       92118  POS/ATM COURTESY FEE
+   184691-80  $  0.00    UCSF CLS PARKING MU SAN   $     6.00  01/03/17    $     0.00  626796313       91509  ZERO OVERDRAFT FEE
+   688482-80  $ 30.00    AT&T*BILL PAYMENT WWW.AT  $   121.00  01/03/17   -$    49.18  852403654       92435  POS/ATM COURTESY FEE
+   665385-80  $  0.00    CHAVEZ SUPERMARKET HAYWA  $    20.61  01/03/17    $     0.00  519173375       92673  ZERO OVERDRAFT FEE
+   811742-81  $ 30.00    AT&T*BILL PAYMENT 800-28  $   185.00  01/03/17   -$   181.15  433399838       92272  POS/ATM COURTESY FEE
+   745893-80  $  0.00    PANDA EXPRESS #1788 FREM  $    22.01  01/03/17    $     0.00  86509478       92019  ZERO OVERDRAFT FEE
+   057670-80  $  0.00    JUICE IT UP SAN BERNADIN  $     5.25  01/03/17    $     0.00  490283069       92551  ZERO OVERDRAFT FEE
+   561569-81  $  0.00    PANDA EXPRESS #748 HAYWA  $    17.05  01/03/17    $     0.00  253090473       92769  ZERO OVERDRAFT FEE
+   264702-80  $  0.00    TRADER JOE'S #096  QPS O  $   108.75  01/03/17    $     0.00  13302447       92359  ZERO OVERDRAFT FEE
+   223055-80  $ 30.00    TURTLES SACRAMENTO CAUS   $    18.06  01/03/17   -$   216.34  82241276       92333  POS/ATM COURTESY FEE
+   312879-81  $  0.00    EL GRULLENSE GRILL REDWO  $    13.08  01/03/17    $     0.00  411600836       92496  ZERO OVERDRAFT FEE
+   085578-80  $  0.00    UberUS_A 1455 Market St   $    20.35  01/03/17    $     0.00  94167763       91943  ZERO OVERDRAFT FEE
+   102863-80  $  0.00    PANDA EXPRESS #2384 MOUN  $    11.64  01/03/17    $     0.00  711888687       92327  ZERO OVERDRAFT FEE
+   793460-80  $  0.00    DOORDASH-BUTTERMILK SO 6  $    27.27  01/03/17    $     0.00  831357011       91593  ZERO OVERDRAFT FEE
+   787391-80  $  0.00    PORT IPS PARKING METERSS  $     4.25  01/03/17    $     0.00  463014502       92765  ZERO OVERDRAFT FEE
+   435993-80  $  0.00    AT&T 46J2 118031 PITTSBU  $    44.99  01/03/17    $     0.00  205604516       92155  ZERO OVERDRAFT FEE
+   398605-80  $  0.00    AT&T 46J2 118031 PITTSBU  $    28.00  01/03/17    $     0.00  174762824       92158  ZERO OVERDRAFT FEE
+   645539-80  $  0.00    AT&T 46J2 118031 PITTSBU  $   205.91  01/03/17    $     0.00  538140819       92160  ZERO OVERDRAFT FEE
+   649666-80  $ 30.00    SQ *DART OPS TANFOR SAN   $   136.00  01/03/17   -$     4.50  522641010       91584  POS/ATM COURTESY FEE
+   045108-81  $  0.00    SENSES NAILS AND SPA LLS  $    64.00  01/03/17    $     0.00  154226473       92014  ZERO OVERDRAFT FEE
+   108286-80  $  0.00  J FUSION PERUVIAN GRILL  S  $    40.96  01/03/17   -$     1.70  264772189       92668  WAIVED PAID-NSF FEE
+   139327-80  $  0.00    CREEKSIDE GARDEN CAFE  C  $    72.15  01/03/17    $     0.00  376729570       92579  ZERO OVERDRAFT FEE
+   468876-80  $  0.00    COBANI GYROS & KEBAB'S S  $    41.49  01/03/17    $     0.00  836999866       92682  ZERO OVERDRAFT FEE
+   194842-80  $  0.00    SQ *BAR 18 (COUNTDO LOS   $     5.00  01/03/17    $     0.00  266183828       91579  ZERO OVERDRAFT FEE
+   050233-80  $  0.00    TAQUERIA EL FAROLITO SAN  $    10.86  01/03/17    $     0.00  284599042       91961  ZERO OVERDRAFT FEE
+   575546-80  $  0.00    TAQUERIA EL FAROLITO SAN  $    23.10  01/03/17    $     0.00  855282451       91965  ZERO OVERDRAFT FEE
+   979319-80  $  0.00    TAQUERIA EL FAROLITO SAN  $     4.62  01/03/17    $     0.00  066414297       91973  ZERO OVERDRAFT FEE
+   251211-80  $  0.00    NAPA FARMS MARKET SAN FR  $    11.62  01/03/17    $     0.00  174041136       92822  ZERO OVERDRAFT FEE
+   255570-80  $  0.00    HOT TOPIC 0281 SANTA CLA  $    41.20  01/03/17    $     0.00  38668434       91445  ZERO OVERDRAFT FEE
+   921346-80  $  0.00    TCGPLAYER.COM 315-436-80  $    19.09  01/03/17    $     0.00  332066370       91541  ZERO OVERDRAFT FEE
+   605629-81  $  0.00    CLAIRES PASTRIES  RESTAD  $    55.10  01/03/17    $     0.00  397771520       92041  ZERO OVERDRAFT FEE
+   169682-80  $  0.00    BART-CLIPPER UNION CITY5  $    20.00  01/03/17    $    27.59  886885202       91890  ZERO OVERDRAFT FEE
+   925463-80  $  0.00    CHEESECAKE PALO ALTO PAL  $    13.16  01/03/17    $     0.00  85717048       91999  ZERO OVERDRAFT FEE
+   377540-80  $  0.00    DOORDASH-IHOP 650-681-94  $    49.54  01/03/17    $     0.00  20456353       91889  ZERO OVERDRAFT FEE
+   379481-81  $  0.00    BEVERAGES & MORE #34 RED  $    53.85  01/03/17    $     0.00  999458505       92456  ZERO OVERDRAFT FEE
+   248863-80  $  0.00    LAS MUCHACHAS RESTAURANM  $    57.42  01/03/17    $     0.00  64005673       92388  ZERO OVERDRAFT FEE
+   716881-80  $  0.00    MCDONALD'S F12464 GILROY  $    56.17  01/03/17    $     0.00  237830258       91458  ZERO OVERDRAFT FEE
+   232057-80  $  0.00    IT'SUGAR UNIVERSAL UNIVE  $    19.71  01/03/17    $     0.00  03360736       92298  ZERO OVERDRAFT FEE
+   288237-80  $ 30.00    AT&T*BILL PAYMENT 111-11  $    49.98  01/03/17   -$   121.07  39995145       92096  POS/ATM COURTESY FEE
+   512743-80  $  0.00    SQ *SNOW GLOBE FEST SAN   $    10.00  01/03/17    $     0.00  879633721       91622  ZERO OVERDRAFT FEE
+   092424-80  $  0.00    UberUS_A 1455 Market St   $    12.55  01/03/17    $     0.00  123465421       91398  ZERO OVERDRAFT FEE
+   872735-80  $  0.00    BART MILLBRAE STAT QPS 5  $     4.65  01/03/17    $     0.00  973002167       91582  ZERO OVERDRAFT FEE
+   291638-80  $  0.00    CHEESECAKE S. SAN JOSE S  $    71.29  01/03/17    $     0.00  044431987       91675  ZERO OVERDRAFT FEE
+
+IPPOSFEE             FILE DATE: 12/31/16              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    2
+RUN DATE: 01/01/17   RUN TIME:  02:19:06            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   483418-80  $  0.00    COUNTRY TIME MARKET EAST  $     9.23  01/03/17    $     0.00  166627365       92105  ZERO OVERDRAFT FEE
+   584327-80  $  0.00    UberUS_A 1455 Market St   $     6.83  01/03/17    $     6.90  016801900       91434  ZERO OVERDRAFT FEE
+   888615-80  $  0.00    WISH.COM 800-266-0172 CA  $    19.00  01/03/17    $     0.00  99644665       91893  ZERO OVERDRAFT FEE
+   917179-80  $  0.00    PANDA EXPRESS #1865 REDW  $     7.96  01/03/17    $     0.00  684647039       91861  ZERO OVERDRAFT FEE
+   029769-80  $  0.00    SQ *DUTCH BROS. COF GRAN  $    15.50  01/03/17    $     0.00  484486757       91715  ZERO OVERDRAFT FEE
+   221789-80  $  0.00    REDWOOD CITY PARKING RED  $     3.75  01/03/17    $     0.00  059548110       91955  ZERO OVERDRAFT FEE
+   223174-80  $  0.00    AY CARAY TAQUERIA SAN MA  $    10.21  01/03/17    $     0.00  52797653       92621  ZERO OVERDRAFT FEE
+   401784-80  $  0.00    BEVERAGES & MORE #77 SAN  $   167.27  01/03/17    $     0.00  100012105       92375  ZERO OVERDRAFT FEE
+   471889-80  $  0.00    ORDER.WISH.COM 877-887-7  $     7.92  01/03/17    $     0.00  26753004       91899  ZERO OVERDRAFT FEE
+   704735-80  $ 30.00    TLO TRANSUNION 561-988-4  $    25.00  01/03/17   -$     7.23  43544313       91843  POS/ATM COURTESY FEE
+   805705-81  $ 30.00    SAN MATEO CREDI 1735 EAS  $   300.00  01/03/17   -$   262.55  3183            92872  POS/ATM COURTESY FEE
+   144520-80  $  0.00    BASKIN #343413 Q35 LATHR  $     5.24  01/03/17    $     0.00  552198361       92228  ZERO OVERDRAFT FEE
+   655684-80  $ 30.00    COSTCO WHSE #0144 SAN FR  $    14.98  01/03/17   -$   262.92  274924088       92023  POS/ATM COURTESY FEE
+
+             -----------
+
+
+Total NSF:   $    300.00
+Total ODT:   $      0.00
+
+Grand Total: $    300.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38864383
+
+
+IPSHBFEE             FILE DATE: 12/31/16              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  02:19:23            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+     No Feeable Transactions Found
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38864385
+
+
+IPPOSFEE             FILE DATE: 12/31/16              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  02:49:31            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   563957-80  $  0.00    AUTO PRIDE CAR WASH SAN   $    19.99  01/03/17    $     0.00  075636126       93419  ZERO OVERDRAFT FEE
+   334719-81  $  0.00    EL AMIGO RESTAURAN SAN J  $   112.31  01/03/17    $   282.00  197629903       93416  ZERO OVERDRAFT FEE
+   632877-80  $ 30.00    ETSY SELLER FEES 888-961  $     3.80  01/03/17   -$   302.16  220104208       93450  POS/ATM COURTESY FEE
+   699460-80  $  0.00    HAYWARD ACE HAYWARD CAUS  $     3.05  01/03/17    $     0.00  977818325       93045  ZERO OVERDRAFT FEE
+   058224-80  $  0.00    AMOEBA MUSIC SAN FRANCIS  $    18.55  01/03/17    $     1.99  491307042       93228  ZERO OVERDRAFT FEE
+   953305-81  $  0.00    SOUTH CITY GROCERY S SAN  $    50.31  01/03/17    $     0.00  62461755       92984  ZERO OVERDRAFT FEE
+   652181-80  $  0.00    TIMBER AND SALT REDWOOD   $    43.06  01/03/17    $     0.00  505522207       93334  ZERO OVERDRAFT FEE
+   773898-81  $  0.00    FLAVORS OF INDIA RENO NV  $    21.55  01/03/17    $     0.00  8407929       93119  ZERO OVERDRAFT FEE
+   518064-80  $  0.00    UberUS_A 1455 Market St   $    83.57  01/03/17    $     0.00  296898909       93421  ZERO OVERDRAFT FEE
+   546237-80  $  0.00    Cardtronics CCS 700 E NA  $   100.00  01/03/17    $     0.00  686287734       93008  ZERO OVERDRAFT FEE
+   916945-80  $  0.00    7-ELEVEN 700 E NAPLES DR  $     1.49  01/03/17    $     0.00  697177          93021  ZERO OVERDRAFT FEE
+   408589-80  $  0.00    DUCKYS SAN CARLOS SAN CA  $    36.50  01/03/17    $    52.22  186605302       93290  ZERO OVERDRAFT FEE
+   096779-81  $  0.00    TA WHEELER RIDGE ARVIN C  $    17.71  01/03/17    $    18.97  112521080       93165  ZERO OVERDRAFT FEE
+   769378-80  $  0.00    GET AWAY TODAY 801-479-1  $ 1,220.12  01/03/17    $     0.00  063948225       93102  ZERO OVERDRAFT FEE
+   036006-81  $  0.00    HAYWARD GAS STATION HAYW  $     5.93  01/03/17    $     0.00  47075909       93058  ZERO OVERDRAFT FEE
+   687452-80  $  0.00    SAFKEEPSSTRGREDWOODCITY6  $   104.00  01/03/17    $     0.00  971536858       93307  ZERO OVERDRAFT FEE
+   583426-80  $  0.00    SONIC DRIVE IN #5007 RIP  $    16.39  01/03/17    $    25.30  672836687       93012  ZERO OVERDRAFT FEE
+
+             -----------
+
+
+Total NSF:   $     30.00
+Total ODT:   $      0.00
+
+Grand Total: $     30.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38864386
+
+
+IPSHBFEE             FILE DATE: 12/31/16              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  02:49:48            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+     No Feeable Transactions Found
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38864484
+
+
+IPPOSFEE             FILE DATE: 12/31/16              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  03:19:56            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   571617-80  $  0.00    GRAB-N-GO 2 ORLANDO FLUS  $     5.93  01/03/17    $     0.00  228329900       93626  ZERO OVERDRAFT FEE
+   713964-80  $  0.00    APPLE STORE  #R039 SANTA  $   209.23  01/03/17    $     0.00  681091450       93636  ZERO OVERDRAFT FEE
+   018111-80  $  0.00    RISTORANTE BUON GUSTO IS  $   165.65  01/03/17    $     0.00  756586924       93606  ZERO OVERDRAFT FEE
+   193065-80  $  0.00    ORCHARD SUPPLY #220 REDW  $    12.76  01/03/17    $    58.65  379136114       93582  ZERO OVERDRAFT FEE
+   208488-80  $ 30.00    60448CAREDSHING 1 RED HA  $   203.50  01/03/17   -$   175.36  516966154       93691  POS/ATM COURTESY FEE
+   222077-80  $  0.00    CHIPOTLE MEX HTTPSPOSTMA  $    20.38  01/03/17    $     0.00  96929111       93524  ZERO OVERDRAFT FEE
+   130316-80  $  0.00    APPLE STORE  #R002 PALO   $   162.04  01/03/17    $     0.00  15342445       93654  ZERO OVERDRAFT FEE
+   729310-80  $  0.00    HARRAH'S LAKE NRCCHA02NR  $   105.99  01/03/17    $     0.00  711551656       93739  ZERO OVERDRAFT FEE
+   876319-80  $  0.00    ORDERAHEAD PHILZ COFFE O  $     4.50  01/03/17    $     0.00  582943820       93554  ZERO OVERDRAFT FEE
+   934019-80  $  0.00    SUPER DUPER BURGER SAN F  $    24.20  01/03/17    $     0.00  75838000       93501  ZERO OVERDRAFT FEE
+   540960-81  $  0.00    UberUS_A 1455 Market St   $     8.61  01/03/17    $     0.00  13102802       93695  ZERO OVERDRAFT FEE
+   836061-80  $  0.00    LA PINATA #5 510-7906550  $   100.00  01/03/17    $     0.00  276505942       93710  ZERO OVERDRAFT FEE
+   224113-80  $ 30.00    EMBASSY SUITES  901 E. C  $   203.00  01/03/17   -$   709.59  5195            93726  POS/ATM COURTESY FEE
+   444515-80  $  0.00    FREEWAY INSURANCE CA 800  $   100.00  01/03/17   -$     0.52  942303770       93522  ZERO OVERDRAFT FEE
+
+             -----------
+
+
+Total NSF:   $     60.00
+Total ODT:   $      0.00
+
+Grand Total: $     60.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38864485
+
+
+IPSHBFEE             FILE DATE: 12/31/16              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  03:20:13            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+     No Feeable Transactions Found
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38864486
+
+
+IPPOSFEE             FILE DATE: 12/31/16              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  03:50:21            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   061266-80  $  0.00    UberUS_A 1455 Market St   $    10.53  01/03/17    $     0.00  32019550       93795  ZERO OVERDRAFT FEE
+
+             -----------
+
+
+Total NSF:   $      0.00
+Total ODT:   $      0.00
+
+Grand Total: $      0.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38864487
+
+
+IPSHBFEE             FILE DATE: 12/31/16              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  03:50:38            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+     No Feeable Transactions Found
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38864488
+
+
+IPPOSFEE             FILE DATE: 12/31/16              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  04:20:46            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   883480-80  $  0.00    UberUS_A 1455 Market St   $     5.78  01/03/17    $     0.00  57528471       93837  ZERO OVERDRAFT FEE
+
+             -----------
+
+
+Total NSF:   $      0.00
+Total ODT:   $      0.00
+
+Grand Total: $      0.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38864489
+
+
+IPSHBFEE             FILE DATE: 12/31/16              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  04:21:03            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+     No Feeable Transactions Found
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38916430
+
+
+IPSHBFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  16:32:52            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+             -----------
+
+
+Total NSF:   $      0.00
+Total ODT:   $      0.00
+
+Grand Total: $      0.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38916433
+
+
+IPSHBFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  15:31:45            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+             -----------
+
+
+Total NSF:   $      0.00
+Total ODT:   $      0.00
+
+Grand Total: $      0.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38916434
+
+
+IPPOSFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  16:01:54            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   344107-80  $ 30.00    ##TS81A                   $ 3,000.00  01/03/17   -$ 3,000.00  WGmS9bUiWa      08257  POS/ATM COURTESY FEE
+   282047-80  $  0.00    BATH & BODY WORKS 1413 C  $    10.19  01/03/17    $     0.00  998905352       08225  ZERO OVERDRAFT FEE
+   110830-81  $  0.00    TARGET T-0320 5001 Junip  $    31.56  01/03/17    $     0.00  31632           08259  ZERO OVERDRAFT FEE
+   371265-80  $  0.00    99 CENTS ONLY ST 20882 H  $    25.87  01/03/17    $     0.00  535946806       08490  ZERO OVERDRAFT FEE
+   283545-80  $  0.00    ARCO PAYPOINT 840 SAN AN  $     9.28  01/03/17    $     0.00  523505          08203  ZERO OVERDRAFT FEE
+   722142-80  $  0.00    Wal-Mart Store  1616 WAL  $    24.41  01/03/17    $     0.00  53359826       08403  ZERO OVERDRAFT FEE
+   019172-80  $  0.00    NATION'S GIANT HAM HAYWA  $    14.14  01/03/17    $     0.00  530936759       08740  ZERO OVERDRAFT FEE
+   633419-80  $  0.00    SPENCER GIFTS # 1140 EL   $    21.99  01/03/17    $     0.00  321226555       08545  ZERO OVERDRAFT FEE
+   351078-80  $  0.00    DOLLAR TREE 312 WALNUT S  $     5.44  01/03/17    $     0.00  26770           08441  ZERO OVERDRAFT FEE
+   901492-80  $  0.00    DOLLAR TREE 312 WALNUT S  $     3.07  01/03/17    $     0.00  92124           08542  ZERO OVERDRAFT FEE
+   849403-80  $  0.00    WHOLEFDS FRE #10 3111 MF  $   100.00  01/03/17    $     0.00  446363527       08377  ZERO OVERDRAFT FEE
+   391544-80  $  0.00    LUCKY #710.FOST 919 EDGE  $    34.64  01/03/17    $     0.00  430377          08409  ZERO OVERDRAFT FEE
+   716616-80  $  0.00    TEAVANA 040 281 HILLSDAL  $    57.40  01/03/17    $     0.00  806422300       08322  ZERO OVERDRAFT FEE
+   924346-81  $  0.00  J MORE FOR LESS NUMB HALF   $    44.79  01/03/17   -$    78.31  435747887       08742  WAIVED PAID-NSF FEE
+   146620-80  $  0.00    CHEVRON/DOS PALOS CHEVRD  $    10.36  01/03/17    $     0.00  704827734       08220  ZERO OVERDRAFT FEE
+   143199-80  $  0.00    Wal-Mart Store  1583 WAL  $   149.96  01/03/17    $     0.00  47772006       08382  ZERO OVERDRAFT FEE
+   183534-80  $ 30.00    Cardtronics CCS .110 LA   $   303.00  01/03/17   -$   231.28  127206764       08247  POS/ATM COURTESY FEE
+   069943-80  $  0.00    WYNKOOP BREWING CO DENVE  $    48.05  01/03/17    $     0.00  79245389       08658  ZERO OVERDRAFT FEE
+   292341-80  $ 30.00    NEWELL'S SAN BRUNO CAUS   $    22.00  01/03/17   -$   461.59  431052459       08727  POS/ATM COURTESY FEE
+   288007-80  $  0.00    WALGREENS STORE 780 E SS  $     6.22  01/03/17    $    12.95  457773671       08445  ZERO OVERDRAFT FEE
+   262094-80  $  0.00    SFMTA ELLIS & OFARRELL S  $     7.00  01/03/17    $     0.00  497388959       08707  ZERO OVERDRAFT FEE
+   866559-80  $  0.00    BIG LOTS STORES 20800 MH  $     9.02  01/03/17    $     0.00  35718470       08366  ZERO OVERDRAFT FEE
+   876471-80  $  0.00    SPEEDWAY 09377 GEO GEORG  $    17.99  01/03/17    $     0.00  008513299       08344  ZERO OVERDRAFT FEE
+   054713-80  $ 30.00    60785NVHOOHOOTR 115 E. T  $    84.99  01/03/17   -$   596.25  973525008       08510  POS/ATM COURTESY FEE
+   275288-80  $  0.00    GARDEN SUPERMARKET EAST   $    18.54  01/03/17    $     0.00  872391323       08282  ZERO OVERDRAFT FEE
+   262131-80  $ 30.00    THE OLD PRO PALO ALTO CA  $    58.29  01/03/17   -$     2.78  603289098       08671  POS/ATM COURTESY FEE
+   495808-80  $  0.00    TJMAXX #0418 240 WALNUTR  $    76.09  01/03/17    $     0.00  347210961       08305  ZERO OVERDRAFT FEE
+   518638-80  $  0.00    MONTE CARLO NIGHTC MOUNT  $    10.00  01/03/17    $     0.00  240689615       08729  ZERO OVERDRAFT FEE
+   243200-80  $  0.00    MONTE CARLO NIGHTC MOUNT  $    10.00  01/03/17    $     0.00  971451852       08730  ZERO OVERDRAFT FEE
+   217789-80  $  0.00    MCDONALD'S F130 1101 EL   $     2.73  01/03/17    $     0.00  14973           08209  ZERO OVERDRAFT FEE
+   662121-80  $  0.00    RALEY'S #412 GRANITE BAY  $    54.65  01/03/17    $     0.00  629351051       08601  ZERO OVERDRAFT FEE
+   649664-80  $  0.00    SAKURA TEPPANYAKI REDWOO  $    81.38  01/03/17    $     0.00  067938516       08647  ZERO OVERDRAFT FEE
+   016584-80  $  0.00    SAVEMART #94.LA 15240 HA  $    13.51  01/03/17    $     0.00  414542          08286  ZERO OVERDRAFT FEE
+   636783-80  $  0.00    KEY MARKET # 1  1063 UPT  $    21.40  01/03/17    $    10.90  30335           08240  ZERO OVERDRAFT FEE
+
+             -----------
+
+
+Total NSF:   $    150.00
+Total ODT:   $      0.00
+
+Grand Total: $    150.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918589
+
+
+IPPOSFEE             FILE DATE: 12/31/16              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  04:51:11            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+             -----------
+
+
+Total NSF:   $      0.00
+Total ODT:   $      0.00
+
+Grand Total: $      0.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918590
+
+
+IPSHBFEE             FILE DATE: 12/31/16              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  04:51:28            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+     No Feeable Transactions Found
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918592
+
+
+IPPOSFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  05:21:36            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   880280-80  $  0.00    CA INTERNATIONA 37 MORTE  $    23.95  01/03/17    $     0.00  6951            93949  ZERO OVERDRAFT FEE
+   164371-80  $  0.00    UberUS_A 1455 Market St   $    24.31  01/03/17    $     0.00  407168910       93928  ZERO OVERDRAFT FEE
+   754167-80  $  0.00    UberUS_A 1455 Market St   $    22.89  01/03/17    $   463.57  052431231       93927  ZERO OVERDRAFT FEE
+
+             -----------
+
+
+Total NSF:   $      0.00
+Total ODT:   $      0.00
+
+Grand Total: $      0.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918593
+
+
+IPSHBFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  05:21:53            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+     No Feeable Transactions Found
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918644
+
+
+IPPOSFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  05:52:02            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   005792-80  $  0.00    UberUS_A 1455 Market St   $     7.20  01/03/17    $     0.00  250333306       93968  ZERO OVERDRAFT FEE
+   306419-80  $  0.00    UberUS_A 1455 Market St   $     6.55  01/03/17    $     0.00  640161845       93985  ZERO OVERDRAFT FEE
+   458280-80  $  0.00    EVI*CACHE CREEK BROOKS C  $ 1,053.00  01/03/17    $     0.00  86339419       93983  ZERO OVERDRAFT FEE
+
+             -----------
+
+
+Total NSF:   $      0.00
+Total ODT:   $      0.00
+
+Grand Total: $      0.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918645
+
+
+IPSHBFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  05:52:19            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+     No Feeable Transactions Found
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918649
+
+
+IPPOSFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  06:22:28            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   160681-80  $  0.00    UberUS_A 1455 Market St   $    12.71  01/03/17    $    50.88  270225820       94014  ZERO OVERDRAFT FEE
+
+             -----------
+
+
+Total NSF:   $      0.00
+Total ODT:   $      0.00
+
+Grand Total: $      0.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918650
+
+
+IPSHBFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  06:22:45            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+     No Feeable Transactions Found
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918651
+
+
+IPPOSFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  06:52:54            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   605617-81  $  0.00    UberUS_A 1455 Market St   $    10.80  01/03/17    $     0.00  027428823       94082  ZERO OVERDRAFT FEE
+
+             -----------
+
+
+Total NSF:   $      0.00
+Total ODT:   $      0.00
+
+Grand Total: $      0.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918652
+
+
+IPSHBFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  06:53:22            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+     No Feeable Transactions Found
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918654
+
+
+IPPOSFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  07:23:31            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   567837-80  $ 30.00    ALAMO RENT-A-CAR EAST BO  $   553.00  01/03/17   -$   106.03  010405783       94149  POS/ATM COURTESY FEE
+   353973-80  $  0.00    FEDEXOFFICE 00040972 SAN  $     4.74  01/03/17    $     0.00  47115790       94133  ZERO OVERDRAFT FEE
+   754230-80  $  0.00    VAPEHAPPY 702-8566768  N  $   238.44  01/03/17    $     0.00  319743368       94246  ZERO OVERDRAFT FEE
+   509925-80  $ 30.00    IPSY *GLAM BAG 888-769-4  $    10.88  01/03/17   -$   276.62  716050613       94186  POS/ATM COURTESY FEE
+   598129-80  $ 30.00    IPSY *GLAM BAG 888-769-4  $    10.88  01/03/17   -$   209.65  622014308       94211  POS/ATM COURTESY FEE
+   956368-80  $  0.00    GASSYS.COM SEATTLE WAUS   $    20.95  01/03/17    $     0.00  771             94090  ZERO OVERDRAFT FEE
+   735173-80  $  0.00    50142CAARJARTKJ 659 HUNT  $   143.00  01/03/17    $     0.00  14027799       94106  ZERO OVERDRAFT FEE
+
+             -----------
+
+
+Total NSF:   $     90.00
+Total ODT:   $      0.00
+
+Grand Total: $     90.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918655
+
+
+IPSHBFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  07:23:49            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+     No Feeable Transactions Found
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918657
+
+
+IPPOSFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  07:53:58            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   745111-81  $ 30.00    IPSY *GLAM BAG 888-769-4  $    10.88  01/03/17   -$   400.34  275054096       94658  POS/ATM COURTESY FEE
+   160855-80  $  0.00    IPSY *GLAM BAG 888-769-4  $    10.88  01/03/17    $     0.00  331502427       94837  ZERO OVERDRAFT FEE
+   194791-80  $  0.00    IPSY *GLAM BAG 888-769-4  $    10.88  01/03/17    $   145.60  925443283       94563  ZERO OVERDRAFT FEE
+   246777-80  $  0.00    IPSY *GLAM BAG 888-769-4  $    10.90  01/03/17    $     0.00  575622457       94356  ZERO OVERDRAFT FEE
+   217314-80  $  0.00    CHASE MISSION ANDALMAR S  $   100.00  01/03/17    $     2.00  438297514       94391  ZERO OVERDRAFT FEE
+   044652-80  $ 30.00    SAN MATEO CREDI 575 MIDD  $   220.00  01/03/17   -$   742.88  3391            94459  POS/ATM COURTESY FEE
+   991468-80  $  0.00    FIVE LINX LLC 585-359-29  $    49.95  01/03/17    $     0.00  466894888       94862  ZERO OVERDRAFT FEE
+   071069-80  $  0.00    SHELL Service S 1600 CAN  $    10.69  01/03/17    $     0.00  272743          94527  ZERO OVERDRAFT FEE
+   133522-80  $  0.00    VZWRLSS*IVR VW 800-922-0  $   182.00  01/03/17    $   300.00  979986079       94429  ZERO OVERDRAFT FEE
+   193309-80  $  0.00    IPSY *GLAM BAG 888-769-4  $    10.88  01/03/17    $     0.00  884787693       94401  ZERO OVERDRAFT FEE
+   662431-80  $  0.00    VIRGIN AMER 98426077711S  $    25.00  01/03/17    $     0.00  706761459       94360  ZERO OVERDRAFT FEE
+   388224-80  $  0.00    IPSY *GLAM BAG 888-769-4  $    10.88  01/03/17    $     0.00  75540621       94411  ZERO OVERDRAFT FEE
+   123496-80  $  0.00    EASY MART EL GRANADA CAU  $    15.00  01/03/17    $     0.00  617029334       94865  ZERO OVERDRAFT FEE
+   573400-80  $  0.00    AROY THAI BISTRO PALO AL  $    48.00  01/03/17    $     0.00  947123145       94840  ZERO OVERDRAFT FEE
+   565330-81  $ 30.00    SPRINT *WIRELESS 800-639  $    82.16  01/03/17   -$    24.27  778575856       94657  POS/ATM COURTESY FEE
+   044665-80  $  0.00    KWIK SERVE STATION S SAN  $    26.00  01/03/17    $   329.19  175235538       94349  ZERO OVERDRAFT FEE
+   103376-80  $  0.00    NNU*XFINITYWIFI 866-497-  $     2.95  01/03/17    $     0.00  91591638       94733  ZERO OVERDRAFT FEE
+   592643-80  $  0.00    EL CHARRO AVITIA CARSON   $    84.65  01/03/17    $     0.00  180668168       94752  ZERO OVERDRAFT FEE
+
+             -----------
+
+
+Total NSF:   $     90.00
+Total ODT:   $      0.00
+
+Grand Total: $     90.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918658
+
+
+IPSHBFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  07:54:15            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+     No Feeable Transactions Found
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918660
+
+
+IPPOSFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  08:24:24            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   576850-80  $  0.00    MOUNTAIN MIKES PIZZA - U  $    21.99  01/03/17    $    42.95  141400906       94983  ZERO OVERDRAFT FEE
+   775225-80  $  0.00    CVS/PHARMACY #09 09833-S  $    51.16  01/03/17    $    10.15  49872449       95826  ZERO OVERDRAFT FEE
+   337108-80  $  0.00    SKYWOOD TRADING POST WOO  $    25.29  01/03/17    $     0.00  15320850       95499  ZERO OVERDRAFT FEE
+   698399-81  $  0.00    SQUEEZEINREDWOODCITY RED  $    40.08  01/03/17    $   282.00  357544740       95628  ZERO OVERDRAFT FEE
+   361082-80  $  0.00    INNEVAPE LLC 727-8575903  $    90.00  01/03/17    $     0.00  346336282       95443  ZERO OVERDRAFT FEE
+   727614-83  $  0.00    SENTER POST LLC SAN JOSE  $    27.25  01/03/17    $     0.00  170362787       95551  ZERO OVERDRAFT FEE
+   034141-80  $  0.00    ROUND TABLE PIZZA - 080S  $    20.71  01/03/17    $     0.00  340342811       95012  ZERO OVERDRAFT FEE
+   940911-80  $  0.00    UberUS_A 1455 Market St   $     7.20  01/03/17    $     0.00  529157515       95244  ZERO OVERDRAFT FEE
+   019025-80  $  0.00    NETFLIX COM LOS GATOS CA  $     7.99  01/03/17    $     0.00  214719591       95161  ZERO OVERDRAFT FEE
+   005163-80  $  0.00    MEDITERRANEAN DELITE SAN  $    11.29  01/03/17    $     0.00  022533561       95549  ZERO OVERDRAFT FEE
+   291957-82  $  0.00    0723 - ROUND TABLE PIZZS  $    30.54  01/03/17    $     0.00  038709468       95065  ZERO OVERDRAFT FEE
+   225088-80  $  0.00    ABM PARKING 75 HOWARD  S  $    24.00  01/03/17    $     0.00  094421086       95765  ZERO OVERDRAFT FEE
+   548947-80  $  0.00    MAYS VIETNAMESE RESTAURR  $    10.70  01/03/17    $     0.00  307083765       95602  ZERO OVERDRAFT FEE
+   913044-80  $  0.00    WELCOME TO DENVER STORED  $    15.02  01/03/17    $     0.00  195727580       95748  ZERO OVERDRAFT FEE
+   892654-81  $  0.00    PACIFIC SUPERMARKET -  S  $    32.29  01/03/17    $     0.00  169199529       94981  ZERO OVERDRAFT FEE
+   716523-80  $ 30.00    STARBUCKS CARD RELOAD  8  $    50.00  01/03/17   -$   799.10  959934835       95181  POS/ATM COURTESY FEE
+   280970-80  $ 30.00    ROUND TABLE PIZZA - 00 G  $    37.41  01/03/17   -$   180.99  923347928       95030  POS/ATM COURTESY FEE
+   082776-80  $ 30.00    NCA 800-2865427  KSUS     $   100.00  01/03/17   -$   668.29  067676255       95140  POS/ATM COURTESY FEE
+   645718-80  $  0.00    EDINBURGH CASTLE SAN FRA  $    30.00  01/03/17    $     0.00  042393973       95264  ZERO OVERDRAFT FEE
+   817384-80  $  0.00    7-ELEVEN 2065 WHITE OAK   $    26.92  01/03/17    $    33.56  001971          95526  ZERO OVERDRAFT FEE
+   833141-80  $  0.00    SQ *SNOW GLOBE FESTIVALS  $    20.70  01/03/17    $     0.00  922705254       95280  ZERO OVERDRAFT FEE
+   932823-80  $ 30.00    OLD NAVY ON-LINE 800-OLD  $     6.53  01/03/17   -$    54.86  458889978       95790  POS/ATM COURTESY FEE
+   783467-80  $ 30.00    OLD NAVY ON-LINE 800-OLD  $    18.71  01/03/17   -$    73.57  689520815       95798  POS/ATM COURTESY FEE
+   365932-80  $  0.00    UberUS_A 1455 Market St   $     9.47  01/03/17    $     0.00  219034620       94963  ZERO OVERDRAFT FEE
+   848561-80  $  0.00    ABM ONSITE CROSSING 900R  $     7.50  01/03/17    $     0.00  252328432       95778  ZERO OVERDRAFT FEE
+   553113-80  $  0.00    NUCIFIC 888-6795520  CAU  $    53.41  01/03/17    $     0.00  37337254       95527  ZERO OVERDRAFT FEE
+   049620-80  $  0.00    NUCIFIC 888-6795520  CAU  $    39.52  01/03/17    $     0.00  59941113       95529  ZERO OVERDRAFT FEE
+   959426-80  $  0.00    SHELL Service S 899 S AI  $    11.95  01/03/17    $     0.00  993922          94967  ZERO OVERDRAFT FEE
+   242890-80  $  0.00    IPSY *GLAM BAG 888-769-4  $    10.85  01/03/17    $     0.00  669184440       95219  ZERO OVERDRAFT FEE
+   983112-80  $ 30.00    CRI*CRUNCHYROLL MEMBER 4  $     6.95  01/03/17   -$     0.77  247188445       95479  POS/ATM COURTESY FEE
+
+             -----------
+
+
+Total NSF:   $    180.00
+Total ODT:   $      0.00
+
+Grand Total: $    180.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918661
+
+
+IPSHBFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  08:24:42            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+     No Feeable Transactions Found
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918662
+
+
+IPPOSFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  08:54:51            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   204785-82  $  0.00    SAFEWAY  STORE  0308 HAL  $     7.78  01/03/17    $     0.00  084497837       96875  ZERO OVERDRAFT FEE
+   293964-81  $  0.00    FOOD STOP REDWOOD CITY C  $    33.82  01/03/17    $     0.00  363736751       96737  ZERO OVERDRAFT FEE
+   598478-80  $  0.00    RED LOBSTER 0549 SAN BRU  $    94.97  01/03/17    $     0.00  505149607       96790  ZERO OVERDRAFT FEE
+   723350-80  $  0.00    PLEARN THAI RESTAURANT B  $    12.22  01/03/17    $     0.00  765555027       97132  ZERO OVERDRAFT FEE
+   591070-80  $  0.00    SAFEWAY STORE 00018994 R  $    86.86  01/03/17    $     0.00  02656641       96200  ZERO OVERDRAFT FEE
+   726244-80  $  0.00    PEET'S #08402 ALAMEDA CA  $    13.30  01/03/17    $     0.00  696910269       96306  ZERO OVERDRAFT FEE
+   471951-80  $  0.00    TETSU RAMEN INC ALAMEDA   $    89.28  01/03/17    $     0.00  395840162       96941  ZERO OVERDRAFT FEE
+   614325-81  $  0.00    LENSCRAFTERS  5608 SAN M  $    25.00  01/03/17    $     0.00  12840812       96793  ZERO OVERDRAFT FEE
+   697696-80  $  0.00    LA CUMBRE SANMATEO CAUS   $    18.03  01/03/17    $     0.00  857745893       95998  ZERO OVERDRAFT FEE
+   287794-80  $  0.00    CINEMARK THEATRES 284  O  $    19.18  01/03/17    $     0.00  006911874       96633  ZERO OVERDRAFT FEE
+   583655-80  $  0.00    CINEMARK THEATRES 284  O  $    10.34  01/03/17    $     0.00  817868838       96635  ZERO OVERDRAFT FEE
+   072474-80  $  0.00  J PHO NEW SAIGON 2 FREMONT  $    31.21  01/03/17   -$     0.09  28547169       95995  WAIVED PAID-NSF FEE
+   886525-80  $  0.00    TACO BELL 30758 SAN MATE  $    11.89  01/03/17    $     0.00  663211307       96744  ZERO OVERDRAFT FEE
+   327933-80  $  0.00    BELLA NAILS SAN MATEO CA  $    40.00  01/03/17    $     0.00  0644707       95887  ZERO OVERDRAFT FEE
+   284336-80  $  0.00    SAFEWAY  STORE00003087 H  $    38.80  01/03/17    $     0.00  835042258       97085  ZERO OVERDRAFT FEE
+   560301-80  $  0.00    BRIAN NUSSBAUM CO BURLIN  $    43.60  01/03/17    $     0.00  137571887       96041  ZERO OVERDRAFT FEE
+   103929-80  $  0.00    MUNICIPAL TRANSPORTATIOS  $     1.12  01/03/17    $     0.00  59102656       96939  ZERO OVERDRAFT FEE
+   520727-80  $  0.00    MUNICIPAL TRANSPORTATIOS  $     3.38  01/03/17    $     0.00  543460252       96942  ZERO OVERDRAFT FEE
+   070643-80  $  0.00    PEET'S #10902 SAN MATEO   $     2.65  01/03/17    $     0.00  218577318       96296  ZERO OVERDRAFT FEE
+   351861-80  $  0.00    JAYBIRD BOOKS SAN MATEO   $    21.84  01/03/17    $     0.00  83517930       96068  ZERO OVERDRAFT FEE
+   112112-80  $  0.00    CENTURY THEATRES 437 SAN  $    16.00  01/03/17    $     0.00  410389539       96589  ZERO OVERDRAFT FEE
+   330014-80  $  0.00    EMMANUEL'S PIZZA & BAKEE  $    43.00  01/03/17    $    13.00  03089289       96920  ZERO OVERDRAFT FEE
+   852822-80  $  0.00    IPSY *GLAM BAG 888-769-4  $    10.90  01/03/17    $    10.12  435892544       96643  ZERO OVERDRAFT FEE
+   400166-81  $  0.00    SAFEWAY STORE 00028787 M  $    60.73  01/03/17    $     0.00  624922469       96349  ZERO OVERDRAFT FEE
+   749502-80  $  0.00    CITY OF ANTIOCH (UTILITA  $    47.41  01/03/17    $     0.00  209723664       95957  ZERO OVERDRAFT FEE
+   712642-80  $  0.00    CHEVRON/KEET NERHAN SAN   $    52.67  01/03/17    $   249.09  429606774       96838  ZERO OVERDRAFT FEE
+   951925-80  $  0.00    CENTURY THEATRES 475 PAL  $     9.25  01/03/17    $    52.22  10453916       96503  ZERO OVERDRAFT FEE
+   496778-80  $  0.00    CENTURY THEATRES 475 PAL  $     4.00  01/03/17    $    52.22  211201692       96508  ZERO OVERDRAFT FEE
+   445822-81  $  0.00    TACO BELL 30758 SAN MATE  $     5.22  01/03/17    $     0.00  943600182       96663  ZERO OVERDRAFT FEE
+   235130-81  $  0.00    TACO BELL 30791 REDWOOD   $     7.72  01/03/17    $   217.61  412415002       97001  ZERO OVERDRAFT FEE
+   670170-81  $  0.00    TARGET T-0321 2485 El Ca  $     2.45  01/03/17    $     2.40  498271          96155  ZERO OVERDRAFT FEE
+   190720-80  $  0.00  J ERNIE'S LIQUORS PALO ALT  $    71.52  01/03/17   -$    21.67  66072944       97098  WAIVED PAID-NSF FEE
+   659103-80  $  0.00    UGG AUSTRALIA MILPITAS C  $    28.54  01/03/17    $    27.59  481036841       96979  ZERO OVERDRAFT FEE
+   563653-80  $  0.00    CHEVRON 0206855 MENLO PA  $    20.08  01/03/17    $     0.00  10899374       97153  ZERO OVERDRAFT FEE
+   545255-80  $  0.00    CHEVRON 0207718 MENLO PA  $     6.41  01/03/17    $     0.00  58651527       97152  ZERO OVERDRAFT FEE
+   452202-80  $  0.00    LUSH STONESTOWN (439)  S  $    21.64  01/03/17    $    19.58  121967385       96940  ZERO OVERDRAFT FEE
+   569918-80  $  0.00    PEET'S #21002 SAN FRANCI  $     9.50  01/03/17    $     0.00  60733762       95964  ZERO OVERDRAFT FEE
+   664612-80  $  0.00    THE EMPIRE ROOM SAN FRAN  $    34.00  01/03/17    $   949.90  034264265       96007  ZERO OVERDRAFT FEE
+   685414-80  $ 30.00    ARSENIOS MEXICAN FOOD  F  $    42.53  01/03/17   -$   634.51  873309143       96116  POS/ATM COURTESY FEE
+   268204-81  $  0.00    NETFLIX COM LOS GATOS CA  $     9.99  01/03/17    $     0.00  99613684       96145  ZERO OVERDRAFT FEE
+   335637-80  $  0.00    PIZZA HUT 11744 S SAN FR  $    55.10  01/03/17    $     0.00  128343139       96882  ZERO OVERDRAFT FEE
+   493273-80  $  0.00    CENTURY THEATRES 494 SAN  $    19.29  01/03/17    $     0.00  730844119       96400  ZERO OVERDRAFT FEE
+   006437-80  $ 30.00    CHEVRON 0095610 CORNING   $    76.39  01/03/17   -$   651.69  209577647       96042  POS/ATM COURTESY FEE
+   012366-80  $  0.00    NATIONWIDE PET INS 800-8  $    18.21  01/03/17    $     0.00  535741096       96975  ZERO OVERDRAFT FEE
+   819597-80  $  0.00    NATIONWIDE PET INS 800-8  $    18.21  01/03/17    $     0.00  100409527       96983  ZERO OVERDRAFT FEE
+   072616-80  $  0.00  J RINCONCITO NICARAGUENSES  $    39.15  01/03/17   -$    32.65  734278104       96936  WAIVED PAID-NSF FEE
+   702332-80  $  0.00    PIZZA HUT 24388 HAYWARD   $    63.28  01/03/17    $     0.00  9953930       97046  ZERO OVERDRAFT FEE
+   835206-80  $  0.00    QUICK MART PACIFICA CAUS  $    11.98  01/03/17    $     0.00  23117413       96001  ZERO OVERDRAFT FEE
+   167015-80  $  0.00    IPSY *GLAM BAG 888-769-4  $    10.88  01/03/17    $     0.00  803268525       96434  ZERO OVERDRAFT FEE
+   472608-80  $ 30.00    IPSY *GLAM BAG 888-769-4  $    10.88  01/03/17   -$    75.67  293059694       96370  POS/ATM COURTESY FEE
+   117010-80  $  0.00    CENTURY THEATRES 494 SAN  $    16.95  01/03/17    $     0.00  25664839       96396  ZERO OVERDRAFT FEE
+   586130-80  $  0.00    MILLS MED CTR CAFE 1 CAB  $     5.76  01/03/17    $     0.00  990309558       96742  ZERO OVERDRAFT FEE
+
+IPPOSFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    2
+RUN DATE: 01/01/17   RUN TIME:  08:54:51            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   664209-80  $ 30.00    IHOP #684 REDWOOD CITY C  $    58.79  01/03/17   -$    94.36  82099867       96967  POS/ATM COURTESY FEE
+   223141-80  $  0.00    CHEVRON 0093591 408-888-  $     5.91  01/03/17    $     0.00  011863991       96056  ZERO OVERDRAFT FEE
+   476698-80  $ 30.00    FOOD STOP REDWOOD CITY C  $    32.54  01/03/17   -$   222.14  5859745       96866  POS/ATM COURTESY FEE
+   630206-80  $  0.00    PEETS COFFEETEA17902 SAN  $     5.90  01/03/17    $     0.00  937239331       96290  ZERO OVERDRAFT FEE
+   349196-80  $  0.00    SAN FRANCISCO N/PETALU P  $     7.05  01/03/17    $     0.00  331287130       96167  ZERO OVERDRAFT FEE
+   387327-80  $  0.00    CENTURY THEATRES 485 RED  $     4.00  01/03/17    $     0.00  858182832       96471  ZERO OVERDRAFT FEE
+   267310-80  $ 30.00    ALUM ROCK SELF STORAGE S  $   124.00  01/03/17   -$    75.05  33412284       96085  POS/ATM COURTESY FEE
+   259655-80  $  0.00    LITTLE DARLINGS SAN FRAN  $    60.00  01/03/17    $     0.00  707936159       96842  ZERO OVERDRAFT FEE
+
+             -----------
+
+
+Total NSF:   $    180.00
+Total ODT:   $      0.00
+
+Grand Total: $    180.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918665
+
+
+IPSHBFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  08:55:10            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+     No Feeable Transactions Found
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918667
+
+
+IPPOSFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  09:25:20            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   359854-80  $  0.00    24 HOUR FITNESS USA 800-  $    44.99  01/03/17    $    16.64  333874135       97382  ZERO OVERDRAFT FEE
+   853257-80  $  0.00    SUBWAY 00323642 SAN CARL  $     8.83  01/03/17    $     0.00  620812221       97492  ZERO OVERDRAFT FEE
+   009390-80  $  0.00    MAC COSMETICS ONLINE 800  $   182.03  01/03/17    $   258.97  706578493       98406  ZERO OVERDRAFT FEE
+   016617-80  $ 30.00    ##TS80A                   $   550.00  01/03/17   -$   550.00                  58971  POS/ATM COURTESY FEE
+   418925-80  $ 30.00    24 HOUR FITNESS USA 800-  $    49.99  01/03/17   -$    11.10  658010570       97459  POS/ATM COURTESY FEE
+   064793-80  $  0.00    PATIO AT RUDYS PALO ALTO  $    11.00  01/03/17    $     0.00  171824309       97797  ZERO OVERDRAFT FEE
+   340353-80  $  0.00    PATIO AT RUDYS PALO ALTO  $     5.67  01/03/17    $     0.00  633701531       97810  ZERO OVERDRAFT FEE
+   443631-80  $ 30.00    ##TS01A                   $    40.00  01/03/17   -$    50.93                  44111  POS/ATM COURTESY FEE
+   156312-80  $  0.00    24 HOUR FITNESS USA 800-  $    44.99  01/03/17    $     0.00  080700698       97422  ZERO OVERDRAFT FEE
+   158346-80  $  0.00  J MAC COSMETICS ONLINE 800  $    37.06  01/03/17   -$    21.55  798889294       98413  WAIVED PAID-NSF FEE
+   681159-80  $ 30.00    24 HOUR FITNESS USA 800-  $    49.99  01/03/17   -$     4.52  96507682       97414  POS/ATM COURTESY FEE
+   162496-80  $ 30.00    24 HOUR FITNESS USA 800-  $    49.99  01/03/17   -$    46.90  59754744       97429  POS/ATM COURTESY FEE
+   959306-81  $  0.00    ACT*Redwood City Parks 6  $   170.00  01/03/17    $     0.00  354476421       97279  ZERO OVERDRAFT FEE
+   374044-80  $ 30.00    24 HOUR FITNESS USA 800-  $    49.99  01/03/17   -$   187.70  917414637       97448  POS/ATM COURTESY FEE
+   079242-81  $  0.00    SUBWAY 03484250 REDWOOD   $    11.14  01/03/17    $   217.61  012237541       97264  ZERO OVERDRAFT FEE
+   994498-80  $  0.00    IN-N-OUT BURGER #246 RED  $     6.21  01/03/17    $     0.00  983898151       97992  ZERO OVERDRAFT FEE
+   014491-81  $  0.00    TARGET T-0321 2485 El Ca  $    60.69  01/03/17    $     2.40  025588          98347  ZERO OVERDRAFT FEE
+   302200-80  $  0.00    MAYAN THEATRE 229 DENVER  $    11.00  01/03/17    $     0.00  506185222       98218  ZERO OVERDRAFT FEE
+   815405-80  $  0.00    2 UP DENVER COUS          $    12.00  01/03/17    $     0.00  059680952       98304  ZERO OVERDRAFT FEE
+   810324-80  $  0.00    24 HOUR FITNESS USA 800-  $    39.99  01/03/17    $     0.00  816444031       97431  ZERO OVERDRAFT FEE
+   951199-81  $  0.00    CHARLOTTE RUSSE 0000003S  $    59.94  01/03/17    $     0.00  886480298       97655  ZERO OVERDRAFT FEE
+   428670-80  $  0.00    24 HOUR FITNESS USA 800-  $    49.99  01/03/17    $   106.45  147900848       97406  ZERO OVERDRAFT FEE
+   150614-81  $  0.00    DAVE & BUSTER'S #24 MILP  $    17.64  01/03/17    $     0.00  22160962       98495  ZERO OVERDRAFT FEE
+   719042-80  $ 30.00    24 HOUR FITNESS USA 800-  $    39.99  01/03/17   -$     5.52  065258470       97365  POS/ATM COURTESY FEE
+   811231-80  $  0.00    Oakwood Market  2106 OAK  $     9.65  01/03/17    $     0.00  029414          98211  ZERO OVERDRAFT FEE
+   182792-81  $  0.00    SHELL Service S 2501 23R  $    20.00  01/03/17    $     0.00  80074           98590  ZERO OVERDRAFT FEE
+   033802-80  $  0.00    24 HOUR FITNESS USA 800-  $    13.99  01/03/17    $    52.97  92819539       97354  ZERO OVERDRAFT FEE
+   904326-80  $  0.00    D&B DALY CITY #102 DALY   $    57.97  01/03/17    $     0.00  657956875       98396  ZERO OVERDRAFT FEE
+   462975-80  $  0.00    IN-N-OUT BURGER #246 RED  $     6.81  01/03/17    $     0.00  808580548       97829  ZERO OVERDRAFT FEE
+   508456-80  $  0.00    DAVE & BUSTER'S #24 MILP  $     9.78  01/03/17    $     0.00  165451799       98408  ZERO OVERDRAFT FEE
+   235696-80  $  0.00    MOLLIE STONES #5 SAN BRU  $     6.36  01/03/17    $     0.00  460911765       97852  ZERO OVERDRAFT FEE
+   649570-80  $  0.00    MOLLIE STONES #6 BURLING  $     4.79  01/03/17    $     0.00  325317386       97855  ZERO OVERDRAFT FEE
+   653101-80  $  0.00    ESURANCE CAR INSURANCE 8  $    45.82  01/03/17    $     0.00  812710710       97244  ZERO OVERDRAFT FEE
+   692997-80  $  0.00    D&B DALY CITY #102 DALY   $    60.93  01/03/17    $    25.00  009402550       98491  ZERO OVERDRAFT FEE
+   193498-80  $ 30.00    ##TS00A                   $     2.00  01/03/17   -$     0.53                  57552  POS/ATM COURTESY FEE
+   813812-80  $  0.00    IN-N-OUT BURGER #308 ROC  $    26.23  01/03/17    $     0.00  020481756       98056  ZERO OVERDRAFT FEE
+   244418-80  $ 30.00    HILTON GARDN INNMARINADM  $    39.71  01/03/17   -$   740.77  278323951       98502  POS/ATM COURTESY FEE
+   997405-80  $  0.00    DOMINO'S 7925 650-298-89  $    21.78  01/03/17    $     0.00  361443519       98231  ZERO OVERDRAFT FEE
+   276461-80  $  0.00    24 HOUR FITNESS USA 800-  $    49.99  01/03/17    $     0.00  12203389       97445  ZERO OVERDRAFT FEE
+   639405-80  $ 30.00    ##TS00A                   $    42.50  01/03/17   -$    13.92                  04561  POS/ATM COURTESY FEE
+   633114-80  $ 30.00    24 HOUR FITNESS USA 800-  $    44.99  01/03/17   -$     5.88  61002543       97388  POS/ATM COURTESY FEE
+   717246-80  $  0.00    SUBWAY 03484250 REDWOOD   $    12.48  01/03/17    $     0.00  987916115       97265  ZERO OVERDRAFT FEE
+   456507-80  $  0.00    IN-N-OUT BURGER #190 MIL  $    23.38  01/03/17    $     0.00  996490341       98010  ZERO OVERDRAFT FEE
+ 46395130-80  $ 30.00    ##TS00A                   $   100.00  01/03/17   -$    26.54                  93715  POS/ATM COURTESY FEE
+ 10469841-80  $  0.00    IN-N-OUT BURGER #246 RED  $     9.81  01/03/17    $     0.00  550778401       98197  ZERO OVERDRAFT FEE
+
+             -----------
+
+
+Total NSF:   $    360.00
+Total ODT:   $      0.00
+
+Grand Total: $    360.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918668
+
+
+IPSHBFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  09:25:39            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+     No Feeable Transactions Found
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918669
+
+
+IPPOSFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  09:55:49            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   391285-80  $  0.00    TARGET T-2766 789 Missio  $    15.21  01/03/17    $     0.00  658114          98883  ZERO OVERDRAFT FEE
+   021665-80  $  0.00    DOLLARTREE 26781 MISSION  $    13.13  01/03/17    $     0.00  29012           98938  ZERO OVERDRAFT FEE
+   066906-80  $  0.00    GALVINS GEORGETOWN KYUS   $    63.14  01/03/17    $     0.00  466617360       98967  ZERO OVERDRAFT FEE
+   515811-80  $  0.00    UberUS_A 1455 Market St   $     4.75  01/03/17    $     0.00  170731587       98711  ZERO OVERDRAFT FEE
+   360856-80  $  0.00    CHEVRON/JB MARKET  LLC B  $     9.74  01/03/17    $    72.55  922960215       98857  ZERO OVERDRAFT FEE
+   447280-80  $  0.00    7-ELEVEN 3868 DELAWARE D  $    10.91  01/03/17    $    30.34  099609          98730  ZERO OVERDRAFT FEE
+   147946-80  $  0.00    UberUS_A 1455 Market St   $     4.75  01/03/17    $    44.22  425694158       98876  ZERO OVERDRAFT FEE
+ 07348074-80  $  0.00    THE HOME DEPOT #1017 HAY  $     4.25  01/03/17    $     0.00  001875149       98731  ZERO OVERDRAFT FEE
+
+             -----------
+
+
+Total NSF:   $      0.00
+Total ODT:   $      0.00
+
+Grand Total: $      0.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918670
+
+
+IPSHBFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  09:56:08            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+     No Feeable Transactions Found
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918671
+
+
+IPPOSFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  10:26:16            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   671258-80  $  0.00    WPY*YouCaring 855-469-37  $     6.00  01/03/17    $     0.00  82238630       00161  ZERO OVERDRAFT FEE
+   980954-80  $  0.00    WPY*Oakland Fire Relief8  $   100.00  01/03/17    $     0.00  02848442       00163  ZERO OVERDRAFT FEE
+   235681-80  $  0.00    NOB HILL  #620 SCOTTS VA  $    21.45  01/03/17    $     0.00  870919978       00349  ZERO OVERDRAFT FEE
+   277726-80  $  0.00    ST JAMES GATE - BELMON B  $    16.00  01/03/17    $     0.00  69120873       00046  ZERO OVERDRAFT FEE
+   612414-80  $  0.00    THE ESPRESSO LANE REDWOO  $     5.00  01/03/17    $     0.00  072772997       00047  ZERO OVERDRAFT FEE
+   827059-80  $  0.00    LUCKY#745.REDWO 200 WOOD  $    14.48  01/03/17    $     0.00  742674          00323  ZERO OVERDRAFT FEE
+   427126-80  $  0.00    SV EXPRESS CARWASH MOUNT  $    10.00  01/03/17    $     0.00  95152070       00087  ZERO OVERDRAFT FEE
+   669824-81  $  0.00    TALBOTS TOYLAND - CA SAN  $    21.84  01/03/17    $     0.00  548342064       00073  ZERO OVERDRAFT FEE
+   349654-81  $  0.00    TALBOTS TOYLAND - CA SAN  $    21.84  01/03/17    $     0.00  695788804       00083  ZERO OVERDRAFT FEE
+   844293-80  $ 30.00    HILLSDALE ARCO  880 E HI  $    19.00  01/03/17   -$    54.64  440471          00422  POS/ATM COURTESY FEE
+   072881-80  $  0.00    EL RANCHO MARKE 812 WILL  $    56.49  01/03/17    $     0.00  3605            00388  ZERO OVERDRAFT FEE
+   375140-80  $  0.00    WINGSTOP 1058 S SAN FRAN  $    12.12  01/03/17    $     0.00  047234272       00211  ZERO OVERDRAFT FEE
+   425440-80  $  0.00    CARLS JR 706 REDWOOD CIT  $    11.88  01/03/17    $     0.00  69541062       00158  ZERO OVERDRAFT FEE
+   332057-80  $  0.00    NEW LEAF COMMUNITY MARKF  $    59.93  01/03/17    $     0.00  131545786       00387  ZERO OVERDRAFT FEE
+   213412-81  $  0.00    PIZZA MY HEART - MIDDLER  $    43.50  01/03/17    $     2.40  93787754       00053  ZERO OVERDRAFT FEE
+   848036-80  $  0.00    FOOD SOURCE #710 HAYWARD  $     7.62  01/03/17    $     0.00  391358918       00319  ZERO OVERDRAFT FEE
+   061455-80  $  0.00    EXPRESS CAR WASH - UNI R  $    10.00  01/03/17    $     0.00  906757082       00013  ZERO OVERDRAFT FEE
+   892394-80  $ 30.00    Spotify USA 646-8375380   $     9.99  01/03/17   -$    45.49  576998916       00149  POS/ATM COURTESY FEE
+   251370-80  $  0.00    CAMPBELL PLAZA BOTTLE  C  $     8.75  01/03/17    $     0.00  54495676       00494  ZERO OVERDRAFT FEE
+   468333-80  $  0.00    UberUS_A 1455 Market St   $     7.10  01/03/17    $     0.00  824722111       00354  ZERO OVERDRAFT FEE
+   752511-80  $ 30.00    UNION BANK 3801 THIRD ST  $   503.00  01/03/17   -$   556.62  398140579       00196  POS/ATM COURTESY FEE
+   231610-80  $  0.00    J AND J HAWAIIAN BBQ MEN  $    18.37  01/03/17    $     0.00  158673380       00526  ZERO OVERDRAFT FEE
+   210604-80  $  0.00    J AND J HAWAIIAN BBQ MEN  $     2.94  01/03/17    $     0.00  66994800       00527  ZERO OVERDRAFT FEE
+   330630-80  $ 30.00    6718 MISSION-98 6718 MIS  $   102.95  01/03/17   -$    52.87  631339398       00481  POS/ATM COURTESY FEE
+   722419-80  $  0.00    SAFEWAY  STORE  1682 PAL  $    33.32  01/03/17    $     0.00  55236535       00511  ZERO OVERDRAFT FEE
+
+             -----------
+
+
+Total NSF:   $    120.00
+Total ODT:   $      0.00
+
+Grand Total: $    120.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918673
+
+
+IPSHBFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  10:26:36            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+     No Feeable Transactions Found
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918675
+
+
+IPPOSFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  10:56:46            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   111044-80  $  0.00    MOLLIE STONES #7 49 W 4S  $    50.60  01/03/17    $     0.00  730616942       00612  ZERO OVERDRAFT FEE
+   344479-80  $  0.00    Cardtronics CCS 3675 GEA  $    82.99  01/03/17    $     0.00  146282577       01089  ZERO OVERDRAFT FEE
+   272322-80  $  0.00    PIER 1 FOLSOM CAUS        $    39.48  01/03/17    $     4.96  857112816       00727  ZERO OVERDRAFT FEE
+   908573-81  $  0.00    GEICO  *AUTO 800-841-300  $   177.12  01/03/17    $     0.00  494996576       01059  ZERO OVERDRAFT FEE
+   084216-80  $  0.00    FLYERS  219 * SOUTH SAN   $     7.55  01/03/17    $     0.00  406863770       01021  ZERO OVERDRAFT FEE
+   571356-80  $ 30.00    SAN MATEO CREDI 575 MIDD  $   200.00  01/03/17   -$   729.24  868             00617  POS/ATM COURTESY FEE
+   252733-80  $  0.00    76 - BROADWAY 76 REDWOOD  $    45.14  01/03/17    $     0.00  5455637       00759  ZERO OVERDRAFT FEE
+   060486-80  $  0.00  J 76 - BROADWAY 76 REDWOOD  $    60.21  01/03/17   -$    56.77  971445869       00767  WAIVED PAID-NSF FEE
+   713912-80  $ 30.00    Cardtronics CCS 13405 LI  $   203.00  01/03/17   -$   413.99  52173921       00919  POS/ATM COURTESY FEE
+   026343-80  $  0.00    CHAVEZ SUPERMARKET REDWO  $     8.71  01/03/17    $     0.00  593621769       00720  ZERO OVERDRAFT FEE
+   373914-80  $  0.00    TMOBILE*AUTO PAY 800-937  $   309.26  01/03/17    $     0.00  31024266       00963  ZERO OVERDRAFT FEE
+   497681-80  $ 30.00    SPEEDY CASH 888-3331360   $   139.71  01/03/17   -$   138.11  430301731       00666  POS/ATM COURTESY FEE
+   401840-80  $  0.00    UberUS_A 1455 Market St   $    31.72  01/03/17    $     0.00  416757389       01072  ZERO OVERDRAFT FEE
+   854504-80  $  0.00    JOSES MEXICAN R 904 E HA  $    72.63  01/03/17    $     0.00  287910761       00638  ZERO OVERDRAFT FEE
+   990894-80  $  0.00    MCDONALD'S F166 125 MONT  $     6.46  01/03/17    $     0.00  342917          00772  ZERO OVERDRAFT FEE
+   023215-80  $  0.00    TARGET T-1122 2220 Bridg  $    29.98  01/03/17    $     0.00  145845          01070  ZERO OVERDRAFT FEE
+   077665-80  $  0.00    SQ *FRESH & NATURAL CAFS  $     7.07  01/03/17    $    25.00  722124257       01032  ZERO OVERDRAFT FEE
+   914288-80  $  0.00    SAFEWAY  STORE  1293 CAM  $    46.76  01/03/17    $     0.00  554016503       00803  ZERO OVERDRAFT FEE
+   702640-81  $  0.00    UBER TECHNOLOGIES INC  8  $     9.91  01/03/17    $     0.00  65345044       00942  ZERO OVERDRAFT FEE
+   481971-80  $ 30.00    CHEVRON 0371957 ROSEBURG  $    79.41  01/03/17   -$    16.27  749545204       01033  POS/ATM COURTESY FEE
+   498729-80  $ 30.00    LA TIENDITA MKT 510 OCON  $     3.26  01/03/17   -$   418.07  964347137       00627  POS/ATM COURTESY FEE
+   147718-80  $  0.00    MI PUEBLO PALO ALTO PALO  $     5.36  01/03/17    $     0.00  794372929       00880  ZERO OVERDRAFT FEE
+   015982-80  $  0.00    MCDONALD'S F257 1721 E B  $     2.39  01/03/17    $     0.00  6642            01090  ZERO OVERDRAFT FEE
+   260982-80  $  0.00    GOOGLE *Supercell g.co/p  $     4.99  01/03/17    $     0.00  35603148       00962  ZERO OVERDRAFT FEE
+ 10316758-80  $ 30.00    SAN MATEO CREDI 1735 EAS  $   100.00  01/03/17   -$   245.20  3275            00870  POS/ATM COURTESY FEE
+
+             -----------
+
+
+Total NSF:   $    180.00
+Total ODT:   $      0.00
+
+Grand Total: $    180.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918676
+
+
+IPSHBFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  10:57:06            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+     No Feeable Transactions Found
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918678
+
+
+IPPOSFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  11:27:14            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   315428-80  $  0.00    LA HONDA COUNTR 8865 LA   $    19.65  01/03/17    $     0.00  69068           01354  ZERO OVERDRAFT FEE
+   151713-80  $ 30.00    SAN MATEO CREDI 1515 S E  $   460.00  01/03/17   -$   424.04  4869            01869  POS/ATM COURTESY FEE
+   478880-80  $  0.00    KIRKLANDS #651 FOLSOM CA  $    24.08  01/03/17    $     4.96  456148744       01098  ZERO OVERDRAFT FEE
+   513093-80  $  0.00    ROMA PIZZERIA SAN FRANCI  $    50.73  01/03/17    $     0.00  744788546       01708  ZERO OVERDRAFT FEE
+   960736-80  $  0.00    SAFEWAY  STORE  0316 SAN  $     2.77  01/03/17    $     0.00  292532123       01689  ZERO OVERDRAFT FEE
+   156796-81  $  0.00    SOUTH CITY GROC 125 HICK  $    33.45  01/03/17    $     0.00  82852           01293  ZERO OVERDRAFT FEE
+   996028-81  $  0.00    NEELAM PACIFIC MARKET  S  $    35.96  01/03/17    $     0.00  02208219       01880  ZERO OVERDRAFT FEE
+   384374-80  $  0.00    ORGIN SAN FRANCISCOCAUS   $    14.00  01/03/17    $     0.00  310725916       01754  ZERO OVERDRAFT FEE
+   227175-80  $  0.00    ORGIN SAN FRANCISCOCAUS   $    18.00  01/03/17    $     0.00  244933099       01755  ZERO OVERDRAFT FEE
+   531598-80  $  0.00    ORGIN SAN FRANCISCOCAUS   $    14.00  01/03/17    $     0.00  21039750       01756  ZERO OVERDRAFT FEE
+   233786-80  $  0.00    ORGIN SAN FRANCISCOCAUS   $    28.00  01/03/17    $     0.00  397672177       01757  ZERO OVERDRAFT FEE
+   776913-80  $  0.00    ORGIN SAN FRANCISCOCAUS   $    28.00  01/03/17    $     0.00  512009566       01759  ZERO OVERDRAFT FEE
+   419734-80  $  0.00    VUDU.COM 408-492-1010 CA  $     3.99  01/03/17    $    39.18  527471311       01239  ZERO OVERDRAFT FEE
+   914810-81  $  0.00    5 STAR GAS & DIESEL DAIL  $    16.28  01/03/17    $    12.19  283231277       01811  ZERO OVERDRAFT FEE
+   537174-80  $  0.00    ABC #74 HAWAII  247 PI K  $    21.75  01/03/17    $     0.00  8105            01622  ZERO OVERDRAFT FEE
+   026815-80  $  0.00    NUESTRA MESA CAMAS WAUS   $    50.28  01/03/17    $     0.00  925073114       01228  ZERO OVERDRAFT FEE
+   063759-80  $  0.00    OLD NAVY US 3383 SAN BRU  $    23.91  01/03/17    $     0.00  024701315       01654  ZERO OVERDRAFT FEE
+   983412-80  $ 30.00    VALLEJO GAS & SHOP VALLE  $    44.06  01/03/17   -$    17.68  698148370       01488  POS/ATM COURTESY FEE
+   222048-80  $  0.00    FOOD 4 LESS 2341 E AVENU  $    22.62  01/03/17    $     0.00  6036            01802  ZERO OVERDRAFT FEE
+   796568-80  $  0.00    OCEANA MARKET 200 EUREKA  $    21.21  01/03/17    $     0.00  36305           01797  ZERO OVERDRAFT FEE
+   172740-80  $  0.00    SAFEWAY  STORE  1224 NEW  $    16.98  01/03/17    $     0.00  06347741       01698  ZERO OVERDRAFT FEE
+   503515-80  $  0.00    CARIBBEAN GARDENS SUPPEB  $    20.00  01/03/17    $    17.27  83031296       01508  ZERO OVERDRAFT FEE
+   204658-80  $  0.00    METROPCS WEB BELLEVUE WA  $    50.00  01/03/17    $     0.00  537697194       01368  ZERO OVERDRAFT FEE
+   760018-80  $  0.00    WINGSTOP DALY CITY #517D  $    24.50  01/03/17    $     0.00  40072057       01213  ZERO OVERDRAFT FEE
+   359879-80  $ 30.00    Bay Cities Cred 22777 Ma  $   200.00  01/03/17   -$   735.59  024623629       01537  POS/ATM COURTESY FEE
+   501685-80  $ 30.00    NG'S COOKING S SAN FRANC  $    46.52  01/03/17   -$    31.60  10425373       01224  POS/ATM COURTESY FEE
+ 01508547-80  $  0.00    UberUS_A 1455 Market St   $     5.75  01/03/17    $     0.00  48655237       01652  ZERO OVERDRAFT FEE
+
+             -----------
+
+
+Total NSF:   $    120.00
+Total ODT:   $      0.00
+
+Grand Total: $    120.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918679
+
+
+IPSHBFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  11:27:35            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+     No Feeable Transactions Found
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918681
+
+
+IPPOSFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  11:57:44            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   546826-80  $  0.00    BATH & BODY WORKS 1860 C  $    25.86  01/03/17    $   187.36  073242275       02695  ZERO OVERDRAFT FEE
+   422181-80  $ 30.00    555 CALIFORNIA GARAGE  S  $    12.00  01/03/17   -$    10.67  720858537       01890  POS/ATM COURTESY FEE
+   278961-80  $ 30.00    LEGAL SEA FOODS LOGAN  B  $    45.00  01/03/17   -$   181.03  870957563       01985  POS/ATM COURTESY FEE
+   201859-80  $ 30.00    HOT WOK BISTRO SAN MATEO  $    52.25  01/03/17   -$   233.28  559085347       02065  POS/ATM COURTESY FEE
+   592277-80  $  0.00    IRVING PIZZA SAN FRANCIS  $    10.24  01/03/17    $     0.00  197963537       02331  ZERO OVERDRAFT FEE
+   177170-80  $ 30.00    FHDA FOOTHILL REGISTRAT6  $   517.00  01/03/17   -$    74.52  89121518       02348  POS/ATM COURTESY FEE
+   258673-80  $  0.00    PF CHANGS #9966 EMERYVIL  $    24.89  01/03/17    $     0.00  989452882       01974  ZERO OVERDRAFT FEE
+   599489-80  $  0.00    SAFEWAY  STORE  0305 RED  $    36.47  01/03/17    $     0.00  862859495       02012  ZERO OVERDRAFT FEE
+   693290-80  $  0.00    MAGGIANOS SAN JOSE SAN J  $    86.53  01/03/17    $     0.00  37413505       02285  ZERO OVERDRAFT FEE
+   658894-80  $  0.00    BROADWAY GRILL BURLINGAM  $    90.47  01/03/17    $   116.57  727100838       02125  ZERO OVERDRAFT FEE
+   034485-80  $  0.00    BROADWAY GRILL BURLINGAM  $    90.00  01/03/17    $    38.92  439404931       02128  ZERO OVERDRAFT FEE
+   144512-80  $  0.00    QVC*500400010101*4 OF 48  $     5.99  01/03/17    $     0.00  528982325       02050  ZERO OVERDRAFT FEE
+   539469-80  $  0.00    QVC*500396084001*4 OF 48  $     6.05  01/03/17    $     0.00  300655641       02082  ZERO OVERDRAFT FEE
+   538940-80  $  0.00    Wal-Mart Super  1001 WAL  $    13.34  01/03/17    $     0.00  870882581       02168  ZERO OVERDRAFT FEE
+   408999-80  $ 30.00    SAN MATEO CREDI 150 EL C  $   500.00  01/03/17   -$   440.64  2324            02416  POS/ATM COURTESY FEE
+   599580-80  $  0.00    PETSMART INC 15 2440 E C  $    10.75  01/03/17    $     0.00  531883800       02256  ZERO OVERDRAFT FEE
+   190283-80  $  0.00    SAFEWAY STORE 1547 BURLI  $    47.56  01/03/17    $     0.00  264791608       02506  ZERO OVERDRAFT FEE
+   264526-80  $  0.00    VICTORIA'S SECRET #1338S  $    46.24  01/03/17    $     0.00  287010582       02637  ZERO OVERDRAFT FEE
+   469540-80  $  0.00    DOUBLE DUTCH SAN FRANCIS  $    63.00  01/03/17    $     0.00  917975041       02279  ZERO OVERDRAFT FEE
+   711844-80  $  0.00    99 STORES FREMONT CAUS    $     9.80  01/03/17    $    30.34  816297170       02691  ZERO OVERDRAFT FEE
+   162922-80  $ 30.00    SFO PEET'S COFFEE SAN FR  $    14.45  01/03/17   -$   437.71  3196013       01977  POS/ATM COURTESY FEE
+   002793-80  $ 30.00    PACIFIC SUPERMARKET - SS  $    53.97  01/03/17   -$    13.21  360793886       02545  POS/ATM COURTESY FEE
+   291721-80  $  0.00    SEPHORA 48 355 STANFORD   $    57.51  01/03/17    $     0.00  313121576       02433  ZERO OVERDRAFT FEE
+   839148-80  $  0.00    SAN MATEO CREDI 1735 EAS  $   100.00  01/03/17    $     0.00  881             02169  ZERO OVERDRAFT FEE
+
+             -----------
+
+
+Total NSF:   $    210.00
+Total ODT:   $      0.00
+
+Grand Total: $    210.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918682
+
+
+IPSHBFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  11:58:05            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+     No Feeable Transactions Found
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918683
+
+
+IPPOSFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  12:28:14            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   358522-80  $ 30.00    ORCHARD SUPPLY  1010 MET  $    48.93  01/03/17   -$   176.52  284058108       02857  POS/ATM COURTESY FEE
+   208059-80  $  0.00    ORCHARD SUPPLY  2110 MID  $    23.23  01/03/17    $   199.71  665877094       03271  ZERO OVERDRAFT FEE
+   672056-80  $ 30.00    SAN MATEO CREDI 871-B HA  $   300.00  01/03/17   -$   656.36  1309            03029  POS/ATM COURTESY FEE
+   508421-80  $  0.00    Wal-Mart Super  2950 WAL  $     7.48  01/03/17    $     0.00  513838916       02922  ZERO OVERDRAFT FEE
+   966346-80  $ 30.00    URUAPAN URUAPAN MX        $   245.27  01/03/17   -$   213.80  98346113       02798  POS/ATM COURTESY FEE
+   185759-81  $  0.00    NEELAM PACIFIC MARKET  S  $    69.99  01/03/17    $     0.00  603537666       02791  ZERO OVERDRAFT FEE
+   998894-80  $  0.00    UberUS_A 1455 Market St   $     2.00  01/03/17    $     0.00  73223786       02879  ZERO OVERDRAFT FEE
+   138264-82  $  0.00    SHINY-TEMPLATES.COM TORO  $    19.95  01/03/17    $     0.00  590273208       03105  ZERO OVERDRAFT FEE
+   662554-80  $ 30.00    UberUS_A 1455 Market St   $    10.67  01/03/17   -$   481.31  761806285       03015  POS/ATM COURTESY FEE
+   256771-80  $  0.00    CHEVRON/KEET NERHAN SAN   $     6.15  01/03/17    $     0.00  961057133       02976  ZERO OVERDRAFT FEE
+   288185-80  $ 30.00    SAN MATEO CREDI 1515 S E  $    60.00  01/03/17   -$   105.24  4882            02777  POS/ATM COURTESY FEE
+   879092-80  $ 30.00    SMARTNFINAL441  249 KENW  $    46.93  01/03/17   -$    90.14  149064          02982  POS/ATM COURTESY FEE
+   209579-80  $ 30.00    STOP IN FOOD &  754 WOOD  $    55.75  01/03/17   -$    48.66  068768274       03256  POS/ATM COURTESY FEE
+   524364-80  $  0.00    STAR ZONE SANTA CRUZ CAU  $     5.00  01/03/17    $     0.00  539711020       02855  ZERO OVERDRAFT FEE
+   406697-80  $  0.00    TARGET T-1407 133 Serram  $     6.96  01/03/17    $     0.00  99367           02795  ZERO OVERDRAFT FEE
+   089849-80  $  0.00    MCDONALD'S F370 505 SERR  $     6.20  01/03/17    $     0.00  836717          02992  ZERO OVERDRAFT FEE
+
+             -----------
+
+
+Total NSF:   $    210.00
+Total ODT:   $      0.00
+
+Grand Total: $    210.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918685
+
+
+IPSHBFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  12:28:36            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+     No Feeable Transactions Found
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918809
+
+
+IPPOSFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  12:58:44            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   136724-80  $  0.00    SAFEWAY  STORE  0797 HAY  $    39.85  01/03/17    $     0.00  199492084       03735  ZERO OVERDRAFT FEE
+   908586-81  $  0.00    WAL-MART #2280  Wal-Mart  $   120.26  01/03/17    $     0.00  928827          03519  ZERO OVERDRAFT FEE
+   834914-80  $  0.00    Cardtronics CCS 3940A WA  $    43.00  01/03/17    $     0.00  464487018       03344  ZERO OVERDRAFT FEE
+   816052-80  $ 30.00    SAN MATEO CREDI 575 MIDD  $   200.00  01/03/17   -$   197.17  3458            03763  POS/ATM COURTESY FEE
+   456234-81  $  0.00    1ST UNITED SERV 600 BANC  $   260.00  01/03/17    $     0.00  1213            03731  ZERO OVERDRAFT FEE
+   114107-81  $  0.00    HUNTINGTON LIQUORS SAN B  $     7.62  01/03/17    $     0.00  13046393       03594  ZERO OVERDRAFT FEE
+   572234-82  $  0.00    WHOLEFDS SCA #10 2732 AS  $    25.73  01/03/17    $     0.00  139137622       03488  ZERO OVERDRAFT FEE
+   543079-80  $  0.00    ARCO #42348 AMP 15000 OL  $     1.89  01/03/17    $     0.00  06889           03335  ZERO OVERDRAFT FEE
+   821175-81  $ 30.00    SAN MATEO CREDI 3117 MID  $   500.00  01/03/17   -$   482.14  3815            03710  POS/ATM COURTESY FEE
+   423096-81  $  0.00    SAFEWAY  STORE  0305 RED  $    33.17  01/03/17    $     0.00  470903537       03800  ZERO OVERDRAFT FEE
+   717786-80  $  0.00    WALGREENS STORE 399 EL S  $    17.56  01/03/17    $     0.00  58548602       03515  ZERO OVERDRAFT FEE
+   178474-80  $ 30.00    CVS/PHARMACY #09 09940-S  $    26.07  01/03/17   -$     5.28  668603978       03753  POS/ATM COURTESY FEE
+   462513-80  $ 30.00    NETFLIX COM LOS GATOS CA  $     9.99  01/03/17   -$     4.73  190872355       03604  POS/ATM COURTESY FEE
+   135438-80  $  0.00    SHOREVIEW LIQUORS SAN MA  $     3.57  01/03/17    $     0.00  330367593       03762  ZERO OVERDRAFT FEE
+
+             -----------
+
+
+Total NSF:   $    120.00
+Total ODT:   $      0.00
+
+Grand Total: $    120.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918810
+
+
+IPSHBFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  12:59:06            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+     No Feeable Transactions Found
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918868
+
+
+IPPOSFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  13:29:14            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   078516-80  $  0.00    SEARS ROEBUCK 1178 EL CA  $    22.32  01/03/17    $     0.00  78744746       04526  ZERO OVERDRAFT FEE
+   509313-80  $  0.00    SAFEWAY FUEL 1824 SOUTH   $    15.07  01/03/17    $     0.00  365992172       04629  ZERO OVERDRAFT FEE
+   063183-81  $  0.00    CAFFE GRECO 423 COLUMBUS  $    62.50  01/03/17    $     0.00  548             03917  ZERO OVERDRAFT FEE
+   536757-80  $  0.00    INFINITY INSURANCE 800-7  $    86.96  01/03/17    $     0.00  115360490       04323  ZERO OVERDRAFT FEE
+   917444-80  $  0.00    GASSYS.COM SEATTLE WAUS   $    26.95  01/03/17    $     0.00  999             03943  ZERO OVERDRAFT FEE
+   539889-80  $  0.00    HARVEST MOON MARKET WATS  $     8.09  01/03/17    $     0.00  053392452       04228  ZERO OVERDRAFT FEE
+   301794-80  $  0.00    RALEY'S #127 SOUTH LAKE   $    17.91  01/03/17    $     0.00  497889863       04680  ZERO OVERDRAFT FEE
+   038010-80  $ 30.00    Wells Fargo Ban SEQUOIA   $    83.00  01/03/17   -$    71.78  920786629       03842  POS/ATM COURTESY FEE
+   008268-89  $ 30.00    P225757 2525 KAANAPALI P  $   103.50  01/03/17   -$   707.24  255814381       04403  POS/ATM COURTESY FEE
+   475845-80  $ 30.00    SAFEWAY  STORE  0777 SOU  $    48.05  01/03/17   -$   179.36  036686805       04625  POS/ATM COURTESY FEE
+   387897-80  $  0.00    UberUS_A 1455 Market St   $     8.74  01/03/17    $     0.00  356309693       04627  ZERO OVERDRAFT FEE
+   977379-80  $  0.00    DA LAT RESTAURANT SAN JO  $    20.80  01/03/17    $     0.00  343905255       04168  ZERO OVERDRAFT FEE
+   630727-80  $  0.00    NEW GOLDEN WOK SOUTH SAN  $    44.00  01/03/17    $     0.00  71528258       04124  ZERO OVERDRAFT FEE
+   215101-80  $  0.00    UberUS_A 1455 Market St   $    28.24  01/03/17    $     0.00  639912181       04717  ZERO OVERDRAFT FEE
+   789984-80  $ 30.00    FOOD 4 LESS 1401 BROADWA  $   246.78  01/03/17   -$   168.84  2940            04743  POS/ATM COURTESY FEE
+   201661-80  $  0.00    FLYERS #270 699 EL CAMIN  $    20.01  01/03/17    $     0.00  42997556       04744  ZERO OVERDRAFT FEE
+   650327-80  $  0.00    0793 EXTRA SPACE STORA P  $   206.00  01/03/17    $     0.00  028640728       04132  ZERO OVERDRAFT FEE
+   888078-80  $  0.00    UNCLE BENNYS DONUT SAN F  $     7.54  01/03/17    $     0.00  215258304       04753  ZERO OVERDRAFT FEE
+   915849-80  $  0.00    TAQUERIA IGUANA AZUL SAN  $     8.70  01/03/17    $     0.00  78172609       03868  ZERO OVERDRAFT FEE
+   644887-80  $  0.00    WHOLEFDS PAL 100 774 EMP  $     3.59  01/03/17    $     0.00  725373183       04548  ZERO OVERDRAFT FEE
+   858543-80  $  0.00  J TONY'S PIZZA MENLO PARK   $    20.00  01/03/17   -$    11.92  281530357       04207  WAIVED PAID-NSF FEE
+   797547-80  $  0.00    LA HACIENDA MAR 249 HILL  $    17.91  01/03/17    $     0.00  17097           03919  ZERO OVERDRAFT FEE
+   542313-80  $ 30.00    SAFEWAY  STORE  0694 SAN  $    11.91  01/03/17   -$    47.19  6963102       03940  POS/ATM COURTESY FEE
+   321353-80  $  0.00    SAFEWAY  STORE  4178 BUR  $     8.57  01/03/17    $     3.45  127526902       03911  ZERO OVERDRAFT FEE
+   131330-80  $  0.00    ARCO PAYPOINT 840 SAN AN  $    20.35  01/03/17    $     0.00  59103           04288  ZERO OVERDRAFT FEE
+
+             -----------
+
+
+Total NSF:   $    150.00
+Total ODT:   $      0.00
+
+Grand Total: $    150.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918869
+
+
+IPSHBFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  13:29:36            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+     No Feeable Transactions Found
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918871
+
+
+IPPOSFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  13:59:46            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   514463-80  $  0.00    MICHAELS STORES 100 WOOD  $    34.59  01/03/17    $     0.00  49522094       05024  ZERO OVERDRAFT FEE
+   395781-81  $  0.00    TJMAXX #0418 240 WALNUTR  $    75.08  01/03/17    $     0.00  893828490       04999  ZERO OVERDRAFT FEE
+   580546-80  $  0.00    Wal-Mart Super  2950 WAL  $    41.14  01/03/17    $     0.00  56672541       04932  ZERO OVERDRAFT FEE
+   676035-82  $  0.00    CHEVRON/CSI-092133/1553C  $    11.93  01/03/17    $     0.00  39727842       05096  ZERO OVERDRAFT FEE
+   050971-82  $  0.00    NETFLIX COM LOS GATOS CA  $    11.99  01/03/17    $     0.00  632633630       04922  ZERO OVERDRAFT FEE
+   238790-81  $  0.00    U.S. BANK US BANK FREELA  $   403.00  01/03/17    $     0.00  291678879       05116  ZERO OVERDRAFT FEE
+   214200-80  $ 30.00    KOHLS 0981 1200 EL CAMIC  $   130.71  01/03/17   -$   340.07  117571421       05130  POS/ATM COURTESY FEE
+   126722-80  $  0.00    FLYERS #270 699 EL CAMIN  $     3.88  01/03/17    $     0.00  105993023       04834  ZERO OVERDRAFT FEE
+   667789-80  $  0.00    SAFEWAY  STORE  3008 PAC  $    60.61  01/03/17    $     0.00  999732701       04897  ZERO OVERDRAFT FEE
+   214762-80  $  0.00    SPROUTS FARMERS 301 GELL  $     1.39  01/03/17    $     4.99  022916          05001  ZERO OVERDRAFT FEE
+   289597-80  $ 30.00    MI PUEBLO PALO ALTO PALO  $    44.66  01/03/17   -$    26.65  241716197       04877  POS/ATM COURTESY FEE
+   075135-80  $  0.00    BURLNGTON STORES314 RENO  $    68.92  01/03/17    $     0.00  235442983       04893  ZERO OVERDRAFT FEE
+   691637-80  $  0.00    MI RANCHO SUPERMARKET  R  $    82.91  01/03/17    $     0.00  671472347       04943  ZERO OVERDRAFT FEE
+   814896-80  $ 30.00    MCDONALD'S F802 2750 GEN  $     3.25  01/03/17   -$   296.17  19755           04874  POS/ATM COURTESY FEE
+
+             -----------
+
+
+Total NSF:   $     90.00
+Total ODT:   $      0.00
+
+Grand Total: $     90.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918872
+
+
+IPSHBFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  14:00:08            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+     No Feeable Transactions Found
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918874
+
+
+IPPOSFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  14:30:17            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+    02416-80  $ 30.00    STARBUCKS STORE 05574  R  $     9.90  01/03/17   -$   295.50  738904204       06058  POS/ATM COURTESY FEE
+   503918-80  $  0.00    60934CAGRNGRATN 630 PARK  $   404.50  01/03/17    $     0.00  016782686       06174  ZERO OVERDRAFT FEE
+   210901-80  $  0.00    STARBUCKS STORE 06607  S  $     5.85  01/03/17    $     0.00  424819184       05895  ZERO OVERDRAFT FEE
+   571433-80  $ 30.00    STARBUCKS STORE 22824  V  $    14.90  01/03/17   -$   221.16  846772569       06339  POS/ATM COURTESY FEE
+   825588-80  $  0.00    STARBUCKS STORE 05225  F  $    20.85  01/03/17    $     0.00  923064655       06154  ZERO OVERDRAFT FEE
+   792841-80  $  0.00    BJ'S RESTAURANTS 550 SAN  $    59.68  01/03/17    $     0.00  935337424       06429  ZERO OVERDRAFT FEE
+   686663-80  $  0.00    VONAGE *PRICE+TAXES 866-  $     5.78  01/03/17    $     0.00  234005031       05551  ZERO OVERDRAFT FEE
+   355271-81  $  0.00    ROSS STORES #13 405 WEST  $    87.62  01/03/17    $     0.00  76696460       06570  ZERO OVERDRAFT FEE
+   044685-80  $  0.00    STARBUCKS STORE 05757  S  $    10.30  01/03/17    $     0.00  996925098       06006  ZERO OVERDRAFT FEE
+   744082-80  $ 30.00    GASSYSPrime Membership a  $   107.66  01/03/17   -$   180.62  34485259       05766  POS/ATM COURTESY FEE
+   548918-80  $  0.00    STARBUCKS STORE 06585  R  $    14.10  01/03/17    $     0.00  635484704       05901  ZERO OVERDRAFT FEE
+   767860-80  $  0.00    VENMO 855-812-4430 NYUS   $     6.00  01/03/17    $     0.00  070753640       06618  ZERO OVERDRAFT FEE
+   097200-80  $  0.00    STARBUCKS STORE 06650  R  $    13.85  01/03/17    $    58.65  53386755       05877  ZERO OVERDRAFT FEE
+   473625-80  $  0.00    STARBUCKS STORE 05889  S  $     2.95  01/03/17    $     0.00  461608144       05977  ZERO OVERDRAFT FEE
+   230884-80  $ 30.00    STARBUCKS STORE 05225  F  $     3.90  01/03/17   -$    88.54  072024203       06161  POS/ATM COURTESY FEE
+   085474-81  $ 30.00    SAN MATEO CREDI 150 EL C  $   500.00  01/03/17   -$   472.53  4455            05388  POS/ATM COURTESY FEE
+   600859-80  $  0.00    VENMO 855-812-4430 NYUS   $    16.00  01/03/17    $     4.35  230783934       06599  ZERO OVERDRAFT FEE
+   731862-80  $ 30.00    STARBUCKS STORE 05977  P  $     4.25  01/03/17   -$   770.90  32975656       05916  POS/ATM COURTESY FEE
+   593574-80  $ 30.00    PATELCO CREDIT  24703 AM  $   300.00  01/03/17   -$   249.50  7691            05617  POS/ATM COURTESY FEE
+   432365-80  $  0.00    SHELL Service S 1400 W H  $     7.09  01/03/17    $     0.00  299790          05393  ZERO OVERDRAFT FEE
+   100983-80  $  0.00    BURGER - APTOS 831-51580  $    27.35  01/03/17    $     0.00  335921658       06521  ZERO OVERDRAFT FEE
+   880015-80  $  0.00    STARBUCKS STORE 00555  R  $    30.00  01/03/17    $     0.00  025626860       06269  ZERO OVERDRAFT FEE
+   531196-80  $  0.00    STARBUCKS STORE 02822  P  $     8.20  01/03/17    $     0.00  988009815       06208  ZERO OVERDRAFT FEE
+   774470-80  $  0.00    MICHAELS STORES 100 WOOD  $    13.12  01/03/17    $    67.62  728668747       06560  ZERO OVERDRAFT FEE
+   959819-80  $  0.00    STARBUCKS STORE 02886  P  $     5.45  01/03/17    $     0.00  72412958       06199  ZERO OVERDRAFT FEE
+   698740-80  $  0.00    STARBUCKS STORE 20234  M  $     5.70  01/03/17    $     0.00  790971162       06337  ZERO OVERDRAFT FEE
+   627174-80  $ 30.00    APL* ITUNES.COM/BILL 866  $     7.95  01/03/17   -$   137.60  66548903       05585  POS/ATM COURTESY FEE
+   300048-80  $  0.00    WHOLEFDS SMT 101 3200 SS  $     7.39  01/03/17    $     0.00  245073854       05345  ZERO OVERDRAFT FEE
+   928808-81  $  0.00    TEMPLE BAR & LOUNGE SAN   $    39.00  01/03/17    $     0.00  49905142       06299  ZERO OVERDRAFT FEE
+   917322-81  $  0.00    TEMPLE BAR & LOUNGE SAN   $    24.00  01/03/17    $     0.00  327836593       06300  ZERO OVERDRAFT FEE
+   231034-81  $  0.00    TEMPLE BAR & LOUNGE SAN   $    31.00  01/03/17    $     0.00  386710983       06305  ZERO OVERDRAFT FEE
+   759958-80  $ 30.00    TROPICANA ROOMS 70273922  $   105.90  01/03/17   -$   481.26  187098871       06661  POS/ATM COURTESY FEE
+   247685-81  $ 30.00    APL* ITUNES.COM/BILL 866  $    11.99  01/03/17   -$   524.13  463287462       05660  POS/ATM COURTESY FEE
+   370945-80  $  0.00    VENMO 855-812-4430 NYUS   $    75.00  01/03/17    $     0.00  01650200       06641  ZERO OVERDRAFT FEE
+   063127-80  $  0.00    APL* ITUNES.COM/BILL 866  $    20.95  01/03/17    $     0.00  043415724       05630  ZERO OVERDRAFT FEE
+   898836-80  $  0.00    STARBUCKS STORE 05287  S  $     1.95  01/03/17    $    25.00  862996868       06145  ZERO OVERDRAFT FEE
+   101211-80  $  0.00    ARCO PAYPOINT 504 WHIPPL  $    20.20  01/03/17    $     0.00  54013           06228  ZERO OVERDRAFT FEE
+   290726-80  $  0.00    STARBUCKS STORE 00555  R  $    12.70  01/03/17    $     0.00  287632987       06261  ZERO OVERDRAFT FEE
+   765075-80  $  0.00    CHEVRON/FLYERS ENERGY LC  $    12.62  01/03/17    $     0.00  218291259       05418  ZERO OVERDRAFT FEE
+   556015-80  $  0.00    APL* ITUNES.COM/BILL 866  $     0.99  01/03/17    $     0.00  56904231       05545  ZERO OVERDRAFT FEE
+   484270-80  $  0.00    7-ELEVEN 25965 INDUSTRIA  $    16.57  01/03/17    $     0.00  081962          05984  ZERO OVERDRAFT FEE
+   712791-80  $  0.00    7-ELEVEN 25965 INDUSTRIA  $    10.35  01/03/17    $     0.00  217385          05994  ZERO OVERDRAFT FEE
+   099772-80  $  0.00    7-ELEVEN 11 SERRA VISTA   $     7.43  01/03/17    $     0.00  436025          05319  ZERO OVERDRAFT FEE
+   372267-80  $  0.00    STARBUCKS STORE 00555  R  $    10.70  01/03/17    $     0.00  159699485       06263  ZERO OVERDRAFT FEE
+   404901-80  $  0.00    ARCO PAYPOINT 840 SAN AN  $    25.47  01/03/17    $     0.00  69472           05535  ZERO OVERDRAFT FEE
+   751098-80  $  0.00    ROBERTOS TACO SHOP RENO   $    51.44  01/03/17    $     0.00  53786414       05768  ZERO OVERDRAFT FEE
+   933292-80  $  0.00    STARBUCKS STORE 03459  R  $     4.70  01/03/17    $     0.00  352226180       06186  ZERO OVERDRAFT FEE
+   024690-80  $  0.00  J APL* ITUNES.COM/BILL 866  $     9.99  01/03/17   -$     9.60  069151257       06530  WAIVED PAID-NSF FEE
+   546250-80  $  0.00    TOWN SAN CARLOS CAUS      $    48.24  01/03/17    $     0.00  256855110       06719  ZERO OVERDRAFT FEE
+   494938-80  $  0.00    APL* ITUNES.COM/BILL 866  $     9.99  01/03/17   -$    19.38  917252423       06541  ZERO OVERDRAFT FEE
+   349815-80  $ 30.00    PAYPAL *LUHUIXI 2211 Nor  $    30.18  01/03/17   -$     3.33  052719230       05934  POS/ATM COURTESY FEE
+
+             -----------
+
+
+Total NSF:   $    330.00
+Total ODT:   $      0.00
+
+Grand Total: $    330.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918876
+
+
+IPSHBFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  14:30:40            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   325403-80  $ 30.00    1515 S EL CAMINO REAL  S  $   300.00  01/03/17   -$   289.70  754328801       05724  POS/ATM COURTESY FEE
+
+             -----------
+
+
+Total NSF:   $     30.00
+Total ODT:   $      0.00
+
+Grand Total: $     30.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918878
+
+
+IPPOSFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  15:00:49            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   204661-82  $  0.00    SAFEWAY  STORE  0308 HAL  $    25.75  01/03/17    $     0.00  357263799       07036  ZERO OVERDRAFT FEE
+   350115-80  $  0.00    BATH & BODY WORKS #1453S  $    13.87  01/03/17    $     0.00  70803528       06905  ZERO OVERDRAFT FEE
+   931755-80  $  0.00    CBI*PIRIFORM 800-799-957  $    79.80  01/03/17    $     0.00  817446108       06793  ZERO OVERDRAFT FEE
+   067541-80  $  0.00    VENMO 855-812-4430 NYUS   $    16.00  01/03/17    $     0.00  656438113       06781  ZERO OVERDRAFT FEE
+   475213-80  $  0.00    VENMO 855-812-4430 NYUS   $    55.00  01/03/17    $     0.00  115271756       06789  ZERO OVERDRAFT FEE
+   859558-80  $  0.00    MOUNTAIN MIKES PIZZA SAN  $    56.46  01/03/17    $     0.00  99840690       06794  ZERO OVERDRAFT FEE
+   860787-80  $ 30.00    TOWN OF TRUCKEE TRUCKEE   $     1.00  01/03/17   -$   454.43  461088086       06777  POS/ATM COURTESY FEE
+   508937-80  $  0.00    SAN JOSE GROCER 2300 MON  $    66.73  01/03/17    $     0.00  13650           07384  ZERO OVERDRAFT FEE
+   660973-80  $  0.00    TAPIOCA EXPERT INC UNION  $     8.30  01/03/17    $     0.00  26892822       07029  ZERO OVERDRAFT FEE
+   815689-80  $  0.00    UberUS_A 1455 Market St   $    23.35  01/03/17    $     0.00  228933691       06902  ZERO OVERDRAFT FEE
+   376599-80  $ 30.00    P302607 2397 SPRING STRE  $    22.75  01/03/17   -$   124.53  254132683       06889  POS/ATM COURTESY FEE
+   272796-81  $  0.00    REDWOOD CITY GR 1833 BRO  $    26.52  01/03/17    $     0.00  645681          07262  ZERO OVERDRAFT FEE
+   445032-80  $  0.00    NORDSTROM #0420 130 HILS  $    38.00  01/03/17    $    46.09  457607847       07085  ZERO OVERDRAFT FEE
+   280822-81  $  0.00    FLYERS #215 2195 JUNIPER  $    15.01  01/03/17    $    18.97  159450542       06985  ZERO OVERDRAFT FEE
+   728964-80  $  0.00    FOOD 4 LESS 1401 BROADWA  $   171.38  01/03/17    $     0.00  6071            07383  ZERO OVERDRAFT FEE
+   001856-80  $  0.00    THE NORTH FACE  1238 FIF  $    88.68  01/03/17    $    60.34  804904895       06926  ZERO OVERDRAFT FEE
+   825127-80  $  0.00    WALGREENS STORE 1363 DIS  $     3.08  01/03/17    $    25.00  217437092       06871  ZERO OVERDRAFT FEE
+   450787-80  $  0.00    DIVISADERO 76 SAN FRANCI  $    15.00  01/03/17    $    25.00  708845          07355  ZERO OVERDRAFT FEE
+   375290-80  $  0.00  J VENMO 855-812-4430 NYUS   $   250.00  01/03/17   -$    45.59  70508988       06772  WAIVED PAID-NSF FEE
+   177658-80  $ 30.00    CHEVRON/REZA INC. SAN BR  $    16.23  01/03/17   -$   102.99  79582461       07254  POS/ATM COURTESY FEE
+   084779-80  $  0.00    7-ELEVEN 635 EL CAMINO R  $    19.07  01/03/17    $     0.00  239589          07280  ZERO OVERDRAFT FEE
+   581498-80  $  0.00    OREILLY AUTO PARTS 3474R  $    70.68  01/03/17    $     0.00  510670770       06872  ZERO OVERDRAFT FEE
+   780232-80  $  0.00    UberUS_A 1455 Market St   $     7.54  01/03/17    $     0.00  08216029       06995  ZERO OVERDRAFT FEE
+   517316-80  $  0.00    SHELL Service S 390 HICK  $     5.54  01/03/17    $     0.00  3933            07053  ZERO OVERDRAFT FEE
+
+             -----------
+
+
+Total NSF:   $     90.00
+Total ODT:   $      0.00
+
+Grand Total: $     90.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918879
+
+
+IPSHBFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  15:01:13            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+             -----------
+
+
+Total NSF:   $      0.00
+Total ODT:   $      0.00
+
+Grand Total: $      0.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918881
+
+
+IPPOSFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  15:31:21            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   647655-80  $  0.00    SAFEWAY  STORE  0970 SAN  $    54.49  01/03/17    $     0.00  759814924       08074  ZERO OVERDRAFT FEE
+   035401-81  $  0.00    MICHAELS STORES 100 WOOD  $    25.57  01/03/17    $     0.00  55474469       07925  ZERO OVERDRAFT FEE
+   699601-81  $  0.00    MICHAELS STORES 100 WOOD  $    14.13  01/03/17    $     0.00  435090437       07947  ZERO OVERDRAFT FEE
+   133522-80  $  0.00    BEST BUY 0 2400 CHARLEST  $   621.68  01/03/17    $     0.00  394713315       07754  ZERO OVERDRAFT FEE
+   101512-80  $  0.00    PLAYSTATION NETWORK 800-  $    24.99  01/03/17    $     0.00  452642561       07658  ZERO OVERDRAFT FEE
+   757984-80  $ 30.00    PACIFIC PETROLE 550 W VA  $    17.81  01/03/17   -$     0.29  07416           07516  POS/ATM COURTESY FEE
+   384652-81  $  0.00    GOOGLE *Gameloft Inc g.c  $     6.99  01/03/17    $     0.00  439235687       07638  ZERO OVERDRAFT FEE
+   123832-80  $  0.00    CHAVEZ SUPERMARKET SAN M  $    25.57  01/03/17    $     0.00  885771519       08087  ZERO OVERDRAFT FEE
+   285886-80  $  0.00    DAISO BA03 EL MERCADO  U  $     9.35  01/03/17    $     0.00  180367713       07763  ZERO OVERDRAFT FEE
+   264126-80  $  0.00    BEAUX SAN FRANCISCOCAUS   $    11.00  01/03/17    $     0.00  97440792       07838  ZERO OVERDRAFT FEE
+   183081-80  $  0.00    MARINA FOODS 1791 DECOTU  $    21.94  01/03/17    $     0.00  53474905       07965  ZERO OVERDRAFT FEE
+   840759-81  $  0.00    FOOD 4 LESS 004 3434 MAS  $    19.54  01/03/17    $     0.00  08714554       07505  ZERO OVERDRAFT FEE
+   342112-80  $  0.00    MACY'S 334 300 STASTANFO  $    30.38  01/03/17    $     0.00  683038267       07547  ZERO OVERDRAFT FEE
+   122193-80  $  0.00    Audible adbl.co/bill NJU  $    14.95  01/03/17    $     0.00  02697194       07722  ZERO OVERDRAFT FEE
+   106483-80  $  0.00    MARSHALLS #0755 2240 BRS  $    14.16  01/03/17    $     0.00  45922998       07866  ZERO OVERDRAFT FEE
+   238771-81  $  0.00    Cardtronics CCS 3434 HIG  $   120.00  01/03/17    $    18.97  020528497       07545  ZERO OVERDRAFT FEE
+   018817-80  $  0.00    CHEVRON/CSI-091081/1706E  $    10.00  01/03/17    $     0.00  526551382       07990  ZERO OVERDRAFT FEE
+   020505-80  $  0.00    METROPCS MOBILE WEB 888-  $    30.00  01/03/17    $     0.00  683390143       07805  ZERO OVERDRAFT FEE
+   733034-80  $  0.00    MI PUEBLO PALO ALTO PALO  $    13.23  01/03/17    $     3.00  742079347       07827  ZERO OVERDRAFT FEE
+   244937-80  $  0.00    CHUCK E CHEESE 108 REDWO  $    57.20  01/03/17    $     0.00  085633070       08062  ZERO OVERDRAFT FEE
+   168086-80  $  0.00    SAN MATEO CREDI 3117 MID  $   200.00  01/03/17    $     0.00  3888            08045  ZERO OVERDRAFT FEE
+   439587-80  $ 30.00    SAN MATEO CREDI 3117 MID  $    60.00  01/03/17   -$    44.88  3889            08059  POS/ATM COURTESY FEE
+   037479-80  $  0.00    FALLAS 662 2664 MISSION   $    10.85  01/03/17    $     0.00  59526806       07811  ZERO OVERDRAFT FEE
+
+             -----------
+
+
+Total NSF:   $     60.00
+Total ODT:   $      0.00
+
+Grand Total: $     60.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918882
+
+
+IPSHBFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  16:02:18            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+             -----------
+
+
+Total NSF:   $      0.00
+Total ODT:   $      0.00
+
+Grand Total: $      0.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918883
+
+
+IPPOSFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  16:32:28            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   167171-80  $  0.00    UNIQLO SERRAMONTE #49  D  $    32.48  01/03/17    $     0.00  033103493       09165  ZERO OVERDRAFT FEE
+   146558-80  $  0.00    CHEVRON/CSI-090535/1768S  $     6.04  01/03/17    $     0.00  99992671       09026  ZERO OVERDRAFT FEE
+   584269-80  $ 30.00    U.S. BANK US BANK HESPER  $   303.00  01/03/17   -$   271.16  860141901       09094  POS/ATM COURTESY FEE
+   694108-80  $  0.00    SAFEWAY  STORE  0747 RED  $   109.97  01/03/17    $   300.00  37682935       09181  ZERO OVERDRAFT FEE
+   661552-80  $  0.00    Wal-Mart Super  1651 WAL  $   140.00  01/03/17    $     3.83  559524953       08893  ZERO OVERDRAFT FEE
+   267177-80  $  0.00    CHAVEZ SUPERMARKET REDWO  $     8.01  01/03/17    $     0.00  077996852       09410  ZERO OVERDRAFT FEE
+   725018-80  $  0.00    FIVE GUYS #CA-1504 REDWO  $    11.97  01/03/17    $     0.00  85572225       08921  ZERO OVERDRAFT FEE
+   848037-82  $ 30.00    OBLWewintoday 8883373496  $    31.93  01/03/17   -$   619.59  199990051       09399  POS/ATM COURTESY FEE
+   608474-82  $ 30.00    OBLWewintoday 8883373496  $    37.14  01/03/17   -$   656.73  97097786       09402  POS/ATM COURTESY FEE
+   439819-80  $  0.00    SAN MATEO CREDI 1735 EAS  $    60.00  01/03/17    $     0.00  3450            08816  ZERO OVERDRAFT FEE
+   788550-80  $  0.00    SHELL Service S 398 GELL  $     5.52  01/03/17    $     0.00  01324           09144  ZERO OVERDRAFT FEE
+   300755-80  $  0.00    CHAVEZ SUPERMARKET MENLO  $    39.50  01/03/17    $     0.00  061627259       09182  ZERO OVERDRAFT FEE
+   742943-80  $  0.00    QUALITY MARKET SQU MENLO  $     7.98  01/03/17    $     0.00  982153723       09076  ZERO OVERDRAFT FEE
+   291360-80  $  0.00    IHOP 648 00006486 SAN FR  $    25.65  01/03/17    $     0.00  394349464       09318  ZERO OVERDRAFT FEE
+   176643-80  $ 30.00    UberUS_A 1455 Market St   $    24.94  01/03/17   -$    16.85  487147318       08823  POS/ATM COURTESY FEE
+
+             -----------
+
+
+Total NSF:   $    120.00
+Total ODT:   $      0.00
+
+Grand Total: $    120.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918884
+
+
+IPPOSFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  17:03:00            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   518684-80  $  0.00    NEW LEAF MARKET 150 SANH  $   107.73  01/03/17    $     0.00  73648219       10054  ZERO OVERDRAFT FEE
+   495916-80  $ 30.00    CASUAL MALE #9704 DALY C  $   180.22  01/03/17   -$   380.40  155326709       09943  POS/ATM COURTESY FEE
+   421424-80  $  0.00    CHEVRON 0359622 SAN JOSE  $    30.16  01/03/17    $    23.57  16714155       09696  ZERO OVERDRAFT FEE
+   893882-80  $  0.00    PETSMART INC 14 607 COLE  $    25.99  01/03/17    $     0.00  4727389       09624  ZERO OVERDRAFT FEE
+   980294-80  $  0.00    GROCERY OUTLET  5550 COA  $    48.02  01/03/17    $     0.00  40571           10056  ZERO OVERDRAFT FEE
+   159504-80  $  0.00    TARGET T-0320 5001 Junip  $   139.30  01/03/17    $   102.00  003336          09994  ZERO OVERDRAFT FEE
+   333460-80  $  0.00    HEIDI PIES RESTAURANT  S  $    26.16  01/03/17    $     0.00  054543497       09681  ZERO OVERDRAFT FEE
+   990309-80  $  0.00    SUPER DISCOUNT LIQUOR &R  $    13.42  01/03/17    $     0.00  9591710       10131  ZERO OVERDRAFT FEE
+   407671-82  $  0.00    DD'S DISCOUNTS #5054 SUN  $     8.66  01/03/17    $     0.00  253936956       09530  ZERO OVERDRAFT FEE
+   608719-80  $  0.00    TAHOE ITALIAN KITCHEN  S  $    19.01  01/03/17    $     0.00  26951358       09668  ZERO OVERDRAFT FEE
+   536089-80  $  0.00    CHEVRON 0093591 408-888-  $    17.51  01/03/17    $     0.00  695014051       09783  ZERO OVERDRAFT FEE
+   588181-80  $  0.00    WALGREENS STORE 45 S ELM  $    18.56  01/03/17    $     0.00  272944609       10112  ZERO OVERDRAFT FEE
+   786722-80  $  0.00    FOOT LOCKER 10127 REDWOO  $   260.99  01/03/17    $     0.00  954033129       10179  ZERO OVERDRAFT FEE
+   541943-81  $  0.00    CHEVRON 0091081 EAST PAL  $    45.20  01/03/17    $     0.00  48902778       09799  ZERO OVERDRAFT FEE
+   593176-80  $  0.00    SAFEWAY  STORE  0971 HAY  $    11.49  01/03/17    $     0.00  933673612       10158  ZERO OVERDRAFT FEE
+   546427-80  $  0.00    CABRILLO GROCERY & DEL S  $     7.09  01/03/17    $     0.00  518235568       10126  ZERO OVERDRAFT FEE
+   769715-80  $ 30.00    50009CACACCASHE 14455 HI  $   200.00  01/03/17   -$   360.85  377680879       09571  POS/ATM COURTESY FEE
+   071938-80  $ 30.00    TRAVIS CU 1796 TUOLUMNE   $    80.00  01/03/17   -$   523.99  4614            09803  POS/ATM COURTESY FEE
+   254721-80  $  0.00    7-ELEVEN 2065 WHITE OAK   $    14.69  01/03/17    $    33.56  741111          10256  ZERO OVERDRAFT FEE
+   250422-80  $  0.00    WHOLEFDS PAL 100 774 EMP  $     2.00  01/03/17    $     0.00  413197085       10001  ZERO OVERDRAFT FEE
+   224783-80  $  0.00    CHEVRON 0377818 BRENTWOO  $    31.25  01/03/17    $    72.55  265394970       09708  ZERO OVERDRAFT FEE
+   045912-80  $  0.00    WASH LAUNDRY CA 7501785P  $    10.00  01/03/17    $     0.00  015127102       09664  ZERO OVERDRAFT FEE
+   711377-80  $  0.00  J CHEVRON 0206855 MENLO PA  $    38.00  01/03/17   -$    26.29  251992573       09766  WAIVED PAID-NSF FEE
+   410660-80  $  0.00    MARSHALLS #0345 1040 GRM  $   159.10  01/03/17    $     0.00  407717805       09593  ZERO OVERDRAFT FEE
+   056625-80  $  0.00    LA ESTRELLITA-REDWOOD  R  $     7.96  01/03/17    $     0.00  971017084       09606  ZERO OVERDRAFT FEE
+   596480-80  $  0.00    CT VCOM 460 WOODSIDE ROA  $    40.00  01/03/17    $     0.00  252324643       09998  ZERO OVERDRAFT FEE
+   151929-80  $  0.00    SAFEWAY  STORE  0305 RED  $    23.25  01/03/17    $     0.00  167226450       09649  ZERO OVERDRAFT FEE
+   991305-80  $ 30.00    WALGREENS STORE 965 GENS  $    48.52  01/03/17   -$   374.69  104881564       10087  POS/ATM COURTESY FEE
+   570131-80  $ 30.00    P226977 181 CURTNER AVE   $   203.25  01/03/17   -$    30.66  064805214       10026  POS/ATM COURTESY FEE
+
+             -----------
+
+
+Total NSF:   $    150.00
+Total ODT:   $      0.00
+
+Grand Total: $    150.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918886
+
+
+IPSHBFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  17:03:25            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+             -----------
+
+
+Total NSF:   $      0.00
+Total ODT:   $      0.00
+
+Grand Total: $      0.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918888
+
+
+IPPOSFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  17:33:34            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   061476-80  $  0.00    NEW LEAF MARKET 150 SANH  $     7.91  01/03/17    $     0.00  539114042       10731  ZERO OVERDRAFT FEE
+   621872-80  $  0.00    NEW LEAF MARKET 150 SANH  $     7.91  01/03/17    $     0.00  297106239       10745  ZERO OVERDRAFT FEE
+   742722-80  $  0.00    WHOLEFDS RED 101 1250 JR  $    26.22  01/03/17    $     0.00  115757734       10770  ZERO OVERDRAFT FEE
+   998300-80  $  0.00    CVS/PHARMACY #10 10330-S  $     7.04  01/03/17    $     0.00  585419068       10642  ZERO OVERDRAFT FEE
+   455786-82  $  0.00    SAFEWAY STORE 2719 Menlo  $     9.28  01/03/17    $     0.00  211220201       10315  ZERO OVERDRAFT FEE
+   369821-80  $  0.00    SAFEWAY  STORE  1218 SUS  $    67.82  01/03/17    $     0.00  622013833       10577  ZERO OVERDRAFT FEE
+   409575-80  $  0.00    CORDOVA MARK-33 301 ROLP  $    82.00  01/03/17    $     0.00  262441509       10796  ZERO OVERDRAFT FEE
+   299853-80  $  0.00    SAFEWAY STORE 2878 MILLB  $    51.80  01/03/17    $     0.00  291736811       10958  ZERO OVERDRAFT FEE
+   086011-80  $ 30.00    SUGAR  BOWL FUE 22082 DO  $    45.40  01/03/17   -$   529.83  212125          10702  POS/ATM COURTESY FEE
+   386364-80  $  0.00    BASIC PLUS HAYWARD CAUS   $    49.75  01/03/17    $     0.00  70880131       10663  ZERO OVERDRAFT FEE
+   975702-80  $  0.00    OLIVE GARDEN  00013219 L  $    27.73  01/03/17    $     0.00  27672021       10443  ZERO OVERDRAFT FEE
+   265276-80  $  0.00    7-ELEVEN 600 E. 3RD ST.   $    20.69  01/03/17    $     0.00  681775          10576  ZERO OVERDRAFT FEE
+   087092-80  $  0.00    7-ELEVEN 3080 SAN JOSE A  $     6.95  01/03/17    $     0.00  883912          10634  ZERO OVERDRAFT FEE
+   787717-80  $  0.00    CHEVRON/SOHAL PETROLEUMR  $    12.60  01/03/17    $     0.00  88854186       10284  ZERO OVERDRAFT FEE
+   242661-80  $  0.00    WM SUPERCENTER  Wal-Mart  $    28.66  01/03/17    $     0.00  093928          10891  ZERO OVERDRAFT FEE
+   308919-80  $  0.00    PETERS CAFE MILLBRAE CAU  $    59.08  01/03/17    $     0.00  49254885       10527  ZERO OVERDRAFT FEE
+   984749-80  $  0.00    KWIK SERV WESTB 1 WESTBO  $    14.24  01/03/17    $     0.00  96070           10717  ZERO OVERDRAFT FEE
+   159913-80  $  0.00    TARGET T-2270 4400 Town   $    13.81  01/03/17    $     0.00  81071           10647  ZERO OVERDRAFT FEE
+   034987-80  $ 30.00    60934CAGRNGRATN 630 PARK  $   204.50  01/03/17   -$   203.72  831308768       10314  POS/ATM COURTESY FEE
+   017967-81  $  0.00    NIKE.COM 800-806-6453 OR  $   207.10  01/03/17    $     0.00  042870438       10356  ZERO OVERDRAFT FEE
+   415541-80  $  0.00    CLARKS #271 156 HILLSDAS  $   147.17  01/03/17    $     0.00  192931804       10806  ZERO OVERDRAFT FEE
+   323948-80  $  0.00    MARATHON PETRO GEORGETOW  $    30.20  01/03/17    $     0.00  517875379       10650  ZERO OVERDRAFT FEE
+   708294-80  $  0.00    WM SUPERCENTER  Wal-Mart  $    20.80  01/03/17    $     0.00  491307          10517  ZERO OVERDRAFT FEE
+   740416-80  $  0.00    T-MOBILE #7351  165 UNIV  $   201.18  01/03/17    $     1.00  438227976       10807  ZERO OVERDRAFT FEE
+   194838-80  $  0.00    T-MOBILE #7351  165 UNIV  $    85.44  01/03/17    $     1.00  997842852       10933  ZERO OVERDRAFT FEE
+   545406-80  $  0.00    SAFEWAY  STORE  1224 NEW  $    13.10  01/03/17    $     0.00  334169196       10813  ZERO OVERDRAFT FEE
+   549598-80  $  0.00    CHECKERS RESTAURANT CALI  $    67.00  01/03/17    $     0.00  68304095       10609  ZERO OVERDRAFT FEE
+   162349-80  $  0.00    THE HOME DEPOT #1017 HAY  $    66.57  01/03/17    $     0.00  972851156       10349  ZERO OVERDRAFT FEE
+   589520-80  $  0.00    WASH LAUNDRY WAVERIDER E  $     8.00  01/03/17    $     0.00  122968363       10600  ZERO OVERDRAFT FEE
+   619089-80  $  0.00    WASH LAUNDRY WAVERIDER E  $     8.00  01/03/17    $     0.00  578446913       10606  ZERO OVERDRAFT FEE
+   750743-80  $  0.00    CAMERONS PUB AND RESTAUH  $    32.90  01/03/17    $     0.00  197142464       10623  ZERO OVERDRAFT FEE
+   373680-80  $ 30.00    CBS ALL ACCESS 888-274-5  $     5.99  01/03/17   -$   545.83  437348417       10375  POS/ATM COURTESY FEE
+   973120-80  $  0.00    7-ELEVEN 895 5TH AVE US   $     2.52  01/03/17    $     0.00  785817          10487  ZERO OVERDRAFT FEE
+   971427-80  $  0.00    BASELINE NUTRITIONALS  8  $   777.10  01/03/17    $     0.00  89369351       10534  ZERO OVERDRAFT FEE
+   736862-80  $  0.00    LOWE'S #3095 491 BAYSHOR  $    22.75  01/03/17    $     0.00  220356034       10722  ZERO OVERDRAFT FEE
+
+             -----------
+
+
+Total NSF:   $     90.00
+Total ODT:   $      0.00
+
+Grand Total: $     90.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918889
+
+
+IPSHBFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  17:33:59            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+             -----------
+
+
+Total NSF:   $      0.00
+Total ODT:   $      0.00
+
+Grand Total: $      0.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918891
+
+
+IPPOSFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  18:04:08            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   266477-80  $  0.00    BURLNGTON STORES224 MILP  $    36.88  01/03/17    $     0.00  191856351       11301  ZERO OVERDRAFT FEE
+   373563-80  $  0.00    CHEVRON/CSI-090535/1768S  $     5.34  01/03/17    $     0.00  32136347       11043  ZERO OVERDRAFT FEE
+   449327-80  $  0.00    GOODWILL INDUSTRIE SOUTH  $     9.98  01/03/17    $     0.00  818635764       11360  ZERO OVERDRAFT FEE
+   278582-80  $  0.00    GASSYS.COM SEATTLE WAUS   $    23.28  01/03/17    $     0.00  0               11371  ZERO OVERDRAFT FEE
+   007137-80  $  0.00    TARGET T-1407 133 Serram  $     2.61  01/03/17    $     4.30  509234          11442  ZERO OVERDRAFT FEE
+   792288-80  $  0.00    MISSION VALLEY  9341 VAL  $    52.80  01/03/17    $     0.00  424533885       11281  ZERO OVERDRAFT FEE
+   755255-80  $  0.00    7-ELEVEN 1097 E. MONTE V  $     3.82  01/03/17    $     0.00  633380          11252  ZERO OVERDRAFT FEE
+   636190-80  $  0.00    FLYERS #270 699 EL CAMIN  $    41.47  01/03/17    $     0.00  33225764       11468  ZERO OVERDRAFT FEE
+   358224-81  $  0.00    LA HACIENDA MAR 1933 MEN  $    10.75  01/03/17    $     0.00  23980           11290  ZERO OVERDRAFT FEE
+   571987-80  $  0.00    SHELL Service S 01011717  $    58.04  01/03/17    $     0.00  96838           11062  ZERO OVERDRAFT FEE
+   369424-80  $ 30.00    SAFEWAY  STORE  0747 RED  $     9.55  01/03/17   -$    42.33  930271238       11515  POS/ATM COURTESY FEE
+   024077-80  $  0.00    CAMPBELL PLAZA BOTTLE  C  $    12.39  01/03/17    $     0.00  058175919       11020  ZERO OVERDRAFT FEE
+   872547-80  $  0.00    SHELL Service S 01011717  $    41.57  01/03/17    $     0.00  104486          11126  ZERO OVERDRAFT FEE
+   522919-80  $  0.00    TARGET T-0321 2485 El Ca  $    20.04  01/03/17    $     0.00  29246           11118  ZERO OVERDRAFT FEE
+   369906-80  $  0.00    SAFEWAY  STORE  0305 RED  $    17.99  01/03/17    $     0.00  43124366       11385  ZERO OVERDRAFT FEE
+   310407-80  $  0.00    LATHROP LIQUOR  15326 S   $     5.36  01/03/17    $     0.00  067877079       11332  ZERO OVERDRAFT FEE
+ 61273869-80  $  0.00    St. Francis Liquor Daly   $    31.94  01/03/17    $     0.00  087010081       11437  ZERO OVERDRAFT FEE
+
+             -----------
+
+
+Total NSF:   $     30.00
+Total ODT:   $      0.00
+
+Grand Total: $     30.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918892
+
+
+IPSHBFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  18:04:34            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+             -----------
+
+
+Total NSF:   $      0.00
+Total ODT:   $      0.00
+
+Grand Total: $      0.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918894
+
+
+IPPOSFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  18:34:43            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   740034-80  $ 30.00    Touchtunes.helpshift.coT  $    20.00  01/03/17   -$    12.19  187620865       11579  POS/ATM COURTESY FEE
+   994156-81  $  0.00    TOYS R US #5821 202 WALN  $    60.85  01/03/17    $     0.00  123096876       12463  ZERO OVERDRAFT FEE
+   226660-81  $  0.00    SAFEWAY  STORE  0971 HAY  $    85.51  01/03/17    $     0.00  580883088       12088  ZERO OVERDRAFT FEE
+   248802-81  $  0.00    PLOUGHMANS RESTAURANT  S  $    83.64  01/03/17    $     0.00  871584504       12316  ZERO OVERDRAFT FEE
+   589570-80  $  0.00    SAFEWAY  STORE  0785 SAN  $     6.50  01/03/17    $     0.00  842234498       12268  ZERO OVERDRAFT FEE
+   217434-80  $  0.00    LUCKY#745.REDWO 200 WOOD  $    18.23  01/03/17    $     0.00  634282          12090  ZERO OVERDRAFT FEE
+   607338-80  $ 30.00    EASYMEDPAY.NET PROFESSIO  $    22.00  01/03/17   -$   667.68  310097338       11611  POS/ATM COURTESY FEE
+   997932-80  $  0.00    LOWES #01132* UNION CITY  $   123.58  01/03/17    $     9.51  634310567       12186  ZERO OVERDRAFT FEE
+   719337-80  $  0.00    BEACON MARSH ROAD MENLO   $    26.09  01/03/17    $     0.00  048480823       12357  ZERO OVERDRAFT FEE
+   012508-80  $  0.00    ROSS STORES #5  150 WOOD  $    36.04  01/03/17    $     0.00  438399177       12487  ZERO OVERDRAFT FEE
+   358235-80  $  0.00    HARRIET'S CAFE GENOA NVU  $     9.50  01/03/17    $     0.00  110648044       11828  ZERO OVERDRAFT FEE
+   913293-80  $ 30.00    FASTRAK CSC 415-486-8655  $    70.00  01/03/17   -$    19.79  278713954       11653  POS/ATM COURTESY FEE
+   964855-80  $ 30.00    60934CAGRNGRATN 630 PARK  $   504.50  01/03/17   -$   352.26  1652266       12012  POS/ATM COURTESY FEE
+   019722-80  $  0.00    SAFEWAY  STORE  0747 RED  $    19.31  01/03/17    $     0.00  86969397       11599  ZERO OVERDRAFT FEE
+   062909-80  $  0.00    SOUTHWES 52624748805800-  $    62.26  01/03/17    $     0.00  482044683       12321  ZERO OVERDRAFT FEE
+   303999-80  $  0.00    CALTRAIN 1012 SAN CARLOS  $     3.75  01/03/17    $     0.00  90164409       11687  ZERO OVERDRAFT FEE
+   782614-80  $  0.00    FASTRAK CSC 415-486-8655  $    50.00  01/03/17   -$    93.28  754159617       11818  ZERO OVERDRAFT FEE
+   286024-80  $  0.00    PACIFIC SUPERMARKET SOUS  $    12.84  01/03/17    $     3.83  185018184       12103  ZERO OVERDRAFT FEE
+   734507-80  $  0.00    SAFEWAY  STORE  3008 PAC  $    75.44  01/03/17    $     0.00  516929257       12024  ZERO OVERDRAFT FEE
+   963302-80  $ 30.00    SECURUS INMATE CALL-VID8  $     7.56  01/03/17   -$   255.32  27788763       11560  POS/ATM COURTESY FEE
+   658652-80  $ 30.00    SECURUS INMATE CALL-VID8  $     7.56  01/03/17   -$   262.88  589859669       11573  POS/ATM COURTESY FEE
+   236757-80  $  0.00    EASYMEDPAY.NET PROFESSIO  $    31.00  01/03/17    $     0.00  565368336       11605  ZERO OVERDRAFT FEE
+   697710-80  $  0.00    MICROSOFT *STORE 800-642  $    13.49  01/03/17    $     0.00  202037747       12131  ZERO OVERDRAFT FEE
+   834169-80  $  0.00    MICROSOFT *STORE 800-642  $     0.89  01/03/17    $     0.00  177343461       12139  ZERO OVERDRAFT FEE
+   600225-80  $  0.00    TARGET T-0320 5001 Junip  $     2.58  01/03/17    $     0.00  542220          12441  ZERO OVERDRAFT FEE
+   035586-80  $  0.00    GASSYS.COM SEATTLE WAUS   $    21.02  01/03/17    $     1.00  1524            12382  ZERO OVERDRAFT FEE
+   380785-80  $  0.00    FASTRAK CSC 415-486-8655  $    25.00  01/03/17    $     0.00  019532507       11771  ZERO OVERDRAFT FEE
+   715576-80  $  0.00    TARGET T-1054 1150 El Ca  $    83.84  01/03/17    $    29.19  86356           12510  ZERO OVERDRAFT FEE
+   309047-80  $  0.00    THE BLACKSMITH REDWOOD C  $    16.00  01/03/17    $     3.27  774568396       12055  ZERO OVERDRAFT FEE
+   372803-80  $  0.00    GAMESTOP #4605 1150 EL S  $    70.65  01/03/17    $     0.00  08878372       12377  ZERO OVERDRAFT FEE
+   071108-80  $  0.00    TARGET T-1526 280 Spreck  $   108.24  01/03/17    $    44.71  37779           12386  ZERO OVERDRAFT FEE
+   539645-80  $  0.00    REDBOX *DVD RENTAL 866-7  $     6.54  01/03/17    $     0.00  508474658       12227  ZERO OVERDRAFT FEE
+
+             -----------
+
+
+Total NSF:   $    180.00
+Total ODT:   $      0.00
+
+Grand Total: $    180.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918895
+
+
+IPSHBFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  18:35:09            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+             -----------
+
+
+Total NSF:   $      0.00
+Total ODT:   $      0.00
+
+Grand Total: $      0.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918897
+
+
+IPPOSFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  19:05:18            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   332588-81  $  0.00    CHAVEZ SUPERMARKET REDWO  $    29.29  01/03/17    $     0.00  390262264       12757  ZERO OVERDRAFT FEE
+   192074-80  $  0.00    UberUS_A 1455 Market St   $     9.92  01/03/17    $     0.00  519794637       12647  ZERO OVERDRAFT FEE
+   805546-80  $  0.00    7-ELEVEN 2100 CRESTMOOR   $     5.45  01/03/17    $     0.00  330392          12745  ZERO OVERDRAFT FEE
+   554037-80  $  0.00    GASSYS.COM SEATTLE WAUS   $    15.18  01/03/17    $   258.97  78              12968  ZERO OVERDRAFT FEE
+   606415-80  $  0.00    TOWN & COUNTRY  16211 E.  $    33.49  01/03/17    $     0.00  401065198       12551  ZERO OVERDRAFT FEE
+   019752-81  $  0.00    LUCKY #714.FREM 5000 MOW  $     7.48  01/03/17    $    36.00  174171          12651  ZERO OVERDRAFT FEE
+   085177-80  $ 30.00    TARGET T-2605 5630 Cottl  $   111.31  01/03/17   -$    12.34  96257           12918  POS/ATM COURTESY FEE
+   703627-80  $  0.00    CAFE GRATITUDE - SA SANT  $    18.50  01/03/17    $     0.00  039387799       12861  ZERO OVERDRAFT FEE
+   152168-80  $  0.00    BREAKERS CAFE REDWOOD CI  $    51.70  01/03/17    $    17.62  753962246       12867  ZERO OVERDRAFT FEE
+   714468-80  $ 30.00    60934CAGRNGRATN 630 PARK  $   204.50  01/03/17   -$   438.22  864913054       12730  POS/ATM COURTESY FEE
+   663806-80  $  0.00    WHOLEFDS RED 101 1250 JR  $    45.42  01/03/17    $     0.00  605976326       12996  ZERO OVERDRAFT FEE
+   947589-80  $  0.00    BOULEVARD CAFE DALY CITY  $    40.93  01/03/17    $     0.00  802920084       12637  ZERO OVERDRAFT FEE
+   465250-80  $  0.00    SMARTNFINAL453 SAN MATEO  $     4.69  01/03/17    $     0.00  4522555       12571  ZERO OVERDRAFT FEE
+   783830-80  $  0.00    MCDONALD'S F263 131 E PA  $     9.57  01/03/17    $     0.00  37791           12746  ZERO OVERDRAFT FEE
+   429561-80  $  0.00    CHEVRON/XTRA OIL COMPANS  $    40.00  01/03/17    $   123.20  615765807       12727  ZERO OVERDRAFT FEE
+   339425-80  $  0.00    SEARS ROEBUCK 6000 MOWRY  $    92.71  01/03/17    $     0.00  767694598       12949  ZERO OVERDRAFT FEE
+   020241-80  $  0.00    ARCO 00725 402 N EL COMI  $    29.54  01/03/17    $     0.00  82634           12881  ZERO OVERDRAFT FEE
+   754776-80  $  0.00    SAFEWAY  STORE  0970 SAN  $    37.99  01/03/17    $     0.00  45681975       12549  ZERO OVERDRAFT FEE
+   124268-80  $ 30.00    FRY'S ELECTRONICS #0CAMP  $   617.91  01/03/17   -$   678.57  275893694       12589  POS/ATM COURTESY FEE
+   670199-80  $  0.00    DOLLAR TREE 1389 E YOSEM  $     7.27  01/03/17    $    44.71  89594           12688  ZERO OVERDRAFT FEE
+ 55745637-80  $  0.00    ARCO PAYPOINT 5898 MISSI  $    25.76  01/03/17    $     0.00  63536           12909  ZERO OVERDRAFT FEE
+
+             -----------
+
+
+Total NSF:   $     90.00
+Total ODT:   $      0.00
+
+Grand Total: $     90.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918898
+
+
+IPSHBFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  19:05:45            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+             -----------
+
+
+Total NSF:   $      0.00
+Total ODT:   $      0.00
+
+Grand Total: $      0.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918900
+
+
+IPPOSFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  19:35:55            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   657862-89  $  0.00    PAYPAL *STEAM G 2211 Nor  $    23.61  01/03/17    $     0.00  956797979       13160  ZERO OVERDRAFT FEE
+   355939-80  $  0.00    76 - HOLLY 76 SAN CARLOS  $    13.32  01/03/17    $    47.66  116826171       14062  ZERO OVERDRAFT FEE
+   976928-80  $ 30.00    SQ *UWE GROSSE LLC 877-4  $   104.75  01/03/17   -$   311.27  677770494       13322  POS/ATM COURTESY FEE
+   950688-80  $  0.00    LUCKY #745 REDWOOD REDWO  $    20.37  01/03/17    $    16.64  48818498       13207  ZERO OVERDRAFT FEE
+   417617-80  $  0.00    TWINKLESTAR 925-580-8573  $    99.99  01/03/17    $     0.00  169249094       13839  ZERO OVERDRAFT FEE
+   740151-80  $  0.00    LYFT *RIDE SUN 1AM LYFT.  $    19.25  01/03/17    $    67.00  689352615       13781  ZERO OVERDRAFT FEE
+   748193-80  $ 30.00    DOORDASH-HUMMUS MEDITE 6  $    19.83  01/03/17   -$    19.65  111926304       13778  POS/ATM COURTESY FEE
+   804085-80  $  0.00    PAYPAL *TEEZILY INC 402-  $    20.85  01/03/17    $     0.00  227904944       13663  ZERO OVERDRAFT FEE
+   492422-81  $  0.00    LUCKY #710 FOSTER C FOST  $     6.16  01/03/17    $     0.00  697176731       13175  ZERO OVERDRAFT FEE
+   111154-80  $  0.00    SQ *BAR 37 (COUNTDO SAN   $     4.00  01/03/17    $     0.00  300438712       13647  ZERO OVERDRAFT FEE
+   412178-80  $  0.00    Wal-Mart Super  5154 WAL  $    27.67  01/03/17    $     0.00  5725056       14174  ZERO OVERDRAFT FEE
+   148796-80  $  0.00    LYFT *RIDE SUN 1AM LYFT.  $    37.55  01/03/17    $     0.00  912536653       13596  ZERO OVERDRAFT FEE
+   568542-81  $  0.00    LUCKY #715 HAYWARD HAYWA  $     1.58  01/03/17    $     0.00  835151990       13177  ZERO OVERDRAFT FEE
+   191543-80  $ 30.00    UNLIMITED CHOICELUNCH  8  $    82.99  01/03/17   -$   329.33  4743445       13640  POS/ATM COURTESY FEE
+   113076-80  $  0.00    LYFT *RIDE SAT 12AM  LYF  $     7.40  01/03/17    $     0.00  239237680       13476  ZERO OVERDRAFT FEE
+   105402-80  $ 30.00    TIFFANYSDAN 925-580-8573  $   387.77  01/03/17   -$     9.44  429708899       13464  POS/ATM COURTESY FEE
+   392123-80  $  0.00    MCDONALD'S F13226 VACAVI  $    19.27  01/03/17    $     0.00  187072737       13022  ZERO OVERDRAFT FEE
+   681381-80  $  0.00    SAFEWAY  STORE  0705 MOU  $     5.20  01/03/17    $     0.00  732014019       14158  ZERO OVERDRAFT FEE
+   477800-80  $  0.00    LYFT *RIDE SUN 1AM LYFT.  $    21.21  01/03/17    $     0.00  739193177       13455  ZERO OVERDRAFT FEE
+   614540-80  $  0.00    LYFT *RIDE SUN 7AM LYFT.  $    15.25  01/03/17    $     0.00  305346714       13456  ZERO OVERDRAFT FEE
+   548340-80  $  0.00    SQ *THE SANDWICH SP SAN   $    10.37  01/03/17    $     0.00  184090582       13613  ZERO OVERDRAFT FEE
+   056656-80  $ 30.00    WWW.ILIVLUVSHOP.COM 561-  $    14.00  01/03/17   -$   150.88  703003110       13675  POS/ATM COURTESY FEE
+   267547-80  $ 30.00    WU *7812810262 877-989-3  $   221.99  01/03/17   -$   745.02  99026075       13082  POS/ATM COURTESY FEE
+   051431-80  $  0.00    ATVENU.COM SAN FRANCISCO  $    25.00  01/03/17    $     0.00  497713001       13643  ZERO OVERDRAFT FEE
+   112520-80  $  0.00    LYFT *RIDE SAT 6PM LYFT.  $     7.61  01/03/17    $     0.00  917451162       13664  ZERO OVERDRAFT FEE
+   987638-80  $  0.00    LYFT *RIDE SUN 12AM  LYF  $    13.78  01/03/17    $     0.00  426349318       13402  ZERO OVERDRAFT FEE
+   487315-80  $  0.00    LYFT *RIDE SAT 7PM LYFT.  $    10.50  01/03/17    $     0.00  358840500       13406  ZERO OVERDRAFT FEE
+   285062-80  $ 30.00    SKETCHBOX WWW.GETSKETCHC  $    43.16  01/03/17   -$    12.75  790611999       13584  POS/ATM COURTESY FEE
+   322655-80  $  0.00    CHAVEZ SUPERMARKET REDWO  $    13.08  01/03/17    $     0.00  396004191       13790  ZERO OVERDRAFT FEE
+   345080-80  $  0.00    76 - SIERRA ENERGY SIERD  $    19.99  01/03/17    $     0.00  854665321       14012  ZERO OVERDRAFT FEE
+   795057-80  $  0.00    SHELL Service S 01011719  $    42.49  01/03/17    $     0.00  03273           13937  ZERO OVERDRAFT FEE
+   168679-81  $  0.00    EAT24 *CHOPSTIX 877-850-  $    22.29  01/03/17    $     0.00  031444456       13689  ZERO OVERDRAFT FEE
+   564565-80  $  0.00    SQ *BAR 6 (COUNTDOW SAN   $    10.00  01/03/17    $     0.00  35855459       13450  ZERO OVERDRAFT FEE
+   304266-80  $  0.00    TARGET T-0320 5001 Junip  $    17.42  01/03/17    $     0.00  476655          14049  ZERO OVERDRAFT FEE
+   171847-80  $  0.00    KWIK SERVE STAT 209 EL C  $    17.29  01/03/17    $     0.00  34442           13251  ZERO OVERDRAFT FEE
+   125918-80  $  0.00    LUCKY #780 SUNNYVAL SUNN  $    40.00  01/03/17    $     0.00  576498635       13240  ZERO OVERDRAFT FEE
+   654626-80  $ 30.00    76 - UNITED PACIFIC 723S  $    41.71  01/03/17   -$   595.70  871100021       14054  POS/ATM COURTESY FEE
+   102149-80  $  0.00    LYFT *CANCEL FEE LYFT.CO  $     5.00  01/03/17    $     0.00  176609738       13379  ZERO OVERDRAFT FEE
+   699376-80  $  0.00    LYFT *RIDE SAT 8PM LYFT.  $    10.02  01/03/17    $     0.00  12256782       13383  ZERO OVERDRAFT FEE
+   698082-80  $  0.00    LYFT *RIDE SUN 5AM LYFT.  $    14.73  01/03/17    $     0.00  269726596       13384  ZERO OVERDRAFT FEE
+   221264-80  $  0.00    LYFT *RIDE SUN 3AM LYFT.  $    11.11  01/03/17    $     0.00  444617888       13385  ZERO OVERDRAFT FEE
+   023339-80  $  0.00    LYFT *RIDE SAT 6PM LYFT.  $     9.23  01/03/17    $     0.00  340988046       13387  ZERO OVERDRAFT FEE
+   580324-80  $  0.00    LYFT *RIDE SAT 9PM LYFT.  $    11.05  01/03/17    $     0.00  73554947       13388  ZERO OVERDRAFT FEE
+   596332-81  $  0.00    LYFT *RIDE SAT 10PM  LYF  $    11.70  01/03/17    $     0.00  535039965       13804  ZERO OVERDRAFT FEE
+   268362-81  $  0.00    LYFT *RIDE SAT 2AM LYFT.  $    11.29  01/03/17    $     0.00  822615488       13805  ZERO OVERDRAFT FEE
+   840275-80  $  0.00    CREDO 800-411-0848 CAUS   $    64.99  01/03/17    $     0.00  077731786       13430  ZERO OVERDRAFT FEE
+   155238-80  $ 30.00    UPALLNIGHT.US 8778877815  $   122.50  01/03/17   -$    39.52  379521267       13516  POS/ATM COURTESY FEE
+   619491-80  $  0.00    KWIK-E-MART UNIVERSAL CT  $    16.34  01/03/17    $     0.00  801335135       13076  ZERO OVERDRAFT FEE
+   906068-80  $  0.00    PRODUCTION CENTRAL UNIVE  $    27.20  01/03/17    $     0.00  253973923       13081  ZERO OVERDRAFT FEE
+   706933-81  $  0.00    MCDONALD'S F416 REDWOOD   $    10.95  01/03/17    $     0.00  014029904       13544  ZERO OVERDRAFT FEE
+   921740-80  $  0.00    VISIT PATREON.COM/ 877-8  $     4.00  01/03/17    $     0.00  208879749       13376  ZERO OVERDRAFT FEE
+   903157-80  $  0.00    BCBG # 0419 MILPITAS CAU  $    75.04  01/03/17    $     0.00  08797113       13869  ZERO OVERDRAFT FEE
+
+IPPOSFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    2
+RUN DATE: 01/01/17   RUN TIME:  19:35:55            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   301885-80  $ 30.00    BLUE APRON ORDER 888-278  $    59.94  01/03/17   -$   258.54  858322709       13603  POS/ATM COURTESY FEE
+   129233-80  $  0.00    CHICK-FIL-A #02772 SUNNY  $    12.98  01/03/17    $     0.00  666722400       13111  ZERO OVERDRAFT FEE
+   046019-80  $  0.00    SELF LENDER  LLC 720-238  $   100.21  01/03/17    $     0.00  003208640       13700  ZERO OVERDRAFT FEE
+   878623-80  $ 30.00    LYFT *RIDE SAT 7PM LYFT.  $    22.86  01/03/17   -$   362.51  040649755       13645  POS/ATM COURTESY FEE
+   787007-80  $  0.00    DENNY'S #7217 SUNNYVALE   $    42.90  01/03/17    $     0.00  529053005       14109  ZERO OVERDRAFT FEE
+   642851-80  $  0.00    DENNY'S #8538 SAN MATEO   $    43.27  01/03/17    $     0.00  377124898       14149  ZERO OVERDRAFT FEE
+   874690-80  $  0.00    UBER US DEC31 4AKT5  HEL  $     7.78  01/03/17    $     0.00  437439810       13599  ZERO OVERDRAFT FEE
+   033386-80  $  0.00    DENNY'S INC DALY CITY CA  $    57.68  01/03/17    $     0.00  264505771       13015  ZERO OVERDRAFT FEE
+   519954-80  $  0.00    LYFT *RIDE SAT 11PM  LYF  $     8.74  01/03/17    $     0.00  354489919       13682  ZERO OVERDRAFT FEE
+   579956-80  $  0.00    LYFT *RIDE SUN 12AM  LYF  $     6.20  01/03/17    $    15.54  926127405       13797  ZERO OVERDRAFT FEE
+   778973-80  $ 30.00    LYFT *RIDE SAT 11PM  LYF  $     4.58  01/03/17   -$     0.60  139226974       13800  POS/ATM COURTESY FEE
+   300612-80  $  0.00    ARCO PAYPOINT 1950 S DEL  $    18.35  01/03/17    $     0.00  146273          13103  ZERO OVERDRAFT FEE
+   440017-80  $  0.00    SMARTNFINAL453 SAN MATEO  $    12.98  01/03/17    $     0.00  965716784       13575  ZERO OVERDRAFT FEE
+   051716-80  $ 30.00    LYFT *RIDE SAT 6PM LYFT.  $     8.59  01/03/17   -$   774.18  557636877       13343  POS/ATM COURTESY FEE
+   408195-80  $  0.00    SQ *BARE BOWLS BURL BURL  $     9.00  01/03/17    $     0.00  967210629       13586  ZERO OVERDRAFT FEE
+   147211-80  $  0.00    MCDONALDS  F2419 SUNNYVA  $    22.46  01/03/17    $     0.00  54852815       13546  ZERO OVERDRAFT FEE
+   809043-80  $  0.00    DOORDASH-JACK IN THE B 6  $    23.04  01/03/17    $    40.53  294628200       13863  ZERO OVERDRAFT FEE
+   470263-80  $  0.00    KINOBODY FITNES 32154191  $    19.00  01/03/17    $     0.00  76785929       13867  ZERO OVERDRAFT FEE
+   488758-80  $  0.00    SQ *CLEAN TAXI FOSTER CI  $    17.30  01/03/17    $     0.00  235220275       13380  ZERO OVERDRAFT FEE
+   877874-80  $  0.00    CHAVEZ SUPERMARKET HAYWA  $    22.46  01/03/17    $    19.12  65018490       13260  ZERO OVERDRAFT FEE
+   267801-80  $  0.00    SANTA FE FOODS LOS BANOS  $    36.00  01/03/17    $     0.00  30155772       13847  ZERO OVERDRAFT FEE
+ 66714878-80  $  0.00    STARBUCKS SAN MATEO CAUS  $     7.95  01/03/17    $     0.00  063985484       13559  ZERO OVERDRAFT FEE
+
+             -----------
+
+
+Total NSF:   $    390.00
+Total ODT:   $      0.00
+
+Grand Total: $    390.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918902
+
+
+IPSHBFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  19:36:22            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+             -----------
+
+
+Total NSF:   $      0.00
+Total ODT:   $      0.00
+
+Grand Total: $      0.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918904
+
+
+IPPOSFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  20:06:31            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   708139-80  $  0.00    LUCKY #749.SAN  1133 OLD  $    47.89  01/03/17    $     0.00  14384           14417  ZERO OVERDRAFT FEE
+   138956-80  $  0.00    TARGET T-0321 2485 El Ca  $    27.60  01/03/17    $     0.00  302257          14397  ZERO OVERDRAFT FEE
+   800697-80  $  0.00    SAFEWAY  STORE  0970 SAN  $   221.47  01/03/17    $     0.00  805613331       14500  ZERO OVERDRAFT FEE
+   859805-80  $  0.00    East Side Market E Palo   $    20.65  01/03/17    $    13.00  103943081       14507  ZERO OVERDRAFT FEE
+   040406-81  $  0.00    Wal-Mart Store  2648 WAL  $   286.09  01/03/17    $     0.00  249572964       14405  ZERO OVERDRAFT FEE
+   119549-80  $  0.00    THE HOME DEPOT  265 MT V  $    96.92  01/03/17    $     0.00  625968080       14273  ZERO OVERDRAFT FEE
+   154530-80  $  0.00    QUALITY MARKET SQU MENLO  $    32.67  01/03/17    $     0.00  71662511       14467  ZERO OVERDRAFT FEE
+   027072-80  $  0.00    TARGET T-0320 5001 Junip  $   154.70  01/03/17    $     0.00  59313           14435  ZERO OVERDRAFT FEE
+   016664-80  $  0.00    SAFEWAY  STORE  0694 SAN  $     6.45  01/03/17    $     0.00  23710417       14427  ZERO OVERDRAFT FEE
+   152491-80  $  0.00    CVS/PHARMACY #09 09940-S  $     4.00  01/03/17    $     0.00  02576114       14465  ZERO OVERDRAFT FEE
+   230463-80  $  0.00    Cardtronics CCS 200 SERR  $    42.50  01/03/17    $     0.00  16502075       14259  ZERO OVERDRAFT FEE
+   786632-80  $ 30.00    ETT*WoodlandParkResRENT8  $   742.00  01/03/17   -$   373.32  80493300       14423  POS/ATM COURTESY FEE
+   792988-80  $  0.00    SHELL Service S 6005 JAR  $    15.00  01/03/17    $     0.00  26697           14395  ZERO OVERDRAFT FEE
+   808653-80  $  0.00    GASSYS.COM SEATTLE WAUS   $   162.36  01/03/17    $   137.81  605             14508  ZERO OVERDRAFT FEE
+   661618-80  $ 30.00    STOP IN FOOD &  754 WOOD  $    24.19  01/03/17   -$   102.85  55595427       14520  POS/ATM COURTESY FEE
+ 92536594-80  $  0.00    QUIK STOP MARKE 2400 FRU  $     8.30  01/03/17    $     0.00  47426           14330  ZERO OVERDRAFT FEE
+
+             -----------
+
+
+Total NSF:   $     60.00
+Total ODT:   $      0.00
+
+Grand Total: $     60.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918905
+
+
+IPSHBFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  20:06:59            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+             -----------
+
+
+Total NSF:   $      0.00
+Total ODT:   $      0.00
+
+Grand Total: $      0.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918907
+
+
+IPPOSFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  20:37:10            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   201122-80  $  0.00    7-ELEVEN 2609 DECOTO RD   $    12.20  01/03/17    $     0.00  408099          15011  ZERO OVERDRAFT FEE
+   614242-80  $  0.00    IN *IT IS VAPOR 650-9932  $    18.52  01/03/17    $     0.00  929482490       14905  ZERO OVERDRAFT FEE
+   534290-80  $  0.00    THE HOME DEPOT  1781 E B  $    40.57  01/03/17    $     0.00  48157948       14613  ZERO OVERDRAFT FEE
+   648038-80  $  0.00    WINCO FOODS #54 8711 GrO  $    86.91  01/03/17    $     4.96  20616072       14860  ZERO OVERDRAFT FEE
+   259495-80  $  0.00    SVM*American Hm Shld 800  $    37.99  01/03/17    $     0.00  810279962       14646  ZERO OVERDRAFT FEE
+   857156-80  $  0.00    CHEVRON 0092672 JAMESTOW  $    22.78  01/03/17    $     0.00  94120527       15049  ZERO OVERDRAFT FEE
+   049818-80  $  0.00    BUFFALO WILD WINGS 0424D  $    42.79  01/03/17    $     0.00  80200871       14831  ZERO OVERDRAFT FEE
+   929006-80  $  0.00    ART OF REFLEXOLOGY HAYWH  $    66.00  01/03/17    $     0.00  065112548       15306  ZERO OVERDRAFT FEE
+   601046-80  $  0.00    LAKE TAHOE RESORT HOTELS  $    53.36  01/03/17    $     0.00  096736215       14756  ZERO OVERDRAFT FEE
+   459164-80  $  0.00    CHEVRON 0207718 MENLO PA  $    14.45  01/03/17    $     0.00  895494374       14983  ZERO OVERDRAFT FEE
+   007105-81  $  0.00    JOANN S CAFE S SAN FRAN   $    45.94  01/03/17    $     0.00  580935056       15285  ZERO OVERDRAFT FEE
+   056222-82  $  0.00    CHEVRON 0092133 COALINGA  $    25.01  01/03/17    $     0.00  822786233       15050  ZERO OVERDRAFT FEE
+   519693-81  $ 30.00    CHEVRON 0373172 SAN BRUN  $    28.55  01/03/17   -$    26.59  297231154       15175  POS/ATM COURTESY FEE
+   055087-80  $  0.00    YNP VALLEY LODGE FOOD CF  $     7.02  01/03/17    $     0.00  631956769       14851  ZERO OVERDRAFT FEE
+   957239-80  $  0.00    YNP VALLEY LODGE RETAILF  $    28.46  01/03/17    $     0.00  364338959       15308  ZERO OVERDRAFT FEE
+   775538-80  $  0.00    DOLLAR GENERAL  258 BERN  $    22.80  01/03/17    $     0.00  492311884       15127  ZERO OVERDRAFT FEE
+   267686-80  $  0.00    FIESTA LIQOUR A 2023 BAK  $     6.95  01/03/17    $     0.00  04961338       15282  ZERO OVERDRAFT FEE
+   289925-80  $  0.00    CHEVRON 0091374 REDWOOD   $     9.00  01/03/17    $     0.00  947007614       15055  ZERO OVERDRAFT FEE
+   259091-80  $  0.00    KINCAIDS BURLINGAME CAUS  $   140.26  01/03/17    $   124.65  238057263       14683  ZERO OVERDRAFT FEE
+   454205-80  $  0.00    KINCAIDS BURLINGAME CAUS  $    61.93  01/03/17    $    72.72  745415336       14685  ZERO OVERDRAFT FEE
+   177455-80  $  0.00    RIVER ROCK CASINO GEYSER  $    22.49  01/03/17    $     0.00  000580739       14840  ZERO OVERDRAFT FEE
+   225519-80  $  0.00    60934CAGRNGRATN 630 PARK  $    64.50  01/03/17    $     0.00  976140681       14874  ZERO OVERDRAFT FEE
+   750737-80  $  0.00    TRANSUNION  *CREDSCORE 8  $    19.95  01/03/17    $     0.00  20056852       14928  ZERO OVERDRAFT FEE
+   719359-80  $  0.00    PAL MARKET INC EAST PALO  $    17.21  01/03/17    $     0.00  986169564       14886  ZERO OVERDRAFT FEE
+   705858-81  $  0.00    HILLSIDE MARKET DALY CIT  $     8.50  01/03/17    $     0.00  708607510       15213  ZERO OVERDRAFT FEE
+   868528-80  $  0.00    HDS*HEADSPACE 855-432382  $    71.91  01/03/17    $     0.00  451350411       14643  ZERO OVERDRAFT FEE
+   658774-80  $  0.00    SAFEWAY  STORE  1224 NEW  $    11.99  01/03/17    $     0.00  161520600       14872  ZERO OVERDRAFT FEE
+   002139-80  $  0.00    TARGET T-0321 2485 El Ca  $    32.61  01/03/17    $     0.00  871453          14854  ZERO OVERDRAFT FEE
+   607903-80  $  0.00    WAL-MART #2280  Wal-Mart  $    76.97  01/03/17    $     0.00  130036          15135  ZERO OVERDRAFT FEE
+   706178-80  $ 30.00    CHEVRON 0305605 CASTRO V  $    12.00  01/03/17   -$     3.87  47074271       14977  POS/ATM COURTESY FEE
+   134902-80  $  0.00    GASSYS Video On Demand A  $     5.99  01/03/17    $    12.95  041286544       15244  ZERO OVERDRAFT FEE
+   328758-80  $  0.00    KMART 4349 1155 VETERAN'  $    33.80  01/03/17    $     0.00  45074957       15125  ZERO OVERDRAFT FEE
+   828118-80  $  0.00  J CHEVRON 0092712 BELMONT   $    48.00  01/03/17   -$    46.05  613453571       15045  WAIVED PAID-NSF FEE
+   678189-80  $  0.00    SPARK OF CREATION STUDI6  $    65.00  01/03/17    $     5.00  912373071       15294  ZERO OVERDRAFT FEE
+   751783-80  $ 30.00    SAN MATEO CREDI 415 WEST  $   500.00  01/03/17   -$   495.96  7878            14642  POS/ATM COURTESY FEE
+   007242-80  $  0.00    TICKETSATWORK.COM 800-33  $    18.00  01/03/17    $     0.00  087974208       15322  ZERO OVERDRAFT FEE
+   596853-80  $  0.00  J CHEVRON 0093591 408-888-  $    35.62  01/03/17   -$    31.72  752323218       15039  WAIVED PAID-NSF FEE
+   984268-80  $  0.00    hsvesr.com 8883890971  I  $     2.50  01/03/17    $     0.00  137199621       14842  ZERO OVERDRAFT FEE
+   695465-80  $  0.00    WALGREENS STORE 2453 S W  $    39.90  01/03/17    $     0.00  129966799       14609  ZERO OVERDRAFT FEE
+   655572-80  $  0.00    SAN MATEO VALERO SAN MAT  $    12.35  01/03/17    $     0.00  357543171       14719  ZERO OVERDRAFT FEE
+   762843-80  $  0.00  J CHEVRON 0308448 NIPOMO C  $    41.89  01/03/17   -$    12.72  880191063       14968  WAIVED PAID-NSF FEE
+   124561-80  $ 30.00    PENINSULA JEWISH COMMUN6  $   260.00  01/03/17   -$   153.76  495423435       14750  POS/ATM COURTESY FEE
+   269545-80  $  0.00    TRANSUNION  *CREDSCORE 8  $    19.95  01/03/17    $     0.00  11121559       14927  ZERO OVERDRAFT FEE
+   423496-80  $ 30.00    UberUS_A 1455 Market St   $    33.25  01/03/17   -$    80.10  29687168       14617  POS/ATM COURTESY FEE
+
+             -----------
+
+
+Total NSF:   $    150.00
+Total ODT:   $      0.00
+
+Grand Total: $    150.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918908
+
+
+IPSHBFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  20:37:39            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+             -----------
+
+
+Total NSF:   $      0.00
+Total ODT:   $      0.00
+
+Grand Total: $      0.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918909
+
+
+IPPOSFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  21:07:48            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   127838-89  $  0.00    THE FAIRMONT HTL SAN JOS  $   474.59  01/03/17    $     0.00  671570936       15579  ZERO OVERDRAFT FEE
+   903748-80  $  0.00    SAFEWAY  STORE  0797 HAY  $    81.48  01/03/17    $     0.00  25193445       15493  ZERO OVERDRAFT FEE
+   979257-80  $ 30.00    ##TS80A                   $   485.00  01/03/17   -$   465.27                  66537  POS/ATM COURTESY FEE
+   008864-80  $  0.00    NOB HILL  #628 REDWOOD C  $    24.91  01/03/17    $     0.00  652553583       15488  ZERO OVERDRAFT FEE
+   853532-80  $  0.00    TARGET T-1122 2220 Bridg  $    14.48  01/03/17    $     0.00  52428           15498  ZERO OVERDRAFT FEE
+   371798-80  $  0.00    MAC D LIQUORS HAYWARD CA  $    17.18  01/03/17    $     0.00  621873995       15570  ZERO OVERDRAFT FEE
+   326214-80  $ 30.00    60448CAREDSHING 1 RED HA  $   203.50  01/03/17   -$   408.86  519465645       15422  POS/ATM COURTESY FEE
+   472536-80  $ 30.00    SAFEWAY STORE  2842 GRAS  $    41.19  01/03/17   -$   601.02  14803354       15499  POS/ATM COURTESY FEE
+   592254-80  $  0.00    QUALITY MARKET SQU MENLO  $     9.32  01/03/17    $     2.40  678533099       15469  ZERO OVERDRAFT FEE
+   167032-80  $  0.00    KOHLS 0981 1200 EL CAMIC  $    43.68  01/03/17    $     0.00  740489345       15601  ZERO OVERDRAFT FEE
+   292967-81  $  0.00    7-ELEVEN 1700 BROADWAY U  $     5.86  01/03/17    $     0.00  696616          15595  ZERO OVERDRAFT FEE
+   139538-80  $  0.00    D&B DALY CITY #102 DALY   $    20.09  01/03/17    $     0.00  683723206       15525  ZERO OVERDRAFT FEE
+   993818-80  $  0.00    CHUCK E CHEESE 3001 SAN   $     2.00  01/03/17    $     7.38  406058972       15409  ZERO OVERDRAFT FEE
+   592787-80  $  0.00    CHEVRON/GRAND PETROLEUMF  $    19.16  01/03/17    $     0.00  884793632       15481  ZERO OVERDRAFT FEE
+   235814-80  $  0.00    CHEVRON/GRAND PETROLEUMF  $     4.68  01/03/17    $     0.00  449216706       15627  ZERO OVERDRAFT FEE
+
+             -----------
+
+
+Total NSF:   $     90.00
+Total ODT:   $      0.00
+
+Grand Total: $     90.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918911
+
+
+IPSHBFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  21:08:17            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+             -----------
+
+
+Total NSF:   $      0.00
+Total ODT:   $      0.00
+
+Grand Total: $      0.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918913
+
+
+IPPOSFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  21:38:25            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   292407-81  $  0.00    BBX*BIRCHBOX INC 877-487  $    10.88  01/03/17    $     0.00  636017797       15921  ZERO OVERDRAFT FEE
+   376980-81  $  0.00    MCDONALD'S F130 1101 EL   $     3.27  01/03/17    $     0.00  95946           16033  ZERO OVERDRAFT FEE
+   394409-80  $  0.00    HOLLY MARKET SAN CARLOS   $    14.32  01/03/17    $     7.31  712545519       15980  ZERO OVERDRAFT FEE
+   275923-80  $  0.00    NINI'S COFFEE SHOP SAN M  $    35.89  01/03/17    $     0.00  442741668       15860  ZERO OVERDRAFT FEE
+   801019-80  $  0.00    GASSYS.COM SEATTLE WAUS   $    10.86  01/03/17    $     0.00  4020            15839  ZERO OVERDRAFT FEE
+   160004-80  $  0.00    US CHINESE FOOD REDWOOD   $     9.35  01/03/17    $     0.00  930735423       15814  ZERO OVERDRAFT FEE
+   636958-80  $  0.00    OPAL MOUNTAIN VIEWCAUS    $    14.00  01/03/17    $    12.30  261871616       16118  ZERO OVERDRAFT FEE
+   224310-80  $  0.00    Ave Liquors San Mateo CA  $    35.82  01/03/17    $     0.00  393333334       16086  ZERO OVERDRAFT FEE
+   205165-80  $  0.00    SAFEWAY STORE 2719 Menlo  $    91.59  01/03/17    $     0.00  81802940       15951  ZERO OVERDRAFT FEE
+   333270-80  $  0.00    MCDONALD'S F464 3143 W B  $     5.54  01/03/17    $     0.00  25545           16004  ZERO OVERDRAFT FEE
+   093650-80  $  0.00    HOUSE OF EGGS COLTON CAU  $    14.39  01/03/17    $     0.00  181889258       16003  ZERO OVERDRAFT FEE
+   981080-80  $  0.00    COLOMBO MARKET  507 LIND  $     4.29  01/03/17    $     0.00  35970918       16017  ZERO OVERDRAFT FEE
+   987365-80  $ 30.00    FIJI MARKET SAN BRUNO CA  $    56.87  01/03/17   -$   177.01  92913757       15963  POS/ATM COURTESY FEE
+   518578-80  $  0.00    LAS PALOMAS TAQUERIA SAN  $    38.78  01/03/17    $     0.00  923514400       15979  ZERO OVERDRAFT FEE
+   767509-80  $  0.00    SAFEWAY  STORE  1206 SAN  $    11.17  01/03/17    $     0.00  597862782       15820  ZERO OVERDRAFT FEE
+
+             -----------
+
+
+Total NSF:   $     30.00
+Total ODT:   $      0.00
+
+Grand Total: $     30.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918914
+
+
+IPSHBFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  21:38:54            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+             -----------
+
+
+Total NSF:   $      0.00
+Total ODT:   $      0.00
+
+Grand Total: $      0.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918915
+
+
+IPPOSFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  22:09:04            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   064258-81  $  0.00    PAYPAL *BAPMICA 2211 Nor  $    22.50  01/03/17    $     0.00  518374640       16204  ZERO OVERDRAFT FEE
+   332661-81  $  0.00    MEIJER INC #032 Q01 CANT  $    95.01  01/03/17    $     0.00  938137339       16259  ZERO OVERDRAFT FEE
+   014606-80  $  0.00  J STACKS MENLO PARK CAUS    $   111.31  01/03/17   -$     5.00  091144730       16258  WAIVED PAID-NSF FEE
+   199557-80  $  0.00    GASSYS.COM SEATTLE WAUS   $    97.49  01/03/17    $   100.00  679             16250  ZERO OVERDRAFT FEE
+   194737-80  $  0.00    STACKS MENLO PARK CAUS    $    34.62  01/03/17    $     0.00  559334766       16307  ZERO OVERDRAFT FEE
+   930223-80  $  0.00    PAYPAL *EBAY 2211 North   $     5.24  01/03/17    $     0.00  915994385       16485  ZERO OVERDRAFT FEE
+   462701-80  $  0.00    UberUS_A 1455 Market St   $     6.91  01/03/17    $     0.00  212399516       16234  ZERO OVERDRAFT FEE
+   102999-80  $  0.00  J QUIK STOP #0059 Q80 MENL  $    45.63  01/03/17   -$    37.14  399398283       16293  WAIVED PAID-NSF FEE
+   301879-81  $  0.00  J TRAVELODGE PALO ALTO PAL  $    16.89  01/03/17   -$     1.00  137859760       16415  WAIVED PAID-NSF FEE
+   596077-80  $  0.00    WALGREENS STORE 3860 DEF  $    28.69  01/03/17    $     0.00  559515263       16430  ZERO OVERDRAFT FEE
+ 31225532-80  $  0.00    QUIK STOP #0067 Q80 OAKL  $    20.00  01/03/17    $     0.00  212438916       16327  ZERO OVERDRAFT FEE
+
+             -----------
+
+
+Total NSF:   $      0.00
+Total ODT:   $      0.00
+
+Grand Total: $      0.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918916
+
+
+IPSHBFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  22:09:32            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+             -----------
+
+
+Total NSF:   $      0.00
+Total ODT:   $      0.00
+
+Grand Total: $      0.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918917
+
+
+IPPOSFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  22:39:41            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   170213-80  $  0.00    MCDONALD'S F130 1101 EL   $     6.47  01/03/17    $     0.00  75810           16629  ZERO OVERDRAFT FEE
+   250968-80  $  0.00    BAY POINT VALERO BAY POI  $    34.74  01/03/17    $    40.39  283622556       16535  ZERO OVERDRAFT FEE
+   587782-80  $  0.00    7-ELEVEN 401 WAVERLEY ST  $     3.93  01/03/17    $     0.00  060242          16666  ZERO OVERDRAFT FEE
+   813465-80  $  0.00    UberUS_A 1455 Market St   $     7.24  01/03/17    $     0.00  763462627       16557  ZERO OVERDRAFT FEE
+   012880-80  $  0.00    UberUS_A 1455 Market St   $    32.93  01/03/17    $     0.00  060251383       16512  ZERO OVERDRAFT FEE
+   777497-80  $  0.00    LUCKY #716.HAYW 25151 SA  $    15.66  01/03/17    $     0.00  830409          16621  ZERO OVERDRAFT FEE
+   280530-80  $  0.00    UberUS_A 1455 Market St   $    21.03  01/03/17    $     0.00  227393271       16543  ZERO OVERDRAFT FEE
+   509209-80  $  0.00    MCDONALD'S F120 300 NEWP  $     6.57  01/03/17    $     0.00  56316           16655  ZERO OVERDRAFT FEE
+
+             -----------
+
+
+Total NSF:   $      0.00
+Total ODT:   $      0.00
+
+Grand Total: $      0.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918918
+
+
+IPSHBFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  22:40:10            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+             -----------
+
+
+Total NSF:   $      0.00
+Total ODT:   $      0.00
+
+Grand Total: $      0.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918919
+
+
+IPPOSFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  23:10:19            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   696203-80  $  0.00    PAYPAL *H GOODW 2211 Nor  $    23.27  01/03/17    $     0.00  36986430       16757  ZERO OVERDRAFT FEE
+   420841-80  $  0.00    MCDONALD'S M753 1795 LAN  $     8.98  01/03/17    $     0.00  93935           16750  ZERO OVERDRAFT FEE
+   872855-80  $  0.00    PAYPAL *CYLENTS 2211 Nor  $    27.57  01/03/17    $     0.00  934557170       16760  ZERO OVERDRAFT FEE
+   631029-80  $  0.00    ALS LIQUOR SOUTH SAN FRA  $    11.56  01/03/17    $     0.00  45233841       16764  ZERO OVERDRAFT FEE
+   624071-81  $  0.00    SAN BRUNO ARCO  1799 EL   $    52.73  01/03/17    $     0.00  81753           16695  ZERO OVERDRAFT FEE
+   819143-80  $  0.00    MCDONALD'S F664 180 EL C  $     9.03  01/03/17    $     0.00  56978           16794  ZERO OVERDRAFT FEE
+   424365-81  $  0.00    7-ELEVEN 2360 WEST GRANT  $     5.00  01/03/17    $     0.00  285712          16686  ZERO OVERDRAFT FEE
+
+             -----------
+
+
+Total NSF:   $      0.00
+Total ODT:   $      0.00
+
+Grand Total: $      0.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918920
+
+
+IPSHBFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  23:10:48            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+             -----------
+
+
+Total NSF:   $      0.00
+Total ODT:   $      0.00
+
+Grand Total: $      0.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918921
+
+
+IPPOSFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  23:40:57            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+   673446-80  $  0.00    7-ELEVEN 895 5TH AVE US   $     6.12  01/03/17    $     0.00  464449          16843  ZERO OVERDRAFT FEE
+
+             -----------
+
+
+Total NSF:   $      0.00
+Total ODT:   $      0.00
+
+Grand Total: $      0.00
+
+**BP0420170101REPOREPOPAID-NSFPOSF00016-38918922
+
+
+IPSHBFEE             FILE DATE: 01/01/17              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
+RUN DATE: 01/01/17   RUN TIME:  23:41:26            Paid-NSF POS Fees Charged
+
+Account       Fee     WC Tran Description          Tran Amt    Tran Date  Balance      Trace Num   Sequence   Fee Type
+------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------
+
+             -----------
+
+
+Total NSF:   $      0.00
+Total ODT:   $      0.00
+
+Grand Total: $      0.00
+
