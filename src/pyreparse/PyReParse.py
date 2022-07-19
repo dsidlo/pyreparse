@@ -12,6 +12,9 @@ import inspect
 #       - Scramble AcNumbers
 #       - Change or Remove CU references
 #       - Restart GitRepo to remove traces of original reports
+
+# TODO: add code to create structures for on/off triggers
+# TODO: add call to self.validate_re_defs()
 '''
 
 
@@ -24,12 +27,12 @@ class PyReParse:
     FLAG_ONCE_PER_REPORT = 8
     FLAG_END_OF_SECTION = 16
 
-    INDEX_POSITIONAL = 'positional'
     INDEX_RE_STRING = 're_string'
     INDEX_RE_QUICK_CHECK = 're_quick_check'
     INDEX_RE_REGEXP = 'regexp'  # Compiled
     INDEX_RE_TRIGGER_ON = 'trigger_on'
     INDEX_RE_TRIGGER_OFF = 'trigger_off'
+    INDEX_RE_CALLBACK = 'callback'
     INDEX_RE_STATES = 'states'
     INDEX_RE_FLAGS = 'flags'
     INDEX_RE_REPORT_LINES_MATCHED = 'report_lines_matched'
@@ -45,31 +48,45 @@ class PyReParse:
     TRIG_START_SECTION_LINE = '<START_SECTION_LINE>'
     TRIG_END_SECTION_LINE = '<END_SECTION_LINE>'
 
-    def __init__(self):
+    def __init__(self, regexp_pats=None):
         self.re_defs = {}
-        self.named_fields = {}
+        self.all_named_fields = {}
         self.last_captured_fields = {}
-        self.re_named_group = re.compile(r'.*\(\?P\<([^\>]+)\>.*', re.MULTILINE | re.DOTALL)
+        self.re_named_group = re.compile(r'.*\(\?P\<([^\>]+)\>.*', re.X | re.MULTILINE | re.DOTALL)
         self.report_line_counter = 0
         self.section_number = 0
         self.section_line_counter = 0
         self.file_name = ''
+        if regexp_pats is not None:
+            self.load_re_lines(regexp_pats)
 
     def set_file_name(self, file_name):
         self.file_name = file_name
 
     @staticmethod
-    def get_fld_name_re(fld_name):
+    def gen_fld_name_re(fld_name):
+        '''
+        A static function to get te generate a regexp string for pulling the
+        field/group name from an existing regexp.
+        :param fld_name:
+        :return:
+        '''
         return r'\(\?P\<' + fld_name + '\>'
 
     @staticmethod
     def dict_merge(D1, D2):
+        '''
+        A static unction for merging dictionaries.
+        :param D1:
+        :param D2:
+        :return:
+        '''
         py = {**D1, **D2}
         return py
 
     def load_re_lines(self, in_hash):
         self.re_defs = {}
-        self.named_fields = {}
+        self.all_named_fields = {}
         return self.append_re_defs(in_hash)
 
     def append_re_defs(self, in_hash):
@@ -125,33 +142,47 @@ class PyReParse:
                                                         }
                                                     })
 
-            except:
-                print(f'*** Exception Hit on Compiling Regexp [{fld}]!')
+            except Exception:
+                print(f'*** Exception Hit on Compiling Regexp [{fld}]! {Exception}')
                 os.exit(1)
 
 
         return self.get_all_fld_names()
 
     def get_all_fld_names(self):
+        '''
+        Returns a list of all field names found within all regexp patterns.
+        :return:
+        '''
         rtrpc = PyReParse
         # Get all field_names from all regexps
-        for fld in self.re_defs:
-            if rtrpc.INDEX_RE_STRING in self.re_defs[fld]:
-                # process are regexp...
-                restr = self.re_defs[fld][rtrpc.INDEX_RE_STRING]
-            else:
-                # process positional fields...
-                pos_flds = self.re_defs[fld][rtrpc.INDEX_POSITIONAL]
-                restr = None
+        nflds = {}
+        for pat_name in self.re_defs:
+            nflds = self.dict_merge(nflds, self.get_fld_names(pat_name))
+
+        self.all_named_fields = nflds
+
+        return self.all_named_fields
+
+    def get_fld_names(self, repat_name):
+        '''
+        Returns a list of field names within a given regexp patterns.
+        :return:
+        '''
+        rtrpc = PyReParse
+        # Get all field_names from all regexps
+        nflds = {}
+        if repat_name in self.re_defs:
+            restr = self.re_defs[repat_name][rtrpc.INDEX_RE_STRING]
 
             if restr:
                 # Process a regexp...
                 while True:
-                    ng = self.re_named_group.match(restr, re.MULTILINE | re.DOTALL)
+                    ng = self.re_named_group.match(restr)
                     if ng is not None:
                         fld_name = ng.group(1)
-                        fld_name_expr = self.get_fld_name_re(fld_name)
-                        self.named_fields[fld_name] = ''
+                        fld_name_expr = self.gen_fld_name_re(fld_name)
+                        nflds[fld_name] = ''
                         restr = re.sub(fld_name_expr, r'(', restr)
                     else:
                         break
@@ -159,10 +190,10 @@ class PyReParse:
                 # Process positional fields match...
                 None
 
-        # TODO: add code to create structures for on/off triggers
-        # TODO: add call to self.validate_re_defs()
+        else:
+            print(f"*** Error: [{repat_name}] does not exist in self.re_defs!")
 
-        return self.named_fields
+        return nflds
 
     def validate_re_defs(self):
         '''
@@ -432,7 +463,7 @@ class PyReParse:
                     # If we get a match, place values from captured groups (by name) into
                     # the self.named_field dictionary (by field name).
                     for fn in m.re.groupindex:
-                        self.named_fields[fn] = m.group(fn)
+                        self.all_named_fields[fn] = m.group(fn)
                     for fn in m.re.groupindex:
                         if fn in self.last_captured_fields:
                             if fn in fn_inc:

@@ -115,28 +115,6 @@ class TestPyReParse(unittest.TestCase):
             'trigger_on': 'start_tx_lines',
             'trigger_off': 'end_tx_lines'
         },
-        'pos_tx_line': {
-            'positional': {
-                'ac_num': ['String', 6, 14],
-                'nsf_fee': ['Money', 0, 1, 23],
-                'fee_code': ['String', 25, 26],
-                'tx_desc': ['String', 28, 51],
-                'tx_amt': ['Money', 53, 55, 63],
-                'tx_date': ['String', 66, 73],
-                'balance': ['Money', 77, 79, 87],
-                'trace_num': ['Integer', 0, 90, 99],
-                'tx_seq': ['Integer', 0, 102, 110],
-                'fee_type': ['String', 113, 132]
-            },
-            're_quick_check':
-                '''
-                ^\s*\d+\-\d+\s+\$\s*[\d\.]+\s
-                ''',
-            'flags': rtrpc.FLAG_RETURN_ON_MATCH,
-            # 'trigger_on': '{START_LINE}[4]|start_tx_lines',
-            'trigger_on': 'start_tx_lines',
-            'trigger_off': 'end_tx_lines'
-        },
         'end_tx_lines': {
             're_string':
                 r'^\s+[\-]+\s*',
@@ -167,11 +145,12 @@ class TestPyReParse(unittest.TestCase):
         }
     }
 
-    expected_value_1 = {'file_date': '', 'run_time': '', 'run_date': '', 'fee_type': '', 'tx_seq': '',
-                        'trace_num': '', 'balance': '',
-                        'tx_date': '', 'tx_amt': '', 'tx_desc': '', 'fee_code': '', 'nsf_fee': '',
+    expected_value_1 = {'report_id': '', 'file_date': '', 'run_time': '', 'run_date': '', 'fee_type': '', 'tx_seq': '',
+                        'trace_num': '',
+                        'balance': '', 'tx_date': '', 'tx_amt': '', 'tx_desc': '', 'fee_code': '', 'nsf_fee': '',
                         'ac_type': '',
-                        'ac_num': ''}
+                        'ac_num': '', 'total_nsf': '', 'total_odt': '', 'grand_total': ''}
+
 
     expected_value_2 = ['file_date']
 
