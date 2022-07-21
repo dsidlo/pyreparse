@@ -474,6 +474,12 @@ class PyReParse:
                             self.last_captured_fields[f'{fn}-<{fn_inc[fn]}>'] = m.group(fn)
                         else:
                             self.last_captured_fields[fn] = m.group(fn)
+
+                    # Perform Callback if defined...
+                    if rtrpc.INDEX_RE_CALLBACK in self.re_defs[fld]:
+                        # Execute the callback function.
+                        self.re_defs[fld][rtrpc.INDEX_RE_CALLBACK](self, fld)
+
                     # Update status values of our regexps lines in the re_defs dict...
                     self.re_defs[fld][rtrpc.INDEX_RE_STATES][rtrpc.INDEX_RE_REPORT_LINES_MATCHED] += 1
                     self.re_defs[fld][rtrpc.INDEX_RE_STATES][rtrpc.INDEX_RE_SECTION_LINES_MATCHED] += 1
@@ -485,7 +491,7 @@ class PyReParse:
                         matched_defs = []
                     # Capture the list of re_defs entries that match this line.
                     matched_defs.append(fld)
-                    # Perform FLAG operations...
+                    # Perform FLAG based operations...
                     if self.re_defs[fld][rtrpc.INDEX_RE_FLAGS] & rtrpc.FLAG_RESET_SECTION_LINE:
                         # Increment the section counter...
                         self.section_number += 1
