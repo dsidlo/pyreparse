@@ -26,9 +26,10 @@ class TriggerDefException(Exception):
 class PyReParse:
     # RegExp Processing Flags
     FLAG_RETURN_ON_MATCH = 1
-    FLAG_NEW_SECTION = 2
+    FLAG_NEW_SECTION = 2        # Counters start at 1
     FLAG_ONCE_PER_SECTION = 4
     FLAG_ONCE_PER_REPORT = 8
+    FLAG_END_OF_SECTION = 16    # Counters are set to 0
 
     INDEX_RE_STRING = 're_string'
     INDEX_RE_QUICK_CHECK = 're_quick_check'
