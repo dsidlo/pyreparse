@@ -95,6 +95,36 @@ due to a need to tweak the main regexp, or possible a corrupt input line.
             ```      
 <br>
 
+## The PyReParse Data Structure of Patterns
+<br>
+
+## Flags
+
+## Coding Triggers...
+A trigger is a line of logic that references counters or pattern-names. Triggers can use the full depth of python expressions, and are compiled to a call back function for efficiency. The purpose of the trigger is to simply return true or false. For the **trigger-on**, the expression should return true if the RegExp Pattern is to be evaluated against the current and following lines. For **trigger-off**, it should evaluate to True so that it is not evaluated for the current and subsequent lines. 
+
+### < Counters >
+Counters are synbolic names that are enclosed in Less-Than and Greater-Than signs. 
+
+The following is te current list of supported report counters...
+
+ - **<REPORT_LINE>**
+   - The **<REPORT_LINE>** counter increments by 1 for each line that the _match()_ method is called on.
+ - **<SECTION_NUMBER>**
+   - The **<SECTION_NUMBER>** counter increments by 1 for each time a _match()_ occurs on a pattern that has the flag **PyReParse.FLAG_NEW_SECTION**.
+ - **<SECTION_LINE>**
+   - The **<SECTION_LINE>** counter increments by 1 for each line that the _match()_ method is called on that is part of a section.
+
+All counters start at 0.
+
+### {Pattern_Names}
+Pattern names are symbolic references to the RegExp Patterns in the current PyReParse data structure.
+Each Pattern may be associated to triggers that tell the matcher when or when not to execute a match on a given pattern. Triggers improve the efficiency of RegExp processing by reducing the number of Regular Expressions that are executed on any given line. This can be very effective when processing a huge number of documents. The pattern name evaluates to True if the pattern has been matched, and False if the pattern as not been matched since the last "NEW_SECTION", A "New Section" occurs when a pattern that has the flag **PyReParse.FLAG_NEW_SECTION** matches the current line, and it triggers the reset of section counters.
+
+## Coding Callbacks...
+You may also code callbacks that are executed when a pattern matches. The callback function is called when a pattern matches, and after the fields have been captured. The callback function is passed the PyReParse instance, and the name of the pattern that matched. The callback function can then use the PyReParse instance to access any currently captured fields, and perform any processing logic field value updates.
+
+<br>
 ## License...
 
 Apache 2.0

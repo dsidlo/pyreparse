@@ -32,6 +32,12 @@ class TestPyReParse(unittest.TestCase):
 '''
 
     def cb_rport_id (prp_inst: PyReParse, pattern_name):
+        '''
+        Callback for report_id pattern.
+
+        :param pattern_name:
+        :return:
+        '''
         global cb_rptid_cnt
 
         flds = prp_inst.last_captured_fields
@@ -43,6 +49,12 @@ class TestPyReParse(unittest.TestCase):
         cb_rptid_cnt += 1
 
     def cb_tx_line(prp_inst: PyReParse, pattern_name):
+        '''
+        Callback for txline pattern.
+
+        :param pattern_name:
+        :return:
+        '''
         global cb_txline_cnt
 
         flds = prp_inst.last_captured_fields
@@ -74,14 +86,14 @@ class TestPyReParse(unittest.TestCase):
                 r'''
                 ^\*\*(?P<report_id>[^\ ]+)\s*$
                 ''',
-            'flags': rtrpc.FLAG_RETURN_ON_MATCH | rtrpc.FLAG_RESET_SECTION_LINE,
+            'flags': rtrpc.FLAG_RETURN_ON_MATCH | rtrpc.FLAG_NEW_SECTION,
             # Trigger Matching on (dependant fields)...
             # {LINE}[n]         Line == n
             # {START_LINE}[n]... Line >= n, to Turn off see below: {END_LINE}[n]... Line < n
-            'trigger_on': '',
+            'trigger_on': '<SECTION_LINE> == 1',
             # Turn off Matching on...
             # {END_LINE}[n]... Line < n
-            'trigger_off': 'report_id',
+            'trigger_off': '{report_id}',
             rtrpc.INDEX_RE_CALLBACK: cb_rport_id,
         },
         'file_date': {
@@ -95,11 +107,11 @@ class TestPyReParse(unittest.TestCase):
             # {LINE}[n]         Line == n
             # {START_LINE}[n]... Line >= n, to Turn off see below: {END_LINE}[n]... Line < n
             # 'trigger_on': f'{rtrpc.TRIG_START_SECTION_LINE}[1]',
-            'trigger_on': 'report_id',
+            'trigger_on': '{report_id}',
             # Turn off Matching on...
             # {END_LINE}[n]... Line < n
             # 'trigger_off': f'{rtrpc.TRIG_END_SECTION_LINE}[3] | file_date'
-            'trigger_off': 'file_date'
+            'trigger_off': '{file_date}'
         },
         'run_date': {
             're_string':
@@ -108,15 +120,15 @@ class TestPyReParse(unittest.TestCase):
                 RUN\ TIME\:\s+(?P<run_time>[\d\:]+)
                 ''',
             'flags': rtrpc.FLAG_RETURN_ON_MATCH | rtrpc.FLAG_ONCE_PER_SECTION,
-            'trigger_on': 'file_date',
-            'trigger_off': 'run_date'
+            'trigger_on': '{file_date}',
+            'trigger_off': '{run_date}'
         },
         'start_tx_lines': {
             're_string':
                 r'^[\ \-]+$',
             'flags': rtrpc.FLAG_RETURN_ON_MATCH | rtrpc.FLAG_ONCE_PER_SECTION,
-            'trigger_on': 'run_date',
-            'trigger_off': 'start_tx_lines'
+            'trigger_on': '{run_date}',
+            'trigger_off': '{start_tx_lines}'
         },
         'tx_line': {
             're_string':
@@ -138,37 +150,37 @@ class TestPyReParse(unittest.TestCase):
                 ^\s*\d+\-\d+\s+\$\s*[\d\.]+\s
                 ''',
             'flags': rtrpc.FLAG_RETURN_ON_MATCH,
-            'trigger_on': 'start_tx_lines',
-            'trigger_off': 'end_tx_lines',
+            'trigger_on': '{start_tx_lines}',
+            'trigger_off': '{end_tx_lines}',
             rtrpc.INDEX_RE_CALLBACK: cb_tx_line,
         },
         'end_tx_lines': {
             're_string':
                 r'^\s+[\-]+\s*',
             'flags': rtrpc.FLAG_RETURN_ON_MATCH | rtrpc.FLAG_ONCE_PER_SECTION,
-            'trigger_on': 'tx_line',
-            'trigger_off': 'end_tx_lines'
+            'trigger_on': '{tx_line}',
+            'trigger_off': '{end_tx_lines} | {total_nsf} | {grand_total}',
         },
         'total_nsf': {
             're_string':
                 r'^Total\ NSF:\s*(?P<total_nsf>[\-\$\ \d\,\.]+)',
             'flags': rtrpc.FLAG_RETURN_ON_MATCH | rtrpc.FLAG_ONCE_PER_SECTION,
-            'trigger_on': 'end_tx_lines',
-            'trigger_off': 'total_nsf'
+            'trigger_on': '{end_tx_lines}',
+            'trigger_off': '{total_nsf}'
         },
         'total_odt': {
             're_string':
                 r'^Total\ ODT:\s*(?P<total_odt>[\-\$\ \d\,\.]+)',
             'flags': rtrpc.FLAG_RETURN_ON_MATCH | rtrpc.FLAG_ONCE_PER_SECTION,
-            'trigger_on': 'total_nsf',
-            'trigger_off': 'total_odt'
+            'trigger_on': '{total_nsf}',
+            'trigger_off': '{total_odt}'
         },
         'grand_total': {
             're_string':
                 r'^Grand\ Total:\s*(?P<grand_total>[\-\$\ \d\,\.]+)',
             'flags': rtrpc.FLAG_RETURN_ON_MATCH | rtrpc.FLAG_END_OF_SECTION,
-            'trigger_on': 'total_odt',
-            'trigger_off': 'grand_total'
+            'trigger_on': '{total_odt}',
+            'trigger_off': '{grand_total}'
         }
     }
 

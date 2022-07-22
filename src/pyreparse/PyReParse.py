@@ -5,6 +5,7 @@ import re
 import os
 import unittest
 import inspect
+import ast
 
 '''
 # TODO: Only hit this regexp between lines A and B of a given Section.
@@ -18,20 +19,28 @@ import inspect
 '''
 
 
-class PyReParse:
+class TriggerDefException(Exception):
+    pass
 
+
+class PyReParse:
     # RegExp Processing Flags
     FLAG_RETURN_ON_MATCH = 1
-    FLAG_RESET_SECTION_LINE = 2
+    FLAG_NEW_SECTION = 2
     FLAG_ONCE_PER_SECTION = 4
     FLAG_ONCE_PER_REPORT = 8
-    FLAG_END_OF_SECTION = 16
 
     INDEX_RE_STRING = 're_string'
     INDEX_RE_QUICK_CHECK = 're_quick_check'
-    INDEX_RE_REGEXP = 'regexp'  # Compiled
+    INDEX_RE_REGEXP = 'regexp'                       # Compiled
+
     INDEX_RE_TRIGGER_ON = 'trigger_on'
     INDEX_RE_TRIGGER_OFF = 'trigger_off'
+    INDEX_RE_TRIGGER_ON_FUNC = 'trigger_on_func'     # Compiled
+    INDEX_RE_TRIGGER_OFF_FUNC = 'trigger_off_func'   # Compiled
+    INDEX_RE_TRIGGER_ON_TEXT = 'trigger_on_text'
+    INDEX_RE_TRIGGER_OFF_TEXT = 'trigger_off_text'
+
     INDEX_RE_CALLBACK = 'callback'
     INDEX_RE_STATES = 'states'
     INDEX_RE_FLAGS = 'flags'
@@ -43,19 +52,18 @@ class PyReParse:
     INDEX_RE_LAST_SECTION_LINE_MATCHED = 'last_section_line_matched'
 
     # Trigger strings...
-    TRIG_START_REPORT_LINE = '<START_REPORT_LINE>'
-    TRIG_END_REPORT_LINE = '<END_REPORT_LINE>'
-    TRIG_START_SECTION_LINE = '<START_SECTION_LINE>'
-    TRIG_END_SECTION_LINE = '<END_SECTION_LINE>'
+    TRIG_SYM_REPORT_LINE = '<REPORT_LINE>'
+    TRIG_SYM_SECTION_COUNT = '<SECTION_COUNT>'
+    TRIG_SYM_SECTION_LINE = '<SECTION_LINE>'
 
     def __init__(self, regexp_pats=None):
         self.re_defs = {}
         self.all_named_fields = {}
         self.last_captured_fields = {}
         self.re_named_group = re.compile(r'.*\(\?P\<([^\>]+)\>.*', re.X | re.MULTILINE | re.DOTALL)
-        self.report_line_counter = 0
-        self.section_number = 0
-        self.section_line_counter = 0
+        self.report_line_count = 0
+        self.section_count = 0
+        self.section_line_count = 0
         self.file_name = ''
         if regexp_pats is not None:
             self.load_re_lines(regexp_pats)
@@ -88,6 +96,109 @@ class PyReParse:
         self.re_defs = {}
         self.all_named_fields = {}
         return self.append_re_defs(in_hash)
+
+    def create_trigger(self, pat_name, trigger_name):
+        '''
+        Validate and Compile a pattern's trigger.
+
+        There are 2 trigger types in PyReParse:
+          - trigger_on:   When True, causes a match to execute on the given pattern.
+          - trigger_off:  When True, causes matching on a pattern to turn off.
+
+        The trigger is a string that evaluates to True or False.
+        The trigger string is compiled into a static function, whose referenced in stored into the re_defs data
+        structure. The trigger_on and trigger off functions are then called. For match operations to be called on the
+        named pattern, the patterns trigger_on must return True while trigger_off returns false, or
+        (trigger_on and not trigger_off).
+        The string is wrapped into a function with the following parameters:
+          - prp_inst: A PyReParse instance
+          - pat_name: Name of the regexp pattern in the re_defs data structure.
+
+        An Example: INDEX_RE_TRIGGER_ON: (<REPORT_LINE> >= 2) and [start_tx_lines]
+          - "<REPORT_LINE>" is converted to "prp_inst.report_line_count"
+          - "[start_tx_lines]" is converted to 
+            "(prp_inst.re_defs['start_tx_lines'][INDEX_RE_STATES][INDEX_RE_SECTION_LINES_MATCHED] > 0)"
+        
+        Counter Variables available:
+          - <REPORT_LINE>
+          - <SECTION_COUNT>
+          - <SECTION_LINE>
+          
+        When you reference a pattern-name using brackets '[]', it is tested to see if a match on it has already 
+        occurred.
+          - [report_id]
+          - [run_date]
+          - [tx_line]
+                  
+        And the following function is created:
+            def trigger_on_start_tx_lines(prp_inst, pat_name):
+                return (prp_inst.report_line_count >= 2) and \
+                       (prp_inst.re_defs['start_tx_lines'][INDEX_RE_STATES][INDEX_RE_SECTION_LINES_MATCHED] > 0)
+            
+
+        self.report_line_count = 0
+        self.section_count = 0
+        self.section_line_count = 0
+
+        :param pat_name:
+        :param trigger_name:
+        :return:
+        '''
+        # This is our function template.
+        def_str = """
+def <trig_func_name>(prp_inst, pat_name, trigger_name): 
+    rtrpc = PyReParse
+    return <func_body>
+        """
+
+        prp = PyReParse
+
+        # Create a unique name for the function.
+        func_name = trigger_name + '_' + pat_name
+        func_name = re.sub(r'[^\w\_]', r'_', func_name)
+        func_def = def_str.replace('<trig_func_name>', func_name)
+        func_body = self.re_defs[pat_name][trigger_name]
+        while True:
+            '''
+            Convert <Variables> into compilable variables.
+            Convert [PatternNames] into tests to see if patter names have been hit.
+            '''
+            m = re.match(r'.*((\<([^\>]+)\>)|(\{([^\}]+)\})).*', func_body, re.MULTILINE | re.DOTALL)
+            if m is None:
+                break
+            elif m and (m.group(2) is not None):
+                # We have a variable...
+                var_name = m.group(2)
+                if var_name == prp.TRIG_SYM_REPORT_LINE:
+                    func_body = func_body.replace(m.group(0), f'prp_inst.report_line_count')
+                elif var_name == prp.TRIG_SYM_SECTION_COUNT:
+                    func_body = func_body.replace(m.group(0), f'prp_inst.section_count')
+                elif var_name == prp.TRIG_SYM_SECTION_LINE:
+                    func_body = func_body.replace(m.group(0), f'prp_inst.section_line_count')
+                else:
+                    raise TriggerDefException(f'Unknown variable: {m.group(0)}')
+                    sys,exit(1)
+            elif m and (m.group(5) is not None):
+                # We have a pattern-name...
+                pn = m.group(5)
+                if pn in self.re_defs:
+                    func_body = func_body.replace(m.group(1),
+                                                  f'(prp_inst.re_defs[' + "'" + pn + "'" +
+                                                  '][rtrpc.INDEX_RE_STATES][rtrpc.INDEX_RE_SECTION_LINES_MATCHED] > 0)')
+                else:
+                    raise TriggerDefException(f'Unknown pattern-name: {pn}')
+                    sys,exit(1)
+
+        # Create a python function expression...
+        func_text = re.sub(r'<func_body>', func_body, func_def)
+        # Run the function expression throug an AST to validate it.
+        ast_tree = ast.parse(func_text)
+        exec(func_text)
+
+        # Get a reference to the function that we just created.
+        compiled_func = locals()[func_name]
+
+        return compiled_func, func_text
 
     def append_re_defs(self, in_hash):
         '''
@@ -125,26 +236,53 @@ class PyReParse:
             # INDEX_RE
             self.re_defs[fld] = in_hash[fld]
 
+            # Verify that the regexp compiles...
             try:
-                self.re_defs[fld] = self.dict_merge(self.re_defs[fld],
-                                                    {
-                                                        rtrpc.INDEX_RE_REGEXP:
-                                                            re.compile(in_hash[fld][rtrpc.INDEX_RE_STRING], re.X)
-                                                            if rtrpc.INDEX_RE_STRING in in_hash[fld]
-                                                            else None,
-                                                        rtrpc.INDEX_RE_STATES: {
-                                                            rtrpc.INDEX_RE_REPORT_LINES_MATCHED: 0,
-                                                            rtrpc.INDEX_RE_SECTION_LINES_MATCHED: 0,
-                                                            rtrpc.INDEX_RE_LAST_REPORT_LINE_MATCHED: 0,
-                                                            rtrpc.INDEX_RE_LAST_SECTION_LINE_MATCHED: 0,
-                                                            rtrpc.INDEX_RE_REPORT_MATCH_ATTEMPTS: 0,
-                                                            rtrpc.INDEX_RE_SECTION_MATCH_ATTEMPTS: 0
-                                                        }
-                                                    })
+                comped_re = re.compile(in_hash[fld][rtrpc.INDEX_RE_STRING], re.X)
+            except Exception as e:
+                print(f'*** Exception: \"{e}\", Hit on Compiling Regexp [{fld}]! ',
+                      f'\"\"\"{in_hash[fld][rtrpc.INDEX_RE_STRING]}\"\"\"')
 
-            except Exception:
-                print(f'*** Exception Hit on Compiling Regexp [{fld}]! {Exception}')
-                os.exit(1)
+            # Place the named regexp pattern into the data structure of named pattterns...
+            self.re_defs[fld] = self.dict_merge(self.re_defs[fld],
+                                                {
+                                                    rtrpc.INDEX_RE_REGEXP:
+                                                        comped_re
+                                                        if rtrpc.INDEX_RE_STRING in in_hash[fld]
+                                                        else None,
+                                                    rtrpc.INDEX_RE_STATES: {
+                                                        rtrpc.INDEX_RE_REPORT_LINES_MATCHED: 0,
+                                                        rtrpc.INDEX_RE_SECTION_LINES_MATCHED: 0,
+                                                        rtrpc.INDEX_RE_LAST_REPORT_LINE_MATCHED: 0,
+                                                        rtrpc.INDEX_RE_LAST_SECTION_LINE_MATCHED: 0,
+                                                        rtrpc.INDEX_RE_REPORT_MATCH_ATTEMPTS: 0,
+                                                        rtrpc.INDEX_RE_SECTION_MATCH_ATTEMPTS: 0
+                                                    }
+                                                })
+
+        # Compile Triggers once all fields are in te re_defs data structure...
+        for fld in self.re_defs:
+            ''' Compile trigger_on...
+            Take the trigger strings and compile them into static functions...
+            '''
+            try:
+                self.re_defs[fld][rtrpc.INDEX_RE_TRIGGER_ON_FUNC],   \
+                self.re_defs[fld][rtrpc.INDEX_RE_TRIGGER_ON_TEXT], = \
+                    self.create_trigger(fld, rtrpc.INDEX_RE_TRIGGER_ON)
+            except TriggerDefException as e:
+                print(f'*** Exception: \"{e}\", Hit on Compiling trigger_On [{fld}]! ',
+                      f'\"\"\"{self.re_defs[fld][rtrpc.INDEX_RE_TRIGGER_ON]}\"\"\"')
+
+            ''' Compile trigger_off...
+            Take the trigger strings and compile them into static functions...
+            '''
+            try:
+                self.re_defs[fld][rtrpc.INDEX_RE_TRIGGER_OFF_FUNC],  \
+                self.re_defs[fld][rtrpc.INDEX_RE_TRIGGER_OFF_TEXT] = \
+                    self.create_trigger(fld, rtrpc.INDEX_RE_TRIGGER_OFF)
+            except TriggerDefException as e:
+                print(f'*** Exception: \"{e}\", Hit on Compiling trigger_Off [{fld}]! ',
+                      f'\"\"\"{self.re_defs[fld][rtrpc.INDEX_RE_TRIGGER_OFF]}\"\"\"')
 
 
         return self.get_all_fld_names()
@@ -208,7 +346,7 @@ class PyReParse:
         '''
         pass
 
-    def eval_triggers(self, reg_def):
+    def eval_triggers(self, pat_name):
         '''
         This version of eval_triggers only expect a single re_def-name within a trigger and nothing more.
         A return value of True means that a match should be performed against the defined regexo.
@@ -218,194 +356,25 @@ class PyReParse:
         '''
 
         rtrpc = PyReParse
-        redef_name = reg_def[rtrpc.INDEX_RE_TRIGGER_ON]
-        if redef_name == '':
-            trig_on_state = True
-        else:
-            if self.re_defs[redef_name][rtrpc.INDEX_RE_STATES][rtrpc.INDEX_RE_SECTION_LINES_MATCHED] > 0:
-                trig_on_state = True
-            else:
-                trig_on_state = False
+        trig_on_func = self.re_defs[pat_name][rtrpc.INDEX_RE_TRIGGER_ON_FUNC]
+        trig_off_func = self.re_defs[pat_name][rtrpc.INDEX_RE_TRIGGER_OFF_FUNC]
 
-        redef_name = reg_def[rtrpc.INDEX_RE_TRIGGER_OFF]
-        if redef_name == '':
-            trig_off_state = False
-        else:
-            if self.re_defs[redef_name][rtrpc.INDEX_RE_STATES][rtrpc.INDEX_RE_SECTION_LINES_MATCHED] > 0:
-                trig_off_state = True
-            else:
-                trig_off_state = False
+        trig_on_state = True
+        trig_off_state = False
 
-        if trig_on_state:
-            if trig_off_state:
-                return False
-            else:
-                return True
-        else:
-            return False
+        try:
+            if trig_on_func is not None:
+                trig_on_state = trig_on_func(self, pat_name, rtrpc.INDEX_RE_TRIGGER_ON)
+        except Exception as e:
+            print(f'*** Exception: \"{e}\", Hit on Evaluating Trigger_On for pattern[{pat_name}]!')
 
+        try:
+            if trig_off_func is not None:
+                trig_off_state = trig_off_func(self, pat_name, rtrpc.INDEX_RE_TRIGGER_OFF)
+        except Exception as e:
+            print(f'*** Exception: \"{e}\", Hit on Evaluating Trigger_Off for pattern[{pat_name}]!')
 
-    def _eval_triggers(self, reg_def):
-        """
-        Process trigger_on and trigger_off properties.
-        If trigger_on result is true, then we turn on regexp processing for the re_def.
-        If trigger_off result is true, then we turn off regexp processing for the re_def.
-        trigger_off superceeds trigger_on
-
-        :param reg_def:
-        :return:
-        """
-
-        # Started writing new logic...
-
-        # Check trigger_on...
-        # Valid Symbols in Trigger_on:
-        # - Any re_defs field name
-        #   - Only perform match after <re_fld_name> has matched.
-        # - <Report_Start_line>[n]
-        #   - Start running match once Report-Line [n] is hit
-        # - <Section_Stat_Line>[n]
-        #   - Start running match once Section-Line [n] is hit
-        trigger_on = reg_def[rtrpc.INDEX_RE_TRIGGER_ON]
-        curr_bool_oper = ''
-        curr_state = False
-        trigger_on_state = False
-        while True:
-            # Check for a <symbol> re_def-name
-            m = re.match(r'(\s*([^\|\&]+)\s*)(?:[\|\&\ ]+)', trigger_on, re.X)
-            rm_pat = m.group(1)
-            sym_or_name = m.group(2)
-            if sym_or_name:
-                # Process symbol or re_def-name
-                # Remove the symbol or name just processed
-                if curr_bool_oper == False:
-                    if sym_or_name[0] == '<':
-                        curr_sate = self.get_symbolic_state(sym_or_name)
-                    else:
-                        if self.re_defs[sym_or_name][rtrpc.INDEX_RE_STATES][rtrpc.INDEX_RE_LAST_SECTION_LINE_MATCHED] > 0:
-                            curr_state = True
-                        else:
-                            curr_state = False
-                pass
-                trigger_on = re.sub(f'^{rm_pat}', '', trigger_on)
-
-            m = re.match(r'(\s*([\|\&]{1}\s*)(?:\s*[^\|\&\ ]+))', trigger_on, re.X)
-            rm_pat = m.group(1)
-            next_oper = m.group(2)
-
-            # ... Older logic below...
-
-            # Do was have any operators in the trigger.
-            # Operators must only exist between symbols and re_defs.
-            # So, operators should not be at the start or the end of a trigger.
-            found_oper = re.match(r'^\s*([\|]|[\&])', trigger_on)
-
-            if found_oper:
-                # Pull next <symbol|field> + <operator>
-                m = re.match(r'([^\|\&]+)(?:[\|\&]*)', trigger_on)
-                if m:
-                    # Get the current trigger...
-                    trig_mch = m.group(0)
-                    trig_nam = m.group(1)
-                    trig_opr = m.group(2)
-                    tcomp = re.match('(\<[^\>]+\>)\[(\d+)\]', trig_nam)
-                    if tcomp:
-                        # Trig is a special variable...
-                        tmatch = tcomp.group(0)
-                        tsymbol = tcomp.group(1)
-                        tval = tcomp.group(2)
-                        # Calculate trigger state...
-                        _state = self.get_symbolic_state(tsymbol, tval)
-                        if cur_operator == '|':
-                            trigger_on_state = trigger_on_state or _state
-                        elif cur_operator == '&':
-                            trigger_on_state = trigger_on_state and _state
-                    else:
-                        # Trig is re_def...
-                        if self.re_defs[trig_nam][rtrpc.INDEX_RE_STATES][rtrpc.INDEX_RE_SECTION_LINES_MATCHED] > 0:
-                            _state = True
-                        else:
-                            _state = False
-                        # Calculate the current state...
-                        if cur_operator == '|':
-                            trigger_on_state = trigger_on_state or _state
-                        elif cur_operator == '&':
-                            trigger_on_state = trigger_on_state and _state
-
-                    cur_operator = trig_opr
-
-        # Check trigger_off...
-        # - Any re_defs field name
-        #   - Stop matching after <re_fld_name> has matched.
-        # - <Report_End_line>[n]
-        #   - Stop running match once Report-Line [n] is hit
-        # - <Section_Stat_Line>[n]
-        #   - Stop running match once Section-Line [n] is hit
-        trigger_off = reg_def[rtrpc.INDEX_RE_TRIGGER_OFF]
-        cur_operator = ''
-        trigger_off_state = FALSE
-        while TRUE:
-            found_oper = re.match(r'([\|]|[\&])', trigger_on)
-            if found_oper:
-                m = re.match(r'([^\|\&]+)[\|\&]', trigger_on)
-                if m:
-                    # Get the current trigger...
-                    trig_mch = m.group(0)
-                    trig_nam = m.group(1)
-                    trig_opr = m.group(2)
-                    tcomp = re.match('(\<[^\>]+\>)\[(\d+)\]', trig_nam)
-                    if tcomp:
-                        # Trig is a special variable...
-                        tmatch = tcomp.group(0)
-                        tsymbol = tcomp.group(1)
-                        tval = tcomp.group(2)
-                        # Calculate trigger state...
-                        _state = get_symbolic_state(tsymbol, tval)
-                        if cur_operator == '|':
-                            trigger_off_state = trigger_off_state or _state
-                        elif cur_operator == '&':
-                            trigger_off_state = trigger_off_state and _state
-                    else:
-                        # Trig is re_def...
-                        if self.re_defs[trig_nam][rtrpc.INDEX_RE_STATES][rtrpc.INDEX_RE_SECTION_LINES_MATCHED] > 0:
-                            _state = True
-                        else:
-                            _state = False
-                        # Calculate the current state...
-                        if cur_operator == '|':
-                            trigger_off_state = trigger_off_state or _state
-                        elif cur_operator == '&':
-                            trigger_off_state = trigger_off_state and _state
-
-                    cur_operator = trig_opr
-
-        if trigger_on_state is False and trigger_off_state is False:
-            return False
-
-        if trigger_on_state is True and trigger_off_state is False:
-                return True
-        if trigger_off_state:
-            return True
-
-        final_state = trigger_on_state
-
-    def get_symbolic_state(self, symbol, value):
-        '''
-        Given a symbol and value such as {START_SECTION_LINE}[3]
-
-        :param symbol:
-        :param value:
-        :return:
-        '''
-        rtrpc = PyReParse
-        if symbol == rtrpc.TRIG_START_REPORT_LINE:
-            return self.report_line_counter >= int(value)
-        elif symbol == rtrpc.TRIG_END_REPORT_LINE:
-            return self.report_line_counter >= int(value)
-        elif symbol == rtrpc.TRIG_START_SECTIOM_LINE:
-            return self.report_line_counter >= int(value)
-        elif symbol == rtrpc.TRIG_END_SECTION_LINE:
-            return self.report_line_counter >= int(value)
+        return trig_on_state and (not trig_off_state)
 
     def match(self, in_line, debug=False, limit_matches=None):
         '''
@@ -418,19 +387,20 @@ class PyReParse:
         Otherwise, we execute regexp matches against against all line-non-specific regexps in our input list.
         If any regular expressions from our input list match the line, their names are returned as a list.
 
-        :param in_line:
-        :param line_count:
+        :param in_line: A string containing the line to match.
+        :param debug: Emit debug lines.
+        :param liit_matches: Debug - Limit the number of matches to this number.
         :return:
         '''
         rtrpc = PyReParse
         # Increment total report and page line counters
-        self.report_line_counter += 1
+        self.report_line_count += 1
         if limit_matches:
-            if limit_matches <= self.report_line_counter:
+            if limit_matches <= self.report_line_count:
                 print(f'*** Exiting: limit_matches is set to [{limit_matches}]')
                 sys.exit(1)
-        self.section_number += 1
-        self.section_line_counter += 1
+        self.section_count += 1
+        self.section_line_count += 1
         # Initialize matched Def list (returned value)
         matched_defs = None
         # Initialize dict of last fields captured.
@@ -449,7 +419,7 @@ class PyReParse:
             # if True:
             if debug:
                 print(f'regexp: [{fld}]')
-            if self.eval_triggers(self.re_defs[fld]):
+            if self.eval_triggers(fld):
                 if debug:
                     print(f'--- Triggered[{fld}]...')
                 if self.re_defs[fld][rtrpc.INDEX_RE_REGEXP] is None:
@@ -484,17 +454,17 @@ class PyReParse:
                     self.re_defs[fld][rtrpc.INDEX_RE_STATES][rtrpc.INDEX_RE_REPORT_LINES_MATCHED] += 1
                     self.re_defs[fld][rtrpc.INDEX_RE_STATES][rtrpc.INDEX_RE_SECTION_LINES_MATCHED] += 1
                     self.re_defs[fld][rtrpc.INDEX_RE_STATES][
-                        rtrpc.INDEX_RE_LAST_REPORT_LINE_MATCHED] = self.report_line_counter
+                        rtrpc.INDEX_RE_LAST_REPORT_LINE_MATCHED] = self.report_line_count
                     self.re_defs[fld][rtrpc.INDEX_RE_STATES][
-                        rtrpc.INDEX_RE_LAST_SECTION_LINE_MATCHED] = self.section_line_counter
+                        rtrpc.INDEX_RE_LAST_SECTION_LINE_MATCHED] = self.section_line_count
                     if matched_defs is None:
                         matched_defs = []
                     # Capture the list of re_defs entries that match this line.
                     matched_defs.append(fld)
                     # Perform FLAG based operations...
-                    if self.re_defs[fld][rtrpc.INDEX_RE_FLAGS] & rtrpc.FLAG_RESET_SECTION_LINE:
+                    if self.re_defs[fld][rtrpc.INDEX_RE_FLAGS] & rtrpc.FLAG_NEW_SECTION:
                         # Increment the section counter...
-                        self.section_number += 1
+                        self.section_count += 1
                         # Reset sectional flags and counters...
                         self.section_reset()
                         # Fields that reset sections also match atleast once within those sections...
@@ -517,9 +487,9 @@ class PyReParse:
                         if re.match(self.re_defs[fld][rtrpc.INDEX_RE_QUICK_CHECK], in_line, re.X):
                             print(f'\n*** A RegExp [{fld}] may have missed a line in File[{self.file_name}] at...')
                             print(f'   Line [{line_no_lf}]')
-                            print(f'   Report Line [{self.report_line_counter}]')
-                            print(f'   Section Number [{self.section_number}]')
-                            print(f'   Section Line [{self.section_line_counter}]')
+                            print(f'   Report Line [{self.report_line_count}]')
+                            print(f'   Section Number [{self.section_count}]')
+                            print(f'   Section Line [{self.section_line_count}]')
 
         # TODO: Add code to check for duplicate fields found (throw error or warning)
 
@@ -537,11 +507,10 @@ class PyReParse:
         re_str = re.sub('[\,\s\$]', '', in_str)
         try:
             ret_val = float(re_str)
-        except:
-            print(f'*** Exception: Failed to convert string to float [{in_str}] -> [{re_str}]')
-            print(f'    Field [field] Report Line [{self.report_line_counter}] ',
-                  f'Section Number [{self.section_number}] ',
-                  f'Section Line [{self.section_line_counter}]')
+        except Exception as e:
+            print(f'*** Exception: \"{e}\", Failed to convert string to float [{in_str}] -> [{re_str}]')
+            print(f'    Field [field] Report Line [{self.report_line_count}] ',
+                  f'Section Number [{self.section_count}] ',
+                  f'Section Line [{self.section_line_count}]')
 
         return ret_val
-

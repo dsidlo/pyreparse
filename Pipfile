@@ -6,6 +6,8 @@ name = "pypi"
 [packages]
 pip-search = "*"
 coverage = "*"
+astformatter = "*"
+astformula = "*"
 
 [dev-packages]
 
