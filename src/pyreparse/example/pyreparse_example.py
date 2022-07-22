@@ -6,7 +6,7 @@ import os
 import unittest
 
 '''
-Tests for pyreparse module...
+Example PyReParse usage...
 '''
 
 import inspect
@@ -15,25 +15,20 @@ from pyreparse import PyReParse
 cb_txline_cnt = 0
 cb_rptid_cnt = 0
 
-class TestPyReParse(unittest.TestCase):
+class PyReParse_Example():
+    """
+    We create a class that will make use of the PyReParse module for parsing a document as a
+    stream of lines that are pushed into the match() function.
+    """
 
-    rtrpc = PyReParse
-
-    in_line_0 = r'''**BP0420170101REPOREPOPAID-NSFPOSF00016-95214549
-'''
-    in_line_1 = r'''IPPOSFEE             FILE DATE: 12/31/15              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
-'''
-    in_line_2 = r'''RUN DATE: 01/01/16   RUN TIME:  00:14:18            Paid-NSF POS Fees Charged
-'''
-    in_line_3 = r'''------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------                                                                  
-'''
-    in_line_4 = r'''   394654-54  $  0.00    VALLARTA SUPERMARK ARVIN  $     5.41  01/02/16    $     0.00  658524658       56546  ZERO OVERDRAFT FEE                                                         
-
-'''
+    PRP = PyReParse  # A
 
     def cb_rport_id (prp_inst: PyReParse, pattern_name):
         '''
         Callback for report_id pattern.
+        Callbacks can be used for editing or transforming captured values.
+        They can also be used as a form of stream processing given that the sequence of lines entering
+        into the PyReParse.match() function is a stream.
 
         :param pattern_name:
         :return:
@@ -74,11 +69,6 @@ class TestPyReParse(unittest.TestCase):
     regexp, and if a match occurs, is produces a warning indicating that a line may have been missed. 
     If you get the warning and find that the line should have matched, you can use that information to update the 
     main regexp, such that it can capture the line of interest.
-
-    TODO: Add an "edit" entry (refer to a function that will edit/conert the captured string)
-    TODO: A validation option that check to see that all lines between 2 regexp-defs matched to a given regexp-def
-          is to count the blank and non-blank lines between the 2 bounding regexp-defs and run an appropriate
-          calculation and match against the total matches of the regexp-def in question.
     '''
     test_re_lines = {
         'report_id': {
@@ -86,15 +76,25 @@ class TestPyReParse(unittest.TestCase):
                 r'''
                 ^\*\*(?P<report_id>[^\ ]+)\s*$
                 ''',
-            'flags': rtrpc.FLAG_RETURN_ON_MATCH | rtrpc.FLAG_NEW_SECTION,
-            # Trigger Matching on (dependant fields)...
-            # {LINE}[n]         Line == n
-            # {START_LINE}[n]... Line >= n, to Turn off see below: {END_LINE}[n]... Line < n
+            # Flag apply specifies characteristics of the current regular expression.
+            #     FLAG_RETURN_ON_MATCH
+            #     : If match occurs, don't bother matching against any other RegExps.
+            #     FLAG_NEW_SECTION
+            #     : Reset Section Counters to 0
+            #     FLAG_ONCE_PER_SECTION
+            #     : Turn off further matching for this RegExp after the first match.
+            #     FLAG_ONCE_PER_REPORT = 8
+            #     : Turn off further matching for this RegExp after the first match.
+            #     FLAG_END_OF_SECTION = 16    # Counters are set to 0
+            'flags': PRP.FLAG_RETURN_ON_MATCH | PRP.FLAG_NEW_SECTION,
+            # Trigger_On: When true means that this regexp will be used.
+            # Trigggers perform comparisons against symbolic <COuNTERS> and boolean operations against
+            # {named_patterns} that have or have not been matched. The return values of the trigger
+            # should only be True or False.
             'trigger_on': '<SECTION_LINE> == 1',
-            # Turn off Matching on...
-            # {END_LINE}[n]... Line < n
+            # Trigger_Off: When true mean that this regexp will not be used.
             'trigger_off': '{report_id}',
-            rtrpc.INDEX_RE_CALLBACK: cb_rport_id,
+            PRP.INDEX_RE_CALLBACK: cb_rport_id,
         },
         'file_date': {
             're_string':
@@ -102,15 +102,8 @@ class TestPyReParse(unittest.TestCase):
                 ^IPPOSFEE\s+
                 FILE\ DATE:\s+(?P<file_date>[\d\/]+)
                 ''',
-            'flags': rtrpc.FLAG_RETURN_ON_MATCH | rtrpc.FLAG_ONCE_PER_SECTION,
-            # Trigger Matching on (dependant fields)...
-            # {LINE}[n]         Line == n
-            # {START_LINE}[n]... Line >= n, to Turn off see below: {END_LINE}[n]... Line < n
-            # 'trigger_on': f'{PRP.TRIG_START_SECTION_LINE}[1]',
+            'flags': PRP.FLAG_RETURN_ON_MATCH | PRP.FLAG_ONCE_PER_SECTION,
             'trigger_on': '{report_id}',
-            # Turn off Matching on...
-            # {END_LINE}[n]... Line < n
-            # 'trigger_off': f'{PRP.TRIG_END_SECTION_LINE}[3] | file_date'
             'trigger_off': '{file_date}'
         },
         'run_date': {
@@ -119,14 +112,14 @@ class TestPyReParse(unittest.TestCase):
                 ^RUN\ DATE\:\s+(?P<run_date>[\d\/]+)\s+
                 RUN\ TIME\:\s+(?P<run_time>[\d\:]+)
                 ''',
-            'flags': rtrpc.FLAG_RETURN_ON_MATCH | rtrpc.FLAG_ONCE_PER_SECTION,
+            'flags': PRP.FLAG_RETURN_ON_MATCH | PRP.FLAG_ONCE_PER_SECTION,
             'trigger_on': '{file_date}',
             'trigger_off': '{run_date}'
         },
         'start_tx_lines': {
             're_string':
                 r'^[\ \-]+$',
-            'flags': rtrpc.FLAG_RETURN_ON_MATCH | rtrpc.FLAG_ONCE_PER_SECTION,
+            'flags': PRP.FLAG_RETURN_ON_MATCH | PRP.FLAG_ONCE_PER_SECTION,
             'trigger_on': '{run_date}',
             'trigger_off': '{start_tx_lines}'
         },
@@ -149,36 +142,36 @@ class TestPyReParse(unittest.TestCase):
                 ''' (?# A simpler regexp that checks to see if a match should have occurred...)
                 ^\s*\d+\-\d+\s+\$\s*[\d\.]+\s
                 ''',
-            'flags': rtrpc.FLAG_RETURN_ON_MATCH,
+            'flags': PRP.FLAG_RETURN_ON_MATCH,
             'trigger_on': '{start_tx_lines}',
             'trigger_off': '{end_tx_lines}',
-            rtrpc.INDEX_RE_CALLBACK: cb_tx_line,
+            PRP.INDEX_RE_CALLBACK: cb_tx_line,
         },
         'end_tx_lines': {
             're_string':
                 r'^\s+[\-]+\s*',
-            'flags': rtrpc.FLAG_RETURN_ON_MATCH | rtrpc.FLAG_ONCE_PER_SECTION,
+            'flags': PRP.FLAG_RETURN_ON_MATCH | PRP.FLAG_ONCE_PER_SECTION,
             'trigger_on': '{tx_line}',
             'trigger_off': '{end_tx_lines} | {total_nsf} | {grand_total}',
         },
         'total_nsf': {
             're_string':
                 r'^Total\ NSF:\s*(?P<total_nsf>[\-\$\ \d\,\.]+)',
-            'flags': rtrpc.FLAG_RETURN_ON_MATCH | rtrpc.FLAG_ONCE_PER_SECTION,
+            'flags': PRP.FLAG_RETURN_ON_MATCH | PRP.FLAG_ONCE_PER_SECTION,
             'trigger_on': '{end_tx_lines}',
             'trigger_off': '{total_nsf}'
         },
         'total_odt': {
             're_string':
                 r'^Total\ ODT:\s*(?P<total_odt>[\-\$\ \d\,\.]+)',
-            'flags': rtrpc.FLAG_RETURN_ON_MATCH | rtrpc.FLAG_ONCE_PER_SECTION,
+            'flags': PRP.FLAG_RETURN_ON_MATCH | PRP.FLAG_ONCE_PER_SECTION,
             'trigger_on': '{total_nsf}',
             'trigger_off': '{total_odt}'
         },
         'grand_total': {
             're_string':
                 r'^Grand\ Total:\s*(?P<grand_total>[\-\$\ \d\,\.]+)',
-            'flags': rtrpc.FLAG_RETURN_ON_MATCH | rtrpc.FLAG_END_OF_SECTION,
+            'flags': PRP.FLAG_RETURN_ON_MATCH | PRP.FLAG_END_OF_SECTION,
             'trigger_on': '{total_odt}',
             'trigger_off': '{grand_total}'
         }

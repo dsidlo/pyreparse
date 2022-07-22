@@ -148,7 +148,7 @@ class PyReParse:
         # This is our function template.
         def_str = """
 def <trig_func_name>(prp_inst, pat_name, trigger_name): 
-    rtrpc = PyReParse
+    PRP = PyReParse
     return <func_body>
         """
 
@@ -185,7 +185,7 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
                 if pn in self.re_defs:
                     func_body = func_body.replace(m.group(1),
                                                   f'(prp_inst.re_defs[' + "'" + pn + "'" +
-                                                  '][rtrpc.INDEX_RE_STATES][rtrpc.INDEX_RE_SECTION_LINES_MATCHED] > 0)')
+                                                  '][PRP.INDEX_RE_STATES][PRP.INDEX_RE_SECTION_LINES_MATCHED] > 0)')
                 else:
                     raise TriggerDefException(f'Unknown pattern-name: {pn}')
                     sys,exit(1)
@@ -325,9 +325,6 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
                         restr = re.sub(fld_name_expr, r'(', restr)
                     else:
                         break
-            else:
-                # Process positional fields match...
-                None
 
         else:
             print(f"*** Error: [{repat_name}] does not exist in self.re_defs!")
