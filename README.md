@@ -3,7 +3,7 @@ PyReParse is a library the helps to ease the development processes of parsing
 complex reports, which have enough structure for effective regular expression 
 processing.
 
-PyReParse is a library that helps on create parsing engines for formed text reports. I had a such a need when I was tasked to parse a Financial Institution's archived transaction reports where the databases that held this data no-longer existed. So the data in the report forms was the only data available to re-create the original database. Thus, regular-expressions were need to find and capture certain field values, and validation calculations were needed to ensure that the data going into the database was complete and accurate.
+PyReParse is a library that helps one create parsing engines for formed text reports. I had a such a need when I was tasked to parse a Financial Institution's archived transaction reports where the databases that held this data no-longer existed. So the data in the report forms was the only data available to re-create the original database. Thus, regular-expressions were used to find and capture certain field values, and validation calculations were needed to ensure that the data going into the database was complete and accurate.
 
 <br>
 

@@ -8,6 +8,7 @@ pip-search = "*"
 coverage = "*"
 astformatter = "*"
 astformula = "*"
+astunparse = "*"
 
 [dev-packages]
 
