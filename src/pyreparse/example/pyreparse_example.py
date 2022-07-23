@@ -197,25 +197,25 @@ class PyReParse_Example():
 
     def test_load_re(self):
         rtp = PyReParse()
-        fld_names = rtp.load_re_lines(TestPyReParse.test_re_lines)
-        self.assertEqual(TestPyReParse.expected_value_1, fld_names)
+        fld_names = rtp.load_re_lines(PyReParse_Example.test_re_lines)
+        self.assertEqual(PyReParse_Example.expected_value_1, fld_names)
 
     def test_match_1(self):
         rtp = PyReParse()
-        fld_names = rtp.load_re_lines(TestPyReParse.test_re_lines)
-        match_re_lines, last_captured = rtp.match(TestPyReParse.in_line_0)
+        fld_names = rtp.load_re_lines(PyReParse_Example.test_re_lines)
+        match_re_lines, last_captured = rtp.match(PyReParse_Example.in_line_0)
         self.assertEqual(['report_id'], match_re_lines)
-        match_re_lines, last_captured = rtp.match(TestPyReParse.in_line_1)
-        self.assertEqual(TestPyReParse.expected_value_2, match_re_lines)
+        match_re_lines, last_captured = rtp.match(PyReParse_Example.in_line_1)
+        self.assertEqual(PyReParse_Example.expected_value_2, match_re_lines)
 
     def test_match_2(self):
         rtp = PyReParse()
-        fld_names = rtp.load_re_lines(TestPyReParse.test_re_lines)
-        match_re_lines, last_captured = rtp.match(TestPyReParse.in_line_0)
-        match_re_lines, last_captured = rtp.match(TestPyReParse.in_line_1)
-        match_re_lines, last_captured = rtp.match(TestPyReParse.in_line_2)
-        self.assertEqual(TestPyReParse.expected_value_3_1, match_re_lines)
-        self.assertEqual(TestPyReParse.expected_value_3_2, rtp.last_captured_fields)
+        fld_names = rtp.load_re_lines(PyReParse_Example.test_re_lines)
+        match_re_lines, last_captured = rtp.match(PyReParse_Example.in_line_0)
+        match_re_lines, last_captured = rtp.match(PyReParse_Example.in_line_1)
+        match_re_lines, last_captured = rtp.match(PyReParse_Example.in_line_2)
+        self.assertEqual(PyReParse_Example.expected_value_3_1, match_re_lines)
+        self.assertEqual(PyReParse_Example.expected_value_3_2, rtp.last_captured_fields)
 
     def test_match_3(self):
 
@@ -223,28 +223,28 @@ class PyReParse_Example():
 
         rtrpc = PyReParse
         rtp = PyReParse()
-        fld_names = rtp.load_re_lines(TestPyReParse.test_re_lines)
+        fld_names = rtp.load_re_lines(PyReParse_Example.test_re_lines)
 
         # Match against line_1
-        match_re_lines, last_captured = rtp.match(TestPyReParse.in_line_0)
+        match_re_lines, last_captured = rtp.match(PyReParse_Example.in_line_0)
         # file_date def should have a mach attempt count of 1
         self.assertEqual(1, rtp.re_defs['report_id'][rtrpc.INDEX_RE_STATES][rtrpc.INDEX_RE_SECTION_LINES_MATCHED])
 
         # Match against line_1
-        match_re_lines, last_captured = rtp.match(TestPyReParse.in_line_1)
+        match_re_lines, last_captured = rtp.match(PyReParse_Example.in_line_1)
         # file_date def should have a mach attempt count of 1
         self.assertEqual(1, rtp.re_defs['report_id'][rtrpc.INDEX_RE_STATES][rtrpc.INDEX_RE_SECTION_LINES_MATCHED])
         self.assertEqual(1, rtp.re_defs['file_date'][rtrpc.INDEX_RE_STATES][rtrpc.INDEX_RE_SECTION_LINES_MATCHED])
 
         # Match against line_2
-        match_re_lines, last_captured = rtp.match(TestPyReParse.in_line_2)
+        match_re_lines, last_captured = rtp.match(PyReParse_Example.in_line_2)
         # file_date def should have a mach attempt count of 1
         self.assertEqual(1, rtp.re_defs['report_id'][rtrpc.INDEX_RE_STATES][rtrpc.INDEX_RE_SECTION_LINES_MATCHED])
         self.assertEqual(1, rtp.re_defs['file_date'][rtrpc.INDEX_RE_STATES][rtrpc.INDEX_RE_SECTION_LINES_MATCHED])
         self.assertEqual(1, rtp.re_defs['run_date'][rtrpc.INDEX_RE_STATES][rtrpc.INDEX_RE_SECTION_LINES_MATCHED])
 
         # Match against line_3
-        match_re_lines, last_captured = rtp.match(TestPyReParse.in_line_3)
+        match_re_lines, last_captured = rtp.match(PyReParse_Example.in_line_3)
         self.assertEqual(match_re_lines, ['start_tx_lines'])
         # file_date def should have a mach attempt count of 1
         self.assertEqual(1, rtp.re_defs['report_id'][rtrpc.INDEX_RE_STATES][rtrpc.INDEX_RE_SECTION_LINES_MATCHED])
@@ -253,7 +253,7 @@ class PyReParse_Example():
         self.assertEqual(1, rtp.re_defs['start_tx_lines'][rtrpc.INDEX_RE_STATES][rtrpc.INDEX_RE_SECTION_LINES_MATCHED])
 
         # Match against line_4
-        match_re_lines, last_captured = rtp.match(TestPyReParse.in_line_4)
+        match_re_lines, last_captured = rtp.match(PyReParse_Example.in_line_4)
         # file_date def should have a mach attempt count of 1
         self.assertEqual(1, rtp.re_defs['report_id'][rtrpc.INDEX_RE_STATES][rtrpc.INDEX_RE_SECTION_LINES_MATCHED])
         self.assertEqual(1, rtp.re_defs['file_date'][rtrpc.INDEX_RE_STATES][rtrpc.INDEX_RE_SECTION_LINES_MATCHED])
@@ -262,8 +262,8 @@ class PyReParse_Example():
         self.assertEqual(1, rtp.re_defs['tx_line'][rtrpc.INDEX_RE_STATES][rtrpc.INDEX_RE_SECTION_LINES_MATCHED])
 
         # Should be the same results as test_match_2 (results don't intermingle)
-        self.assertEqual(TestPyReParse.expected_value_4_1, match_re_lines)
-        self.assertEqual(TestPyReParse.expected_value_4_2, rtp.last_captured_fields)
+        self.assertEqual(PyReParse_Example.expected_value_4_1, match_re_lines)
+        self.assertEqual(PyReParse_Example.expected_value_4_2, rtp.last_captured_fields)
 
         # Verify that Callbacks have been called...
         self.assertEqual(3, cb_rptid_cnt)
@@ -273,7 +273,7 @@ class PyReParse_Example():
         file_path = 'data/NsfPosFees/999-063217-XXXX-PAID-NSF POS FEES CHARGED page 0001 to 0188.TXT'
         rtrpc = PyReParse
         rtp = PyReParse()
-        fld_names = rtp.load_re_lines(TestPyReParse.test_re_lines)
+        fld_names = rtp.load_re_lines(PyReParse_Example.test_re_lines)
         report_id = ''
         file_date = ''
         run_date = ''
