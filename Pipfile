@@ -10,6 +10,9 @@ astformatter = "*"
 astformula = "*"
 astunparse = "*"
 build = "*"
+twine = "*"
+pip = "*"
+pypisearch = "*"
 
 [dev-packages]
 
