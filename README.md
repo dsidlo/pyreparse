@@ -99,6 +99,8 @@ due to a need to tweak the main regexp, or possibly a corrupt input line.
             ```      
 <br>
 
+Please check out [pyreparse_example.py](pyreparse/example/pyreparse_example.py), you can used this code as a template to guide you in the creation of your own parsing engine.
+
 ## The PyReParse Data Structure of Patterns
 <br>
 

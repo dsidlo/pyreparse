@@ -1,17 +1,12 @@
 #!/usr/bin/env python3
 
-import sys
-import re
-import os
-import unittest
-
 '''
 Example PyReParse usage...
 This is a template example for creating your own PyReParse parser engine. 
 '''
 
-import inspect
 from pyreparse import PyReParse
+
 
 cb_txline_cnt = 0
 cb_rptid_cnt = 0
@@ -191,10 +186,9 @@ class PyReParse_Example():
     }
 
     def parse_file(self):
-        file_path = 'data/NsfPosFees/999-063217-XXXX-PAID-NSF POS FEES CHARGED page 0001 to 0188.TXT'
-        rtrpc = PyReParse
-        rtp = PyReParse()
-        fld_names = rtp.load_re_lines(PyReParse_Example.test_re_lines)
+        file_path = '../tests/data/NsfPosFees/999-063217-XXXX-PAID-NSF POS FEES CHARGED page 0001 to 0188.TXT'
+        prp = PyReParse()
+        fld_names = prp.load_re_lines(PyReParse_Example.test_re_lines)
         report_id = ''
         file_date = ''
         run_date = ''
@@ -206,7 +200,7 @@ class PyReParse_Example():
 
         with open(file_path, 'r') as txt_file:
             for line in txt_file:
-                match_def, matched_fields = rtp.match(line)
+                match_def, matched_fields = prp.match(line)
                 if match_def == ['report_id']:
                     report_id = matched_fields['report_id']
                     # Reset tx_lines array on new section...
@@ -219,33 +213,41 @@ class PyReParse_Example():
                 elif match_def == ['tx_line']:
                     m_flds = matched_fields
                     fld = 'nsf_fee'
-                    m_flds[fld] = rtp.money2float(fld, m_flds[fld])
+                    m_flds[fld] = prp.money2float(fld, m_flds[fld])
                     fld = 'tx_amt'
-                    m_flds[fld] = rtp.money2float(fld, m_flds[fld])
+                    m_flds[fld] = prp.money2float(fld, m_flds[fld])
                     fld = 'balance'
-                    m_flds[fld] = rtp.money2float(fld, m_flds[fld])
+                    m_flds[fld] = prp.money2float(fld, m_flds[fld])
                     txn_lines.append(m_flds)
                 elif match_def == ['end_tx_lines']:
                     pass
                 elif match_def == ['total_nsf']:
                     m_flds = matched_fields
                     fld = 'total_nsf'
-                    total_nsf = rtp.money2float(fld, m_flds[fld])
+                    total_nsf = prp.money2float(fld, m_flds[fld])
                 elif match_def == ['total_odt']:
                     m_flds = matched_fields
                     fld = 'total_odt'
-                    total_odt = rtp.money2float(fld, m_flds[fld])
+                    total_odt = prp.money2float(fld, m_flds[fld])
                 elif match_def == ['grand_total']:
                     m_flds = matched_fields
                     fld = 'grand_total'
-                    grand_total = rtp.money2float(fld, m_flds[fld])
+                    grand_total = prp.money2float(fld, m_flds[fld])
 
                     # Run totals & validations
                     nsf_tot = 0
                     for flds in txn_lines:
                         nsf_tot += flds['nsf_fee']
-                    self.assertEqual(nsf_tot, grand_total)
+
+                    if nsf_tot == grand_total:
+                        print (f'*** Section [{prp.section_count}] Parsing Completed.')
 
                     # Reset tx_lines array at end of section...
                     txn_lines = []
 
+        if prp.section_count == 2538:
+            print (f'\n*** All Sections Processed!')
+
+if __name__ == '__main__':
+    prg = PyReParse_Example()
+    prg.parse_file()
