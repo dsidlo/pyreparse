@@ -32,9 +32,9 @@ class PyReParse:
     FLAG_END_OF_SECTION = 16    # Counters are set to 0
 
     INDEX_RE_STRING = 're_string'
+    INDEX_RE_FLAGS = 'flags'
     INDEX_RE_QUICK_CHECK = 're_quick_check'
     INDEX_RE_REGEXP = 'regexp'                       # Compiled
-
     INDEX_RE_TRIGGER_ON = 'trigger_on'               # Entry - Trigger_On Assigned by User
     INDEX_RE_TRIGGER_OFF = 'trigger_off'             # Entry - Trigger_Off Assigned by User
     INDEX_RE_TRIGGER_ON_FUNC = 'trigger_on_func'     # Entry - Trigger_On Func Compiled by PyReParse

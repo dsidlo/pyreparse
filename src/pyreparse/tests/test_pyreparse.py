@@ -17,7 +17,7 @@ cb_rptid_cnt = 0
 
 class TestPyReParse(unittest.TestCase):
 
-    rtrpc = PyReParse
+    PRP = PyReParse
 
     in_line_0 = r'''**BP0420170101REPOREPOPAID-NSFPOSF00016-95214549
 '''
@@ -82,56 +82,56 @@ class TestPyReParse(unittest.TestCase):
     '''
     test_re_lines = {
         'report_id': {
-            're_string':
+            PRP.INDEX_RE_STRING:
                 r'''
                 ^\*\*(?P<report_id>[^\ ]+)\s*$
                 ''',
-            'flags': rtrpc.FLAG_RETURN_ON_MATCH | rtrpc.FLAG_NEW_SECTION,
+            PRP.INDEX_RE_FLAGS: PRP.FLAG_RETURN_ON_MATCH | PRP.FLAG_NEW_SECTION,
             # Trigger Matching on (dependant fields)...
             # {LINE}[n]         Line == n
             # {START_LINE}[n]... Line >= n, to Turn off see below: {END_LINE}[n]... Line < n
-            'trigger_on': '<SECTION_LINE> == 1',
+            PRP.INDEX_RE_TRIGGER_ON: '<SECTION_LINE> == 1',
             # Turn off Matching on...
             # {END_LINE}[n]... Line < n
-            'trigger_off': '{report_id}',
-            rtrpc.INDEX_RE_CALLBACK: cb_rport_id,
+            PRP.INDEX_RE_TRIGGER_OFF: '{report_id}',
+            PRP.INDEX_RE_CALLBACK: cb_rport_id,
         },
         'file_date': {
-            're_string':
+            PRP.INDEX_RE_STRING:
                 r'''
                 ^IPPOSFEE\s+
                 FILE\ DATE:\s+(?P<file_date>[\d\/]+)
                 ''',
-            'flags': rtrpc.FLAG_RETURN_ON_MATCH | rtrpc.FLAG_ONCE_PER_SECTION,
+            PRP.INDEX_RE_FLAGS: PRP.FLAG_RETURN_ON_MATCH | PRP.FLAG_ONCE_PER_SECTION,
             # Trigger Matching on (dependant fields)...
             # {LINE}[n]         Line == n
             # {START_LINE}[n]... Line >= n, to Turn off see below: {END_LINE}[n]... Line < n
-            # 'trigger_on': f'{PRP.TRIG_START_SECTION_LINE}[1]',
-            'trigger_on': '{report_id}',
+            # PRP.INDEX_RE_TRIGGER_ON: f'{PRP.TRIG_START_SECTION_LINE}[1]',
+            PRP.INDEX_RE_TRIGGER_ON: '{report_id}',
             # Turn off Matching on...
             # {END_LINE}[n]... Line < n
-            # 'trigger_off': f'{PRP.TRIG_END_SECTION_LINE}[3] | file_date'
-            'trigger_off': '{file_date}'
+            # PRP.INDEX_RE_TRIGGER_OFF: f'{PRP.TRIG_END_SECTION_LINE}[3] | file_date'
+            PRP.INDEX_RE_TRIGGER_OFF: '{file_date}'
         },
         'run_date': {
-            're_string':
+            PRP.INDEX_RE_STRING:
                 r'''
                 ^RUN\ DATE\:\s+(?P<run_date>[\d\/]+)\s+
                 RUN\ TIME\:\s+(?P<run_time>[\d\:]+)
                 ''',
-            'flags': rtrpc.FLAG_RETURN_ON_MATCH | rtrpc.FLAG_ONCE_PER_SECTION,
-            'trigger_on': '{file_date}',
-            'trigger_off': '{run_date}'
+            PRP.INDEX_RE_FLAGS: PRP.FLAG_RETURN_ON_MATCH | PRP.FLAG_ONCE_PER_SECTION,
+            PRP.INDEX_RE_TRIGGER_ON: '{file_date}',
+            PRP.INDEX_RE_TRIGGER_OFF: '{run_date}'
         },
         'start_tx_lines': {
-            're_string':
+            PRP.INDEX_RE_STRING:
                 r'^[\ \-]+$',
-            'flags': rtrpc.FLAG_RETURN_ON_MATCH | rtrpc.FLAG_ONCE_PER_SECTION,
-            'trigger_on': '{run_date}',
-            'trigger_off': '{start_tx_lines}'
+            PRP.INDEX_RE_FLAGS: PRP.FLAG_RETURN_ON_MATCH | PRP.FLAG_ONCE_PER_SECTION,
+            PRP.INDEX_RE_TRIGGER_ON: '{run_date}',
+            PRP.INDEX_RE_TRIGGER_OFF: '{start_tx_lines}'
         },
         'tx_line': {
-            're_string':
+            PRP.INDEX_RE_STRING:
                 r'''
                 ^\s+(?#This comment is needed to pick up <ac_num> regexp bug?)
                 (?P<ac_num>\d+)\-(?P<ac_type>\d+)\s+
@@ -145,42 +145,42 @@ class TestPyReParse(unittest.TestCase):
                 (?P<tx_seq>\d+)\s\s
                 (?P<fee_type>.+)
                 ''',
-            're_quick_check':
+            PRP.INDEX_RE_QUICK_CHECK:
                 ''' (?# A simpler regexp that checks to see if a match should have occurred...)
                 ^\s*\d+\-\d+\s+\$\s*[\d\.]+\s
                 ''',
-            'flags': rtrpc.FLAG_RETURN_ON_MATCH,
-            'trigger_on': '{start_tx_lines}',
-            'trigger_off': '{end_tx_lines}',
-            rtrpc.INDEX_RE_CALLBACK: cb_tx_line,
+            PRP.INDEX_RE_FLAGS: PRP.FLAG_RETURN_ON_MATCH,
+            PRP.INDEX_RE_TRIGGER_ON: '{start_tx_lines}',
+            PRP.INDEX_RE_TRIGGER_OFF: '{end_tx_lines}',
+            PRP.INDEX_RE_CALLBACK: cb_tx_line,
         },
         'end_tx_lines': {
-            're_string':
+            PRP.INDEX_RE_STRING:
                 r'^\s+[\-]+\s*',
-            'flags': rtrpc.FLAG_RETURN_ON_MATCH | rtrpc.FLAG_ONCE_PER_SECTION,
-            'trigger_on': '{tx_line}',
-            'trigger_off': '{end_tx_lines} | {total_nsf} | {grand_total}',
+            PRP.INDEX_RE_FLAGS: PRP.FLAG_RETURN_ON_MATCH | PRP.FLAG_ONCE_PER_SECTION,
+            PRP.INDEX_RE_TRIGGER_ON: '{tx_line}',
+            PRP.INDEX_RE_TRIGGER_OFF: '{end_tx_lines} | {total_nsf} | {grand_total}',
         },
         'total_nsf': {
-            're_string':
+            PRP.INDEX_RE_STRING:
                 r'^Total\ NSF:\s*(?P<total_nsf>[\-\$\ \d\,\.]+)',
-            'flags': rtrpc.FLAG_RETURN_ON_MATCH | rtrpc.FLAG_ONCE_PER_SECTION,
-            'trigger_on': '{end_tx_lines}',
-            'trigger_off': '{total_nsf}'
+            PRP.INDEX_RE_FLAGS: PRP.FLAG_RETURN_ON_MATCH | PRP.FLAG_ONCE_PER_SECTION,
+            PRP.INDEX_RE_TRIGGER_ON: '{end_tx_lines}',
+            PRP.INDEX_RE_TRIGGER_OFF: '{total_nsf}'
         },
         'total_odt': {
-            're_string':
+            PRP.INDEX_RE_STRING:
                 r'^Total\ ODT:\s*(?P<total_odt>[\-\$\ \d\,\.]+)',
-            'flags': rtrpc.FLAG_RETURN_ON_MATCH | rtrpc.FLAG_ONCE_PER_SECTION,
-            'trigger_on': '{total_nsf}',
-            'trigger_off': '{total_odt}'
+            PRP.INDEX_RE_FLAGS: PRP.FLAG_RETURN_ON_MATCH | PRP.FLAG_ONCE_PER_SECTION,
+            PRP.INDEX_RE_TRIGGER_ON: '{total_nsf}',
+            PRP.INDEX_RE_TRIGGER_OFF: '{total_odt}'
         },
         'grand_total': {
-            're_string':
+            PRP.INDEX_RE_STRING:
                 r'^Grand\ Total:\s*(?P<grand_total>[\-\$\ \d\,\.]+)',
-            'flags': rtrpc.FLAG_RETURN_ON_MATCH | rtrpc.FLAG_END_OF_SECTION,
-            'trigger_on': '{total_odt}',
-            'trigger_off': '{grand_total}'
+            PRP.INDEX_RE_FLAGS: PRP.FLAG_RETURN_ON_MATCH | PRP.FLAG_END_OF_SECTION,
+            PRP.INDEX_RE_TRIGGER_ON: '{total_odt}',
+            PRP.INDEX_RE_TRIGGER_OFF: '{grand_total}'
         }
     }
 
@@ -228,45 +228,45 @@ class TestPyReParse(unittest.TestCase):
 
         global cb_txline_cnt
 
-        rtrpc = PyReParse
+        PRP = PyReParse
         rtp = PyReParse()
         fld_names = rtp.load_re_lines(TestPyReParse.test_re_lines)
 
         # Match against line_1
         match_re_lines, last_captured = rtp.match(TestPyReParse.in_line_0)
         # file_date def should have a mach attempt count of 1
-        self.assertEqual(1, rtp.re_defs['report_id'][rtrpc.INDEX_STATES][rtrpc.INDEX_ST_SECTION_LINES_MATCHED])
+        self.assertEqual(1, rtp.re_defs['report_id'][PRP.INDEX_STATES][PRP.INDEX_ST_SECTION_LINES_MATCHED])
 
         # Match against line_1
         match_re_lines, last_captured = rtp.match(TestPyReParse.in_line_1)
         # file_date def should have a mach attempt count of 1
-        self.assertEqual(1, rtp.re_defs['report_id'][rtrpc.INDEX_STATES][rtrpc.INDEX_ST_SECTION_LINES_MATCHED])
-        self.assertEqual(1, rtp.re_defs['file_date'][rtrpc.INDEX_STATES][rtrpc.INDEX_ST_SECTION_LINES_MATCHED])
+        self.assertEqual(1, rtp.re_defs['report_id'][PRP.INDEX_STATES][PRP.INDEX_ST_SECTION_LINES_MATCHED])
+        self.assertEqual(1, rtp.re_defs['file_date'][PRP.INDEX_STATES][PRP.INDEX_ST_SECTION_LINES_MATCHED])
 
         # Match against line_2
         match_re_lines, last_captured = rtp.match(TestPyReParse.in_line_2)
         # file_date def should have a mach attempt count of 1
-        self.assertEqual(1, rtp.re_defs['report_id'][rtrpc.INDEX_STATES][rtrpc.INDEX_ST_SECTION_LINES_MATCHED])
-        self.assertEqual(1, rtp.re_defs['file_date'][rtrpc.INDEX_STATES][rtrpc.INDEX_ST_SECTION_LINES_MATCHED])
-        self.assertEqual(1, rtp.re_defs['run_date'][rtrpc.INDEX_STATES][rtrpc.INDEX_ST_SECTION_LINES_MATCHED])
+        self.assertEqual(1, rtp.re_defs['report_id'][PRP.INDEX_STATES][PRP.INDEX_ST_SECTION_LINES_MATCHED])
+        self.assertEqual(1, rtp.re_defs['file_date'][PRP.INDEX_STATES][PRP.INDEX_ST_SECTION_LINES_MATCHED])
+        self.assertEqual(1, rtp.re_defs['run_date'][PRP.INDEX_STATES][PRP.INDEX_ST_SECTION_LINES_MATCHED])
 
         # Match against line_3
         match_re_lines, last_captured = rtp.match(TestPyReParse.in_line_3)
         self.assertEqual(match_re_lines, ['start_tx_lines'])
         # file_date def should have a mach attempt count of 1
-        self.assertEqual(1, rtp.re_defs['report_id'][rtrpc.INDEX_STATES][rtrpc.INDEX_ST_SECTION_LINES_MATCHED])
-        self.assertEqual(1, rtp.re_defs['file_date'][rtrpc.INDEX_STATES][rtrpc.INDEX_ST_SECTION_LINES_MATCHED])
-        self.assertEqual(1, rtp.re_defs['run_date'][rtrpc.INDEX_STATES][rtrpc.INDEX_ST_SECTION_LINES_MATCHED])
-        self.assertEqual(1, rtp.re_defs['start_tx_lines'][rtrpc.INDEX_STATES][rtrpc.INDEX_ST_SECTION_LINES_MATCHED])
+        self.assertEqual(1, rtp.re_defs['report_id'][PRP.INDEX_STATES][PRP.INDEX_ST_SECTION_LINES_MATCHED])
+        self.assertEqual(1, rtp.re_defs['file_date'][PRP.INDEX_STATES][PRP.INDEX_ST_SECTION_LINES_MATCHED])
+        self.assertEqual(1, rtp.re_defs['run_date'][PRP.INDEX_STATES][PRP.INDEX_ST_SECTION_LINES_MATCHED])
+        self.assertEqual(1, rtp.re_defs['start_tx_lines'][PRP.INDEX_STATES][PRP.INDEX_ST_SECTION_LINES_MATCHED])
 
         # Match against line_4
         match_re_lines, last_captured = rtp.match(TestPyReParse.in_line_4)
         # file_date def should have a mach attempt count of 1
-        self.assertEqual(1, rtp.re_defs['report_id'][rtrpc.INDEX_STATES][rtrpc.INDEX_ST_SECTION_LINES_MATCHED])
-        self.assertEqual(1, rtp.re_defs['file_date'][rtrpc.INDEX_STATES][rtrpc.INDEX_ST_SECTION_LINES_MATCHED])
-        self.assertEqual(1, rtp.re_defs['run_date'][rtrpc.INDEX_STATES][rtrpc.INDEX_ST_SECTION_LINES_MATCHED])
-        self.assertEqual(1, rtp.re_defs['start_tx_lines'][rtrpc.INDEX_STATES][rtrpc.INDEX_ST_SECTION_LINES_MATCHED])
-        self.assertEqual(1, rtp.re_defs['tx_line'][rtrpc.INDEX_STATES][rtrpc.INDEX_ST_SECTION_LINES_MATCHED])
+        self.assertEqual(1, rtp.re_defs['report_id'][PRP.INDEX_STATES][PRP.INDEX_ST_SECTION_LINES_MATCHED])
+        self.assertEqual(1, rtp.re_defs['file_date'][PRP.INDEX_STATES][PRP.INDEX_ST_SECTION_LINES_MATCHED])
+        self.assertEqual(1, rtp.re_defs['run_date'][PRP.INDEX_STATES][PRP.INDEX_ST_SECTION_LINES_MATCHED])
+        self.assertEqual(1, rtp.re_defs['start_tx_lines'][PRP.INDEX_STATES][PRP.INDEX_ST_SECTION_LINES_MATCHED])
+        self.assertEqual(1, rtp.re_defs['tx_line'][PRP.INDEX_STATES][PRP.INDEX_ST_SECTION_LINES_MATCHED])
 
         # Should be the same results as test_match_2 (results don't intermingle)
         self.assertEqual(TestPyReParse.expected_value_4_1, match_re_lines)
@@ -278,7 +278,7 @@ class TestPyReParse(unittest.TestCase):
 
     def test_parse_file(self):
         file_path = 'data/NsfPosFees/999-063217-XXXX-PAID-NSF POS FEES CHARGED page 0001 to 0188.TXT'
-        rtrpc = PyReParse
+        PRP = PyReParse
         rtp = PyReParse()
         fld_names = rtp.load_re_lines(TestPyReParse.test_re_lines)
         report_id = ''
