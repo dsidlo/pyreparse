@@ -7,6 +7,17 @@ PyReParse is a library that helps one create parsing engines for formed text rep
 
 <br>
 
+# TODO...
+Add the idea of subsections.
+Subsections are sections that have a parent indicator.
+   - Subsection: ['<parent-1>','parent-2', 'parent-n'...]
+
+
+[]: # Language: markdown
+[]: # Path: README.md
+
+<br>
+
 ## Benefits...
 
 - The benefits of using PyReParse include...
@@ -23,8 +34,18 @@ a simpler regexp that can catch lines that should have matched but did not,
 due to a need to tweak the main regexp, or possibly a corrupt input line.
 - Logic for counting report lines and sections within a report.
 - PyReParse uses named-capture-groups and returns captured values in a dictionary. This eases the ability to capture values for transformation and storage.
-- One can associate a RegExp pattern to a callback so that one can perform custom calculations, validations, and transforations to the captured values of interest.
+- One can associate a RegExp pattern to a callback so that one can perform custom calculations, validations, and transformations to the captured values of interest.
 <br>
+
+## Installation...
+
+```shell
+# Use pip...
+pip install pyreparse
+
+# Pipenv...
+pipenv install pyreparse
+```
 
 ## Basic Usage Pattern
 
