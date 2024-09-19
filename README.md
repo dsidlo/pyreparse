@@ -62,7 +62,7 @@ pipenv install pyreparse
       2. The Callback function is called when a match occurs and after fields have been captured.
       3. Callbacks can be used for field validation and event correlation, as the PyReParase instance (which contains the states of all regexp/fields), is available to the callback.
    5. Write the document processing logic...
-      1. If all processing logic is implemented as callbacks, the main logic would look like... <i>(TODO: Callbacks implemented soon...)</i>
+      1. If all processing logic is implemented as callbacks, the main logic would look like... 
          1. ```python
             # Import PyRePrase
             from pyreparse import PyReParse as PRP
