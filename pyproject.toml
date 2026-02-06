@@ -20,6 +20,8 @@ classifiers = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/dsidlo/pyreparse"
-"Bug Tracker" = "https://github.com/dsidlo/pyreparse/issues"
-
+Homepage = "https://github.com/dsidlo/pyreparse"
+"Source Code" = "https://github.com/dsidlo/pyreparse"
+Repository = "https://github.com/dsidlo/pyreparse"
+"Issue Tracker" = "https://github.com/dsidlo/pyreparse/issues"
+Changelog = "https://github.com/dsidlo/pyreparse/blob/main/CHANGELOG.md"
