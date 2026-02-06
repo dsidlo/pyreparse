@@ -7,17 +7,6 @@ PyReParse is a library that helps one create parsing engines for formed text rep
 
 <br>
 
-# TODO...
-Add the idea of subsections.
-Subsections are sections that have a parent indicator.
-   - Subsection: ['<parent-1>','parent-2', 'parent-n'...]
-
-
-[]: # Language: markdown
-[]: # Path: README.md
-
-<br>
-
 ## Benefits...
 
 - The benefits of using PyReParse include...
