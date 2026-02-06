@@ -12,6 +12,7 @@ Tests for pyreparse module...
 import inspect
 from pyreparse import PyReParse
 
+global cb_txline_cnt, cb_rptid_cnt
 cb_txline_cnt = 0
 cb_rptid_cnt = 0
 
@@ -146,7 +147,7 @@ class TestPyReParse(unittest.TestCase):
                 (?P<fee_type>.+)
                 ''',
             PRP.INDEX_RE_QUICK_CHECK:
-                ''' (?# A simpler regexp that checks to see if a match should have occurred...)
+                r''' (?# A simpler regexp that checks to see if a match should have occurred...)
                 ^\s*\d+\-\d+\s+\$\s*[\d\.]+\s
                 ''',
             PRP.INDEX_RE_FLAGS: PRP.FLAG_RETURN_ON_MATCH,
@@ -227,6 +228,7 @@ class TestPyReParse(unittest.TestCase):
     def test_match_3(self):
 
         global cb_txline_cnt
+        cb_txline_cnt = cb_txline_cnt
 
         PRP = PyReParse
         rtp = PyReParse()

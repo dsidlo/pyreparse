@@ -149,7 +149,7 @@ class PyReParse_Example():
             # The re_quick_check is used to verify check if the unmatched line is aactually a possible
             # match for the main regexp.
             're_quick_check':
-                ''' (?# A simpler regexp that checks to see if a match should have occurred...)
+                r''' (?# A simpler regexp that checks to see if a match should have occurred...)
                 ^\s*\d+\-\d+\s+\$\s*[\d\.]+\s
                 ''',
             PRP.INDEX_RE_FLAGS: PRP.FLAG_RETURN_ON_MATCH,

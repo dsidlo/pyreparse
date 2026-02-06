@@ -89,7 +89,7 @@ class PyReParse:
         :param fld_name:
         :return:
         '''
-        return r'\(\?P\<' + fld_name + '\>'
+        return r'\(\?P\<' + fld_name + r'\>'
 
     @staticmethod
     def dict_merge(D1, D2):
@@ -509,7 +509,7 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
         self.section_reset()
 
     def money2float(self, fld, in_str):
-        re_str = re.sub('[\,\s\$]', '', in_str)
+        re_str = re.sub(r'[\,\s\$]', r'', in_str)
         try:
             ret_val = float(re_str)
         except Exception as e:
