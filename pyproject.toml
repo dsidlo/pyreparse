@@ -8,7 +8,7 @@ version = "0.0.3"
 authors = [
   { name="dsidlo", email="dsidlo@gmail.com" },
 ]
-description = "Build Efficient RegExp Parsing Engines."
+description = "Build Efficient RegExp Parsing Engines. Quickly process massive structured and semi-structured text files."
 readme = "README.md"
 license = { file="LICENSE" }
 requires-python = ">=3.7"
