@@ -1,4 +1,7 @@
 # PyReParse
+
+  - Python Report Parser
+
 PyReParse is a library that helps to ease the development processes of parsing
 huge complex structured reports.
 
@@ -42,6 +45,10 @@ pip install pyreparse
 # Pipenv...
 pipenv install pyreparse
 ```
+
+## Hit: An LLM can help you get started...
+
+As create the parsing rules data structure can be a bit daunting for someone new to regular expressions, it makes sense to feed PyReParse's Docs and example program to an LLM, along with examples of report-text and a description of the details and calculations that you want to perform. That would be a great way to get started.
 
 ## Basic Usage Pattern
 
