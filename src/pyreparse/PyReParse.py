@@ -13,6 +13,14 @@ import ast
 
 # TODO: add code to create structures for on/off triggers
 # TODO: add call to self.validate_re_defs()
+
+# TODO...
+Add the idea of subsections.
+Subsections are sections that have a parent indicator.
+   - Subsection: ['<parent-1>','parent-2', 'parent-n'...]
+[]: # Language: markdown
+[]: # Path: README.md
+
 '''
 
 
