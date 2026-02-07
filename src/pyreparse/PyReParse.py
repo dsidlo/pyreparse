@@ -37,10 +37,12 @@ class PyReParse:
         prefix = ''
         in_comment = False
         escaped = False
+        metas = '.^$*+?(){}|[]\\'
         while i < length and len(prefix) < max_len:
             c = raw_pat[i]
             if escaped:
-                prefix += c
+                if c in metas:
+                    prefix += c
                 escaped = False
                 i += 1
                 continue
@@ -65,7 +67,7 @@ class PyReParse:
                 while i < length and raw_pat[i] != '\n':
                     i += 1
                 continue
-            if c in '.^$*+?(){}|[]\\':
+            if c in metas:
                 if c == '^' and len(prefix) == 0:
                     i += 1
                     continue
