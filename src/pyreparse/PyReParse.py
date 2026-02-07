@@ -6,7 +6,7 @@ import ast
 from decimal import Decimal
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
-from typing import List, Tuple, Dict, Any
+from typing import Iterator, List, Optional, Tuple, Dict, Any
 
 '''
 
@@ -854,3 +854,38 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
 
         sections.sort(key=lambda x: x['section_start'])
         return sections
+
+    def stream_matches(self, file_path: str, callback=None) -> Optional[Iterator[Tuple[List[str], Dict[str, Any]]]]:
+        """
+        Stream individual matches from the file, yielding (match_def, fields) or calling callback.
+        """
+        self.set_file_name(file_path)
+        self.report_reset()
+        with open(file_path, 'r') as f:
+            for line in f:
+                m, flds = self.match(line.rstrip('\n'))
+                if callback:
+                    callback(m, flds)
+                else:
+                    yield m, flds
+
+    def parse_file_stream(self, file_path: str, callback=None) -> Optional[Iterator[Dict[str, Any]]]:
+        """
+        Serially parse file into sections by boundaries, yielding sections or calling callback.
+        """
+        self.set_file_name(file_path)
+        self.report_reset()
+        boundaries = self._find_section_boundaries(file_path)
+        with open(file_path, 'r') as f:
+            lines = f.readlines()
+        for start, end in boundaries:
+            sec = {'section_start': start, 'fields_list': []}
+            section_lines = lines[start-1:end]
+            for line in section_lines:
+                m, flds = self.match(line.rstrip('\n'))
+                if m:
+                    sec['fields_list'].append({'match_def': m, 'fields': flds.copy()})
+            if callback:
+                callback(sec)
+            else:
+                yield sec
