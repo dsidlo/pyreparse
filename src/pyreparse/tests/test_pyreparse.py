@@ -706,7 +706,7 @@ class TestPyReParse(unittest.TestCase):
         with tempfile.NamedTemporaryFile(mode='w', delete=False) as f:
             for rep in range(3):
                 f.write(f'**REPORT{rep+1}\n')
-                for cust in range(1):
+                for cust in range(2):
                     f.write(f'CUSTOMER{cust+1}\n')
                     for tx in range(50):
                         f.write(f'TX{tx} $1.00\n')
@@ -724,18 +724,27 @@ class TestPyReParse(unittest.TestCase):
         self.assertEqual(sec0['section_start'], 1)
 
         tx_count = sum(1 for item in sec0['fields_list'] if 'tx_line' in item['match_def'])
-        self.assertEqual(tx_count, 50)  # 1 cust * 50
+        self.assertEqual(tx_count, 100)  # 2 cust * 50
+
+        cust_start_count = sum(1 for item in sec0['fields_list'] if 'cust_start' in item['match_def'])
+        self.assertEqual(cust_start_count, 2)
 
         # Check totals
         tx_amts = [prp.money2decimal('amt', item['fields']['amt']) for item in sec0['fields_list'] if 'tx_line' in item['match_def']]
         sec_total = sum(tx_amts)
-        cust_total_item = next(item for item in sec0['fields_list'] if 'cust_total' in item['match_def'])
-        self.assertEqual(cust_total_item['fields']['total'], f"${sec_total:.2f}")
-        self.assertEqual(Decimal('50.00'), sec_total)  # 50 * $1.00
+        cust_total_items = [item for item in sec0['fields_list'] if 'cust_total' in item['match_def']]
+        self.assertEqual(len(cust_total_items), 2)
+        cust_totals_sum = sum(prp.money2decimal('total', item['fields']['total']) for item in cust_total_items)
+        self.assertEqual(cust_totals_sum, sec_total)
+        self.assertEqual(Decimal('100.00'), sec_total)  # 100 * $1.00
 
         # Subs metadata
         sub_items = [item['fields']['current_subsection_parents'] for item in sec0['fields_list'] if 'current_subsection_parents' in item['fields']]
         self.assertTrue(any('cust_start' in parents for parents in sub_items))
+
+        tx_parents = [item['fields']['current_subsection_parents'] for item in sec0['fields_list'] if 'tx_line' in item['match_def']]
+        self.assertEqual(len(tx_parents), 100)
+        self.assertTrue(all(parents == ['cust_start'] for parents in tx_parents))
 
         # Parallel equiv
         sections_parallel = prp.parse_file_parallel(mock_path)

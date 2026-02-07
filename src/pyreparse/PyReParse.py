@@ -776,39 +776,32 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
         :param file_path: Path to the file to analyze.
         :return: List of tuples (start_line, end_line) where lines are 1-based.
         """
-        boundary_regexes = []
-        for name, defn in self.re_defs.items():
-            flags = defn.get(self.INDEX_RE_FLAGS, 0)
-            if flags & (self.FLAG_NEW_SECTION | self.FLAG_END_OF_SECTION | self.FLAG_NEW_SUBSECTION):
-                regexp = defn.get(self.INDEX_RE_REGEXP)
-                if regexp:
-                    boundary_regexes.append((name, regexp, flags))
-
-        boundaries = []
-        section_stack = []
-        last_line = 0
+        start_lines = []
         with open(file_path, 'r') as f:
             for i, line in enumerate(f, 1):
-                last_line = i
                 line_stripped = line.rstrip('\n')
-                for name, regexp, flags in boundary_regexes:
-                    if m := regexp.match(line_stripped):
-                        if flags & self.FLAG_NEW_SECTION:
-                            if section_stack:
-                                start, sub_start = section_stack.pop()
-                                boundaries.append((start, i - 1))
-                            section_stack.append((i, None))
-                        elif flags & self.FLAG_NEW_SUBSECTION:
-                            if section_stack:
-                                section_stack[-1] = (section_stack[-1][0], i)
-                        elif flags & self.FLAG_END_OF_SECTION:
-                            if section_stack:
-                                start, sub_start = section_stack.pop()
-                                boundaries.append((start, i))
+                matched = False
+                for name, defn in self.re_defs.items():
+                    flags = defn.get(self.INDEX_RE_FLAGS, 0)
+                    if flags & self.FLAG_NEW_SECTION:
+                        regexp = defn.get(self.INDEX_RE_REGEXP)
+                        if regexp and regexp.match(line_stripped):
+                            start_lines.append(i)
+                            matched = True
+                            break
+                if matched:
+                    continue
 
-        while section_stack:
-            start, _ = section_stack.pop()
-            boundaries.append((start, last_line))
+        # Get total lines
+        total_lines = 0
+        with open(file_path, 'r') as f:
+            total_lines = sum(1 for _ in f)
+
+        boundaries = []
+        for j in range(len(start_lines)):
+            start = start_lines[j]
+            end = start_lines[j + 1] - 1 if j + 1 < len(start_lines) else total_lines
+            boundaries.append((start, end))
 
         return boundaries
 
