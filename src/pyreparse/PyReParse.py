@@ -339,6 +339,15 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
                 print(f'*** Exception: \"{e}\", Hit on Compiling trigger_Off [{fld}]! ',
                       f'\"\"\"{self.re_defs[fld][rtrpc.INDEX_RE_TRIGGER_OFF]}\"\"\"')
 
+            # Warn if NEW_SUBSECTION lacks parent trigger
+            flags = self.re_defs[fld].get(rtrpc.INDEX_RE_FLAGS, 0)
+            if flags & rtrpc.FLAG_NEW_SUBSECTION:
+                trigger_on_text = self.re_defs[fld].get(rtrpc.INDEX_RE_TRIGGER_ON, '')
+                if '{' not in trigger_on_text:
+                    print(f'Warning: [{fld}] has FLAG_NEW_SUBSECTION but TRIGGER_ON "{trigger_on_text}" lacks {{parent_pattern}} reference.')
+                print(f'*** Exception: \"{e}\", Hit on Compiling trigger_Off [{fld}]! ',
+                      f'\"\"\"{self.re_defs[fld][rtrpc.INDEX_RE_TRIGGER_OFF]}\"\"\"')
+
 
         return self.get_all_fld_names()
 
@@ -496,9 +505,6 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
                         rtrpc.INDEX_ST_LAST_REPORT_LINE_MATCHED] = self.report_line_count
                     self.re_defs[fld][rtrpc.INDEX_STATES][
                         rtrpc.INDEX_ST_LAST_SECTION_LINE_MATCHED] = self.section_line_count
-                    self.last_captured_fields['subsection_depth'] = self.subsection_depth
-                    self.last_captured_fields['current_subsection_parents'] = list(self.current_subsection_parents)
-                    self.subsection_line_count = self.subsection_line_count  # Ensure set
                     if matched_defs is None:
                         matched_defs = []
                     # Capture the list of re_defs entries that match this line.
@@ -526,8 +532,39 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
                         self.subsection_depth_counts[self.subsection_depth] += 1
                         self.max_subsection_depth = max(self.max_subsection_depth, self.subsection_depth)
                         self.subsection_line_count = 1
+                    
+                    # Add subsection info *after* flags for current state
+                    self.last_captured_fields['subsection_depth'] = self.subsection_depth
+                    self.last_captured_fields['current_subsection_parents'] = list(self.current_subsection_parents)
+                    self.last_captured_fields['subsection_line_count'] = self.subsection_line_count
+                        matched_defs = []
+                    # Capture the list of re_defs entries that match this line.
+                    matched_defs.append(fld)
+                    # Perform FLAG based operations...
+                    if self.re_defs[fld][rtrpc.INDEX_RE_FLAGS] & rtrpc.FLAG_NEW_SECTION:
+                        # Increment the section counter...
+                        self.section_count += 1
+                        # Reset sectional flags and counters...
+                        self.section_reset()
+                        # Fields that reset sections also match atleast once within those sections...
+                        self.re_defs[fld][rtrpc.INDEX_STATES][rtrpc.INDEX_ST_SECTION_MATCH_ATTEMPTS] = 1
+                        self.re_defs[fld][rtrpc.INDEX_STATES][rtrpc.INDEX_ST_SECTION_LINES_MATCHED] = 1
+                        self.re_defs[fld][rtrpc.INDEX_STATES][rtrpc.INDEX_ST_LAST_SECTION_LINE_MATCHED] = 1
+                        self.re_defs[fld][rtrpc.INDEX_STATES][rtrpc.INDEX_ST_LAST_REPORT_LINE_MATCHED] = 1
+                    if self.re_defs[fld][rtrpc.INDEX_RE_FLAGS] & rtrpc.FLAG_END_OF_SECTION:
+                        if self.subsection_depth > 0:
+                            self.subsection_depth -= 1
+                            self.current_subsection_parents.pop()
+                            self.subsection_line_count = 0
+                        self.section_reset()  # Existing call after
+                    if self.re_defs[fld][rtrpc.INDEX_RE_FLAGS] & rtrpc.FLAG_NEW_SUBSECTION:
+                        self.subsection_depth += 1
+                        self.current_subsection_parents.append(fld)
+                        self.subsection_depth_counts[self.subsection_depth] += 1
+                        self.max_subsection_depth = max(self.max_subsection_depth, self.subsection_depth)
+                        self.subsection_line_count = 1
 
-                    if self.re_defs[fld][rtrpc.INDEX_RE_FLAGS] | rtrpc.FLAG_RETURN_ON_MATCH:
+                    if self.re_defs[fld][rtrpc.INDEX_RE_FLAGS] & rtrpc.FLAG_RETURN_ON_MATCH:
                         return matched_defs, self.last_captured_fields
 
                 else:
@@ -608,8 +645,7 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
         Get counts of subsections per depth.
         :return: dict - e.g., {1: 10, 2: 5}
         """
-        from collections import defaultdict
-        return dict(getattr(self, 'subsection_depth_counts', defaultdict(int)))
+        return dict(getattr(self, 'subsection_depth_counts', {}))
 
     def get_subsection_info(self):
         """
