@@ -99,7 +99,7 @@ class TestPyReParse(unittest.TestCase):
             PRP.INDEX_RE_STRING:
                 r'''
                 ^IPPOSFEE\s+
-                FILE\ DATE:\s+(?P<file_date>[\d\/]+)
+                FILE DATE:\s+(?P<file_date>[\d\/]+)
                 ''',
             PRP.INDEX_RE_FLAGS: PRP.FLAG_RETURN_ON_MATCH | PRP.FLAG_ONCE_PER_SECTION,
             # Trigger Matching on (dependant fields)...
@@ -115,8 +115,8 @@ class TestPyReParse(unittest.TestCase):
         'run_date': {
             PRP.INDEX_RE_STRING:
                 r'''
-                ^RUN\ DATE\:\s+(?P<run_date>[\d\/]+)\s+
-                RUN\ TIME\:\s+(?P<run_time>[\d\:]+)
+                ^RUN DATE:\s+(?P<run_date>[\d\/]+)\s+
+                RUN TIME:\s+(?P<run_time>[\d\:]+)
                 ''',
             PRP.INDEX_RE_FLAGS: PRP.FLAG_RETURN_ON_MATCH | PRP.FLAG_ONCE_PER_SECTION,
             PRP.INDEX_RE_TRIGGER_ON: '{file_date}',
@@ -689,11 +689,11 @@ class TestPyReParse(unittest.TestCase):
                 PRP.INDEX_RE_TRIGGER_ON: '{report_start}'
             },
             'tx_line': {
-                PRP.INDEX_RE_STRING: r'^TX(?P<tx_id>\d+)\s+(?P<amt>\$[0-9,]+\.\d\d)',
+                PRP.INDEX_RE_STRING: r'^TX(?P<tx_id>\d+)\s+(?P<amt>\$[\d,]+\.\d{2})',
                 PRP.INDEX_RE_TRIGGER_ON: '{cust_start}'
             },
             'cust_total': {
-                PRP.INDEX_RE_STRING: r'^TOTAL\s+(?P<total>\$[0-9,]+\.\d\d)',
+                PRP.INDEX_RE_STRING: r'^TOTAL\s+(?P<total>\$[\d,]+\.\d{2})',
                 PRP.INDEX_RE_FLAGS: PRP.FLAG_END_OF_SECTION | PRP.FLAG_RETURN_ON_MATCH,
                 PRP.INDEX_RE_TRIGGER_ON: '<SUBSECTION_DEPTH> == 1'  # Depth 1 (customer)
             },
@@ -807,13 +807,13 @@ class TestPyReParse(unittest.TestCase):
     def test_prefix_filtering(self):
         patterns = {
             'abc_pat': {
-                self.PRP.INDEX_RE_STRING: r'^ABC\d*(?P<val>\d+)',
+                self.PRP.INDEX_RE_STRING: r'^ABC(?P<val>\d+)',
                 self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_RETURN_ON_MATCH,
                 self.PRP.INDEX_RE_TRIGGER_ON: 'True',
                 self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
             },
             'def_pat': {
-                self.PRP.INDEX_RE_STRING: r'^DEF\d*(?P<val>\d+)',
+                self.PRP.INDEX_RE_STRING: r'^DEF(?P<val>\d+)',
                 self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_RETURN_ON_MATCH,
                 self.PRP.INDEX_RE_TRIGGER_ON: 'True',
                 self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
