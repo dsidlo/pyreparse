@@ -205,69 +205,13 @@ class PyReParse_Example():
 
         if self.args.parallel_sections > 0:
             sections = self.prp.parse_file_parallel(self.file_path, max_workers=4, parallel_depth=self.args.parallel_sections)
-            total_matches = sum(len(s['fields_list']) for s in sections)
-            print(f"Parallel depth {self.args.parallel_sections}: {len(sections)} sections, {total_matches} matches")
-            # TODO aggregate totals/validations
         else:
-            # Existing serial parse_file logic (cb_rport_id etc)
-            report_id = ''
-            file_date = ''
-            run_date = ''
-            run_time = ''
-            txn_lines = []
-            total_nsf = 0
-            total_odt = 0
-            grand_total = 0
+            sections = self.prp.parse_file(self.file_path)  # New serial
 
-            with open(self.file_path, 'r') as txt_file:
-                for line in txt_file:
-                    match_def, matched_fields = self.prp.match(line)
-                    if match_def == ['report_id']:
-                        report_id = matched_fields['report_id']
-                        # Reset tx_lines array on new section...
-                        txn_lines = []
-                    elif match_def == ['file_date']:
-                        file_date = matched_fields['file_date']
-                    elif match_def == ['run_date']:
-                        run_date = matched_fields['run_date']
-                        run_time = matched_fields['run_time']
-                    elif match_def == ['tx_line']:
-                        m_flds = matched_fields
-                        fld = 'nsf_fee'
-                        m_flds[fld] = self.prp.money2decimal(fld, m_flds[fld])
-                        fld = 'tx_amt'
-                        m_flds[fld] = self.prp.money2decimal(fld, m_flds[fld])
-                        fld = 'balance'
-                        m_flds[fld] = self.prp.money2decimal(fld, m_flds[fld])
-                        txn_lines.append(m_flds)
-                    elif match_def == ['end_tx_lines']:
-                        pass
-                    elif match_def == ['total_nsf']:
-                        m_flds = matched_fields
-                        fld = 'total_nsf'
-                        total_nsf = self.prp.money2decimal(fld, m_flds[fld])
-                    elif match_def == ['total_odt']:
-                        m_flds = matched_fields
-                        fld = 'total_odt'
-                        total_odt = self.prp.money2decimal(fld, m_flds[fld])
-                    elif match_def == ['grand_total']:
-                        m_flds = matched_fields
-                        fld = 'grand_total'
-                        grand_total = self.prp.money2decimal(fld, m_flds[fld])
-
-                        # Run totals & validations
-                        nsf_tot = Decimal('0')
-                        for flds in txn_lines:
-                            nsf_tot += flds['nsf_fee']
-
-                        if nsf_tot == grand_total:
-                            print(f'*** Section [{self.prp.section_count}] Parsing Completed.')
-
-                        # Reset tx_lines array at end of section...
-                        txn_lines = []
-
-            if self.prp.section_count == 2538:
-                print('\n*** All Sections Processed!')
+        # Common processing: print/merge sections
+        total_matches = sum(len(s['fields_list']) for s in sections)
+        print(f"Processed {len(sections)} sections, {total_matches} matches")
+        # TODO aggregate totals/validations
 
 if __name__ == '__main__':
     example = PyReParse_Example()

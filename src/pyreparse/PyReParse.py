@@ -828,6 +828,17 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
                 })
         return section_data
 
+    def parse_file(self, file_path: str) -> List[Dict[str, Any]]:
+        """
+        Serial parsing returning same format as parse_file_parallel(depth=0).
+        """
+        boundaries = self._find_section_boundaries(file_path)
+        sections = []
+        for start, end in boundaries:
+            sec = self._process_section_chunk(file_path, start, end)
+            sections.append(sec)
+        return sections
+
     def parse_file_parallel(self, file_path: str, max_workers: int = 4, parallel_depth: int = 1) -> List[Dict[str, Any]]:
         """
         Parse the entire file in parallel by dividing it into section chunks and processing them concurrently.
