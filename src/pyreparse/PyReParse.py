@@ -3,23 +3,15 @@
 import sys
 import re
 import ast
+import io
+from decimal import Decimal
+from collections import defaultdict
+from concurrent.futures import ThreadPoolExecutor
+from typing import Iterator, List, Optional, Tuple, Dict, Any, Union
 
 '''
-# TODO: Only hit this regexp between lines A and B of a given Section.
-# TODO: Clean up the test data
-#       - Scramble AcNumbers
-#       - Change or Remove CU references
-#       - Restart GitRepo to remove traces of original reports
 
-# TODO: add code to create structures for on/off triggers
 # TODO: add call to self.validate_re_defs()
-
-# TODO...
-Add the idea of subsections.
-Subsections are sections that have a parent indicator.
-   - Subsection: ['<parent-1>','parent-2', 'parent-n'...]
-[]: # Language: markdown
-[]: # Path: README.md
 
 '''
 
@@ -35,9 +27,15 @@ class PyReParse:
     FLAG_ONCE_PER_SECTION = 4
     FLAG_ONCE_PER_REPORT = 8
     FLAG_END_OF_SECTION = 16    # Counters are set to 0
+    FLAG_NEW_SUBSECTION = 32    # Start a subsection (nested under current section/parent)
+
+    special_escape_followers = set('aAbBdDFfNnPpRrSsTtVvWwXxZz0123456789')
+
+    KNOWN_FLAGS_MASK = (FLAG_RETURN_ON_MATCH | FLAG_NEW_SECTION | FLAG_ONCE_PER_SECTION | FLAG_ONCE_PER_REPORT |
+                        FLAG_END_OF_SECTION | FLAG_NEW_SUBSECTION)
 
     INDEX_RE_STRING = 're_string'
-    INDEX_RE_FLAGS = 'flags'                         # Entry containing a patterns flags`.
+    INDEX_RE_FLAGS = 'flags'
     INDEX_RE_QUICK_CHECK = 're_quick_check'
     INDEX_RE_REGEXP = 'regexp'                       # Compiled
     INDEX_RE_TRIGGER_ON = 'trigger_on'               # Entry - Trigger_On Assigned by User
@@ -48,7 +46,6 @@ class PyReParse:
     INDEX_RE_TRIGGER_OFF_TEXT = 'trigger_off_text'   # Entry - Trigger_OFF Text Created by PyReParse
 
     INDEX_RE_CALLBACK = 'callback'  # Entry containing a patterns assigned callback.
-    INDEX_RE_FLAGS = 'flags'  # Entry containing a patterns flags`.
 
     INDEX_STATES = 'states'  # Dict of a patterns states.
     INDEX_ST_REPORT_LINES_MATCHED = 'report_lines_matched'
@@ -58,10 +55,21 @@ class PyReParse:
     INDEX_ST_LAST_REPORT_LINE_MATCHED = 'last_report_line_matched'
     INDEX_ST_LAST_SECTION_LINE_MATCHED = 'last_section_line_matched'
 
+    # Subsection Indices
+    INDEX_SUBSECTION_DEPTH = 'subsection_depth'
+    INDEX_SUBSECTION_PARENTS = 'subsection_parents'
+    INDEX_SUBSECTION_LINE_COUNT = 'subsection_line_count'
+    INDEX_MAX_SUBSECTION_DEPTH = 'max_subsection_depth'
+    INDEX_SUBSECTION_DEPTH_COUNTS = 'subsection_depth_counts'
+
     # Trigger strings...
     TRIG_SYM_REPORT_LINE = '<REPORT_LINE>'
     TRIG_SYM_SECTION_COUNT = '<SECTION_COUNT>'
     TRIG_SYM_SECTION_LINE = '<SECTION_LINE>'
+
+    # Subsection Trigger Symbols
+    TRIG_SYM_SUBSECTION_DEPTH = '<SUBSECTION_DEPTH>'
+    TRIG_SYM_SUBSECTION_LINE = '<SUBSECTION_LINE>'
 
     def __init__(self, regexp_pats=None):
         self.re_defs = {}
@@ -72,8 +80,121 @@ class PyReParse:
         self.section_count = 0
         self.section_line_count = 0
         self.file_name = ''
+        self.subsection_depth = 0
+        self.current_subsection_parents = []
+        self.subsection_line_count = 0
+        self.max_subsection_depth = 0
+        self.subsection_depth_counts = defaultdict(int)
         if regexp_pats is not None:
             self.load_re_lines(regexp_pats)
+
+    def validate_re_defs(self, patterns) -> None:
+        """
+        Validate the patterns data structure before loading.
+
+        Raises ValueError or TriggerDefException for invalid configurations.
+        """
+        prp = PyReParse
+        known_mask = prp.KNOWN_FLAGS_MASK
+
+        # Validate basic structure
+        for pat_name, pat_def in patterns.items():
+            if prp.INDEX_RE_STRING not in pat_def:
+                raise ValueError(f"Pattern '{pat_name}' missing required '{prp.INDEX_RE_STRING}' key.")
+            re_str = pat_def[prp.INDEX_RE_STRING]
+            if not isinstance(re_str, str) or len(re_str.strip()) == 0:
+                raise ValueError(f"Pattern '{pat_name}' '{prp.INDEX_RE_STRING}' must be a non-empty string.")
+
+            # Validate flags
+            if prp.INDEX_RE_FLAGS in pat_def:
+                flags = pat_def[prp.INDEX_RE_FLAGS]
+                if not isinstance(flags, int) or flags < 0:
+                    raise ValueError(f"Pattern '{pat_name}' '{prp.INDEX_RE_FLAGS}' must be a non-negative integer.")
+                if flags & ~known_mask != 0:
+                    raise ValueError(f"Pattern '{pat_name}' contains unknown flags: {flags & ~known_mask}")
+
+            # Validate triggers syntax
+            for trigger_key in [prp.INDEX_RE_TRIGGER_ON, prp.INDEX_RE_TRIGGER_OFF]:
+                if trigger_key in pat_def:
+                    trigger_text = pat_def[trigger_key]
+                    if not isinstance(trigger_text, str):
+                        raise ValueError(f"Pattern '{pat_name}' '{trigger_key}' must be a string.")
+
+                    # Simulate replacement for AST parsing
+                    func_body = trigger_text
+                    while True:
+                        m = re.match(r'.*((\<([^\>]+)\>)|(\{([^\}]+)\})).*', func_body, re.MULTILINE | re.DOTALL)
+                        if m is None:
+                            break
+                        elif m.group(2) is not None:
+                            # Variable
+                            var_name = m.group(2)
+                            if var_name == prp.TRIG_SYM_REPORT_LINE:
+                                func_body = func_body.replace(var_name, 'prp_inst.report_line_count')
+                            elif var_name == prp.TRIG_SYM_SECTION_COUNT:
+                                func_body = func_body.replace(var_name, 'prp_inst.section_count')
+                            elif var_name == prp.TRIG_SYM_SECTION_LINE:
+                                func_body = func_body.replace(var_name, 'prp_inst.section_line_count')
+                            elif var_name == prp.TRIG_SYM_SUBSECTION_DEPTH:
+                                func_body = func_body.replace(var_name, 'prp_inst.subsection_depth')
+                            elif var_name == prp.TRIG_SYM_SUBSECTION_LINE:
+                                func_body = func_body.replace(var_name, 'prp_inst.subsection_line_count')
+                            else:
+                                raise TriggerDefException(f"Unknown variable in '{pat_name}' '{trigger_key}': {m.group(0)}")
+                        elif m.group(5) is not None:
+                            # Pattern name
+                            pn = m.group(5)
+                            if pn not in patterns:
+                                raise TriggerDefException(f"Unknown pattern reference in '{pat_name}' '{trigger_key}': {pn}")
+                            func_body = func_body.replace(m.group(4),
+                                                          f"(prp_inst.re_defs['{pn}'][prp.INDEX_STATES][prp.INDEX_ST_SECTION_LINES_MATCHED] > 0)")
+
+                    # AST parse the body
+                    func_text = f"def dummy(prp_inst, pat_name): return {func_body}"
+                    try:
+                        ast.parse(func_text)
+                    except SyntaxError as e:
+                        raise TriggerDefException(f"Syntax error in '{pat_name}' '{trigger_key}': {e}")
+
+            # Validate NEW_SUBSECTION has parent trigger
+            if prp.INDEX_RE_FLAGS in pat_def:
+                flags = pat_def[prp.INDEX_RE_FLAGS]
+                if flags & prp.FLAG_NEW_SUBSECTION:
+                    trigger_on = pat_def.get(prp.INDEX_RE_TRIGGER_ON, '')
+                    if '{' not in trigger_on:
+                        print(f"Warning: [{pat_name}] has FLAG_NEW_SUBSECTION but TRIGGER_ON \"{trigger_on}\" lacks {{parent_pattern}} reference.")
+
+        # Build dependency graph for cycle detection
+        graph = {pat_name: [] for pat_name in patterns}
+        for pat_name, pat_def in patterns.items():
+            trigger_key = prp.INDEX_RE_TRIGGER_ON
+            if trigger_key in pat_def:
+                trigger_text = pat_def[trigger_key]
+                refs = re.findall(r'\{([^\}]+)\}', trigger_text)
+                for ref in refs:
+                    if ref in patterns and ref != pat_name:
+                        graph[pat_name].append(ref)
+
+        # DFS for cycle detection
+        visited = set()
+        rec_stack = set()
+
+        def has_cycle(node):
+            visited.add(node)
+            rec_stack.add(node)
+            for neighbor in graph[node]:
+                if neighbor not in visited:
+                    if has_cycle(neighbor):
+                        return True
+                elif neighbor in rec_stack:
+                    return True
+            rec_stack.remove(node)
+            return False
+
+        for node in graph:
+            if node not in visited:
+                if has_cycle(node):
+                    raise ValueError(f"Cycle detected in trigger dependencies involving '{node}'")
 
     def set_file_name(self, file_name):
         self.file_name = file_name
@@ -121,6 +242,8 @@ class PyReParse:
                 )
 
         """
+        self.validate_re_defs(in_hash)
+        self.raw_patterns = in_hash.copy()
         self.re_defs = {}
         self.all_named_fields = {}
         return self.__append_re_defs(in_hash)
@@ -199,11 +322,15 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
                 # We have a variable...
                 var_name = m.group(2)
                 if var_name == prp.TRIG_SYM_REPORT_LINE:
-                    func_body = func_body.replace(m.group(0), 'prp_inst.report_line_count')
+                    func_body = func_body.replace(var_name, 'prp_inst.report_line_count')
                 elif var_name == prp.TRIG_SYM_SECTION_COUNT:
-                    func_body = func_body.replace(m.group(0), 'prp_inst.section_count')
+                    func_body = func_body.replace(var_name, 'prp_inst.section_count')
                 elif var_name == prp.TRIG_SYM_SECTION_LINE:
-                    func_body = func_body.replace(m.group(0), 'prp_inst.section_line_count')
+                    func_body = func_body.replace(var_name, 'prp_inst.section_line_count')
+                elif var_name == prp.TRIG_SYM_SUBSECTION_DEPTH:
+                    func_body = func_body.replace(var_name, 'prp_inst.subsection_depth')
+                elif var_name == prp.TRIG_SYM_SUBSECTION_LINE:
+                    func_body = func_body.replace(var_name, 'prp_inst.subsection_line_count')
                 else:
                     raise TriggerDefException(f'Unknown variable: {m.group(0)}')
 
@@ -211,7 +338,7 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
                 # We have a pattern-name...
                 pn = m.group(5)
                 if pn in self.re_defs:
-                    func_body = func_body.replace(m.group(1),
+                    func_body = func_body.replace(m.group(4),
                                                   '(prp_inst.re_defs[' + "'" + pn + "'" +
                                                   '][PRP.INDEX_STATES][PRP.INDEX_ST_SECTION_LINES_MATCHED] > 0)')
                 else:
@@ -224,9 +351,7 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
         try:
             ast_tree = ast.parse(func_text)
         except SyntaxError as e:
-            ex_msg = f"Syntax error exception: {e}\n  - Function: {func_name}"
-            print(ex_msg)
-            raise SyntaxError(ex_msg)
+            raise SyntaxError(f"Syntax error in trigger '{trigger_name}' for pattern '{pat_name}': {e}")
         # Yea... Don't execute PyReparse scripts from just anyone.
         # Consider that the PyReparse
         # Execute the function
@@ -275,11 +400,14 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
             self.re_defs[fld] = in_hash[fld]
 
             # Verify that the regexp compiles...
+            comped_re = None
             try:
-                comped_re = re.compile(in_hash[fld][rtrpc.INDEX_RE_STRING], re.X)
+                raw_pat = in_hash[fld][rtrpc.INDEX_RE_STRING]
+                comped_re = re.compile(raw_pat, re.X)
+            except re.error as e:
+                raise ValueError(f"Failed to compile regex for pattern '{fld}': {e}")
             except Exception as e:
-                print(f'*** Exception: \"{e}\", Hit on Compiling Regexp [{fld}]! ',
-                      f'\"\"\"{in_hash[fld][rtrpc.INDEX_RE_STRING]}\"\"\"')
+                raise ValueError(f"Unexpected error for pattern '{fld}': {e}")
 
             # Place the named regexp pattern into the data structure of named pattterns...
             self.re_defs[fld] = self.dict_merge(self.re_defs[fld],
@@ -303,24 +431,24 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
             ''' Compile trigger_on...
             Take the trigger strings and compile them into static functions...
             '''
-            try:
-                self.re_defs[fld][rtrpc.INDEX_RE_TRIGGER_ON_FUNC],   \
-                self.re_defs[fld][rtrpc.INDEX_RE_TRIGGER_ON_TEXT], = \
-                    self.__create_trigger(fld, rtrpc.INDEX_RE_TRIGGER_ON)
-            except TriggerDefException as e:
-                print(f'*** Exception: \"{e}\", Hit on Compiling trigger_On [{fld}]! ',
-                      f'\"\"\"{self.re_defs[fld][rtrpc.INDEX_RE_TRIGGER_ON]}\"\"\"')
+            if rtrpc.INDEX_RE_TRIGGER_ON in self.re_defs[fld]:
+                try:
+                    self.re_defs[fld][rtrpc.INDEX_RE_TRIGGER_ON_FUNC],   \
+                    self.re_defs[fld][rtrpc.INDEX_RE_TRIGGER_ON_TEXT], = \
+                        self.__create_trigger(fld, rtrpc.INDEX_RE_TRIGGER_ON)
+                except TriggerDefException as e:
+                    raise
 
             ''' Compile trigger_off...
             Take the trigger strings and compile them into static functions...
             '''
-            try:
-                self.re_defs[fld][rtrpc.INDEX_RE_TRIGGER_OFF_FUNC],  \
-                self.re_defs[fld][rtrpc.INDEX_RE_TRIGGER_OFF_TEXT] = \
-                    self.__create_trigger(fld, rtrpc.INDEX_RE_TRIGGER_OFF)
-            except TriggerDefException as e:
-                print(f'*** Exception: \"{e}\", Hit on Compiling trigger_Off [{fld}]! ',
-                      f'\"\"\"{self.re_defs[fld][rtrpc.INDEX_RE_TRIGGER_OFF]}\"\"\"')
+            if rtrpc.INDEX_RE_TRIGGER_OFF in self.re_defs[fld]:
+                try:
+                    self.re_defs[fld][rtrpc.INDEX_RE_TRIGGER_OFF_FUNC],  \
+                    self.re_defs[fld][rtrpc.INDEX_RE_TRIGGER_OFF_TEXT] = \
+                        self.__create_trigger(fld, rtrpc.INDEX_RE_TRIGGER_OFF)
+                except TriggerDefException as e:
+                    raise
 
 
         return self.get_all_fld_names()
@@ -378,8 +506,8 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
         '''
 
         rtrpc = PyReParse
-        trig_on_func = self.re_defs[pat_name][rtrpc.INDEX_RE_TRIGGER_ON_FUNC]
-        trig_off_func = self.re_defs[pat_name][rtrpc.INDEX_RE_TRIGGER_OFF_FUNC]
+        trig_on_func = self.re_defs[pat_name].get(rtrpc.INDEX_RE_TRIGGER_ON_FUNC, None)
+        trig_off_func = self.re_defs[pat_name].get(rtrpc.INDEX_RE_TRIGGER_OFF_FUNC, None)
 
         trig_on_state = True
         trig_off_state = False
@@ -399,6 +527,7 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
         return trig_on_state and (not trig_off_state)
 
     def match(self, in_line, debug=False, limit_matches=None):
+        in_line = in_line.rstrip('\n')
         '''
         Given a text input line, check if any of our regexp(s) match to it.
 
@@ -421,8 +550,8 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
             if limit_matches <= self.report_line_count:
                 print(f'*** Exiting: limit_matches is set to [{limit_matches}]')
                 sys.exit(1)
-        self.section_count += 1
         self.section_line_count += 1
+        self.subsection_line_count += 1
         # Initialize matched Def list (returned value)
         matched_defs = None
         # Initialize dict of last fields captured.
@@ -439,9 +568,14 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
             # Check if match should be triggered.
             # Triggers returning true means skip match evaluation,
             # if True:
-            if debug:
-                print(f'regexp: [{fld}]')
-            if self.__eval_triggers(fld):
+            flags = self.re_defs[fld].get(rtrpc.INDEX_RE_FLAGS, 0)
+            if flags & rtrpc.FLAG_NEW_SECTION:
+                do_match = True
+            else:
+                do_match = self.__eval_triggers(fld)
+            if do_match:
+                if debug:
+                    print(f'regexp: [{fld}]')
                 if debug:
                     print(f'--- Triggered[{fld}]...')
                 if self.re_defs[fld][rtrpc.INDEX_RE_REGEXP] is None:
@@ -484,7 +618,8 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
                     # Capture the list of re_defs entries that match this line.
                     matched_defs.append(fld)
                     # Perform FLAG based operations...
-                    if self.re_defs[fld][rtrpc.INDEX_RE_FLAGS] & rtrpc.FLAG_NEW_SECTION:
+                    flags = self.re_defs[fld].get(rtrpc.INDEX_RE_FLAGS, 0)
+                    if flags & rtrpc.FLAG_NEW_SECTION:
                         # Increment the section counter...
                         self.section_count += 1
                         # Reset sectional flags and counters...
@@ -494,11 +629,25 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
                         self.re_defs[fld][rtrpc.INDEX_STATES][rtrpc.INDEX_ST_SECTION_LINES_MATCHED] = 1
                         self.re_defs[fld][rtrpc.INDEX_STATES][rtrpc.INDEX_ST_LAST_SECTION_LINE_MATCHED] = 1
                         self.re_defs[fld][rtrpc.INDEX_STATES][rtrpc.INDEX_ST_LAST_REPORT_LINE_MATCHED] = 1
-                    if self.re_defs[fld][rtrpc.INDEX_RE_FLAGS] & rtrpc.FLAG_END_OF_SECTION:
-                        # Reset sectional flags and counters...
-                        self.section_reset()
+                    if flags & rtrpc.FLAG_END_OF_SECTION:
+                        if self.subsection_depth > 0:
+                            self.subsection_depth -= 1
+                            self.current_subsection_parents.pop()
+                            self.subsection_line_count = 0
+                        self.section_reset()  # Existing call after
+                    if flags & rtrpc.FLAG_NEW_SUBSECTION:
+                        self.subsection_depth += 1
+                        self.current_subsection_parents.append(fld)
+                        self.subsection_depth_counts[self.subsection_depth] += 1
+                        self.max_subsection_depth = max(self.max_subsection_depth, self.subsection_depth)
+                        self.subsection_line_count = 1
 
-                    if self.re_defs[fld][rtrpc.INDEX_RE_FLAGS] | rtrpc.FLAG_RETURN_ON_MATCH:
+                    # Add subsection info *after* flags for current state
+                    self.last_captured_fields['subsection_depth'] = self.subsection_depth
+                    self.last_captured_fields['current_subsection_parents'] = list(self.current_subsection_parents)
+                    self.last_captured_fields['subsection_line_count'] = self.subsection_line_count
+
+                    if flags & rtrpc.FLAG_RETURN_ON_MATCH:
                         return matched_defs, self.last_captured_fields
 
                 else:
@@ -525,6 +674,10 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
             self.re_defs[fld][rtrpc.INDEX_STATES][rtrpc.INDEX_ST_SECTION_MATCH_ATTEMPTS] = 0
             self.re_defs[fld][rtrpc.INDEX_STATES][rtrpc.INDEX_ST_SECTION_LINES_MATCHED] = 0
             self.re_defs[fld][rtrpc.INDEX_STATES][rtrpc.INDEX_ST_LAST_SECTION_LINE_MATCHED] = 0
+        self.subsection_depth = 0
+        self.current_subsection_parents = []
+        self.subsection_line_count = 0
+        self.section_line_count = 0
 
     def report_reset(self):
         rtrpc = PyReParse
@@ -535,6 +688,8 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
             self.re_defs[fld][rtrpc.INDEX_STATES][rtrpc.INDEX_ST_LAST_REPORT_LINE_MATCHED] = 0
 
         self.section_reset()
+        self.max_subsection_depth = 0
+        self.subsection_depth_counts.clear()
 
     def money2float(self, fld, in_str):
         re_str = re.sub(r'[\,\s\$]', r'', in_str)
@@ -542,8 +697,219 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
             ret_val = float(re_str)
         except Exception as e:
             print(f'*** Exception: \"{e}\", Failed to convert string to float [{in_str}] -> [{re_str}]')
-            print(f'    Field [field] Report Line [{self.report_line_count}] ',
+            print(f'    Field [{fld}] Report Line [{self.report_line_count}] ',
                   f'Section Number [{self.section_count}] ',
                   f'Section Line [{self.section_line_count}]')
 
         return ret_val
+
+    def get_subsection_depth(self):
+        """
+        Get the current subsection depth (nesting level).
+        :return: int - 0 for top-level, >0 for subsections.
+        """
+        return getattr(self, 'subsection_depth', 0)
+
+    def get_current_subsection(self):
+        """
+        Get the current subsection parents as a tuple.
+        :return: tuple - e.g., ('report_id', 'customer_id')
+        """
+        return tuple(getattr(self, 'current_subsection_parents', []))
+
+    def get_max_subsection_depth(self):
+        """
+        Get the maximum subsection depth observed.
+        :return: int
+        """
+        return getattr(self, 'max_subsection_depth', 0)
+
+    def get_subsection_depth_counts(self):
+        """
+        Get counts of subsections per depth.
+        :return: dict - e.g., {1: 10, 2: 5}
+        """
+        return dict(getattr(self, 'subsection_depth_counts', {}))
+
+    def get_subsection_info(self):
+        """
+        Get comprehensive subsection information.
+        :return: dict with depth, parents, max_depth, counts.
+        """
+        return {
+            'depth': self.get_subsection_depth(),
+            'parents': list(self.get_current_subsection()),
+            'max_depth': self.get_max_subsection_depth(),
+            'counts': self.get_subsection_depth_counts()
+        }
+
+    def money2decimal(self, fld, in_str):
+        re_str = re.sub(r'[\,\s\$]', r'', in_str)
+        try:
+            ret_val = Decimal(re_str)
+        except Exception as e:
+            ret_val = Decimal('0')
+        return ret_val
+
+    def _find_section_boundaries(self, file_path: str) -> List[Tuple[int, int]]:
+        """
+        Find boundaries of top-level sections in the file for parallel processing.
+        This identifies start and end lines of sections based on boundary patterns.
+        Handles basic nesting but returns top-level boundaries for parallel_depth=1.
+
+        :param file_path: Path to the file to analyze.
+        :return: List of tuples (start_line, end_line) where lines are 1-based.
+        """
+        start_lines = []
+        with open(file_path, 'r') as f:
+            for i, line in enumerate(f, 1):
+                line_stripped = line.rstrip('\n')
+                matched = False
+                for name, defn in self.re_defs.items():
+                    flags = defn.get(self.INDEX_RE_FLAGS, 0)
+                    if flags & self.FLAG_NEW_SECTION:
+                        regexp = defn.get(self.INDEX_RE_REGEXP)
+                        if regexp and regexp.match(line_stripped):
+                            start_lines.append(i)
+                            matched = True
+                            break
+                if matched:
+                    continue
+
+        # Get total lines
+        total_lines = 0
+        with open(file_path, 'r') as f:
+            total_lines = sum(1 for _ in f)
+
+        boundaries = []
+        for j in range(len(start_lines)):
+            start = start_lines[j]
+            end = start_lines[j + 1] - 1 if j + 1 < len(start_lines) else total_lines
+            boundaries.append((start, end))
+
+        return boundaries
+
+    def _process_section_chunk(self, file_path: str, start_line: int, end_line: int) -> Dict[str, Any]:
+        """
+        Process a specific chunk of lines corresponding to a section.
+        Creates a new PyReParse instance to avoid state conflicts in parallel execution.
+
+        :param file_path: Path to the file.
+        :param start_line: Starting line number (1-based, inclusive).
+        :param end_line: Ending line number (1-based, inclusive).
+        :return: Dictionary containing section data, including matched fields.
+        """
+        prp = PyReParse(self.raw_patterns)
+        prp.set_file_name(file_path)
+        prp.report_reset()
+        prp.section_reset()
+
+        with open(file_path, 'r') as f:
+            all_lines = f.readlines()
+            lines = all_lines[start_line - 1 : end_line]
+
+        section_data = {
+            'section_start': start_line,
+            'fields_list': [],
+            'totals': {},
+            'valid': True
+        }
+        for line in lines:
+            match_def, fields = prp.match(line.rstrip('\n'))
+            if match_def:
+                section_data['fields_list'].append({
+                    'match_def': match_def,
+                    'fields': fields.copy()
+                })
+        return section_data
+
+    def parse_file(self, file_path: str) -> List[Dict[str, Any]]:
+        """
+        Serial parsing returning same format as parse_file_parallel(depth=0).
+        """
+        boundaries = self._find_section_boundaries(file_path)
+        sections = []
+        for start, end in boundaries:
+            sec = self._process_section_chunk(file_path, start, end)
+            sections.append(sec)
+        return sections
+
+    def parse_file_parallel(self, file_path: str, max_workers: int = 4, parallel_depth: int = 1) -> List[Dict[str, Any]]:
+        """
+        Parse the entire file in parallel by dividing it into section chunks and processing them concurrently.
+        Currently supports top-level sections (parallel_depth=1). Higher depths are stubbed for future recursion.
+
+        :param file_path: Path to the file to parse.
+        :param max_workers: Maximum number of worker threads to use.
+        :param parallel_depth: Depth of parallelism (1 for top-level sections only).
+        :return: List of dictionaries, each representing parsed data for a section.
+        """
+        if parallel_depth > 1:
+            raise NotImplementedError("TODO: Recurse into subsections for parallel_depth > 1")
+
+        if not hasattr(self, 'raw_patterns'):
+            raise ValueError("Patterns must be loaded first using load_re_lines()")
+
+        boundaries = self._find_section_boundaries(file_path)
+
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
+            futures = [
+                executor.submit(self._process_section_chunk, file_path, s, e)
+                for s, e in boundaries
+            ]
+            sections = [future.result() for future in futures]
+
+        sections.sort(key=lambda x: x['section_start'])
+        return sections
+
+    def stream_matches(self, file_path: str, callback=None) -> Optional[Iterator[Tuple[List[str], Dict[str, Any]]]]:
+        """
+        Stream individual matches from the file, yielding (match_def, fields) or calling callback.
+        """
+        self.set_file_name(file_path)
+        self.report_reset()
+        with open(file_path, 'r') as f:
+            for line in f:
+                m, flds = self.match(line.rstrip('\n'))
+                if callback:
+                    callback(m, flds)
+                else:
+                    yield m, flds
+
+    def parse_file_stream(self, file_path: str, callback=None) -> Optional[Iterator[Dict[str, Any]]]:
+        """
+        Streamingly parse file into sections dynamically, yielding sections or calling callback.
+        """
+        self.set_file_name(file_path)
+        self.report_reset()
+        current_sec = None
+        with open(file_path, 'r') as f:
+            for line_num, line in enumerate(f, 1):
+                m, flds = self.match(line.rstrip('\n'))
+                if m:
+                    is_new_section = any(
+                        self.re_defs[pat].get(self.INDEX_RE_FLAGS, 0) & self.FLAG_NEW_SECTION
+                        for pat in m
+                    )
+                    if is_new_section:
+                        if current_sec is not None:
+                            if callback:
+                                callback(current_sec)
+                            else:
+                                yield current_sec
+                        current_sec = {
+                            'section_start': line_num,
+                            'fields_list': [],
+                            'totals': {},
+                            'valid': True
+                        }
+                    if current_sec is not None:
+                        current_sec['fields_list'].append({
+                            'match_def': m,
+                            'fields': flds.copy()
+                        })
+        if current_sec is not None:
+            if callback:
+                callback(current_sec)
+            else:
+                yield current_sec

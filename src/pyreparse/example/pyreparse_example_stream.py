@@ -27,7 +27,6 @@ class PyReParse_Example():
         self.args = None
         self.file_path = None
 
-    @staticmethod
     def cb_rport_id(prp_inst: PyReParse, pattern_name):
         '''
         Callback for report_id pattern.
@@ -52,7 +51,6 @@ class PyReParse_Example():
 
         cb_rptid_cnt += 1
 
-    @staticmethod
     def cb_tx_line(prp_inst: PyReParse, pattern_name):
         '''
         Callback for txline pattern.
@@ -75,8 +73,11 @@ class PyReParse_Example():
 
         cb_txline_cnt += 1
 
+<<<<<<< HEAD
+=======
     PRP = PyReParse
 
+>>>>>>> d864bc27a9f24fc2d2f78dea36f2368809f29385
     '''
     This is the data structure that contains a set of RegExp(s) that will be run against a text report.
     It is important to verify the the regular expressions match to expected lines.
@@ -218,5 +219,5 @@ class PyReParse_Example():
             # TODO aggregate totals/validations
 
 if __name__ == '__main__':
-    prg = PyReParse_Example()
-    prg.parse_file()
+    example = PyReParse_Example()
+    example.parse_file()

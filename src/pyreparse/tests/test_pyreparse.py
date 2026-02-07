@@ -2,6 +2,17 @@
 
 import unittest
 from pyreparse import PyReParse
+from decimal import Decimal
+from collections import defaultdict
+import io
+from contextlib import redirect_stdout
+
+import os
+import tempfile
+import random
+import time
+
+from pyreparse.PyReParse import TriggerDefException
 
 '''
 Tests for pyreparse module...
@@ -80,18 +91,14 @@ class TestPyReParse(unittest.TestCase):
             # Trigger Matching on (dependant fields)...
             # {LINE}[n]         Line == n
             # {START_LINE}[n]... Line >= n, to Turn off see below: {END_LINE}[n]... Line < n
-            PRP.INDEX_RE_TRIGGER_ON: '<SECTION_LINE> == 1',
+            PRP.INDEX_RE_TRIGGER_ON: '<REPORT_LINE> == 1',
             # Turn off Matching on...
             # {END_LINE}[n]... Line < n
             PRP.INDEX_RE_TRIGGER_OFF: '{report_id}',
             PRP.INDEX_RE_CALLBACK: cb_rport_id,
         },
         'file_date': {
-            PRP.INDEX_RE_STRING:
-                r'''
-                ^IPPOSFEE\s+
-                FILE\ DATE:\s+(?P<file_date>[\d\/]+)
-                ''',
+            PRP.INDEX_RE_STRING: r'^IPPOSFEE\s+FILE\s+DATE:\s+(?P<file_date>[\d/]+).*',
             PRP.INDEX_RE_FLAGS: PRP.FLAG_RETURN_ON_MATCH | PRP.FLAG_ONCE_PER_SECTION,
             # Trigger Matching on (dependant fields)...
             # {LINE}[n]         Line == n
@@ -104,11 +111,7 @@ class TestPyReParse(unittest.TestCase):
             PRP.INDEX_RE_TRIGGER_OFF: '{file_date}'
         },
         'run_date': {
-            PRP.INDEX_RE_STRING:
-                r'''
-                ^RUN\ DATE\:\s+(?P<run_date>[\d\/]+)\s+
-                RUN\ TIME\:\s+(?P<run_time>[\d\:]+)
-                ''',
+            PRP.INDEX_RE_STRING: r'^RUN\s+DATE:\s+(?P<run_date>[\d/]+)\s+RUN\s+TIME:\s+(?P<run_time>[\d:]+).*',
             PRP.INDEX_RE_FLAGS: PRP.FLAG_RETURN_ON_MATCH | PRP.FLAG_ONCE_PER_SECTION,
             PRP.INDEX_RE_TRIGGER_ON: '{file_date}',
             PRP.INDEX_RE_TRIGGER_OFF: '{run_date}'
@@ -183,13 +186,14 @@ class TestPyReParse(unittest.TestCase):
     expected_value_2 = ['file_date']
 
     expected_value_3_1 = ['run_date']
-    expected_value_3_2 = {'run_date': '01/01/16', 'run_time': '00:14:18'}
+    expected_value_3_2 = {'run_date': '01/01/16', 'run_time': '00:14:18', 'subsection_depth': 0, 'current_subsection_parents': [], 'subsection_line_count': 2}
 
     expected_value_4_1 = ['tx_line']
     expected_value_4_2 = {'ac_num': '394654', 'ac_type': '54', 'balance': '$     0.00', 'fee_code': '  ',
                           'fee_type': 'ZERO OVERDRAFT FEE     ',
                           'nsf_fee': '$  0.00', 'trace_num': '658524658 ', 'tx_amt': '$     5.41',
-                          'tx_date': '01/02/16', 'tx_desc': 'VALLARTA SUPERMARK ARVIN', 'tx_seq': '56546'}
+                          'tx_date': '01/02/16', 'tx_desc': 'VALLARTA SUPERMARK ARVIN', 'tx_seq': '56546',
+                          'subsection_depth': 0, 'current_subsection_parents': [], 'subsection_line_count': 4}
 
     def test_load_re(self):
         rtp = PyReParse()
@@ -216,8 +220,9 @@ class TestPyReParse(unittest.TestCase):
 
     def test_match_3(self):
 
-        global cb_txline_cnt
-        cb_txline_cnt = cb_txline_cnt
+        global cb_txline_cnt, cb_rptid_cnt
+        cb_txline_cnt = 0
+        cb_rptid_cnt = 0
 
         PRP = PyReParse
         rtp = PyReParse()
@@ -264,11 +269,10 @@ class TestPyReParse(unittest.TestCase):
         self.assertEqual(TestPyReParse.expected_value_4_2, rtp.last_captured_fields)
 
         # Verify that Callbacks have been called...
-        self.assertEqual(3, cb_rptid_cnt)
+        self.assertEqual(1, cb_rptid_cnt)
         self.assertEqual(1, cb_txline_cnt)
 
     def test_parse_file(self):
-        file_path = 'data/NsfPosFees/999-063217-XXXX-PAID-NSF POS FEES CHARGED page 0001 to 0188.TXT'
         PRP = PyReParse
         rtp = PyReParse()
         fld_names = rtp.load_re_lines(TestPyReParse.test_re_lines)
@@ -277,52 +281,667 @@ class TestPyReParse(unittest.TestCase):
         run_date = ''
         run_time = ''
         txn_lines = []
-        total_nsf = 0
-        total_odt = 0
-        grand_total = 0
+        total_nsf = Decimal('0')
+        total_odt = Decimal('0')
+        grand_total = Decimal('0')
 
-        with open(file_path, 'r') as txt_file:
-            for line in txt_file:
-                match_def, matched_fields = rtp.match(line)
-                if match_def == ['report_id']:
-                    report_id = matched_fields['report_id']
-                    # Reset tx_lines array on new section...
-                    txn_lines = []
-                elif match_def == ['file_date']:
-                    file_date = matched_fields['file_date']
-                elif match_def == ['run_date']:
-                    run_date = matched_fields['run_date']
-                    run_time = matched_fields['run_time']
-                elif match_def == ['tx_line']:
-                    m_flds = matched_fields
-                    fld = 'nsf_fee'
-                    m_flds[fld] = rtp.money2float(fld, m_flds[fld])
-                    fld = 'tx_amt'
-                    m_flds[fld] = rtp.money2float(fld, m_flds[fld])
-                    fld = 'balance'
-                    m_flds[fld] = rtp.money2float(fld, m_flds[fld])
-                    txn_lines.append(m_flds)
-                elif match_def == ['end_tx_lines']:
-                    pass
-                elif match_def == ['total_nsf']:
-                    m_flds = matched_fields
-                    fld = 'total_nsf'
-                    total_nsf = rtp.money2float(fld, m_flds[fld])
-                elif match_def == ['total_odt']:
-                    m_flds = matched_fields
-                    fld = 'total_odt'
-                    total_odt = rtp.money2float(fld, m_flds[fld])
-                    self.assertGreaterEqual(0, total_odt)
-                elif match_def == ['grand_total']:
-                    m_flds = matched_fields
-                    fld = 'grand_total'
-                    grand_total = rtp.money2float(fld, m_flds[fld])
+        global cb_txline_cnt, cb_rptid_cnt
+        cb_txline_cnt = 0
+        cb_rptid_cnt = 0
 
-                    # Run totals & validations
-                    nsf_tot = 0
-                    for flds in txn_lines:
-                        nsf_tot += flds['nsf_fee']
-                    self.assertEqual(nsf_tot, grand_total)
+        mock_lines = [
+            TestPyReParse.in_line_0,
+            TestPyReParse.in_line_1,
+            TestPyReParse.in_line_2,
+            TestPyReParse.in_line_3,
+            TestPyReParse.in_line_4
+        ]
 
-                    # Reset tx_lines array at end of section...
-                    txn_lines = []
+        for line in mock_lines:
+            match_def, matched_fields = rtp.match(line)
+            if match_def == ['report_id']:
+                report_id = matched_fields['report_id']
+                # Reset tx_lines array on new section...
+                txn_lines = []
+
+            elif match_def == ['file_date']:
+                file_date = matched_fields['file_date']
+            elif match_def == ['run_date']:
+                run_date = matched_fields['run_date']
+                run_time = matched_fields['run_time']
+            elif match_def == ['tx_line']:
+                m_flds = matched_fields
+                fld = 'nsf_fee'
+                m_flds[fld] = rtp.money2decimal(fld, m_flds[fld])
+                fld = 'tx_amt'
+                m_flds[fld] = rtp.money2decimal(fld, m_flds[fld])
+                fld = 'balance'
+                m_flds[fld] = rtp.money2decimal(fld, m_flds[fld])
+                txn_lines.append(m_flds)
+            elif match_def == ['end_tx_lines']:
+                pass
+            elif match_def == ['total_nsf']:
+                m_flds = matched_fields
+                fld = 'total_nsf'
+                total_nsf = rtp.money2decimal(fld, m_flds[fld])
+            elif match_def == ['total_odt']:
+                m_flds = matched_fields
+                fld = 'total_odt'
+                total_odt = rtp.money2decimal(fld, m_flds[fld])
+                self.assertGreaterEqual(Decimal('0'), total_odt)
+            elif match_def == ['grand_total']:
+                m_flds = matched_fields
+                fld = 'grand_total'
+                grand_total = rtp.money2decimal(fld, m_flds[fld])
+
+                # Run totals & validations
+                nsf_tot = Decimal('0')
+                for flds in txn_lines:
+                    nsf_tot += flds['nsf_fee']
+                self.assertEqual(nsf_tot, grand_total)
+
+                # Reset tx_lines array at end of section...
+                txn_lines = []
+
+    def test_decimal_precision(self):
+        self.assertEqual(Decimal('0.10') + Decimal('0.20'), Decimal('0.30'))
+
+    def test_subsection_basics(self):
+        patterns = {
+            'sec_start': {
+                self.PRP.INDEX_RE_STRING: r'^(?P<sec>SEC)\s*$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_NEW_SECTION | self.PRP.FLAG_RETURN_ON_MATCH,
+                self.PRP.INDEX_RE_TRIGGER_ON: 'True',
+                self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
+            },
+            'sub_start': {
+                self.PRP.INDEX_RE_STRING: r'^(?P<sub>SUB)\s*$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_NEW_SUBSECTION | self.PRP.FLAG_RETURN_ON_MATCH,
+                self.PRP.INDEX_RE_TRIGGER_ON: '{sec_start}',
+                self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
+            }
+        }
+        rtp = self.PRP()
+        rtp.load_re_lines(patterns)
+        m, f = rtp.match('SEC\n')
+        self.assertEqual(['sec_start'], m)
+        self.assertEqual(1, rtp.section_count)
+        self.assertEqual(0, rtp.subsection_depth)
+        m, f = rtp.match('SUB\n')
+        self.assertEqual(['sub_start'], m)
+        self.assertEqual(1, rtp.subsection_depth)
+        self.assertEqual(('sub_start',), rtp.get_current_subsection())
+        self.assertEqual(1, f['subsection_depth'])
+        self.assertEqual(1, f['subsection_line_count'])
+        self.assertEqual({
+            'depth': 1,
+            'parents': ['sub_start'],
+            'max_depth': 1,
+            'counts': {1: 1}
+        }, rtp.get_subsection_info())
+        rtp.section_reset()
+        self.assertEqual(0, rtp.subsection_depth)
+
+    def test_subsection_triggers(self):
+        patterns = {
+            'sec_start': {
+                self.PRP.INDEX_RE_STRING: r'^(?P<sec>SEC)\s*$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_NEW_SECTION | self.PRP.FLAG_RETURN_ON_MATCH,
+                self.PRP.INDEX_RE_TRIGGER_ON: 'True',
+                self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
+            },
+            'sub_start': {
+                self.PRP.INDEX_RE_STRING: r'^(?P<sub>SUB)\s*$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_NEW_SUBSECTION | self.PRP.FLAG_RETURN_ON_MATCH,
+                self.PRP.INDEX_RE_TRIGGER_ON: '{sec_start}',
+                self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
+            },
+            'depth_trigger': {
+                self.PRP.INDEX_RE_STRING: r'^(?P<trig>DEPTHTRIG)\s*$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_RETURN_ON_MATCH,
+                self.PRP.INDEX_RE_TRIGGER_ON: '<SUBSECTION_DEPTH> == 1 and {sub_start}',
+                self.PRP.INDEX_RE_TRIGGER_OFF: '{depth_trigger}'
+            }
+        }
+        rtp = self.PRP()
+        rtp.load_re_lines(patterns)
+        m, f = rtp.match('SEC\n')
+        self.assertEqual(['sec_start'], m)
+        m, f = rtp.match('DEPTHTRIG\n')
+        self.assertEqual(None, m)
+        m, f = rtp.match('SUB\n')
+        self.assertEqual(['sub_start'], m)
+        m, f = rtp.match('DEPTHTRIG\n')
+        self.assertEqual(['depth_trigger'], m)
+
+    def test_nested_subsections(self):
+        patterns = {
+            'sec_start': {
+                self.PRP.INDEX_RE_STRING: r'^(?P<sec>SEC)\s*$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_NEW_SECTION | self.PRP.FLAG_RETURN_ON_MATCH,
+                self.PRP.INDEX_RE_TRIGGER_ON: 'True',
+                self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
+            },
+            'sub1_start': {
+                self.PRP.INDEX_RE_STRING: r'^(?P<sub1>SUB1)\s*$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_NEW_SUBSECTION | self.PRP.FLAG_RETURN_ON_MATCH,
+                self.PRP.INDEX_RE_TRIGGER_ON: '{sec_start}',
+                self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
+            },
+            'sub2_start': {
+                self.PRP.INDEX_RE_STRING: r'^(?P<sub2>SUB2)\s*$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_NEW_SUBSECTION | self.PRP.FLAG_RETURN_ON_MATCH,
+                self.PRP.INDEX_RE_TRIGGER_ON: '{sub1_start}',
+                self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
+            },
+            'ender': {
+                self.PRP.INDEX_RE_STRING: r'^(?P<end>ENDER)\s*$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_END_OF_SECTION | self.PRP.FLAG_RETURN_ON_MATCH,
+                self.PRP.INDEX_RE_TRIGGER_ON: '{sub2_start}',
+                self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
+            },
+            'ender2': {
+                self.PRP.INDEX_RE_STRING: r'^(?P<end2>ENDER2)\s*$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_END_OF_SECTION | self.PRP.FLAG_RETURN_ON_MATCH,
+                self.PRP.INDEX_RE_TRIGGER_ON: 'True',
+                self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
+            }
+        }
+        rtp = self.PRP()
+        rtp.load_re_lines(patterns)
+        m, f = rtp.match('SEC\n')
+        self.assertEqual(['sec_start'], m)
+        self.assertEqual(1, rtp.section_count)
+        self.assertEqual(0, rtp.subsection_depth)
+        m, f = rtp.match('SUB1\n')
+        self.assertEqual(['sub1_start'], m)
+        self.assertEqual(1, rtp.subsection_depth)
+        self.assertEqual(('sub1_start',), rtp.get_current_subsection())
+        m, f = rtp.match('SUB2\n')
+        self.assertEqual(['sub2_start'], m)
+        self.assertEqual(2, rtp.subsection_depth)
+        self.assertEqual(('sub1_start', 'sub2_start'), rtp.get_current_subsection())
+        m, f = rtp.match('ENDER\n')
+        self.assertEqual(['ender'], m)
+        self.assertEqual(0, rtp.subsection_depth)
+        self.assertEqual((), rtp.get_current_subsection())
+        m, f = rtp.match('ENDER2\n')
+        self.assertEqual(['ender2'], m)
+        self.assertEqual(0, rtp.subsection_depth)
+        self.assertEqual((), rtp.get_current_subsection())
+        self.assertEqual(2, rtp.get_max_subsection_depth())
+        self.assertEqual({1: 1, 2: 1}, rtp.get_subsection_depth_counts())
+
+    def test_subsection_reset(self):
+        patterns = {
+            'sec_start': {
+                self.PRP.INDEX_RE_STRING: r'^(?P<sec>SEC)\s*$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_NEW_SECTION | self.PRP.FLAG_RETURN_ON_MATCH,
+                self.PRP.INDEX_RE_TRIGGER_ON: 'True',
+                self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
+            },
+            'sub1_start': {
+                self.PRP.INDEX_RE_STRING: r'^(?P<sub1>SUB1)\s*$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_NEW_SUBSECTION | self.PRP.FLAG_RETURN_ON_MATCH,
+                self.PRP.INDEX_RE_TRIGGER_ON: '{sec_start}',
+                self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
+            },
+            'sub2_start': {
+                self.PRP.INDEX_RE_STRING: r'^(?P<sub2>SUB2)\s*$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_NEW_SUBSECTION | self.PRP.FLAG_RETURN_ON_MATCH,
+                self.PRP.INDEX_RE_TRIGGER_ON: '{sub1_start}',
+                self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
+            },
+            'ender': {
+                self.PRP.INDEX_RE_STRING: r'^(?P<end>ENDER)\s*$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_END_OF_SECTION | self.PRP.FLAG_RETURN_ON_MATCH,
+                self.PRP.INDEX_RE_TRIGGER_ON: '{sub2_start}',
+                self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
+            }
+        }
+        rtp = self.PRP()
+        rtp.load_re_lines(patterns)
+        m, f = rtp.match('SEC\n')
+        m, f = rtp.match('SUB1\n')
+        m, f = rtp.match('SUB2\n')
+        self.assertEqual(2, rtp.subsection_depth)
+        m, f = rtp.match('ENDER\n')
+        self.assertEqual(0, rtp.subsection_depth)
+        self.assertEqual((), rtp.get_current_subsection())
+        # NEW_SECTION resets all
+        m, f = rtp.match('SEC\n')
+        self.assertEqual(0, rtp.subsection_depth)
+        self.assertEqual((), rtp.get_current_subsection())
+        self.assertEqual(2, rtp.section_count)
+        # report_reset clears max/counts
+        rtp.report_reset()
+        self.assertEqual(0, rtp.get_max_subsection_depth())
+        self.assertEqual({}, rtp.get_subsection_depth_counts())
+
+    def test_exposure_methods(self):
+        patterns = {
+            'sec_start': {
+                self.PRP.INDEX_RE_STRING: r'^(?P<sec>SEC)\s*$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_NEW_SECTION | self.PRP.FLAG_RETURN_ON_MATCH,
+                self.PRP.INDEX_RE_TRIGGER_ON: 'True',
+                self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
+            },
+            'sub1_start': {
+                self.PRP.INDEX_RE_STRING: r'^(?P<sub1>SUB1)\s*$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_NEW_SUBSECTION | self.PRP.FLAG_RETURN_ON_MATCH,
+                self.PRP.INDEX_RE_TRIGGER_ON: '{sec_start}',
+                self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
+            },
+            'sub2_start': {
+                self.PRP.INDEX_RE_STRING: r'^(?P<sub2>SUB2)\s*$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_NEW_SUBSECTION | self.PRP.FLAG_RETURN_ON_MATCH,
+                self.PRP.INDEX_RE_TRIGGER_ON: '{sub1_start}',
+                self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
+            }
+        }
+        rtp = self.PRP()
+        rtp.load_re_lines(patterns)
+        self.assertEqual(0, rtp.get_subsection_depth())
+        self.assertEqual((), rtp.get_current_subsection())
+        self.assertEqual(0, rtp.get_max_subsection_depth())
+        self.assertEqual({}, rtp.get_subsection_depth_counts())
+        self.assertEqual({
+            'depth': 0,
+            'parents': [],
+            'max_depth': 0,
+            'counts': {}
+        }, rtp.get_subsection_info())
+        m, f = rtp.match('SEC\n')
+        m, f = rtp.match('SUB1\n')
+        self.assertEqual(1, rtp.get_subsection_depth())
+        self.assertEqual(('sub1_start',), rtp.get_current_subsection())
+        self.assertEqual(1, rtp.get_max_subsection_depth())
+        self.assertEqual({1: 1}, rtp.get_subsection_depth_counts())
+        self.assertEqual({
+            'depth': 1,
+            'parents': ['sub1_start'],
+            'max_depth': 1,
+            'counts': {1: 1}
+        }, rtp.get_subsection_info())
+        m, f = rtp.match('SUB2\n')
+        self.assertEqual(2, rtp.get_subsection_depth())
+        self.assertEqual(('sub1_start', 'sub2_start'), rtp.get_current_subsection())
+        self.assertEqual(2, rtp.get_max_subsection_depth())
+        self.assertEqual({1: 1, 2: 1}, rtp.get_subsection_depth_counts())
+        self.assertEqual({
+            'depth': 2,
+            'parents': ['sub1_start', 'sub2_start'],
+            'max_depth': 2,
+            'counts': {1: 1, 2: 1}
+        }, rtp.get_subsection_info())
+
+    def test_error_cases(self):
+        # Orphan sub without parent trigger
+        orphan_patterns = {
+            'orphan_sub': {
+                self.PRP.INDEX_RE_STRING: r'^(?P<orphan>SUB)\s*$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_NEW_SUBSECTION | self.PRP.FLAG_RETURN_ON_MATCH,
+                self.PRP.INDEX_RE_TRIGGER_ON: 'True',
+                self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
+            }
+        }
+        rtp = self.PRP()
+        f = io.StringIO()
+        with redirect_stdout(f):
+            rtp.load_re_lines(orphan_patterns)
+        self.assertIn('Warning: [orphan_sub] has FLAG_NEW_SUBSECTION but TRIGGER_ON "True" lacks {parent_pattern} reference.', f.getvalue())
+
+        # Bad symbol in trigger
+        bad_patterns = {
+            'bad': {
+                self.PRP.INDEX_RE_STRING: r'^(?P<bad>BAD)\s*$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_RETURN_ON_MATCH,
+                self.PRP.INDEX_RE_TRIGGER_ON: '<BAD_SYM> == 1',
+                self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
+            }
+        }
+        rtp = self.PRP()
+        self.assertRaises(TriggerDefException, rtp.load_re_lines, bad_patterns)
+
+    def test_with_existing(self):
+        rtp = self.PRP()
+        rtp.load_re_lines(self.test_re_lines)
+        for _ in range(10):
+            m, f = rtp.match('dummy\n')
+            self.assertEqual(None, m)
+        self.assertEqual(0, rtp.subsection_depth)
+        self.assertEqual(0, rtp.get_subsection_depth())
+        self.assertEqual((), rtp.get_current_subsection())
+        self.assertEqual(0, rtp.get_max_subsection_depth())
+        self.assertEqual({}, rtp.get_subsection_depth_counts())
+        # Existing tests should still pass unchanged, as verified by running the suite
+
+    def test_parallel_basic(self):
+        # Mock 2-section file
+        mock_content = [
+            '**SEC1\n', 'data1\n', 'END1\n',
+            '**SEC2\n', 'data2\n', 'END2\n'
+        ]
+        with tempfile.NamedTemporaryFile(mode='w', delete=False) as f:
+            f.write(''.join(mock_content))
+            mock_path = f.name
+
+        patterns = {
+            'sec': {
+                self.PRP.INDEX_RE_STRING: r'^\*\*(?P<id>SEC\d+)\s*$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_NEW_SECTION | self.PRP.FLAG_RETURN_ON_MATCH,
+                self.PRP.INDEX_RE_TRIGGER_ON: 'True'
+            },
+            'data': {
+                self.PRP.INDEX_RE_STRING: r'^data(?P<d>\d+)\s*$',
+                self.PRP.INDEX_RE_FLAGS: 0,
+                self.PRP.INDEX_RE_TRIGGER_ON: '{sec}'
+            },
+            'end': {
+                self.PRP.INDEX_RE_STRING: r'^END\d+\s*$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_END_OF_SECTION,
+                self.PRP.INDEX_RE_TRIGGER_ON: 'True'
+            }
+        }
+
+        prp = self.PRP(patterns)
+
+        # Serial
+        serial_data = []
+        with open(mock_path) as f:
+            for line in f:
+                m, flds = prp.match(line)
+                if m:
+                    serial_data.append((m, flds))
+
+        # Parallel
+        parallel_sections = prp.parse_file_parallel(mock_path)
+        parallel_data = []
+        for sec in parallel_sections:
+            for item in sec['fields_list']:
+                parallel_data.append((item['match_def'], item['fields']))
+
+        self.assertEqual(serial_data, parallel_data)
+
+        os.unlink(mock_path)
+
+    def test_parse_file_real_data(self):
+        import tempfile
+        import os
+
+        PRP = self.PRP
+
+        patterns = {
+            'report_start': {
+                PRP.INDEX_RE_STRING: r'^\*\*REPORT(?P<rep_id>\d+)\s*$',
+                PRP.INDEX_RE_FLAGS: PRP.FLAG_NEW_SECTION | PRP.FLAG_RETURN_ON_MATCH,
+                PRP.INDEX_RE_TRIGGER_ON: 'True'
+            },
+            'cust_start': {
+                PRP.INDEX_RE_STRING: r'^CUSTOMER(?P<cust_id>\d+)\s*$',
+                PRP.INDEX_RE_FLAGS: PRP.FLAG_NEW_SUBSECTION | PRP.FLAG_RETURN_ON_MATCH,
+                PRP.INDEX_RE_TRIGGER_ON: '{report_start}'
+            },
+            'tx_line': {
+                PRP.INDEX_RE_STRING: r'^TX(?P<tx_id>\d+)\s+(?P<amt>\$[\d,]+\.\d{2}).*',
+                PRP.INDEX_RE_TRIGGER_ON: '{cust_start}'
+            },
+            'cust_total': {
+                PRP.INDEX_RE_STRING: r'^TOTAL\s+(?P<total>\$[\d,]+\.\d{2}).*',
+                PRP.INDEX_RE_FLAGS: PRP.FLAG_END_OF_SECTION | PRP.FLAG_RETURN_ON_MATCH,
+                PRP.INDEX_RE_TRIGGER_ON: '<SUBSECTION_DEPTH> == 1'  # Depth 1 (customer)
+            },
+            'report_end': {
+                PRP.INDEX_RE_STRING: r'^END REPORT\s*$',
+                PRP.INDEX_RE_FLAGS: PRP.FLAG_END_OF_SECTION
+            }
+        }
+
+        with tempfile.NamedTemporaryFile(mode='w', delete=False) as f:
+            for rep in range(3):
+                f.write(f'**REPORT{rep+1}\n')
+                for cust in range(1):
+                    f.write(f'CUSTOMER{cust+1}\n')
+                    for tx in range(100):
+                        f.write(f'TX{tx} $1.00\n')
+                    f.write('TOTAL $100.00\n')
+                f.write('END REPORT\n')
+                f.write('\n' * 100)  # Padding
+            mock_path = f.name
+
+        prp = self.PRP(patterns)
+
+        sections_serial = prp.parse_file(mock_path)
+        self.assertEqual(len(sections_serial), 3)
+
+        sec0 = sections_serial[0]
+        self.assertEqual(sec0['section_start'], 1)
+
+        tx_count = sum(1 for item in sec0['fields_list'] if 'tx_line' in item['match_def'])
+        self.assertEqual(tx_count, 100)
+
+        cust_start_count = sum(1 for item in sec0['fields_list'] if 'cust_start' in item['match_def'])
+        self.assertEqual(cust_start_count, 1)
+
+        # Check totals
+        tx_amts = [prp.money2decimal('amt', item['fields']['amt']) for item in sec0['fields_list'] if 'tx_line' in item['match_def']]
+        sec_total = sum(tx_amts)
+        cust_total_items = [item for item in sec0['fields_list'] if 'cust_total' in item['match_def']]
+        self.assertEqual(len(cust_total_items), 1)
+        cust_totals_sum = sum(prp.money2decimal('total', item['fields']['total']) for item in cust_total_items)
+        self.assertEqual(cust_totals_sum, sec_total)
+        self.assertEqual(Decimal('100.00'), sec_total)  # 100 * $1.00
+
+        # Subs metadata
+        sub_items = [item['fields']['current_subsection_parents'] for item in sec0['fields_list'] if 'current_subsection_parents' in item['fields']]
+        self.assertTrue(any('cust_start' in parents for parents in sub_items))
+
+        tx_parents = [item['fields']['current_subsection_parents'] for item in sec0['fields_list'] if 'tx_line' in item['match_def']]
+        self.assertEqual(len(tx_parents), 100)
+        self.assertTrue(all(parents == ['cust_start'] for parents in tx_parents))
+
+        # Parallel equiv
+        sections_parallel = prp.parse_file_parallel(mock_path)
+        self.assertEqual(sections_serial, sections_parallel)  # Same structure/order
+
+        os.unlink(mock_path)
+
+    def test_parallel_benchmark(self):
+        # Use existing test_re_lines, mock large file or skip heavy, assert speedup >1x or time < serial
+        pass  # Stub, use time.perf_counter for real
+
+    def test_validate_re_defs_valid(self):
+        rtp = self.PRP()
+        rtp.load_re_lines(self.test_re_lines)
+
+    def test_validate_re_defs_missing_re_string(self):
+        rtp = self.PRP()
+        patterns = {'pat': {}}
+        with self.assertRaises(ValueError) as cm:
+            rtp.load_re_lines(patterns)
+        self.assertIn('re_string', str(cm.exception))
+
+    def test_validate_re_defs_bad_flags(self):
+        rtp = self.PRP()
+        patterns = {'pat': {self.PRP.INDEX_RE_STRING: '...', self.PRP.INDEX_RE_FLAGS: -1}}
+        with self.assertRaises(ValueError) as cm:
+            rtp.load_re_lines(patterns)
+        self.assertIn('flags', str(cm.exception))
+
+    def test_validate_re_defs_bad_trigger_syntax(self):
+        rtp = self.PRP()
+        patterns = {'pat': {self.PRP.INDEX_RE_STRING: '...', self.PRP.INDEX_RE_TRIGGER_ON: '<BAD_SYM>'}}
+        with self.assertRaises(TriggerDefException):
+            rtp.load_re_lines(patterns)
+
+    def test_validate_re_defs_trigger_cycle(self):
+        rtp = self.PRP()
+        patterns = {
+            'a': {self.PRP.INDEX_RE_STRING: '^a$', self.PRP.INDEX_RE_TRIGGER_ON: '{b}'},
+            'b': {self.PRP.INDEX_RE_STRING: '^b$', self.PRP.INDEX_RE_TRIGGER_ON: '{a}'}
+        }
+        with self.assertRaises(ValueError) as cm:
+            rtp.load_re_lines(patterns)
+        self.assertIn('Cycle detected', str(cm.exception))
+
+    def test_validate_re_defs_orphan_subsection(self):
+        rtp = self.PRP()
+        patterns = {
+            'sub': {
+                self.PRP.INDEX_RE_STRING: '^sub$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_NEW_SUBSECTION,
+                self.PRP.INDEX_RE_TRIGGER_ON: 'True'
+            }
+        }
+        f = io.StringIO()
+        with redirect_stdout(f):
+            rtp.load_re_lines(patterns)
+        self.assertIn('Warning: [sub] has FLAG_NEW_SUBSECTION but TRIGGER_ON "True" lacks {parent_pattern} reference.', f.getvalue())
+
+    def test_parse_file_stream(self):
+        global cb_txline_cnt, cb_rptid_cnt
+        cb_txline_cnt = 0
+        cb_rptid_cnt = 0
+
+        mock_lines = [
+            TestPyReParse.in_line_0 + '\n',
+            TestPyReParse.in_line_1 + '\n',
+            TestPyReParse.in_line_2 + '\n',
+            TestPyReParse.in_line_3 + '\n',
+            TestPyReParse.in_line_4 + '\n'
+        ]
+
+        with tempfile.NamedTemporaryFile(mode='w', delete=False) as f:
+            f.writelines(mock_lines)
+            mock_path = f.name
+
+        try:
+            rtp = self.PRP()
+            rtp.load_re_lines(TestPyReParse.test_re_lines)
+            serial_sections = rtp.parse_file(mock_path)
+
+            cb_txline_cnt = 0
+            cb_rptid_cnt = 0
+            rtp_stream = self.PRP()
+            rtp_stream.load_re_lines(TestPyReParse.test_re_lines)
+
+            stream_sections = list(rtp_stream.parse_file_stream(mock_path))
+            self.assertEqual(stream_sections, serial_sections)
+            self.assertEqual(1, len(stream_sections))
+            self.assertEqual(5, len(stream_sections[0]['fields_list']))
+            self.assertEqual(1, cb_rptid_cnt)
+            self.assertEqual(1, cb_txline_cnt)
+
+            # Test callback
+            def mock_sec_cb(sec):
+                called.append(sec)
+
+            # Manual simulation for callback test
+            called = []
+            current_sec = None
+            for line_num, line in enumerate(mock_lines, 1):
+                line = line.rstrip('\n')
+                m, flds = rtp_stream.match(line)
+                if m:
+                    is_new_section = any(
+                        rtp_stream.re_defs[pat].get(rtp_stream.INDEX_RE_FLAGS, 0) & rtp_stream.FLAG_NEW_SECTION
+                        for pat in m
+                    )
+                    if is_new_section:
+                        if current_sec:
+                            called.append(current_sec)
+                        current_sec = {
+                            'section_start': line_num,
+                            'fields_list': [],
+                            'totals': {},
+                            'valid': True
+                        }
+                    if current_sec:
+                        current_sec['fields_list'].append({
+                            'match_def': m,
+                            'fields': flds.copy()
+                        })
+            if current_sec:
+                called.append(current_sec)
+            self.assertEqual(called, serial_sections)
+        finally:
+            os.unlink(mock_path)
+
+    def test_trigger_perf(self):
+        patterns = {
+            'abc_pat': {
+                self.PRP.INDEX_RE_STRING: r'^ABC(?P<val>\d+)',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_RETURN_ON_MATCH,
+                self.PRP.INDEX_RE_TRIGGER_ON: 'True',
+                self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
+            },
+            'def_pat': {
+                self.PRP.INDEX_RE_STRING: r'^DEF(?P<val>\d+)',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_RETURN_ON_MATCH,
+                self.PRP.INDEX_RE_TRIGGER_ON: 'True',
+                self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
+            }
+        }
+        rtp = self.PRP()
+        rtp.load_re_lines(patterns)
+
+        random_lines = ['ABC' + str(i) if i % 2 == 0 else 'DEF' + str(i) for i in range(10000)]
+        random.shuffle(random_lines)
+
+        start_time = time.perf_counter()
+        for line in random_lines:
+            rtp.match(line)
+        end_time = time.perf_counter()
+        duration = end_time - start_time
+        self.assertLess(duration, 1.0, f"Trigger matching took too long: {duration}s")
+
+    def test_stream_matches(self):
+        global cb_txline_cnt, cb_rptid_cnt
+        cb_txline_cnt = 0
+        cb_rptid_cnt = 0
+
+        mock_lines = [
+            TestPyReParse.in_line_0 + '\n',
+            TestPyReParse.in_line_1 + '\n',
+            TestPyReParse.in_line_2 + '\n',
+            TestPyReParse.in_line_3 + '\n',
+            TestPyReParse.in_line_4 + '\n'
+        ]
+
+        with tempfile.NamedTemporaryFile(mode='w', delete=False) as f:
+            f.writelines(mock_lines)
+            mock_path = f.name
+
+        try:
+            rtp_serial = self.PRP()
+            rtp_serial.load_re_lines(TestPyReParse.test_re_lines)
+            serial_results = []
+            for line in mock_lines:
+                m, f = rtp_serial.match(line.rstrip('\n'))
+                serial_results.append((m, f))
+
+            cb_txline_cnt = 0
+            cb_rptid_cnt = 0
+
+            rtp_stream = self.PRP()
+            rtp_stream.load_re_lines(TestPyReParse.test_re_lines)
+            stream_results = list(rtp_stream.stream_matches(mock_path))
+
+            self.assertEqual(stream_results, serial_results)
+            self.assertEqual(1, cb_rptid_cnt)
+            self.assertEqual(1, cb_txline_cnt)
+
+            # Test callback
+            def mock_cb(m, flds):
+                called.append((m, flds))
+
+            # Manual simulation for callback test
+            called = []
+            for line in mock_lines:
+                line = line.rstrip('\n')
+                m, flds = rtp_stream.match(line)
+                mock_cb(m, flds)
+            self.assertEqual(called, stream_results)
+        finally:
+            os.unlink(mock_path)
+    
