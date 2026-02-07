@@ -28,65 +28,14 @@ class PyReParse:
     FLAG_END_OF_SECTION = 16    # Counters are set to 0
     FLAG_NEW_SUBSECTION = 32    # Start a subsection (nested under current section/parent)
 
-    PREFIX_LEN = 12
-
     special_escape_followers = set('aAbBdDFfNnPpRrSsTtVvWwXxZz0123456789')
-
-    @staticmethod
-    def extract_literal_prefix(raw_pat, max_len=12):
-        i = 0
-        length = len(raw_pat)
-        prefix = ''
-        in_comment = False
-        escaped = False
-        metas = '.^$*+?(){}|[]\\'
-        while i < length and len(prefix) < max_len:
-            c = raw_pat[i]
-            if escaped:
-                escaped = False
-                if c not in PyReParse.special_escape_followers:
-                    prefix += c
-                    # Hack for literal ** after \*
-                    if c == '*' and i + 1 < length and raw_pat[i + 1] == '*':
-                        prefix += '*'
-                        i += 1
-                i += 1
-                continue
-            if in_comment:
-                if c == ')':
-                    in_comment = False
-                i += 1
-                continue
-            if c.isspace():
-                i += 1
-                continue
-            if c == '\\':
-                escaped = True
-                i += 1
-                continue
-            if i + 2 < length and raw_pat[i:i+3] == '(?#':
-                in_comment = True
-                i += 3
-                continue
-            if c == '#':
-                i += 1
-                while i < length and raw_pat[i] != '\n':
-                    i += 1
-                continue
-            if c in metas:
-                if c == '^' and len(prefix) == 0:
-                    i += 1
-                    continue
-                break
-            prefix += c
-            i += 1
-        return prefix
 
     KNOWN_FLAGS_MASK = (FLAG_RETURN_ON_MATCH | FLAG_NEW_SECTION | FLAG_ONCE_PER_SECTION | FLAG_ONCE_PER_REPORT |
                         FLAG_END_OF_SECTION | FLAG_NEW_SUBSECTION)
 
+    PREFIX_LEN = 12
+
     INDEX_RE_STRING = 're_string'
-    INDEX_RE_FLAGS = 'flags'                         # Entry containing a patterns flags`.
     INDEX_RE_QUICK_CHECK = 're_quick_check'
     INDEX_RE_REGEXP = 'regexp'                       # Compiled
     INDEX_RE_TRIGGER_ON = 'trigger_on'               # Entry - Trigger_On Assigned by User
@@ -457,11 +406,17 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
             try:
                 raw_pat = in_hash[fld][rtrpc.INDEX_RE_STRING]
                 comped_re = re.compile(raw_pat, re.X)
-
-                prefix = PyReParse.extract_literal_prefix(raw_pat, rtrpc.PREFIX_LEN)
-                prefix_matcher = None
-                if len(prefix) >= 2:
-                    prefix_matcher = lambda line: line.startswith(prefix)
+                i = 0
+                pat_len = len(raw_pat)
+                while i < pat_len and raw_pat[i] in r'^ \t\n\r\f\v': i += 1
+                start = i
+                metas = r'.*?+()[]{}|\\'
+                while i < pat_len and raw_pat[i] not in metas: i += 1
+                prefix_str = raw_pat[start:i][:self.PREFIX_LEN]
+                if len(prefix_str) >= 3:
+                    prefix_matcher = lambda line: line.startswith(prefix_str)
+                else:
+                    prefix_matcher = None
             except re.error as e:
                 raise ValueError(f"Failed to compile regex for pattern '{fld}': {e}")
             except Exception as e:

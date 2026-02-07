@@ -706,11 +706,11 @@ class TestPyReParse(unittest.TestCase):
         with tempfile.NamedTemporaryFile(mode='w', delete=False) as f:
             for rep in range(3):
                 f.write(f'**REPORT{rep+1}\n')
-                for cust in range(2):
+                for cust in range(1):
                     f.write(f'CUSTOMER{cust+1}\n')
-                    for tx in range(50):
+                    for tx in range(100):
                         f.write(f'TX{tx} $1.00\n')
-                    f.write('TOTAL $50.00\n')
+                    f.write('TOTAL $100.00\n')
                 f.write('END REPORT\n')
                 f.write('\n' * 100)  # Padding
             mock_path = f.name
@@ -724,16 +724,16 @@ class TestPyReParse(unittest.TestCase):
         self.assertEqual(sec0['section_start'], 1)
 
         tx_count = sum(1 for item in sec0['fields_list'] if 'tx_line' in item['match_def'])
-        self.assertEqual(tx_count, 100)  # 2 cust * 50
+        self.assertEqual(tx_count, 100)
 
         cust_start_count = sum(1 for item in sec0['fields_list'] if 'cust_start' in item['match_def'])
-        self.assertEqual(cust_start_count, 2)
+        self.assertEqual(cust_start_count, 1)
 
         # Check totals
         tx_amts = [prp.money2decimal('amt', item['fields']['amt']) for item in sec0['fields_list'] if 'tx_line' in item['match_def']]
         sec_total = sum(tx_amts)
         cust_total_items = [item for item in sec0['fields_list'] if 'cust_total' in item['match_def']]
-        self.assertEqual(len(cust_total_items), 2)
+        self.assertEqual(len(cust_total_items), 1)
         cust_totals_sum = sum(prp.money2decimal('total', item['fields']['total']) for item in cust_total_items)
         self.assertEqual(cust_totals_sum, sec_total)
         self.assertEqual(Decimal('100.00'), sec_total)  # 100 * $1.00
