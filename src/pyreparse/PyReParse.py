@@ -4,6 +4,7 @@ import sys
 import re
 import ast
 from decimal import Decimal
+from collections import defaultdict
 
 '''
 # TODO...
@@ -79,6 +80,11 @@ class PyReParse:
         self.section_count = 0
         self.section_line_count = 0
         self.file_name = ''
+        self.subsection_depth = 0
+        self.current_subsection_parents = []
+        self.subsection_line_count = 0
+        self.max_subsection_depth = 0
+        self.subsection_depth_counts = defaultdict(int)
         if regexp_pats is not None:
             self.load_re_lines(regexp_pats)
 
@@ -432,8 +438,8 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
             if limit_matches <= self.report_line_count:
                 print(f'*** Exiting: limit_matches is set to [{limit_matches}]')
                 sys.exit(1)
-        self.section_count += 1
         self.section_line_count += 1
+        self.subsection_line_count += 1
         # Initialize matched Def list (returned value)
         matched_defs = None
         # Initialize dict of last fields captured.
@@ -490,6 +496,9 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
                         rtrpc.INDEX_ST_LAST_REPORT_LINE_MATCHED] = self.report_line_count
                     self.re_defs[fld][rtrpc.INDEX_STATES][
                         rtrpc.INDEX_ST_LAST_SECTION_LINE_MATCHED] = self.section_line_count
+                    self.last_captured_fields['subsection_depth'] = self.subsection_depth
+                    self.last_captured_fields['current_subsection_parents'] = list(self.current_subsection_parents)
+                    self.subsection_line_count = self.subsection_line_count  # Ensure set
                     if matched_defs is None:
                         matched_defs = []
                     # Capture the list of re_defs entries that match this line.
@@ -506,8 +515,17 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
                         self.re_defs[fld][rtrpc.INDEX_STATES][rtrpc.INDEX_ST_LAST_SECTION_LINE_MATCHED] = 1
                         self.re_defs[fld][rtrpc.INDEX_STATES][rtrpc.INDEX_ST_LAST_REPORT_LINE_MATCHED] = 1
                     if self.re_defs[fld][rtrpc.INDEX_RE_FLAGS] & rtrpc.FLAG_END_OF_SECTION:
-                        # Reset sectional flags and counters...
-                        self.section_reset()
+                        if self.subsection_depth > 0:
+                            self.subsection_depth -= 1
+                            self.current_subsection_parents.pop()
+                            self.subsection_line_count = 0
+                        self.section_reset()  # Existing call after
+                    if self.re_defs[fld][rtrpc.INDEX_RE_FLAGS] & rtrpc.FLAG_NEW_SUBSECTION:
+                        self.subsection_depth += 1
+                        self.current_subsection_parents.append(fld)
+                        self.subsection_depth_counts[self.subsection_depth] += 1
+                        self.max_subsection_depth = max(self.max_subsection_depth, self.subsection_depth)
+                        self.subsection_line_count = 1
 
                     if self.re_defs[fld][rtrpc.INDEX_RE_FLAGS] | rtrpc.FLAG_RETURN_ON_MATCH:
                         return matched_defs, self.last_captured_fields
@@ -536,6 +554,9 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
             self.re_defs[fld][rtrpc.INDEX_STATES][rtrpc.INDEX_ST_SECTION_MATCH_ATTEMPTS] = 0
             self.re_defs[fld][rtrpc.INDEX_STATES][rtrpc.INDEX_ST_SECTION_LINES_MATCHED] = 0
             self.re_defs[fld][rtrpc.INDEX_STATES][rtrpc.INDEX_ST_LAST_SECTION_LINE_MATCHED] = 0
+        self.subsection_depth = 0
+        self.current_subsection_parents = []
+        self.subsection_line_count = 0
 
     def report_reset(self):
         rtrpc = PyReParse
@@ -546,6 +567,8 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
             self.re_defs[fld][rtrpc.INDEX_STATES][rtrpc.INDEX_ST_LAST_REPORT_LINE_MATCHED] = 0
 
         self.section_reset()
+        self.max_subsection_depth = 0
+        self.subsection_depth_counts.clear()
 
     def money2float(self, fld, in_str):
         re_str = re.sub(r'[\,\s\$]', r'', in_str)
