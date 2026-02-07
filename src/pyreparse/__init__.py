@@ -28,4 +28,4 @@ due to a need to tweak the main regexp, or possibly a corrupt input line.
   and transformations to the captured values of interest.
 
 """
-from pyreparse.PyReParse import PyReParse
+from .PyReParse import PyReParse
