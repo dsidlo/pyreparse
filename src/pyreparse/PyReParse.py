@@ -345,8 +345,6 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
                 trigger_on_text = self.re_defs[fld].get(rtrpc.INDEX_RE_TRIGGER_ON, '')
                 if '{' not in trigger_on_text:
                     print(f'Warning: [{fld}] has FLAG_NEW_SUBSECTION but TRIGGER_ON "{trigger_on_text}" lacks {{parent_pattern}} reference.')
-                print(f'*** Exception: \"{e}\", Hit on Compiling trigger_Off [{fld}]! ',
-                      f'\"\"\"{self.re_defs[fld][rtrpc.INDEX_RE_TRIGGER_OFF]}\"\"\"')
 
 
         return self.get_all_fld_names()
