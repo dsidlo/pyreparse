@@ -568,14 +568,14 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
             # Check if match should be triggered.
             # Triggers returning true means skip match evaluation,
             # if True:
-            if debug:
-                print(f'regexp: [{fld}]')
             flags = self.re_defs[fld].get(rtrpc.INDEX_RE_FLAGS, 0)
             if flags & rtrpc.FLAG_NEW_SECTION:
                 do_match = True
             else:
                 do_match = self.__eval_triggers(fld)
             if do_match:
+                if debug:
+                    print(f'regexp: [{fld}]')
                 if debug:
                     print(f'--- Triggered[{fld}]...')
                 if self.re_defs[fld][rtrpc.INDEX_RE_REGEXP] is None:
