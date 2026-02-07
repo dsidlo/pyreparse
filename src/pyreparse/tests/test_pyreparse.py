@@ -712,7 +712,7 @@ class TestPyReParse(unittest.TestCase):
         prp = self.PRP(patterns)
 
         sections_serial = prp.parse_file(mock_path)
-        self.assertGreaterEqual(len(sections_serial), 3)
+        self.assertEqual(len(sections_serial), 3)
 
         sec0 = sections_serial[0]
         self.assertEqual(sec0['section_start'], 1)
@@ -911,8 +911,13 @@ class TestPyReParse(unittest.TestCase):
                 called.append((m, flds))
 
             called = []
+            global cb_txline_cnt, cb_rptid_cnt
+            cb_txline_cnt = 0
+            cb_rptid_cnt = 0
             rtp_stream.stream_matches(mock_path, callback=mock_cb)
             self.assertEqual(called, stream_results)
+            self.assertEqual(1, cb_rptid_cnt)
+            self.assertEqual(1, cb_txline_cnt)
         finally:
             os.unlink(mock_path)
     
