@@ -98,7 +98,7 @@ class TestPyReParse(unittest.TestCase):
             PRP.INDEX_RE_CALLBACK: cb_rport_id,
         },
         'file_date': {
-            PRP.INDEX_RE_STRING: r'^IPPOSFEE\s+FILE DATE:\s+(?P<file_date>[\d/]+).*',
+            PRP.INDEX_RE_STRING: r'^IPPOSFEE\s+FILE\s+DATE:\s+(?P<file_date>[\d/]+).*',
             PRP.INDEX_RE_FLAGS: PRP.FLAG_RETURN_ON_MATCH | PRP.FLAG_ONCE_PER_SECTION,
             # Trigger Matching on (dependant fields)...
             # {LINE}[n]         Line == n
@@ -111,7 +111,7 @@ class TestPyReParse(unittest.TestCase):
             PRP.INDEX_RE_TRIGGER_OFF: '{file_date}'
         },
         'run_date': {
-            PRP.INDEX_RE_STRING: r'^RUN DATE:\s+(?P<run_date>[\d/]+)\s+RUN TIME:\s+(?P<run_time>[\d:]+).*',
+            PRP.INDEX_RE_STRING: r'^RUN\s+DATE:\s+(?P<run_date>[\d/]+)\s+RUN\s+TIME:\s+(?P<run_time>[\d:]+).*',
             PRP.INDEX_RE_FLAGS: PRP.FLAG_RETURN_ON_MATCH | PRP.FLAG_ONCE_PER_SECTION,
             PRP.INDEX_RE_TRIGGER_ON: '{file_date}',
             PRP.INDEX_RE_TRIGGER_OFF: '{run_date}'
