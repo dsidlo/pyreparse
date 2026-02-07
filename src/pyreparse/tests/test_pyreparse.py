@@ -91,7 +91,7 @@ class TestPyReParse(unittest.TestCase):
             # Trigger Matching on (dependant fields)...
             # {LINE}[n]         Line == n
             # {START_LINE}[n]... Line >= n, to Turn off see below: {END_LINE}[n]... Line < n
-            PRP.INDEX_RE_TRIGGER_ON: '<SECTION_LINE> == 1',
+            PRP.INDEX_RE_TRIGGER_ON: '<REPORT_LINE> == 1',
             # Turn off Matching on...
             # {END_LINE}[n]... Line < n
             PRP.INDEX_RE_TRIGGER_OFF: '{report_id}',
