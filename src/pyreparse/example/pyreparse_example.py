@@ -6,6 +6,9 @@ This is a template example for creating your own PyReParse parser engine.
 '''
 
 from pyreparse import PyReParse
+from decimal import Decimal
+import argparse
+import sys
 
 
 cb_txline_cnt = 0
@@ -17,7 +20,12 @@ class PyReParse_Example():
     stream of lines that are pushed into the match() function.
     """
 
-    PRP = PyReParse  # An alias to the PyReParse class.
+    def __init__(self):
+        self.PRP = PyReParse
+        self.prp = self.PRP()
+        self.prp.load_re_lines(PyReParse_Example.test_re_lines)
+        self.args = None
+        self.file_path = None
 
     def cb_rport_id(prp_inst: PyReParse, pattern_name):
         '''
@@ -65,6 +73,7 @@ class PyReParse_Example():
 
         cb_txline_cnt += 1
 
+    PRP = PyReParse
 
     '''
     This is the data structure that contains a set of RegExp(s) that will be run against a text report.
@@ -105,21 +114,13 @@ class PyReParse_Example():
             PRP.INDEX_RE_CALLBACK: cb_rport_id,
         },
         'file_date': {
-            PRP.INDEX_RE_STRING:
-                r'''
-                ^IPPOSFEE\s+
-                FILE\ DATE:\s+(?P<file_date>[\d\/]+)
-                ''',
+            PRP.INDEX_RE_STRING: r'^IPPOSFEE\s+FILE\s+DATE:\s+(?P<file_date>[\d/]+).*',
             PRP.INDEX_RE_FLAGS: PRP.FLAG_RETURN_ON_MATCH | PRP.FLAG_ONCE_PER_SECTION,
             PRP.INDEX_RE_TRIGGER_ON: '{report_id}',
             PRP.INDEX_RE_TRIGGER_OFF: '{file_date}'
         },
         'run_date': {
-            PRP.INDEX_RE_STRING:
-                r'''
-                ^RUN\ DATE\:\s+(?P<run_date>[\d\/]+)\s+
-                RUN\ TIME\:\s+(?P<run_time>[\d\:]+)
-                ''',
+            PRP.INDEX_RE_STRING: r'^RUN\s+DATE:\s+(?P<run_date>[\d/]+)\s+RUN\s+TIME:\s+(?P<run_time>[\d:]+).*',
             PRP.INDEX_RE_FLAGS: PRP.FLAG_RETURN_ON_MATCH | PRP.FLAG_ONCE_PER_SECTION,
             PRP.INDEX_RE_TRIGGER_ON: '{file_date}',
             PRP.INDEX_RE_TRIGGER_OFF: '{run_date}'
@@ -188,68 +189,32 @@ class PyReParse_Example():
     }
 
     def parse_file(self):
-        file_path = '../tests/data/NsfPosFees/999-063217-XXXX-PAID-NSF POS FEES CHARGED page 0001 to 0188.TXT'
-        prp = PyReParse()
-        fld_names = prp.load_re_lines(PyReParse_Example.test_re_lines)
-        report_id = ''
-        file_date = ''
-        run_date = ''
-        run_time = ''
-        txn_lines = []
-        total_nsf = 0
-        total_odt = 0
-        grand_total = 0
+        parser = argparse.ArgumentParser(description='PyReParse Example')
+        parser.add_argument('file_path', nargs='?', default='tests/data/NsfPosFees/999-063217-XXXX-PAID-NSF POS FEES CHARGED page 0001 to 0188.TXT')
+        parser.add_argument('--parallel-sections', type=int, default=0, help='Parallel depth >0')
+        parser.add_argument('--stream', action='store_true', help='Use streaming mode')
+        self.args = parser.parse_args()
+        self.file_path = self.args.file_path
 
-        with open(file_path, 'r') as txt_file:
-            for line in txt_file:
-                match_def, matched_fields = prp.match(line)
-                if match_def == ['report_id']:
-                    report_id = matched_fields['report_id']
-                    # Reset tx_lines array on new section...
-                    txn_lines = []
-                elif match_def == ['file_date']:
-                    file_date = matched_fields['file_date']
-                elif match_def == ['run_date']:
-                    run_date = matched_fields['run_date']
-                    run_time = matched_fields['run_time']
-                elif match_def == ['tx_line']:
-                    m_flds = matched_fields
-                    fld = 'nsf_fee'
-                    m_flds[fld] = prp.money2float(fld, m_flds[fld])
-                    fld = 'tx_amt'
-                    m_flds[fld] = prp.money2float(fld, m_flds[fld])
-                    fld = 'balance'
-                    m_flds[fld] = prp.money2float(fld, m_flds[fld])
-                    txn_lines.append(m_flds)
-                elif match_def == ['end_tx_lines']:
-                    pass
-                elif match_def == ['total_nsf']:
-                    m_flds = matched_fields
-                    fld = 'total_nsf'
-                    total_nsf = prp.money2float(fld, m_flds[fld])
-                elif match_def == ['total_odt']:
-                    m_flds = matched_fields
-                    fld = 'total_odt'
-                    total_odt = prp.money2float(fld, m_flds[fld])
-                elif match_def == ['grand_total']:
-                    m_flds = matched_fields
-                    fld = 'grand_total'
-                    grand_total = prp.money2float(fld, m_flds[fld])
+        if self.args.stream:
+            print("Streaming mode...")
+            match_count = 0
+            for m, f in self.prp.stream_matches(self.file_path):
+                if m:
+                    match_count += 1
+                    print(f"Match: {m} - {f}")
+            print(f"Total matches: {match_count}")
+        else:
+            if self.args.parallel_sections > 0:
+                sections = self.prp.parse_file_parallel(self.file_path, max_workers=4, parallel_depth=self.args.parallel_sections)
+            else:
+                sections = self.prp.parse_file(self.file_path)  # New serial
 
-                    # Run totals & validations
-                    nsf_tot = 0
-                    for flds in txn_lines:
-                        nsf_tot += flds['nsf_fee']
-
-                    if nsf_tot == grand_total:
-                        print(f'*** Section [{prp.section_count}] Parsing Completed.')
-
-                    # Reset tx_lines array at end of section...
-                    txn_lines = []
-
-        if prp.section_count == 2538:
-            print('\n*** All Sections Processed!')
+            # Common processing: print/merge sections
+            total_matches = sum(len(s['fields_list']) for s in sections)
+            print(f"Processed {len(sections)} sections, {total_matches} matches")
+            # TODO aggregate totals/validations
 
 if __name__ == '__main__':
-    prg = PyReParse_Example()
-    prg.parse_file()
+    example = PyReParse_Example()
+    example.parse_file()

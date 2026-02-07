@@ -1,4 +1,7 @@
 # PyReParse
+
+  - Python Report Parser
+
 PyReParse is a library that helps to ease the development processes of parsing
 huge complex structured reports.
 
@@ -12,6 +15,21 @@ Regexp pattern-based events trigger call-backs for...
   - Report on customers with specific report-value conditions.
 
 <br>
+
+## Changes in v0.0.4
+  - Added Money Handling
+    - Money can should be handled using Decimal rather than Float to remove the possibility of rounding errors.
+    - To use the money type for a field that is captured during parsing...
+      - Use the m_flds[] dictionary when defining the field name and what it captures: `m_flds['nsf_fee'] = ...`
+  
+  - Added Section and nested Subsection detection and counting.
+  - Added validate_re_defs() function that validate the data structure of patterns that PyReParse uses to parse the structure text.
+  - Added parallel execution by section
+    - parse_file()
+    - parse_file_parallel(file_path: str, max_workers: int = 4, parallel_depth: int = 1) -> List[Dict[str, Any]]
+  - Added regexp caching so that regexps are compiled only once.
+  - Implement a streaming API mode for low memory systems
+    - This overcomes the potential memory limitation that parse_file() and parse_file_parallel() have as those functions collect data into a memory structure. But if the files are extreemly large and have a lot of data, the memory structure of the captured data can also become quote large. So, where as the stream_matches() does not accumulate a memory structure of the data and instead, operates on the data as it streams in, much like the PyReParse.match() function already does. But if one uses stream_matches() on execute all logic in callbacks.
 
 ## Benefits...
 
@@ -31,6 +49,7 @@ due to a need to tweak the main regexp, or possibly a corrupt input line.
   - Logic for counting report lines and sections within a report.
   - PyReParse uses named-capture-groups and returns captured values in a dictionary. This eases the ability to capture values for transformation and storage.
   - One can associate a RegExp pattern to a callback so that one can perform custom calculations, validations, and transformations to the captured values of interest.
+  - Supports exact decimal arithmetic for financial data via `money2decimal` to avoid float precision errors.
 <br>
 
 ## Installation...
@@ -42,6 +61,10 @@ pip install pyreparse
 # Pipenv...
 pipenv install pyreparse
 ```
+
+## Hit: An LLM can help you get started...
+
+As create the parsing rules data structure can be a bit daunting for someone new to regular expressions, it makes sense to feed PyReParse's Docs and example program to an LLM, along with examples of report-text and a description of the details and calculations that you want to perform. That would be a great way to get started.
 
 ## Basic Usage Pattern
 
@@ -118,8 +141,90 @@ pipenv install pyreparse
 
 Please check out [pyreparse_example.py](pyreparse/example/pyreparse_example.py), you can used this code as a template to guide you in the creation of your own parsing engine.
 
+#### Precise Money Handling with Decimal
+
+For precise money handling, use `money2decimal()` instead of `money2float()` to convert captured strings to `decimal.Decimal`. Import `from decimal import Decimal` and update sums/validations accordingly.
+
+Example:
+```python
+elif match_def == ['tx_line']:
+    m_flds = matched_fields
+    m_flds['nsf_fee'] = prp.money2decimal('nsf_fee', m_flds['nsf_fee'])
+    # Similar for other fields like 'tx_amt', 'balance'
+    txn_lines.append(m_flds)
+
+# Validation sum
+nsf_tot = Decimal('0')
+for flds in txn_lines:
+    nsf_tot += flds['nsf_fee']
+if nsf_tot == grand_total:
+    print(f'*** Section [{prp.section_count}] Parsing Completed.')
+```
+
+## Parallel Section Processing
+
+For large reports with many independent sections (e.g., 2500+ NSF sections), use `parse_file_parallel(file_path, max_workers=4, parallel_depth=1)`:
+
+- Automatically detects section boundaries (NEW_SECTION/END_OF_SECTION).
+- Processes chunks in ThreadPoolExecutor (order preserved).
+- Returns `List[Dict]` with `section_start`, `fields_list` (all matches), `totals` stub.
+- `parallel_depth=1`: Top-level parallel (subs serial); >1: Recurse subs.
+
+CLI in example: `python src/pyreparse/example/pyreparse_example.py file.txt --parallel-sections 1`
+
+Example:
+```python
+sections = prp.parse_file_parallel('report.txt')
+for sec in sections:
+  print(f'Section {sec[\"section_start\"]}: {len(sec[\"fields_list\"])} matches')
+```
+
+Perf: 2-4x speedup multi-core. Tests verify serial==parallel.
+
+## Streaming for Large Files
+
+For very large files where loading the entire report into memory is impractical, use streaming methods like `stream_matches()` or `parse_file_stream()` to process line-by-line or section-by-section without buffering the full content.
+
+- `stream_matches(file_path, callback=None)`: Yields individual `(match_def, fields)` tuples for each line, or calls a provided callback. Ideal for real-time processing or low-memory event-driven parsing.
+- `parse_file_stream(file_path, callback=None)`: Yields complete sections as dicts (similar to `parse_file()`), or calls a callback per section. Processes boundaries serially but streams content.
+
+Memory benefits: These methods read the file iteratively (via `open()` and `readlines()` slices or line-by-line), avoiding full file loads. Use for GB-scale reports; memory usage stays constant regardless of file size, unlike `parse_file()` which builds full in-memory lists.
+
+Example:
+```python
+# Stream individual matches
+for match_def, fields in prp.stream_matches('large_report.txt'):
+    if match_def:
+        print(f"Matched {match_def}: {fields}")
+
+# Stream sections with callback
+def process_section(sec):
+    print(f"Section {sec['section_start']}: {len(sec['fields_list'])} items")
+
+list(prp.parse_file_stream('large_report.txt', callback=process_section))
+```
+
+CLI in example: `python src/pyreparse/example/pyreparse_example.py file.txt --stream`
+
 ## The PyReParse Data Structure of Patterns
 <br>
+
+## Patterns Validation
+
+PyReParse automatically validates the patterns dictionary in `load_re_lines()` via `validate_re_defs()`:
+
+**Checks Performed:**
+- Each pattern requires `INDEX_RE_STRING` (non-empty string).
+- `INDEX_RE_FLAGS`: Must be non-negative integer using only defined flags.
+- `INDEX_RE_TRIGGER_ON`/`INDEX_RE_TRIGGER_OFF`: Valid Python syntax after symbol/variable replacement (AST-checked).
+- Trigger dependencies: No cycles in `{pattern_name}` graph (DAG enforced).
+- `FLAG_NEW_SUBSECTION`: `trigger_on` must contain `{parent_pattern}` reference.
+
+**Errors:** Raises `ValueError` (structural/flags/cycles/orphan subs) or `TriggerDefException` (syntax).
+
+See `tests/test_pyreparse.py::TestPyReParse.test_validate_re_defs*` for examples.
+
+This ensures robust configuration before compilation/processing.
 
 ## Flags
 
