@@ -942,4 +942,6 @@ class TestPyReParse(unittest.TestCase):
                 m, flds = rtp_stream.match(line)
                 mock_cb(m, flds)
             self.assertEqual(called, stream_results)
+        finally:
+            os.unlink(mock_path)
     
