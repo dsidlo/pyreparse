@@ -36,6 +36,7 @@ class PyReParse:
     PREFIX_LEN = 12
 
     INDEX_RE_STRING = 're_string'
+    INDEX_RE_FLAGS = 'flags'
     INDEX_RE_QUICK_CHECK = 're_quick_check'
     INDEX_RE_REGEXP = 'regexp'                       # Compiled
     INDEX_RE_TRIGGER_ON = 'trigger_on'               # Entry - Trigger_On Assigned by User
