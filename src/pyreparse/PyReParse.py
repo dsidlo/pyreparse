@@ -570,7 +570,12 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
             # if True:
             if debug:
                 print(f'regexp: [{fld}]')
-            if self.__eval_triggers(fld):
+            flags = self.re_defs[fld].get(rtrpc.INDEX_RE_FLAGS, 0)
+            if flags & rtrpc.FLAG_NEW_SECTION:
+                do_match = True
+            else:
+                do_match = self.__eval_triggers(fld)
+            if do_match:
                 if debug:
                     print(f'--- Triggered[{fld}]...')
                 if self.re_defs[fld][rtrpc.INDEX_RE_REGEXP] is None:
