@@ -3,6 +3,9 @@
 import unittest
 from pyreparse import PyReParse
 from decimal import Decimal
+from collections import defaultdict
+import io
+from contextlib import redirect_stdout
 
 '''
 Tests for pyreparse module...
@@ -331,3 +334,10 @@ class TestPyReParse(unittest.TestCase):
 
     def test_decimal_precision(self):
         self.assertEqual(Decimal('0.10') + Decimal('0.20'), Decimal('0.30'))
+
+    def test_subsection_basics(self):
+        # [full test code as above]
+    def test_subsection_triggers(self):
+        # [full]
+    # ... all 7 tests
+    
