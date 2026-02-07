@@ -709,8 +709,8 @@ class TestPyReParse(unittest.TestCase):
                 for cust in range(1):
                     f.write(f'CUSTOMER{cust+1}\n')
                     for tx in range(50):
-                        f.write(f'TX{tx} $10.00\n')
-                    f.write('TOTAL $500.00\n')
+                        f.write(f'TX{tx} $1.00\n')
+                    f.write('TOTAL $50.00\n')
                 f.write('END REPORT\n')
                 f.write('\n' * 100)  # Padding
             mock_path = f.name
@@ -725,6 +725,13 @@ class TestPyReParse(unittest.TestCase):
 
         tx_count = sum(1 for item in sec0['fields_list'] if 'tx_line' in item['match_def'])
         self.assertEqual(tx_count, 50)  # 1 cust * 50
+
+        # Check totals
+        tx_amts = [prp.money2decimal('amt', item['fields']['amt']) for item in sec0['fields_list'] if 'tx_line' in item['match_def']]
+        sec_total = sum(tx_amts)
+        cust_total_item = next(item for item in sec0['fields_list'] if 'cust_total' in item['match_def'])
+        self.assertEqual(cust_total_item['fields']['total'], f"${sec_total:.2f}")
+        self.assertEqual(Decimal('50.00'), sec_total)  # 50 * $1.00
 
         # Subs metadata
         sub_items = [item['fields']['current_subsection_parents'] for item in sec0['fields_list'] if 'current_subsection_parents' in item['fields']]
