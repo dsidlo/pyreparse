@@ -640,6 +640,7 @@ class TestPyReParse(unittest.TestCase):
             },
             'data': {
                 self.PRP.INDEX_RE_STRING: r'^data(?P<d>\d+)\s*$',
+                self.PRP.INDEX_RE_FLAGS: 0,
                 self.PRP.INDEX_RE_TRIGGER_ON: '{sec}'
             },
             'end': {

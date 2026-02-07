@@ -613,7 +613,8 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
                     # Capture the list of re_defs entries that match this line.
                     matched_defs.append(fld)
                     # Perform FLAG based operations...
-                    if self.re_defs[fld][rtrpc.INDEX_RE_FLAGS] & rtrpc.FLAG_NEW_SECTION:
+                    flags = self.re_defs[fld].get(rtrpc.INDEX_RE_FLAGS, 0)
+                    if flags & rtrpc.FLAG_NEW_SECTION:
                         # Increment the section counter...
                         self.section_count += 1
                         # Reset sectional flags and counters...
@@ -623,13 +624,13 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
                         self.re_defs[fld][rtrpc.INDEX_STATES][rtrpc.INDEX_ST_SECTION_LINES_MATCHED] = 1
                         self.re_defs[fld][rtrpc.INDEX_STATES][rtrpc.INDEX_ST_LAST_SECTION_LINE_MATCHED] = 1
                         self.re_defs[fld][rtrpc.INDEX_STATES][rtrpc.INDEX_ST_LAST_REPORT_LINE_MATCHED] = 1
-                    if self.re_defs[fld][rtrpc.INDEX_RE_FLAGS] & rtrpc.FLAG_END_OF_SECTION:
+                    if flags & rtrpc.FLAG_END_OF_SECTION:
                         if self.subsection_depth > 0:
                             self.subsection_depth -= 1
                             self.current_subsection_parents.pop()
                             self.subsection_line_count = 0
                         self.section_reset()  # Existing call after
-                    if self.re_defs[fld][rtrpc.INDEX_RE_FLAGS] & rtrpc.FLAG_NEW_SUBSECTION:
+                    if flags & rtrpc.FLAG_NEW_SUBSECTION:
                         self.subsection_depth += 1
                         self.current_subsection_parents.append(fld)
                         self.subsection_depth_counts[self.subsection_depth] += 1
@@ -641,7 +642,7 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
                     self.last_captured_fields['current_subsection_parents'] = list(self.current_subsection_parents)
                     self.last_captured_fields['subsection_line_count'] = self.subsection_line_count
 
-                    if self.re_defs[fld][rtrpc.INDEX_RE_FLAGS] & rtrpc.FLAG_RETURN_ON_MATCH:
+                    if flags & rtrpc.FLAG_RETURN_ON_MATCH:
                         return matched_defs, self.last_captured_fields
 
                 else:
@@ -765,31 +766,31 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
                 if regexp:
                     boundary_regexes.append((name, regexp, flags))
 
-        with open(file_path, 'r') as f:
-            lines = f.readlines()
-
         boundaries = []
         section_stack = []
-        for i, line in enumerate(lines, 1):
-            line_stripped = line.rstrip('\n')
-            for name, regexp, flags in boundary_regexes:
-                if m := regexp.match(line_stripped):
-                    if flags & self.FLAG_NEW_SECTION:
-                        if section_stack:
-                            start, sub_start = section_stack.pop()
-                            boundaries.append((start, i - 1))
-                        section_stack.append((i, None))
-                    elif flags & self.FLAG_NEW_SUBSECTION:
-                        if section_stack:
-                            section_stack[-1] = (section_stack[-1][0], i)
-                    elif flags & self.FLAG_END_OF_SECTION:
-                        if section_stack:
-                            start, sub_start = section_stack.pop()
-                            boundaries.append((start, i))
+        last_line = 0
+        with open(file_path, 'r') as f:
+            for i, line in enumerate(f, 1):
+                last_line = i
+                line_stripped = line.rstrip('\n')
+                for name, regexp, flags in boundary_regexes:
+                    if m := regexp.match(line_stripped):
+                        if flags & self.FLAG_NEW_SECTION:
+                            if section_stack:
+                                start, sub_start = section_stack.pop()
+                                boundaries.append((start, i - 1))
+                            section_stack.append((i, None))
+                        elif flags & self.FLAG_NEW_SUBSECTION:
+                            if section_stack:
+                                section_stack[-1] = (section_stack[-1][0], i)
+                        elif flags & self.FLAG_END_OF_SECTION:
+                            if section_stack:
+                                start, sub_start = section_stack.pop()
+                                boundaries.append((start, i))
 
         while section_stack:
             start, _ = section_stack.pop()
-            boundaries.append((start, len(lines)))
+            boundaries.append((start, last_line))
 
         return boundaries
 
