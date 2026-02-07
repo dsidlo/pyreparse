@@ -820,7 +820,6 @@ class TestPyReParse(unittest.TestCase):
             rtp.load_re_lines(TestPyReParse.test_re_lines)
             serial_sections = rtp.parse_file(mock_path)
 
-            global cb_txline_cnt, cb_rptid_cnt
             cb_txline_cnt = 0
             cb_rptid_cnt = 0
             rtp_stream = self.PRP()
@@ -896,7 +895,6 @@ class TestPyReParse(unittest.TestCase):
                 m, f = rtp_serial.match(line.rstrip('\n'))
                 serial_results.append((m, f))
 
-            global cb_txline_cnt, cb_rptid_cnt
             cb_txline_cnt = 0
             cb_rptid_cnt = 0
 
