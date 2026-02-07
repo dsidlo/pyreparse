@@ -26,6 +26,9 @@ class PyReParse:
     FLAG_END_OF_SECTION = 16    # Counters are set to 0
     FLAG_NEW_SUBSECTION = 32    # Start a subsection (nested under current section/parent)
 
+    KNOWN_FLAGS_MASK = (FLAG_RETURN_ON_MATCH | FLAG_NEW_SECTION | FLAG_ONCE_PER_SECTION | FLAG_ONCE_PER_REPORT |
+                        FLAG_END_OF_SECTION | FLAG_NEW_SUBSECTION)
+
     INDEX_RE_STRING = 're_string'
     INDEX_RE_FLAGS = 'flags'                         # Entry containing a patterns flags`.
     INDEX_RE_QUICK_CHECK = 're_quick_check'
@@ -81,6 +84,114 @@ class PyReParse:
         if regexp_pats is not None:
             self.load_re_lines(regexp_pats)
 
+    def validate_re_defs(self, patterns) -> None:
+        """
+        Validate the patterns data structure before loading.
+
+        Raises ValueError or TriggerDefException for invalid configurations.
+        """
+        prp = PyReParse
+        known_mask = prp.KNOWN_FLAGS_MASK
+
+        # Validate basic structure
+        for pat_name, pat_def in patterns.items():
+            if prp.INDEX_RE_STRING not in pat_def:
+                raise ValueError(f"Pattern '{pat_name}' missing required '{prp.INDEX_RE_STRING}' key.")
+            re_str = pat_def[prp.INDEX_RE_STRING]
+            if not isinstance(re_str, str) or len(re_str.strip()) == 0:
+                raise ValueError(f"Pattern '{pat_name}' '{prp.INDEX_RE_STRING}' must be a non-empty string.")
+
+            # Validate flags
+            if prp.INDEX_RE_FLAGS in pat_def:
+                flags = pat_def[prp.INDEX_RE_FLAGS]
+                if not isinstance(flags, int) or flags < 0:
+                    raise ValueError(f"Pattern '{pat_name}' '{prp.INDEX_RE_FLAGS}' must be a non-negative integer.")
+                if flags & ~known_mask != 0:
+                    raise ValueError(f"Pattern '{pat_name}' contains unknown flags: {flags & ~known_mask}")
+
+            # Validate triggers syntax
+            for trigger_key in [prp.INDEX_RE_TRIGGER_ON, prp.INDEX_RE_TRIGGER_OFF]:
+                if trigger_key in pat_def:
+                    trigger_text = pat_def[trigger_key]
+                    if not isinstance(trigger_text, str):
+                        raise ValueError(f"Pattern '{pat_name}' '{trigger_key}' must be a string.")
+
+                    # Simulate replacement for AST parsing
+                    func_body = trigger_text
+                    while True:
+                        m = re.match(r'.*((\<([^\>]+)\>)|(\{([^\}]+)\})).*', func_body, re.MULTILINE | re.DOTALL)
+                        if m is None:
+                            break
+                        elif m.group(2) is not None:
+                            # Variable
+                            var_name = m.group(2)
+                            if var_name == prp.TRIG_SYM_REPORT_LINE:
+                                func_body = func_body.replace(m.group(0), 'prp_inst.report_line_count')
+                            elif var_name == prp.TRIG_SYM_SECTION_COUNT:
+                                func_body = func_body.replace(m.group(0), 'prp_inst.section_count')
+                            elif var_name == prp.TRIG_SYM_SECTION_LINE:
+                                func_body = func_body.replace(m.group(0), 'prp_inst.section_line_count')
+                            elif var_name == prp.TRIG_SYM_SUBSECTION_DEPTH:
+                                func_body = func_body.replace(m.group(0), 'prp_inst.subsection_depth')
+                            elif var_name == prp.TRIG_SYM_SUBSECTION_LINE:
+                                func_body = func_body.replace(m.group(0), 'prp_inst.subsection_line_count')
+                            else:
+                                raise TriggerDefException(f"Unknown variable in '{pat_name}' '{trigger_key}': {m.group(0)}")
+                        elif m.group(5) is not None:
+                            # Pattern name
+                            pn = m.group(5)
+                            if pn not in patterns:
+                                raise TriggerDefException(f"Unknown pattern reference in '{pat_name}' '{trigger_key}': {pn}")
+                            func_body = func_body.replace(m.group(1),
+                                                          f"(prp_inst.re_defs['{pn}'][prp.INDEX_STATES][prp.INDEX_ST_SECTION_LINES_MATCHED] > 0)")
+
+                    # AST parse the body
+                    func_text = f"def dummy(prp_inst, pat_name): return {func_body}"
+                    try:
+                        ast.parse(func_text)
+                    except SyntaxError as e:
+                        raise TriggerDefException(f"Syntax error in '{pat_name}' '{trigger_key}': {e}")
+
+            # Validate NEW_SUBSECTION has parent trigger
+            if prp.INDEX_RE_FLAGS in pat_def:
+                flags = pat_def[prp.INDEX_RE_FLAGS]
+                if flags & prp.FLAG_NEW_SUBSECTION:
+                    trigger_on = pat_def.get(prp.INDEX_RE_TRIGGER_ON, '')
+                    if '{' not in trigger_on:
+                        raise ValueError(f"Pattern '{pat_name}' has FLAG_NEW_SUBSECTION but '{prp.INDEX_RE_TRIGGER_ON}' lacks parent pattern reference: {trigger_on}")
+
+        # Build dependency graph for cycle detection
+        graph = {pat_name: [] for pat_name in patterns}
+        for pat_name, pat_def in patterns.items():
+            for trigger_key in [prp.INDEX_RE_TRIGGER_ON, prp.INDEX_RE_TRIGGER_OFF]:
+                if trigger_key in pat_def:
+                    trigger_text = pat_def[trigger_key]
+                    refs = re.findall(r'\{([^\}]+)\}', trigger_text)
+                    for ref in refs:
+                        if ref in patterns:
+                            graph[pat_name].append(ref)
+
+        # DFS for cycle detection
+        visited = set()
+        rec_stack = set()
+
+        def has_cycle(node):
+            visited.add(node)
+            rec_stack.add(node)
+            for neighbor in graph[node]:
+                if neighbor not in visited:
+                    if has_cycle(neighbor):
+                        return True
+                elif neighbor in rec_stack:
+                    return True
+            rec_stack.remove(node)
+            return False
+
+        for node in graph:
+            if node not in visited:
+                if has_cycle(node):
+                    raise ValueError(f"Cycle detected in trigger dependencies involving '{node}'")
+
     def set_file_name(self, file_name):
         self.file_name = file_name
 
@@ -127,6 +238,7 @@ class PyReParse:
                 )
 
         """
+        self.validate_re_defs(in_hash)
         self.re_defs = {}
         self.all_named_fields = {}
         return self.__append_re_defs(in_hash)
@@ -333,13 +445,6 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
                 print(f'*** Exception: \"{e}\", Hit on Compiling trigger_Off [{fld}]! ',
                       f'\"\"\"{self.re_defs[fld][rtrpc.INDEX_RE_TRIGGER_OFF]}\"\"\"')
                 raise
-
-            # Warn if NEW_SUBSECTION lacks parent trigger
-            flags = self.re_defs[fld].get(rtrpc.INDEX_RE_FLAGS, 0)
-            if flags & rtrpc.FLAG_NEW_SUBSECTION:
-                trigger_on_text = self.re_defs[fld].get(rtrpc.INDEX_RE_TRIGGER_ON, '')
-                if '{' not in trigger_on_text:
-                    print(f'Warning: [{fld}] has FLAG_NEW_SUBSECTION but TRIGGER_ON "{trigger_on_text}" lacks {{parent_pattern}} reference.')
 
 
         return self.get_all_fld_names()
