@@ -448,54 +448,15 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
             prefix_matcher = None
             try:
                 raw_pat = in_hash[fld][rtrpc.INDEX_RE_STRING]
-                # Clean pattern for prefix extraction (simulate re.X)
-                lines = raw_pat.splitlines()
-                clean_pat = ''
-                for line in lines:
-                    stripped = line.lstrip(' \t')
-                    if stripped and not stripped.startswith('#'):
-                        if '#' in stripped:
-                            stripped = stripped.split('#', 1)[0]
-                        clean_pat += stripped + ' '
-                clean_pat = clean_pat.strip()
-                if not clean_pat:
-                    raise ValueError("Empty pattern")
-                comped_re = re.compile(clean_pat, re.X)
+                comped_re = re.compile(raw_pat, re.X)
 
-                # Extract literal prefix from clean_pat
-                pat = clean_pat
-                if pat.startswith('^'):
-                    pat = pat[1:]
-                i = 0
-                prefix = ''
-                length = len(pat)
-                while i < length:
-                    c = pat[i]
-                    if c.isspace():
-                        i += 1
-                        continue
-                    if c == '\\':
-                        i += 1
-                        if i >= length:
-                            break
-                        next_c = pat[i]
-                        if next_c.lower() in 'sdw':
-                            break  # Skip special \s \d etc.
-                        else:
-                            prefix += next_c
-                            i += 1
-                    elif c in '.^$*+?(){}|[]':
-                        break
-                    else:
-                        prefix += c
-                        i += 1
+                prefix = PyReParse.extract_literal_prefix(raw_pat, rtrpc.PREFIX_LEN)
                 if len(prefix) >= 3:
                     prefix_matcher = lambda line: line.startswith(prefix)
+            except re.error as e:
+                raise ValueError(f"Failed to compile regex for pattern '{fld}': {e}")
             except Exception as e:
-                print(f'*** Exception: \"{e}\", Hit on Compiling Regexp [{fld}]! ',
-                      f'\"\"\"{in_hash[fld][rtrpc.INDEX_RE_STRING]}\"\"\"')
-                comped_re = None
-                prefix_matcher = None
+                raise ValueError(f"Unexpected error for pattern '{fld}': {e}")
 
             # Place the named regexp pattern into the data structure of named pattterns...
             self.re_defs[fld] = self.dict_merge(self.re_defs[fld],
