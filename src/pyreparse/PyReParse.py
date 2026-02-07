@@ -30,6 +30,50 @@ class PyReParse:
 
     PREFIX_LEN = 12
 
+    @staticmethod
+    def extract_literal_prefix(raw_pat, max_len=12):
+        i = 0
+        length = len(raw_pat)
+        prefix = ''
+        in_comment = False
+        escaped = False
+        while i < length and len(prefix) < max_len:
+            c = raw_pat[i]
+            if escaped:
+                prefix += c
+                escaped = False
+                i += 1
+                continue
+            if in_comment:
+                if c == ')':
+                    in_comment = False
+                i += 1
+                continue
+            if c.isspace():
+                i += 1
+                continue
+            if c == '\\':
+                escaped = True
+                i += 1
+                continue
+            if i + 2 < length and raw_pat[i:i+3] == '(?#':
+                in_comment = True
+                i += 3
+                continue
+            if c == '#':
+                i += 1
+                while i < length and raw_pat[i] != '\n':
+                    i += 1
+                continue
+            if c in '.^$*+?(){}|[]\\':
+                if c == '^' and len(prefix) == 0:
+                    i += 1
+                    continue
+                break
+            prefix += c
+            i += 1
+        return prefix if len(prefix) >= 3 else ''
+
     KNOWN_FLAGS_MASK = (FLAG_RETURN_ON_MATCH | FLAG_NEW_SECTION | FLAG_ONCE_PER_SECTION | FLAG_ONCE_PER_REPORT |
                         FLAG_END_OF_SECTION | FLAG_NEW_SUBSECTION)
 
@@ -351,9 +395,7 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
         try:
             ast_tree = ast.parse(func_text)
         except SyntaxError as e:
-            ex_msg = f"Syntax error exception: {e}\n  - Function: {func_name}"
-            print(ex_msg)
-            raise SyntaxError(ex_msg)
+            raise SyntaxError(f"Syntax error in trigger '{trigger_name}' for pattern '{pat_name}': {e}")
         # Yea... Don't execute PyReparse scripts from just anyone.
         # Consider that the PyReparse
         # Execute the function
@@ -487,8 +529,6 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
                     self.re_defs[fld][rtrpc.INDEX_RE_TRIGGER_ON_TEXT], = \
                         self.__create_trigger(fld, rtrpc.INDEX_RE_TRIGGER_ON)
                 except TriggerDefException as e:
-                    print(f'*** Exception: \"{e}\", Hit on Compiling trigger_On [{fld}]! ',
-                          f'\"\"\"{self.re_defs[fld][rtrpc.INDEX_RE_TRIGGER_ON]}\"\"\"')
                     raise
 
             ''' Compile trigger_off...
@@ -500,8 +540,6 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
                     self.re_defs[fld][rtrpc.INDEX_RE_TRIGGER_OFF_TEXT] = \
                         self.__create_trigger(fld, rtrpc.INDEX_RE_TRIGGER_OFF)
                 except TriggerDefException as e:
-                    print(f'*** Exception: \"{e}\", Hit on Compiling trigger_Off [{fld}]! ',
-                          f'\"\"\"{self.re_defs[fld][rtrpc.INDEX_RE_TRIGGER_OFF]}\"\"\"')
                     raise
 
 
@@ -798,11 +836,7 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
         try:
             ret_val = Decimal(re_str)
         except Exception as e:
-            print(f'*** Exception: \"{e}\", Failed to convert string to Decimal [{in_str}] -> [{re_str}]')
-            print(f'    Field [{fld}] Report Line [{self.report_line_count}] ',
-                  f'Section Number [{self.section_count}] ',
-                  f'Section Line [{self.section_line_count}]')
-            ret_val = Decimal('0')  # Fallback to 0 on error
+            ret_val = Decimal('0')
         return ret_val
 
     def _find_section_boundaries(self, file_path: str) -> List[Tuple[int, int]]:
