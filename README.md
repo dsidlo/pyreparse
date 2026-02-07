@@ -34,6 +34,7 @@ due to a need to tweak the main regexp, or possibly a corrupt input line.
   - Logic for counting report lines and sections within a report.
   - PyReParse uses named-capture-groups and returns captured values in a dictionary. This eases the ability to capture values for transformation and storage.
   - One can associate a RegExp pattern to a callback so that one can perform custom calculations, validations, and transformations to the captured values of interest.
+  - Supports exact decimal arithmetic for financial data via `money2decimal` to avoid float precision errors.
 <br>
 
 ## Installation...
@@ -124,6 +125,26 @@ As create the parsing rules data structure can be a bit daunting for someone new
 <br>
 
 Please check out [pyreparse_example.py](pyreparse/example/pyreparse_example.py), you can used this code as a template to guide you in the creation of your own parsing engine.
+
+#### Precise Money Handling with Decimal
+
+For precise money handling, use `money2decimal()` instead of `money2float()` to convert captured strings to `decimal.Decimal`. Import `from decimal import Decimal` and update sums/validations accordingly.
+
+Example:
+```python
+elif match_def == ['tx_line']:
+    m_flds = matched_fields
+    m_flds['nsf_fee'] = prp.money2decimal('nsf_fee', m_flds['nsf_fee'])
+    # Similar for other fields like 'tx_amt', 'balance'
+    txn_lines.append(m_flds)
+
+# Validation sum
+nsf_tot = Decimal('0')
+for flds in txn_lines:
+    nsf_tot += flds['nsf_fee']
+if nsf_tot == grand_total:
+    print(f'*** Section [{prp.section_count}] Parsing Completed.')
+```
 
 ## The PyReParse Data Structure of Patterns
 <br>

@@ -3,6 +3,7 @@
 import sys
 import re
 import ast
+from decimal import Decimal
 
 '''
 # TODO: Only hit this regexp between lines A and B of a given Section.
@@ -542,8 +543,20 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
             ret_val = float(re_str)
         except Exception as e:
             print(f'*** Exception: \"{e}\", Failed to convert string to float [{in_str}] -> [{re_str}]')
-            print(f'    Field [field] Report Line [{self.report_line_count}] ',
+            print(f'    Field [{fld}] Report Line [{self.report_line_count}] ',
                   f'Section Number [{self.section_count}] ',
                   f'Section Line [{self.section_line_count}]')
 
+        return ret_val
+
+    def money2decimal(self, fld, in_str):
+        re_str = re.sub(r'[\,\s\$]', r'', in_str)
+        try:
+            ret_val = Decimal(re_str)
+        except Exception as e:
+            print(f'*** Exception: \"{e}\", Failed to convert string to Decimal [{in_str}] -> [{re_str}]')
+            print(f'    Field [{fld}] Report Line [{self.report_line_count}] ',
+                  f'Section Number [{self.section_count}] ',
+                  f'Section Line [{self.section_line_count}]')
+            ret_val = Decimal('0')  # Fallback to 0 on error
         return ret_val

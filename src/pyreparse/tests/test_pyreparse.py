@@ -2,6 +2,7 @@
 
 import unittest
 from pyreparse import PyReParse
+from decimal import Decimal
 
 '''
 Tests for pyreparse module...
@@ -277,9 +278,9 @@ class TestPyReParse(unittest.TestCase):
         run_date = ''
         run_time = ''
         txn_lines = []
-        total_nsf = 0
-        total_odt = 0
-        grand_total = 0
+        total_nsf = Decimal('0')
+        total_odt = Decimal('0')
+        grand_total = Decimal('0')
 
         with open(file_path, 'r') as txt_file:
             for line in txt_file:
@@ -288,6 +289,7 @@ class TestPyReParse(unittest.TestCase):
                     report_id = matched_fields['report_id']
                     # Reset tx_lines array on new section...
                     txn_lines = []
+
                 elif match_def == ['file_date']:
                     file_date = matched_fields['file_date']
                 elif match_def == ['run_date']:
@@ -296,33 +298,36 @@ class TestPyReParse(unittest.TestCase):
                 elif match_def == ['tx_line']:
                     m_flds = matched_fields
                     fld = 'nsf_fee'
-                    m_flds[fld] = rtp.money2float(fld, m_flds[fld])
+                    m_flds[fld] = rtp.money2decimal(fld, m_flds[fld])
                     fld = 'tx_amt'
-                    m_flds[fld] = rtp.money2float(fld, m_flds[fld])
+                    m_flds[fld] = rtp.money2decimal(fld, m_flds[fld])
                     fld = 'balance'
-                    m_flds[fld] = rtp.money2float(fld, m_flds[fld])
+                    m_flds[fld] = rtp.money2decimal(fld, m_flds[fld])
                     txn_lines.append(m_flds)
                 elif match_def == ['end_tx_lines']:
                     pass
                 elif match_def == ['total_nsf']:
                     m_flds = matched_fields
                     fld = 'total_nsf'
-                    total_nsf = rtp.money2float(fld, m_flds[fld])
+                    total_nsf = rtp.money2decimal(fld, m_flds[fld])
                 elif match_def == ['total_odt']:
                     m_flds = matched_fields
                     fld = 'total_odt'
-                    total_odt = rtp.money2float(fld, m_flds[fld])
-                    self.assertGreaterEqual(0, total_odt)
+                    total_odt = rtp.money2decimal(fld, m_flds[fld])
+                    self.assertGreaterEqual(Decimal('0'), total_odt)
                 elif match_def == ['grand_total']:
                     m_flds = matched_fields
                     fld = 'grand_total'
-                    grand_total = rtp.money2float(fld, m_flds[fld])
+                    grand_total = rtp.money2decimal(fld, m_flds[fld])
 
                     # Run totals & validations
-                    nsf_tot = 0
+                    nsf_tot = Decimal('0')
                     for flds in txn_lines:
                         nsf_tot += flds['nsf_fee']
                     self.assertEqual(nsf_tot, grand_total)
 
                     # Reset tx_lines array at end of section...
                     txn_lines = []
+
+    def test_decimal_precision(self):
+        self.assertEqual(Decimal('0.10') + Decimal('0.20'), Decimal('0.30'))

@@ -6,6 +6,7 @@ This is a template example for creating your own PyReParse parser engine.
 '''
 
 from pyreparse import PyReParse
+from decimal import Decimal
 
 
 cb_txline_cnt = 0
@@ -214,29 +215,29 @@ class PyReParse_Example():
                 elif match_def == ['tx_line']:
                     m_flds = matched_fields
                     fld = 'nsf_fee'
-                    m_flds[fld] = prp.money2float(fld, m_flds[fld])
+                    m_flds[fld] = prp.money2decimal(fld, m_flds[fld])
                     fld = 'tx_amt'
-                    m_flds[fld] = prp.money2float(fld, m_flds[fld])
+                    m_flds[fld] = prp.money2decimal(fld, m_flds[fld])
                     fld = 'balance'
-                    m_flds[fld] = prp.money2float(fld, m_flds[fld])
+                    m_flds[fld] = prp.money2decimal(fld, m_flds[fld])
                     txn_lines.append(m_flds)
                 elif match_def == ['end_tx_lines']:
                     pass
                 elif match_def == ['total_nsf']:
                     m_flds = matched_fields
                     fld = 'total_nsf'
-                    total_nsf = prp.money2float(fld, m_flds[fld])
+                    total_nsf = prp.money2decimal(fld, m_flds[fld])
                 elif match_def == ['total_odt']:
                     m_flds = matched_fields
                     fld = 'total_odt'
-                    total_odt = prp.money2float(fld, m_flds[fld])
+                    total_odt = prp.money2decimal(fld, m_flds[fld])
                 elif match_def == ['grand_total']:
                     m_flds = matched_fields
                     fld = 'grand_total'
-                    grand_total = prp.money2float(fld, m_flds[fld])
+                    grand_total = prp.money2decimal(fld, m_flds[fld])
 
                     # Run totals & validations
-                    nsf_tot = 0
+                    nsf_tot = Decimal('0')
                     for flds in txn_lines:
                         nsf_tot += flds['nsf_fee']
 
