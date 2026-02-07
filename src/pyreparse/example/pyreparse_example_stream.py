@@ -73,11 +73,8 @@ class PyReParse_Example():
 
         cb_txline_cnt += 1
 
-<<<<<<< HEAD
-=======
     PRP = PyReParse
 
->>>>>>> d864bc27a9f24fc2d2f78dea36f2368809f29385
     '''
     This is the data structure that contains a set of RegExp(s) that will be run against a text report.
     It is important to verify the the regular expressions match to expected lines.
