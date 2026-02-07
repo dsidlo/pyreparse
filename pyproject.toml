@@ -18,8 +18,16 @@ classifiers = [
     "Topic :: Text Processing",
     "Operating System :: OS Independent",
 ]
+dependencies = [
+    "astunparse>=1.6.3",
+]
 
 [project.urls]
 "Homepage" = "https://github.com/dsidlo/pyreparse"
 "Bug Tracker" = "https://github.com/dsidlo/pyreparse/issues"
+
+[dependency-groups]
+dev = [
+    "pytest>=7.4.4",
+]
 

@@ -169,20 +169,20 @@ class PyReParse_Example():
                 r'^Total\ NSF:\s*(?P<total_nsf>[\-\$\ \d\,\.]+)',
             PRP.INDEX_RE_FLAGS: PRP.FLAG_RETURN_ON_MATCH | PRP.FLAG_ONCE_PER_SECTION,
             PRP.INDEX_RE_TRIGGER_ON: '{end_tx_lines}',
-            PRP.INDEX_RE_TRIGGER_OFF: '{total_nsf}'
+            PRP.INDEX_RE_TRIGGER_OFF: '{total_nsf}' # Insufficient Funds Total
         },
         'total_odt': {
             PRP.INDEX_RE_STRING:
                 r'^Total\ ODT:\s*(?P<total_odt>[\-\$\ \d\,\.]+)',
             PRP.INDEX_RE_FLAGS: PRP.FLAG_RETURN_ON_MATCH | PRP.FLAG_ONCE_PER_SECTION,
-            PRP.INDEX_RE_TRIGGER_ON: '{total_nsf}',
+            PRP.INDEX_RE_TRIGGER_ON: '{total_nsf}', # Insufficient Funds Total
             PRP.INDEX_RE_TRIGGER_OFF: '{total_odt}'
         },
         'grand_total': {
             PRP.INDEX_RE_STRING:
                 r'^Grand\ Total:\s*(?P<grand_total>[\-\$\ \d\,\.]+)',
             PRP.INDEX_RE_FLAGS: PRP.FLAG_RETURN_ON_MATCH | PRP.FLAG_END_OF_SECTION,
-            PRP.INDEX_RE_TRIGGER_ON: '{total_odt}',
+            PRP.INDEX_RE_TRIGGER_ON: '{total_odt}', # Overdraft Total
             PRP.INDEX_RE_TRIGGER_OFF: '{grand_total}'
         }
     }

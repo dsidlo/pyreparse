@@ -2,9 +2,6 @@
 
 import sys
 import re
-import os
-import unittest
-import inspect
 import ast
 
 '''
@@ -32,7 +29,7 @@ class PyReParse:
     FLAG_END_OF_SECTION = 16    # Counters are set to 0
 
     INDEX_RE_STRING = 're_string'
-    INDEX_RE_FLAGS = 'flags'
+    INDEX_RE_FLAGS = 'flags'                         # Entry containing a patterns flags`.
     INDEX_RE_QUICK_CHECK = 're_quick_check'
     INDEX_RE_REGEXP = 'regexp'                       # Compiled
     INDEX_RE_TRIGGER_ON = 'trigger_on'               # Entry - Trigger_On Assigned by User
@@ -43,7 +40,6 @@ class PyReParse:
     INDEX_RE_TRIGGER_OFF_TEXT = 'trigger_off_text'   # Entry - Trigger_OFF Text Created by PyReParse
 
     INDEX_RE_CALLBACK = 'callback' # Entry containing a patterns assigned callback.
-    INDEX_RE_FLAGS = 'flags'  # Entry containing a patterns flags`.
 
     INDEX_STATES = 'states'  # Dict of a patterns states.
     INDEX_ST_REPORT_LINES_MATCHED = 'report_lines_matched'
@@ -95,6 +91,27 @@ class PyReParse:
         return py
 
     def load_re_lines(self, in_hash):
+        """
+        Load a PyReParse regexps data structure into this PyRePrase instance.
+
+        :param in_hash:
+        :return:
+
+        The PyReParse regexp data structure...
+
+        <PyReParse_Data-Structure_Name>> =
+                {
+                    '<regexp_name>': {
+                        PRP.INDEX_RE_STRING: r'''<regular expression with named capture groups>''',
+                        PRP.INDEX_RE_FLAGS: <PyReParse Flags (or'ed together with '|')>
+                        PRP.INDEX_RE_TRIGGER_ON: '<Trigger-On Logic>',
+                        PRP.INDEX_RE_TRIGGER_OFF: '<Trigger-Off Logic>',
+                        PRP.INDEX_RE_CALLBACK: <Function Reference to Callback>,
+                    },
+                    ...
+                )
+
+        """
         self.re_defs = {}
         self.all_named_fields = {}
         return self.__append_re_defs(in_hash)
@@ -179,7 +196,6 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
                     func_body = func_body.replace(m.group(0), f'prp_inst.section_line_count')
                 else:
                     raise TriggerDefException(f'Unknown variable: {m.group(0)}')
-                    sys,exit(1)
             elif m and (m.group(5) is not None):
                 # We have a pattern-name...
                 pn = m.group(5)
@@ -189,12 +205,20 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
                                                   '][PRP.INDEX_STATES][PRP.INDEX_ST_SECTION_LINES_MATCHED] > 0)')
                 else:
                     raise TriggerDefException(f'Unknown pattern-name: {pn}')
-                    sys,exit(1)
 
         # Create a python function expression...
         func_text = re.sub(r'<func_body>', func_body, func_def)
-        # Run the function expression throug an AST to validate it.
-        ast_tree = ast.parse(func_text)
+        # Run the function expression through an AST to validate it.
+        # Bad expressions will throw an exception.
+        try:
+            ast_tree = ast.parse(func_text)
+        except SyntaxError as e:
+            ex_msg = f"Syntax error exception: {e}\n  - Function: {func_name}"
+            print(ex_msg)
+            raise SyntaxError(ex_msg)
+        # Yea... Don't execute PyReparse scripts from just anyone.
+        # Consider that the PyReparse
+        # Execute the function
         exec(func_text)
 
         # Get a reference to the function that we just created.
@@ -233,6 +257,7 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
         '''
 
         rtrpc = PyReParse
+        comped_re = None
 
         for fld in in_hash:
             # INDEX_RE
@@ -502,6 +527,7 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
 
     def money2float(self, fld, in_str):
         re_str = re.sub('[\,\s\$]', '', in_str)
+        ret_val = None
         try:
             ret_val = float(re_str)
         except Exception as e:
