@@ -1,8 +1,22 @@
 # PyReparse Notes
 
-## Add and LLM Help
+
+## Intereting Features
+
+### Add and LLM Help
 
   - Add and LLM Helper to get a Parsing Engine Started.
+
+### Create a Structured Report Generator for Testing
+
+  - Create a structured report generator.
+  - It should be easy to define the report structure.
+  - One should be able to define how negative values are output
+    - -$999.99 ($999.99) $(999.99) $-999.99 etc.. 
+  - Section tags
+  - Totals tags
+  - Columnar final total
+  - etc...
 
 ## Using Decimal instead of Floats for Money
 
