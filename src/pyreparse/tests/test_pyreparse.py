@@ -336,8 +336,272 @@ class TestPyReParse(unittest.TestCase):
         self.assertEqual(Decimal('0.10') + Decimal('0.20'), Decimal('0.30'))
 
     def test_subsection_basics(self):
-        # [full test code as above]
+        patterns = {
+            'sec_start': {
+                self.PRP.INDEX_RE_STRING: r'^(?P<sec>SEC)\s*$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_NEW_SECTION | self.PRP.FLAG_RETURN_ON_MATCH,
+                self.PRP.INDEX_RE_TRIGGER_ON: 'True',
+                self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
+            },
+            'sub_start': {
+                self.PRP.INDEX_RE_STRING: r'^(?P<sub>SUB)\s*$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_NEW_SUBSECTION | self.PRP.FLAG_RETURN_ON_MATCH,
+                self.PRP.INDEX_RE_TRIGGER_ON: '{sec_start}',
+                self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
+            }
+        }
+        rtp = self.PRP()
+        rtp.load_re_lines(patterns)
+        m, f = rtp.match('SEC\n')
+        self.assertEqual(['sec_start'], m)
+        self.assertEqual(1, rtp.section_count)
+        self.assertEqual(0, rtp.subsection_depth)
+        m, f = rtp.match('SUB\n')
+        self.assertEqual(['sub_start'], m)
+        self.assertEqual(1, rtp.subsection_depth)
+        self.assertEqual(('sub_start',), rtp.get_current_subsection())
+        self.assertEqual(1, f['subsection_depth'])
+        self.assertEqual(1, f['subsection_line_count'])
+        self.assertEqual({
+            'depth': 1,
+            'parents': ['sub_start'],
+            'max_depth': 1,
+            'counts': {1: 1}
+        }, rtp.get_subsection_info())
+        rtp.section_reset()
+        self.assertEqual(0, rtp.subsection_depth)
+
     def test_subsection_triggers(self):
-        # [full]
-    # ... all 7 tests
+        patterns = {
+            'sec_start': {
+                self.PRP.INDEX_RE_STRING: r'^(?P<sec>SEC)\s*$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_NEW_SECTION | self.PRP.FLAG_RETURN_ON_MATCH,
+                self.PRP.INDEX_RE_TRIGGER_ON: 'True',
+                self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
+            },
+            'sub_start': {
+                self.PRP.INDEX_RE_STRING: r'^(?P<sub>SUB)\s*$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_NEW_SUBSECTION | self.PRP.FLAG_RETURN_ON_MATCH,
+                self.PRP.INDEX_RE_TRIGGER_ON: '{sec_start}',
+                self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
+            },
+            'depth_trigger': {
+                self.PRP.INDEX_RE_STRING: r'^(?P<trig>DEPTHTRIG)\s*$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_RETURN_ON_MATCH,
+                self.PRP.INDEX_RE_TRIGGER_ON: '<SUBSECTION_DEPTH> == 1 and {sub_start}',
+                self.PRP.INDEX_RE_TRIGGER_OFF: '{depth_trigger}'
+            }
+        }
+        rtp = self.PRP()
+        rtp.load_re_lines(patterns)
+        m, f = rtp.match('SEC\n')
+        self.assertEqual(['sec_start'], m)
+        m, f = rtp.match('DEPTHTRIG\n')
+        self.assertEqual(None, m)
+        m, f = rtp.match('SUB\n')
+        self.assertEqual(['sub_start'], m)
+        m, f = rtp.match('DEPTHTRIG\n')
+        self.assertEqual(['depth_trigger'], m)
+
+    def test_nested_subsections(self):
+        patterns = {
+            'sec_start': {
+                self.PRP.INDEX_RE_STRING: r'^(?P<sec>SEC)\s*$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_NEW_SECTION | self.PRP.FLAG_RETURN_ON_MATCH,
+                self.PRP.INDEX_RE_TRIGGER_ON: 'True',
+                self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
+            },
+            'sub1_start': {
+                self.PRP.INDEX_RE_STRING: r'^(?P<sub1>SUB1)\s*$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_NEW_SUBSECTION | self.PRP.FLAG_RETURN_ON_MATCH,
+                self.PRP.INDEX_RE_TRIGGER_ON: '{sec_start}',
+                self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
+            },
+            'sub2_start': {
+                self.PRP.INDEX_RE_STRING: r'^(?P<sub2>SUB2)\s*$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_NEW_SUBSECTION | self.PRP.FLAG_RETURN_ON_MATCH,
+                self.PRP.INDEX_RE_TRIGGER_ON: '{sub1_start}',
+                self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
+            },
+            'ender': {
+                self.PRP.INDEX_RE_STRING: r'^(?P<end>ENDER)\s*$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_END_OF_SECTION | self.PRP.FLAG_RETURN_ON_MATCH,
+                self.PRP.INDEX_RE_TRIGGER_ON: '{sub2_start}',
+                self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
+            },
+            'ender2': {
+                self.PRP.INDEX_RE_STRING: r'^(?P<end2>ENDER2)\s*$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_END_OF_SECTION | self.PRP.FLAG_RETURN_ON_MATCH,
+                self.PRP.INDEX_RE_TRIGGER_ON: '{ender}',
+                self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
+            }
+        }
+        rtp = self.PRP()
+        rtp.load_re_lines(patterns)
+        m, f = rtp.match('SEC\n')
+        self.assertEqual(['sec_start'], m)
+        self.assertEqual(1, rtp.section_count)
+        self.assertEqual(0, rtp.subsection_depth)
+        m, f = rtp.match('SUB1\n')
+        self.assertEqual(['sub1_start'], m)
+        self.assertEqual(1, rtp.subsection_depth)
+        self.assertEqual(('sub1_start',), rtp.get_current_subsection())
+        m, f = rtp.match('SUB2\n')
+        self.assertEqual(['sub2_start'], m)
+        self.assertEqual(2, rtp.subsection_depth)
+        self.assertEqual(('sub1_start', 'sub2_start'), rtp.get_current_subsection())
+        m, f = rtp.match('ENDER\n')
+        self.assertEqual(['ender'], m)
+        self.assertEqual(0, rtp.subsection_depth)
+        self.assertEqual((), rtp.get_current_subsection())
+        m, f = rtp.match('ENDER2\n')
+        self.assertEqual(['ender2'], m)
+        self.assertEqual(0, rtp.subsection_depth)
+        self.assertEqual((), rtp.get_current_subsection())
+        self.assertEqual(2, rtp.get_max_subsection_depth())
+        self.assertEqual({1: 1, 2: 1}, rtp.get_subsection_depth_counts())
+
+    def test_subsection_reset(self):
+        patterns = {
+            'sec_start': {
+                self.PRP.INDEX_RE_STRING: r'^(?P<sec>SEC)\s*$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_NEW_SECTION | self.PRP.FLAG_RETURN_ON_MATCH,
+                self.PRP.INDEX_RE_TRIGGER_ON: 'True',
+                self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
+            },
+            'sub1_start': {
+                self.PRP.INDEX_RE_STRING: r'^(?P<sub1>SUB1)\s*$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_NEW_SUBSECTION | self.PRP.FLAG_RETURN_ON_MATCH,
+                self.PRP.INDEX_RE_TRIGGER_ON: '{sec_start}',
+                self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
+            },
+            'sub2_start': {
+                self.PRP.INDEX_RE_STRING: r'^(?P<sub2>SUB2)\s*$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_NEW_SUBSECTION | self.PRP.FLAG_RETURN_ON_MATCH,
+                self.PRP.INDEX_RE_TRIGGER_ON: '{sub1_start}',
+                self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
+            },
+            'ender': {
+                self.PRP.INDEX_RE_STRING: r'^(?P<end>ENDER)\s*$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_END_OF_SECTION | self.PRP.FLAG_RETURN_ON_MATCH,
+                self.PRP.INDEX_RE_TRIGGER_ON: '{sub2_start}',
+                self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
+            }
+        }
+        rtp = self.PRP()
+        rtp.load_re_lines(patterns)
+        m, f = rtp.match('SEC\n')
+        m, f = rtp.match('SUB1\n')
+        m, f = rtp.match('SUB2\n')
+        self.assertEqual(2, rtp.subsection_depth)
+        m, f = rtp.match('ENDER\n')
+        self.assertEqual(0, rtp.subsection_depth)
+        self.assertEqual((), rtp.get_current_subsection())
+        # NEW_SECTION resets all
+        m, f = rtp.match('SEC\n')
+        self.assertEqual(0, rtp.subsection_depth)
+        self.assertEqual((), rtp.get_current_subsection())
+        self.assertEqual(2, rtp.section_count)
+        # report_reset clears max/counts
+        rtp.report_reset()
+        self.assertEqual(0, rtp.get_max_subsection_depth())
+        self.assertEqual({}, rtp.get_subsection_depth_counts())
+
+    def test_exposure_methods(self):
+        patterns = {
+            'sec_start': {
+                self.PRP.INDEX_RE_STRING: r'^(?P<sec>SEC)\s*$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_NEW_SECTION | self.PRP.FLAG_RETURN_ON_MATCH,
+                self.PRP.INDEX_RE_TRIGGER_ON: 'True',
+                self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
+            },
+            'sub1_start': {
+                self.PRP.INDEX_RE_STRING: r'^(?P<sub1>SUB1)\s*$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_NEW_SUBSECTION | self.PRP.FLAG_RETURN_ON_MATCH,
+                self.PRP.INDEX_RE_TRIGGER_ON: '{sec_start}',
+                self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
+            },
+            'sub2_start': {
+                self.PRP.INDEX_RE_STRING: r'^(?P<sub2>SUB2)\s*$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_NEW_SUBSECTION | self.PRP.FLAG_RETURN_ON_MATCH,
+                self.PRP.INDEX_RE_TRIGGER_ON: '{sub1_start}',
+                self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
+            }
+        }
+        rtp = self.PRP()
+        rtp.load_re_lines(patterns)
+        self.assertEqual(0, rtp.get_subsection_depth())
+        self.assertEqual((), rtp.get_current_subsection())
+        self.assertEqual(0, rtp.get_max_subsection_depth())
+        self.assertEqual({}, rtp.get_subsection_depth_counts())
+        self.assertEqual({
+            'depth': 0,
+            'parents': [],
+            'max_depth': 0,
+            'counts': {}
+        }, rtp.get_subsection_info())
+        m, f = rtp.match('SEC\n')
+        m, f = rtp.match('SUB1\n')
+        self.assertEqual(1, rtp.get_subsection_depth())
+        self.assertEqual(('sub1_start',), rtp.get_current_subsection())
+        self.assertEqual(1, rtp.get_max_subsection_depth())
+        self.assertEqual({1: 1}, rtp.get_subsection_depth_counts())
+        self.assertEqual({
+            'depth': 1,
+            'parents': ['sub1_start'],
+            'max_depth': 1,
+            'counts': {1: 1}
+        }, rtp.get_subsection_info())
+        m, f = rtp.match('SUB2\n')
+        self.assertEqual(2, rtp.get_subsection_depth())
+        self.assertEqual(('sub1_start', 'sub2_start'), rtp.get_current_subsection())
+        self.assertEqual(2, rtp.get_max_subsection_depth())
+        self.assertEqual({1: 1, 2: 1}, rtp.get_subsection_depth_counts())
+        self.assertEqual({
+            'depth': 2,
+            'parents': ['sub1_start', 'sub2_start'],
+            'max_depth': 2,
+            'counts': {1: 1, 2: 1}
+        }, rtp.get_subsection_info())
+
+    def test_error_cases(self):
+        # Orphan sub without parent trigger
+        orphan_patterns = {
+            'orphan_sub': {
+                self.PRP.INDEX_RE_STRING: r'^(?P<orphan>SUB)\s*$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_NEW_SUBSECTION | self.PRP.FLAG_RETURN_ON_MATCH,
+                self.PRP.INDEX_RE_TRIGGER_ON: 'True',
+                self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
+            }
+        }
+        rtp = self.PRP()
+        f = io.StringIO()
+        with redirect_stdout(f):
+            rtp.load_re_lines(orphan_patterns)
+        self.assertIn('Warning: [orphan_sub] has FLAG_NEW_SUBSECTION but TRIGGER_ON "True" lacks {parent_pattern} reference.', f.getvalue())
+
+        # Bad symbol in trigger
+        bad_patterns = {
+            'bad': {
+                self.PRP.INDEX_RE_STRING: r'^(?P<bad>BAD)\s*$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_RETURN_ON_MATCH,
+                self.PRP.INDEX_RE_TRIGGER_ON: '<BAD_SYM> == 1',
+                self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
+            }
+        }
+        rtp = self.PRP()
+        self.assertRaises(self.PRP.TriggerDefException, rtp.load_re_lines, bad_patterns)
+
+    def test_with_existing(self):
+        rtp = self.PRP()
+        rtp.load_re_lines(self.test_re_lines)
+        for _ in range(10):
+            m, f = rtp.match('dummy\n')
+            self.assertEqual(None, m)
+        self.assertEqual(0, rtp.subsection_depth)
+        self.assertEqual(0, rtp.get_subsection_depth())
+        self.assertEqual((), rtp.get_current_subsection())
+        self.assertEqual(0, rtp.get_max_subsection_depth())
+        self.assertEqual({}, rtp.get_subsection_depth_counts())
+        # Existing tests should still pass unchanged, as verified by running the suite
     
