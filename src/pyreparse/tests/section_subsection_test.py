@@ -24,6 +24,7 @@ patterns = {
         PRP.INDEX_RE_STRING: r'^TOTAL:\s+(?P<total>\$[\d,]+\.\d\d)',
         PRP.INDEX_RE_FLAGS: PRP.FLAG_END_OF_SECTION,
         PRP.INDEX_RE_TRIGGER_ON: '<SUBSECTION_DEPTH> == 1',  # Depth 1 (customer)
+        PRP.INDEX_RE_TRIGGER_OFF: '{cust_total}',
     },
 }
 
@@ -34,7 +35,7 @@ reports = []  # List of {'report_id': str, 'customers': list}
 current_report = None
 current_cust = None
 
-with open('nsf_report.txt') as f:
+with open('data/SectionTestData/section_test.txt') as f:
     for line in f:
         match_def, fields = prp.match(line.strip())
         info = prp.get_subsection_info()
