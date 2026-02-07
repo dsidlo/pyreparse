@@ -6,21 +6,15 @@ import ast
 from decimal import Decimal
 
 '''
-# TODO: Only hit this regexp between lines A and B of a given Section.
-# TODO: Clean up the test data
-#       - Scramble AcNumbers
-#       - Change or Remove CU references
-#       - Restart GitRepo to remove traces of original reports
-
-# TODO: add code to create structures for on/off triggers
-# TODO: add call to self.validate_re_defs()
-
 # TODO...
 Add the idea of subsections.
 Subsections are sections that have a parent indicator.
    - Subsection: ['<parent-1>','parent-2', 'parent-n'...]
 []: # Language: markdown
 []: # Path: README.md
+
+# TODO: add call to self.validate_re_defs()
+  - # TODO: add code to create structures for on/off triggers
 
 '''
 
@@ -36,6 +30,7 @@ class PyReParse:
     FLAG_ONCE_PER_SECTION = 4
     FLAG_ONCE_PER_REPORT = 8
     FLAG_END_OF_SECTION = 16    # Counters are set to 0
+    FLAG_NEW_SUBSECTION = 32    # Start a subsection (nested under current section/parent)
 
     INDEX_RE_STRING = 're_string'
     INDEX_RE_FLAGS = 'flags'                         # Entry containing a patterns flags`.
@@ -59,10 +54,21 @@ class PyReParse:
     INDEX_ST_LAST_REPORT_LINE_MATCHED = 'last_report_line_matched'
     INDEX_ST_LAST_SECTION_LINE_MATCHED = 'last_section_line_matched'
 
+    # Subsection Indices
+    INDEX_SUBSECTION_DEPTH = 'subsection_depth'
+    INDEX_SUBSECTION_PARENTS = 'subsection_parents'
+    INDEX_SUBSECTION_LINE_COUNT = 'subsection_line_count'
+    INDEX_MAX_SUBSECTION_DEPTH = 'max_subsection_depth'
+    INDEX_SUBSECTION_DEPTH_COUNTS = 'subsection_depth_counts'
+
     # Trigger strings...
     TRIG_SYM_REPORT_LINE = '<REPORT_LINE>'
     TRIG_SYM_SECTION_COUNT = '<SECTION_COUNT>'
     TRIG_SYM_SECTION_LINE = '<SECTION_LINE>'
+
+    # Subsection Trigger Symbols
+    TRIG_SYM_SUBSECTION_DEPTH = '<SUBSECTION_DEPTH>'
+    TRIG_SYM_SUBSECTION_LINE = '<SUBSECTION_LINE>'
 
     def __init__(self, regexp_pats=None):
         self.re_defs = {}
@@ -205,6 +211,10 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
                     func_body = func_body.replace(m.group(0), 'prp_inst.section_count')
                 elif var_name == prp.TRIG_SYM_SECTION_LINE:
                     func_body = func_body.replace(m.group(0), 'prp_inst.section_line_count')
+                elif var_name == prp.TRIG_SYM_SUBSECTION_DEPTH:
+                    func_body = func_body.replace(m.group(0), 'prp_inst.subsection_depth')
+                elif var_name == prp.TRIG_SYM_SUBSECTION_LINE:
+                    func_body = func_body.replace(m.group(0), 'prp_inst.subsection_line_count')
                 else:
                     raise TriggerDefException(f'Unknown variable: {m.group(0)}')
 
@@ -548,6 +558,47 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
                   f'Section Line [{self.section_line_count}]')
 
         return ret_val
+
+    def get_subsection_depth(self):
+        """
+        Get the current subsection depth (nesting level).
+        :return: int - 0 for top-level, >0 for subsections.
+        """
+        return getattr(self, 'subsection_depth', 0)
+
+    def get_current_subsection(self):
+        """
+        Get the current subsection parents as a tuple.
+        :return: tuple - e.g., ('report_id', 'customer_id')
+        """
+        return tuple(getattr(self, 'current_subsection_parents', []))
+
+    def get_max_subsection_depth(self):
+        """
+        Get the maximum subsection depth observed.
+        :return: int
+        """
+        return getattr(self, 'max_subsection_depth', 0)
+
+    def get_subsection_depth_counts(self):
+        """
+        Get counts of subsections per depth.
+        :return: dict - e.g., {1: 10, 2: 5}
+        """
+        from collections import defaultdict
+        return dict(getattr(self, 'subsection_depth_counts', defaultdict(int)))
+
+    def get_subsection_info(self):
+        """
+        Get comprehensive subsection information.
+        :return: dict with depth, parents, max_depth, counts.
+        """
+        return {
+            'depth': self.get_subsection_depth(),
+            'parents': list(self.get_current_subsection()),
+            'max_depth': self.get_max_subsection_depth(),
+            'counts': self.get_subsection_depth_counts()
+        }
 
     def money2decimal(self, fld, in_str):
         re_str = re.sub(r'[\,\s\$]', r'', in_str)
