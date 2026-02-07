@@ -405,16 +405,54 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
             comped_re = None
             prefix_matcher = None
             try:
-                comped_re = re.compile(in_hash[fld][rtrpc.INDEX_RE_STRING], re.X)
                 raw_pat = in_hash[fld][rtrpc.INDEX_RE_STRING]
-                stripped = raw_pat.lstrip('^ \t\n\r\f\v')
-                prefix_cand = re.sub(r'[\\^\\.\\*\\+\\?\\(\\)\\[\\]\\{\\}\\|\\\\\\s]', '', stripped[:self.PREFIX_LEN*2])
-                if len(prefix_cand) >= 3:
-                    prefix_str = prefix_cand[:self.PREFIX_LEN]
-                    prefix_matcher = lambda line: line.startswith(prefix_str)
+                # Clean pattern for prefix extraction (simulate re.X)
+                lines = raw_pat.splitlines()
+                clean_pat = ''
+                for line in lines:
+                    stripped = line.lstrip(' \t')
+                    if stripped and not stripped.startswith('#'):
+                        if '#' in stripped:
+                            stripped = stripped.split('#', 1)[0]
+                        clean_pat += stripped + ' '
+                clean_pat = clean_pat.strip()
+                if not clean_pat:
+                    raise ValueError("Empty pattern")
+                comped_re = re.compile(clean_pat, re.X)
+
+                # Extract literal prefix from clean_pat
+                pat = clean_pat
+                if pat.startswith('^'):
+                    pat = pat[1:]
+                i = 0
+                prefix = ''
+                length = len(pat)
+                while i < length:
+                    c = pat[i]
+                    if c.isspace():
+                        i += 1
+                        continue
+                    if c == '\\':
+                        i += 1
+                        if i >= length:
+                            break
+                        next_c = pat[i]
+                        if next_c.lower() in 'sdw':
+                            break  # Skip special \s \d etc.
+                        else:
+                            prefix += next_c
+                            i += 1
+                    elif c in '.^$*+?(){}|[]':
+                        break
+                    else:
+                        prefix += c
+                        i += 1
+                if len(prefix) >= 3:
+                    prefix_matcher = lambda line: line.startswith(prefix)
             except Exception as e:
                 print(f'*** Exception: \"{e}\", Hit on Compiling Regexp [{fld}]! ',
                       f'\"\"\"{in_hash[fld][rtrpc.INDEX_RE_STRING]}\"\"\"')
+                comped_re = None
                 prefix_matcher = None
 
             # Place the named regexp pattern into the data structure of named pattterns...

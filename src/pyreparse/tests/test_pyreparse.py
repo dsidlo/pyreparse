@@ -807,13 +807,13 @@ class TestPyReParse(unittest.TestCase):
     def test_prefix_filtering(self):
         patterns = {
             'abc_pat': {
-                self.PRP.INDEX_RE_STRING: r'^ABC\s+(?P<val>\d+)',
+                self.PRP.INDEX_RE_STRING: r'^ABC(?P<val>\d+)',
                 self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_RETURN_ON_MATCH,
                 self.PRP.INDEX_RE_TRIGGER_ON: 'True',
                 self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
             },
             'def_pat': {
-                self.PRP.INDEX_RE_STRING: r'^DEF\s+(?P<val>\d+)',
+                self.PRP.INDEX_RE_STRING: r'^DEF(?P<val>\d+)',
                 self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_RETURN_ON_MATCH,
                 self.PRP.INDEX_RE_TRIGGER_ON: 'True',
                 self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
@@ -826,14 +826,14 @@ class TestPyReParse(unittest.TestCase):
         rtp.report_reset()
 
         # Match ABC line: should match abc_pat, skip def_pat (attempts unchanged)
-        match_re_lines, fields = rtp.match('ABC 123')
+        match_re_lines, fields = rtp.match('ABC123')
         self.assertEqual(['abc_pat'], match_re_lines)
         self.assertEqual('123', fields.get('val'))
         self.assertEqual(1, rtp.re_defs['abc_pat'][self.PRP.INDEX_STATES][self.PRP.INDEX_ST_SECTION_MATCH_ATTEMPTS])
         self.assertEqual(0, rtp.re_defs['def_pat'][self.PRP.INDEX_STATES][self.PRP.INDEX_ST_SECTION_MATCH_ATTEMPTS])
 
         # Match DEF line: should match def_pat
-        match_re_lines, fields = rtp.match('DEF 456')
+        match_re_lines, fields = rtp.match('DEF456')
         self.assertEqual(['def_pat'], match_re_lines)
         self.assertEqual('456', fields.get('val'))
         self.assertEqual(1, rtp.re_defs['def_pat'][self.PRP.INDEX_STATES][self.PRP.INDEX_ST_SECTION_MATCH_ATTEMPTS])
@@ -841,7 +841,7 @@ class TestPyReParse(unittest.TestCase):
         # Perf test: generate 10000 random lines, time matching
         import random
         import time
-        random_lines = ['ABC ' + str(i) if i % 2 == 0 else 'DEF ' + str(i) for i in range(10000)]
+        random_lines = ['ABC' + str(i) if i % 2 == 0 else 'DEF' + str(i) for i in range(10000)]
         random.shuffle(random_lines)
 
         start_time = time.perf_counter()
