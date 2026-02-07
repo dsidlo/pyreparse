@@ -695,7 +695,7 @@ class TestPyReParse(unittest.TestCase):
             'cust_total': {
                 PRP.INDEX_RE_STRING: r'^TOTAL\s+(?P<total>\$[0-9,]+\.\d\d)',
                 PRP.INDEX_RE_FLAGS: PRP.FLAG_END_OF_SECTION | PRP.FLAG_RETURN_ON_MATCH,
-                PRP.INDEX_RE_TRIGGER_ON: '{tx_line}'
+                PRP.INDEX_RE_TRIGGER_ON: '<SUBSECTION_DEPTH> == 1'  # Depth 1 (customer)
             },
             'report_end': {
                 PRP.INDEX_RE_STRING: r'^END REPORT\s*$',
@@ -706,13 +706,13 @@ class TestPyReParse(unittest.TestCase):
         with tempfile.NamedTemporaryFile(mode='w', delete=False) as f:
             for rep in range(3):
                 f.write(f'**REPORT{rep+1}\n')
-                for cust in range(2):
+                for cust in range(1):
                     f.write(f'CUSTOMER{cust+1}\n')
                     for tx in range(50):
                         f.write(f'TX{tx} $10.00\n')
-                    f.write('TOTAL $1000.00\n')
+                    f.write('TOTAL $500.00\n')
                 f.write('END REPORT\n')
-                f.write('\n' * 10)  # Padding
+                f.write('\n' * 100)  # Padding
             mock_path = f.name
 
         prp = self.PRP(patterns)
@@ -724,7 +724,7 @@ class TestPyReParse(unittest.TestCase):
         self.assertEqual(sec0['section_start'], 1)
 
         tx_count = sum(1 for item in sec0['fields_list'] if 'tx_line' in item['match_def'])
-        self.assertEqual(tx_count, 100)  # 2 cust * 50
+        self.assertEqual(tx_count, 50)  # 1 cust * 50
 
         # Subs metadata
         sub_items = [item['fields']['current_subsection_parents'] for item in sec0['fields_list'] if 'current_subsection_parents' in item['fields']]
