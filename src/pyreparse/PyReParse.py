@@ -126,15 +126,15 @@ class PyReParse:
                             # Variable
                             var_name = m.group(2)
                             if var_name == prp.TRIG_SYM_REPORT_LINE:
-                                func_body = func_body.replace(m.group(0), 'prp_inst.report_line_count')
+                                func_body = func_body.replace(var_name, 'prp_inst.report_line_count')
                             elif var_name == prp.TRIG_SYM_SECTION_COUNT:
-                                func_body = func_body.replace(m.group(0), 'prp_inst.section_count')
+                                func_body = func_body.replace(var_name, 'prp_inst.section_count')
                             elif var_name == prp.TRIG_SYM_SECTION_LINE:
-                                func_body = func_body.replace(m.group(0), 'prp_inst.section_line_count')
+                                func_body = func_body.replace(var_name, 'prp_inst.section_line_count')
                             elif var_name == prp.TRIG_SYM_SUBSECTION_DEPTH:
-                                func_body = func_body.replace(m.group(0), 'prp_inst.subsection_depth')
+                                func_body = func_body.replace(var_name, 'prp_inst.subsection_depth')
                             elif var_name == prp.TRIG_SYM_SUBSECTION_LINE:
-                                func_body = func_body.replace(m.group(0), 'prp_inst.subsection_line_count')
+                                func_body = func_body.replace(var_name, 'prp_inst.subsection_line_count')
                             else:
                                 raise TriggerDefException(f"Unknown variable in '{pat_name}' '{trigger_key}': {m.group(0)}")
                         elif m.group(5) is not None:
@@ -142,7 +142,7 @@ class PyReParse:
                             pn = m.group(5)
                             if pn not in patterns:
                                 raise TriggerDefException(f"Unknown pattern reference in '{pat_name}' '{trigger_key}': {pn}")
-                            func_body = func_body.replace(m.group(1),
+                            func_body = func_body.replace(m.group(4),
                                                           f"(prp_inst.re_defs['{pn}'][prp.INDEX_STATES][prp.INDEX_ST_SECTION_LINES_MATCHED] > 0)")
 
                     # AST parse the body
@@ -158,18 +158,18 @@ class PyReParse:
                 if flags & prp.FLAG_NEW_SUBSECTION:
                     trigger_on = pat_def.get(prp.INDEX_RE_TRIGGER_ON, '')
                     if '{' not in trigger_on:
-                        raise ValueError(f"Pattern '{pat_name}' has FLAG_NEW_SUBSECTION but '{prp.INDEX_RE_TRIGGER_ON}' lacks parent pattern reference: {trigger_on}")
+                        print(f"Warning: [{pat_name}] has FLAG_NEW_SUBSECTION but TRIGGER_ON \"{trigger_on}\" lacks {{parent_pattern}} reference.")
 
         # Build dependency graph for cycle detection
         graph = {pat_name: [] for pat_name in patterns}
         for pat_name, pat_def in patterns.items():
-            for trigger_key in [prp.INDEX_RE_TRIGGER_ON, prp.INDEX_RE_TRIGGER_OFF]:
-                if trigger_key in pat_def:
-                    trigger_text = pat_def[trigger_key]
-                    refs = re.findall(r'\{([^\}]+)\}', trigger_text)
-                    for ref in refs:
-                        if ref in patterns:
-                            graph[pat_name].append(ref)
+            trigger_key = prp.INDEX_RE_TRIGGER_ON
+            if trigger_key in pat_def:
+                trigger_text = pat_def[trigger_key]
+                refs = re.findall(r'\{([^\}]+)\}', trigger_text)
+                for ref in refs:
+                    if ref in patterns and ref != pat_name:
+                        graph[pat_name].append(ref)
 
         # DFS for cycle detection
         visited = set()
@@ -317,15 +317,15 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
                 # We have a variable...
                 var_name = m.group(2)
                 if var_name == prp.TRIG_SYM_REPORT_LINE:
-                    func_body = func_body.replace(m.group(0), 'prp_inst.report_line_count')
+                    func_body = func_body.replace(var_name, 'prp_inst.report_line_count')
                 elif var_name == prp.TRIG_SYM_SECTION_COUNT:
-                    func_body = func_body.replace(m.group(0), 'prp_inst.section_count')
+                    func_body = func_body.replace(var_name, 'prp_inst.section_count')
                 elif var_name == prp.TRIG_SYM_SECTION_LINE:
-                    func_body = func_body.replace(m.group(0), 'prp_inst.section_line_count')
+                    func_body = func_body.replace(var_name, 'prp_inst.section_line_count')
                 elif var_name == prp.TRIG_SYM_SUBSECTION_DEPTH:
-                    func_body = func_body.replace(m.group(0), 'prp_inst.subsection_depth')
+                    func_body = func_body.replace(var_name, 'prp_inst.subsection_depth')
                 elif var_name == prp.TRIG_SYM_SUBSECTION_LINE:
-                    func_body = func_body.replace(m.group(0), 'prp_inst.subsection_line_count')
+                    func_body = func_body.replace(var_name, 'prp_inst.subsection_line_count')
                 else:
                     raise TriggerDefException(f'Unknown variable: {m.group(0)}')
 
@@ -333,7 +333,7 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
                 # We have a pattern-name...
                 pn = m.group(5)
                 if pn in self.re_defs:
-                    func_body = func_body.replace(m.group(1),
+                    func_body = func_body.replace(m.group(4),
                                                   '(prp_inst.re_defs[' + "'" + pn + "'" +
                                                   '][PRP.INDEX_STATES][PRP.INDEX_ST_SECTION_LINES_MATCHED] > 0)')
                 else:
