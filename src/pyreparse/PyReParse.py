@@ -5,6 +5,8 @@ import re
 import ast
 from decimal import Decimal
 from collections import defaultdict
+from concurrent.futures import ThreadPoolExecutor
+from typing import List, Tuple, Dict, Any
 
 '''
 
@@ -239,6 +241,7 @@ class PyReParse:
 
         """
         self.validate_re_defs(in_hash)
+        self.raw_patterns = in_hash.copy()
         self.re_defs = {}
         self.all_named_fields = {}
         return self.__append_re_defs(in_hash)
@@ -744,3 +747,110 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
                   f'Section Line [{self.section_line_count}]')
             ret_val = Decimal('0')  # Fallback to 0 on error
         return ret_val
+
+    def _find_section_boundaries(self, file_path: str) -> List[Tuple[int, int]]:
+        """
+        Find boundaries of top-level sections in the file for parallel processing.
+        This identifies start and end lines of sections based on boundary patterns.
+        Handles basic nesting but returns top-level boundaries for parallel_depth=1.
+
+        :param file_path: Path to the file to analyze.
+        :return: List of tuples (start_line, end_line) where lines are 1-based.
+        """
+        boundary_regexes = []
+        for name, defn in self.re_defs.items():
+            flags = defn.get(self.INDEX_RE_FLAGS, 0)
+            if flags & (self.FLAG_NEW_SECTION | self.FLAG_END_OF_SECTION | self.FLAG_NEW_SUBSECTION):
+                regexp = defn.get(self.INDEX_RE_REGEXP)
+                if regexp:
+                    boundary_regexes.append((name, regexp, flags))
+
+        with open(file_path, 'r') as f:
+            lines = f.readlines()
+
+        boundaries = []
+        section_stack = []
+        for i, line in enumerate(lines, 1):
+            line_stripped = line.rstrip('\n')
+            for name, regexp, flags in boundary_regexes:
+                if m := regexp.match(line_stripped):
+                    if flags & self.FLAG_NEW_SECTION:
+                        if section_stack:
+                            start, sub_start = section_stack.pop()
+                            boundaries.append((start, i - 1))
+                        section_stack.append((i, None))
+                    elif flags & self.FLAG_NEW_SUBSECTION:
+                        if section_stack:
+                            section_stack[-1] = (section_stack[-1][0], i)
+                    elif flags & self.FLAG_END_OF_SECTION:
+                        if section_stack:
+                            start, sub_start = section_stack.pop()
+                            boundaries.append((start, i))
+
+        while section_stack:
+            start, _ = section_stack.pop()
+            boundaries.append((start, len(lines)))
+
+        return boundaries
+
+    def _process_section_chunk(self, file_path: str, start_line: int, end_line: int) -> Dict[str, Any]:
+        """
+        Process a specific chunk of lines corresponding to a section.
+        Creates a new PyReParse instance to avoid state conflicts in parallel execution.
+
+        :param file_path: Path to the file.
+        :param start_line: Starting line number (1-based, inclusive).
+        :param end_line: Ending line number (1-based, inclusive).
+        :return: Dictionary containing section data, including matched fields.
+        """
+        prp = PyReParse(self.raw_patterns)
+        prp.set_file_name(file_path)
+        prp.report_reset()
+        prp.section_reset()
+
+        with open(file_path, 'r') as f:
+            all_lines = f.readlines()
+            lines = all_lines[start_line - 1 : end_line]
+
+        section_data = {
+            'section_start': start_line,
+            'fields_list': [],
+            'totals': {},
+            'valid': True
+        }
+        for line in lines:
+            match_def, fields = prp.match(line.rstrip())
+            if match_def:
+                section_data['fields_list'].append({
+                    'match_def': match_def,
+                    'fields': fields.copy()
+                })
+        return section_data
+
+    def parse_file_parallel(self, file_path: str, max_workers: int = 4, parallel_depth: int = 1) -> List[Dict[str, Any]]:
+        """
+        Parse the entire file in parallel by dividing it into section chunks and processing them concurrently.
+        Currently supports top-level sections (parallel_depth=1). Higher depths are stubbed for future recursion.
+
+        :param file_path: Path to the file to parse.
+        :param max_workers: Maximum number of worker threads to use.
+        :param parallel_depth: Depth of parallelism (1 for top-level sections only).
+        :return: List of dictionaries, each representing parsed data for a section.
+        """
+        if parallel_depth > 1:
+            raise NotImplementedError("TODO: Recurse into subsections for parallel_depth > 1")
+
+        if not hasattr(self, 'raw_patterns'):
+            raise ValueError("Patterns must be loaded first using load_re_lines()")
+
+        boundaries = self._find_section_boundaries(file_path)
+
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
+            futures = [
+                executor.submit(self._process_section_chunk, file_path, s, e)
+                for s, e in boundaries
+            ]
+            sections = [future.result() for future in futures]
+
+        sections.sort(key=lambda x: x['section_start'])
+        return sections
