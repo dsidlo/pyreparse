@@ -526,7 +526,7 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
         return trig_on_state and (not trig_off_state)
 
     def match(self, in_line, debug=False, limit_matches=None):
-        in_line = in_line.rstrip()
+        in_line = in_line.rstrip('\n')
         '''
         Given a text input line, check if any of our regexp(s) match to it.
 
@@ -808,7 +808,7 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
             'valid': True
         }
         for line in lines:
-            match_def, fields = prp.match(line.rstrip())
+            match_def, fields = prp.match(line.rstrip('\n'))
             if match_def:
                 section_data['fields_list'].append({
                     'match_def': match_def,
