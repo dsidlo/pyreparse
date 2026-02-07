@@ -651,7 +651,7 @@ class TestPyReParse(unittest.TestCase):
         }
         with self.assertRaises(ValueError) as cm:
             rtp.load_re_lines(patterns)
-        self.assertIn('cycle', str(cm.exception))
+        self.assertIn('Cycle detected', str(cm.exception))
 
     def test_validate_re_defs_orphan_subsection(self):
         rtp = self.PRP()
@@ -662,7 +662,8 @@ class TestPyReParse(unittest.TestCase):
                 self.PRP.INDEX_RE_TRIGGER_ON: 'True'
             }
         }
-        with self.assertRaises(ValueError) as cm:
+        f = io.StringIO()
+        with redirect_stdout(f):
             rtp.load_re_lines(patterns)
-        self.assertIn('lacks', str(cm.exception))
+        self.assertIn('Warning: [sub] has FLAG_NEW_SUBSECTION but TRIGGER_ON "True" lacks {parent_pattern} reference.', f.getvalue())
     

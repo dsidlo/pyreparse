@@ -425,26 +425,28 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
             ''' Compile trigger_on...
             Take the trigger strings and compile them into static functions...
             '''
-            try:
-                self.re_defs[fld][rtrpc.INDEX_RE_TRIGGER_ON_FUNC],   \
-                self.re_defs[fld][rtrpc.INDEX_RE_TRIGGER_ON_TEXT], = \
-                    self.__create_trigger(fld, rtrpc.INDEX_RE_TRIGGER_ON)
-            except TriggerDefException as e:
-                print(f'*** Exception: \"{e}\", Hit on Compiling trigger_On [{fld}]! ',
-                      f'\"\"\"{self.re_defs[fld][rtrpc.INDEX_RE_TRIGGER_ON]}\"\"\"')
-                raise
+            if rtrpc.INDEX_RE_TRIGGER_ON in self.re_defs[fld]:
+                try:
+                    self.re_defs[fld][rtrpc.INDEX_RE_TRIGGER_ON_FUNC],   \
+                    self.re_defs[fld][rtrpc.INDEX_RE_TRIGGER_ON_TEXT], = \
+                        self.__create_trigger(fld, rtrpc.INDEX_RE_TRIGGER_ON)
+                except TriggerDefException as e:
+                    print(f'*** Exception: \"{e}\", Hit on Compiling trigger_On [{fld}]! ',
+                          f'\"\"\"{self.re_defs[fld][rtrpc.INDEX_RE_TRIGGER_ON]}\"\"\"')
+                    raise
 
             ''' Compile trigger_off...
             Take the trigger strings and compile them into static functions...
             '''
-            try:
-                self.re_defs[fld][rtrpc.INDEX_RE_TRIGGER_OFF_FUNC],  \
-                self.re_defs[fld][rtrpc.INDEX_RE_TRIGGER_OFF_TEXT] = \
-                    self.__create_trigger(fld, rtrpc.INDEX_RE_TRIGGER_OFF)
-            except TriggerDefException as e:
-                print(f'*** Exception: \"{e}\", Hit on Compiling trigger_Off [{fld}]! ',
-                      f'\"\"\"{self.re_defs[fld][rtrpc.INDEX_RE_TRIGGER_OFF]}\"\"\"')
-                raise
+            if rtrpc.INDEX_RE_TRIGGER_OFF in self.re_defs[fld]:
+                try:
+                    self.re_defs[fld][rtrpc.INDEX_RE_TRIGGER_OFF_FUNC],  \
+                    self.re_defs[fld][rtrpc.INDEX_RE_TRIGGER_OFF_TEXT] = \
+                        self.__create_trigger(fld, rtrpc.INDEX_RE_TRIGGER_OFF)
+                except TriggerDefException as e:
+                    print(f'*** Exception: \"{e}\", Hit on Compiling trigger_Off [{fld}]! ',
+                          f'\"\"\"{self.re_defs[fld][rtrpc.INDEX_RE_TRIGGER_OFF]}\"\"\"')
+                    raise
 
 
         return self.get_all_fld_names()
@@ -502,8 +504,8 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
         '''
 
         rtrpc = PyReParse
-        trig_on_func = self.re_defs[pat_name][rtrpc.INDEX_RE_TRIGGER_ON_FUNC]
-        trig_off_func = self.re_defs[pat_name][rtrpc.INDEX_RE_TRIGGER_OFF_FUNC]
+        trig_on_func = self.re_defs[pat_name].get(rtrpc.INDEX_RE_TRIGGER_ON_FUNC, None)
+        trig_off_func = self.re_defs[pat_name].get(rtrpc.INDEX_RE_TRIGGER_OFF_FUNC, None)
 
         trig_on_state = True
         trig_off_state = False
