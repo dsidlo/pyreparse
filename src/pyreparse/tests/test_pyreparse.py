@@ -839,7 +839,7 @@ class TestPyReParse(unittest.TestCase):
             # Recreate fresh file for callback test
             with tempfile.NamedTemporaryFile(mode='w', delete=False) as f_cb:
                 f_cb.writelines(mock_lines)
-                mock_path_cb = f.name
+                mock_path_cb = f_cb.name
 
             try:
                 called = []
@@ -921,7 +921,7 @@ class TestPyReParse(unittest.TestCase):
             # Recreate fresh file for callback test
             with tempfile.NamedTemporaryFile(mode='w', delete=False) as f_cb:
                 f_cb.writelines(mock_lines)
-                mock_path_cb = f.name
+                mock_path_cb = f_cb.name
 
             try:
                 called = []
