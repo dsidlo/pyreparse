@@ -820,7 +820,13 @@ class TestPyReParse(unittest.TestCase):
             rtp.load_re_lines(TestPyReParse.test_re_lines)
             serial_sections = rtp.parse_file(mock_path)
 
-            stream_sections = list(rtp.parse_file_stream(mock_path))
+            global cb_txline_cnt, cb_rptid_cnt
+            cb_txline_cnt = 0
+            cb_rptid_cnt = 0
+            rtp_stream = self.PRP()
+            rtp_stream.load_re_lines(TestPyReParse.test_re_lines)
+
+            stream_sections = list(rtp_stream.parse_file_stream(mock_path))
             self.assertEqual(stream_sections, serial_sections)
             self.assertEqual(1, len(stream_sections))
             self.assertEqual(5, len(stream_sections[0]['fields_list']))
@@ -832,7 +838,7 @@ class TestPyReParse(unittest.TestCase):
                 called.append(sec)
 
             called = []
-            rtp.parse_file_stream(mock_path, callback=mock_sec_cb)
+            rtp_stream.parse_file_stream(mock_path, callback=mock_sec_cb)
             self.assertEqual(called, serial_sections)
         finally:
             os.unlink(mock_path)
@@ -889,6 +895,10 @@ class TestPyReParse(unittest.TestCase):
             for line in mock_lines:
                 m, f = rtp_serial.match(line.rstrip('\n'))
                 serial_results.append((m, f))
+
+            global cb_txline_cnt, cb_rptid_cnt
+            cb_txline_cnt = 0
+            cb_rptid_cnt = 0
 
             rtp_stream = self.PRP()
             rtp_stream.load_re_lines(TestPyReParse.test_re_lines)

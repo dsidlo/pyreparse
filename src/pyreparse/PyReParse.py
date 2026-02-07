@@ -871,21 +871,38 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
 
     def parse_file_stream(self, file_path: str, callback=None) -> Optional[Iterator[Dict[str, Any]]]:
         """
-        Serially parse file into sections by boundaries, yielding sections or calling callback.
+        Streamingly parse file into sections dynamically, yielding sections or calling callback.
         """
         self.set_file_name(file_path)
         self.report_reset()
-        boundaries = self._find_section_boundaries(file_path)
+        current_sec = None
         with open(file_path, 'r') as f:
-            lines = f.readlines()
-        for start, end in boundaries:
-            sec = {'section_start': start, 'fields_list': []}
-            section_lines = lines[start-1:end]
-            for line in section_lines:
+            for line_num, line in enumerate(f, 1):
                 m, flds = self.match(line.rstrip('\n'))
                 if m:
-                    sec['fields_list'].append({'match_def': m, 'fields': flds.copy()})
+                    is_new_section = any(
+                        self.re_defs[pat].get(self.INDEX_RE_FLAGS, 0) & self.FLAG_NEW_SECTION
+                        for pat in m
+                    )
+                    if is_new_section:
+                        if current_sec is not None:
+                            if callback:
+                                callback(current_sec)
+                            else:
+                                yield current_sec
+                        current_sec = {
+                            'section_start': line_num,
+                            'fields_list': [],
+                            'totals': {},
+                            'valid': True
+                        }
+                    if current_sec is not None:
+                        current_sec['fields_list'].append({
+                            'match_def': m,
+                            'fields': flds.copy()
+                        })
+        if current_sec is not None:
             if callback:
-                callback(sec)
+                callback(current_sec)
             else:
-                yield sec
+                yield current_sec
