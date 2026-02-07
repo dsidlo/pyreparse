@@ -579,6 +579,8 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
             # if True:
             if debug:
                 print(f'regexp: [{fld}]')
+            if rtrpc.INDEX_RE_PREFIX_MATCHER in self.re_defs[fld] and not self.re_defs[fld][rtrpc.INDEX_RE_PREFIX_MATCHER](in_line):
+                continue
             if self.__eval_triggers(fld):
                 if debug:
                     print(f'--- Triggered[{fld}]...')
