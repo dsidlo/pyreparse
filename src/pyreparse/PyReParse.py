@@ -33,8 +33,6 @@ class PyReParse:
     KNOWN_FLAGS_MASK = (FLAG_RETURN_ON_MATCH | FLAG_NEW_SECTION | FLAG_ONCE_PER_SECTION | FLAG_ONCE_PER_REPORT |
                         FLAG_END_OF_SECTION | FLAG_NEW_SUBSECTION)
 
-    PREFIX_LEN = 12
-
     INDEX_RE_STRING = 're_string'
     INDEX_RE_FLAGS = 'flags'
     INDEX_RE_QUICK_CHECK = 're_quick_check'
@@ -47,7 +45,6 @@ class PyReParse:
     INDEX_RE_TRIGGER_OFF_TEXT = 'trigger_off_text'   # Entry - Trigger_OFF Text Created by PyReParse
 
     INDEX_RE_CALLBACK = 'callback'  # Entry containing a patterns assigned callback.
-    INDEX_RE_PREFIX_MATCHER = 'prefix_matcher'  # Entry for prefix matcher configuration.
 
     INDEX_STATES = 'states'  # Dict of a patterns states.
     INDEX_ST_REPORT_LINES_MATCHED = 'report_lines_matched'
@@ -72,50 +69,6 @@ class PyReParse:
     # Subsection Trigger Symbols
     TRIG_SYM_SUBSECTION_DEPTH = '<SUBSECTION_DEPTH>'
     TRIG_SYM_SUBSECTION_LINE = '<SUBSECTION_LINE>'
-
-    @staticmethod
-    def extract_literal_prefix(raw_pat):
-        PREFIX_LEN = 12
-        i = 0
-        pat_len = len(raw_pat)
-        # Skip leading whitespace, newlines, and '^'
-        while i < pat_len:
-            c = raw_pat[i]
-            if c.isspace() or c == '^':
-                i += 1
-                continue
-            break
-        prefix = []
-        special_escapes = set('dDsSwWbBfFnNrRtTvvAa0123456789DHSTWZ')
-        metas = set('.?+()[]{}|^$|')
-        while i < pat_len and len(prefix) < PREFIX_LEN:
-            c = raw_pat[i]
-            if c.isspace():
-                i += 1
-                continue
-            if c == '(' and i + 2 < pat_len and raw_pat[i:i+3] == '(?#':
-                i += 3
-                while i < pat_len and raw_pat[i] != ')':
-                    i += 1
-                if i < pat_len:
-                    i += 1
-                continue
-            if c == '\\':
-                i += 1
-                if i >= pat_len:
-                    break
-                esc = raw_pat[i]
-                if esc in special_escapes:
-                    break
-                else:
-                    prefix.append(esc)
-                    i += 1
-                    continue
-            if c in metas:
-                break
-            prefix.append(c)
-            i += 1
-        return ''.join(prefix)
 
     def __init__(self, regexp_pats=None):
         self.re_defs = {}
@@ -447,14 +400,8 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
 
             # Verify that the regexp compiles...
             comped_re = None
-            prefix_matcher = None
             try:
                 raw_pat = in_hash[fld][rtrpc.INDEX_RE_STRING]
-                prefix_str = PyReParse.extract_literal_prefix(raw_pat)
-                if len(prefix_str) >= 3:
-                    prefix_matcher = lambda line: line.startswith(prefix_str)
-                else:
-                    prefix_matcher = None
                 comped_re = re.compile(raw_pat, re.X)
             except re.error as e:
                 raise ValueError(f"Failed to compile regex for pattern '{fld}': {e}")
@@ -467,10 +414,6 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
                                                     rtrpc.INDEX_RE_REGEXP:
                                                         comped_re
                                                         if rtrpc.INDEX_RE_STRING in in_hash[fld]
-                                                        else None,
-                                                    rtrpc.INDEX_RE_PREFIX_MATCHER:
-                                                        prefix_matcher
-                                                        if prefix_matcher is not None and rtrpc.INDEX_RE_STRING in in_hash[fld]
                                                         else None,
                                                     rtrpc.INDEX_STATES: {
                                                         rtrpc.INDEX_ST_REPORT_LINES_MATCHED: 0,
@@ -626,9 +569,6 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
             # if True:
             if debug:
                 print(f'regexp: [{fld}]')
-            pm = self.re_defs[fld].get(rtrpc.INDEX_RE_PREFIX_MATCHER)
-            if pm and not pm(in_line):
-                continue
             if self.__eval_triggers(fld):
                 if debug:
                     print(f'--- Triggered[{fld}]...')
