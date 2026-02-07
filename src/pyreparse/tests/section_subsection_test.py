@@ -41,16 +41,16 @@ with open('data/SectionTestData/section_test.txt') as f:
         info = prp.get_subsection_info()
         print(f"Depth {info['depth']}, Parents {info['parents']}: {match_def} {fields}")
 
-        if 'report_id' in match_def:
+        if match_def and 'report_id' in match_def:
             current_report = {'id': fields['report_id'], 'customers': []}
             reports.append(current_report)
-        elif 'customer_id' in match_def:
+        elif match_def and 'customer_id' in match_def:
             current_cust = {'id': fields['cust_id'], 'txs': [], 'total': 0}
             current_report['customers'].append(current_cust)
             print(f"New customer under {info['parents']}")
-        elif 'tx_line' in match_def:
+        elif match_def and 'tx_line' in match_def:
             current_cust['txs'].append(fields['amt'])
-        elif 'cust_total' in match_def:
+        elif match_def and 'cust_total' in match_def:
             current_cust['total'] = fields['total']
             # Validate sum(tx) == total
 
