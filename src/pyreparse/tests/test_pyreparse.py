@@ -618,4 +618,51 @@ class TestPyReParse(unittest.TestCase):
         self.assertEqual(0, rtp.get_max_subsection_depth())
         self.assertEqual({}, rtp.get_subsection_depth_counts())
         # Existing tests should still pass unchanged, as verified by running the suite
+
+    def test_validate_re_defs_valid(self):
+        rtp = self.PRP()
+        rtp.load_re_lines(self.test_re_lines)
+
+    def test_validate_re_defs_missing_re_string(self):
+        rtp = self.PRP()
+        patterns = {'pat': {}}
+        with self.assertRaises(ValueError) as cm:
+            rtp.load_re_lines(patterns)
+        self.assertIn('re_string', str(cm.exception))
+
+    def test_validate_re_defs_bad_flags(self):
+        rtp = self.PRP()
+        patterns = {'pat': {self.PRP.INDEX_RE_STRING: '...', self.PRP.INDEX_RE_FLAGS: -1}}
+        with self.assertRaises(ValueError) as cm:
+            rtp.load_re_lines(patterns)
+        self.assertIn('flags', str(cm.exception))
+
+    def test_validate_re_defs_bad_trigger_syntax(self):
+        rtp = self.PRP()
+        patterns = {'pat': {self.PRP.INDEX_RE_STRING: '...', self.PRP.INDEX_RE_TRIGGER_ON: '<BAD_SYM>'}}
+        with self.assertRaises(TriggerDefException):
+            rtp.load_re_lines(patterns)
+
+    def test_validate_re_defs_trigger_cycle(self):
+        rtp = self.PRP()
+        patterns = {
+            'a': {self.PRP.INDEX_RE_STRING: '^a$', self.PRP.INDEX_RE_TRIGGER_ON: '{b}'},
+            'b': {self.PRP.INDEX_RE_STRING: '^b$', self.PRP.INDEX_RE_TRIGGER_ON: '{a}'}
+        }
+        with self.assertRaises(ValueError) as cm:
+            rtp.load_re_lines(patterns)
+        self.assertIn('cycle', str(cm.exception))
+
+    def test_validate_re_defs_orphan_subsection(self):
+        rtp = self.PRP()
+        patterns = {
+            'sub': {
+                self.PRP.INDEX_RE_STRING: '^sub$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_NEW_SUBSECTION,
+                self.PRP.INDEX_RE_TRIGGER_ON: 'True'
+            }
+        }
+        with self.assertRaises(ValueError) as cm:
+            rtp.load_re_lines(patterns)
+        self.assertIn('lacks', str(cm.exception))
     
