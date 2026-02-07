@@ -27,8 +27,8 @@ class TestPyReParse(unittest.TestCase):
     PRP = PyReParse
 
     in_line_0 = r'''**BP0420170101REPOREPOPAID-NSFPOSF00016-95214549                                                                                     '''
-    in_line_1 = r'''IPPOSFEE             FILE\ DATE: 12/31/15              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1 '''
-    in_line_2 = r'''RUN\ DATE: 01/01/16   RUN\ TIME:  00:14:18            Paid-NSF POS Fees Charged                                                        '''
+    in_line_1 = r'''IPPOSFEE             FILE DATE: 12/31/15              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1 '''
+    in_line_2 = r'''RUN DATE: 01/01/16   RUN TIME:  00:14:18            Paid-NSF POS Fees Charged                                                        '''
     in_line_3 = r'''------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------              '''
     in_line_4 = r'''   394654-54  $  0.00    VALLARTA SUPERMARK ARVIN  $     5.41  01/02/16    $     0.00  658524658       56546  ZERO OVERDRAFT FEE     '''
 
@@ -98,7 +98,7 @@ class TestPyReParse(unittest.TestCase):
             PRP.INDEX_RE_CALLBACK: cb_rport_id,
         },
         'file_date': {
-            PRP.INDEX_RE_STRING: r'^IPPOSFEE\s+FILE\ DATE:\s+(?P<file_date>[\d/]+).*',
+            PRP.INDEX_RE_STRING: r'^IPPOSFEE\s+FILE DATE:\s+(?P<file_date>[\d/]+).*',
             PRP.INDEX_RE_FLAGS: PRP.FLAG_RETURN_ON_MATCH | PRP.FLAG_ONCE_PER_SECTION,
             # Trigger Matching on (dependant fields)...
             # {LINE}[n]         Line == n
@@ -111,7 +111,7 @@ class TestPyReParse(unittest.TestCase):
             PRP.INDEX_RE_TRIGGER_OFF: '{file_date}'
         },
         'run_date': {
-            PRP.INDEX_RE_STRING: r'^RUN\ DATE:\s+(?P<run_date>[\d/]+)\s+RUN\ TIME:\s+(?P<run_time>[\d:]+).*',
+            PRP.INDEX_RE_STRING: r'^RUN DATE:\s+(?P<run_date>[\d/]+)\s+RUN TIME:\s+(?P<run_time>[\d:]+).*',
             PRP.INDEX_RE_FLAGS: PRP.FLAG_RETURN_ON_MATCH | PRP.FLAG_ONCE_PER_SECTION,
             PRP.INDEX_RE_TRIGGER_ON: '{file_date}',
             PRP.INDEX_RE_TRIGGER_OFF: '{run_date}'
