@@ -807,13 +807,13 @@ class TestPyReParse(unittest.TestCase):
     def test_prefix_filtering(self):
         patterns = {
             'abc_pat': {
-                self.PRP.INDEX_RE_STRING: r'^ABC(?P<val>\d+)',
+                self.PRP.INDEX_RE_STRING: r'^ABC\d*(?P<val>\d+)',
                 self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_RETURN_ON_MATCH,
                 self.PRP.INDEX_RE_TRIGGER_ON: 'True',
                 self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
             },
             'def_pat': {
-                self.PRP.INDEX_RE_STRING: r'^DEF(?P<val>\d+)',
+                self.PRP.INDEX_RE_STRING: r'^DEF\d*(?P<val>\d+)',
                 self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_RETURN_ON_MATCH,
                 self.PRP.INDEX_RE_TRIGGER_ON: 'True',
                 self.PRP.INDEX_RE_TRIGGER_OFF: 'False'

@@ -73,6 +73,50 @@ class PyReParse:
     TRIG_SYM_SUBSECTION_DEPTH = '<SUBSECTION_DEPTH>'
     TRIG_SYM_SUBSECTION_LINE = '<SUBSECTION_LINE>'
 
+    @staticmethod
+    def extract_literal_prefix(raw_pat):
+        PREFIX_LEN = 12
+        i = 0
+        pat_len = len(raw_pat)
+        # Skip leading whitespace, newlines, and '^'
+        while i < pat_len:
+            c = raw_pat[i]
+            if c.isspace() or c == '^':
+                i += 1
+                continue
+            break
+        prefix = []
+        special_escapes = set('dDsSwWbBfFnNrRtTvvAa0123456789DHSTWZ')
+        metas = set('.?+()[]{}|^$|')
+        while i < pat_len and len(prefix) < PREFIX_LEN:
+            c = raw_pat[i]
+            if c.isspace():
+                i += 1
+                continue
+            if c == '(' and i + 2 < pat_len and raw_pat[i:i+3] == '(?#':
+                i += 3
+                while i < pat_len and raw_pat[i] != ')':
+                    i += 1
+                if i < pat_len:
+                    i += 1
+                continue
+            if c == '\\':
+                i += 1
+                if i >= pat_len:
+                    break
+                esc = raw_pat[i]
+                if esc in special_escapes:
+                    break
+                else:
+                    prefix.append(esc)
+                    i += 1
+                    continue
+            if c in metas:
+                break
+            prefix.append(c)
+            i += 1
+        return ''.join(prefix)
+
     def __init__(self, regexp_pats=None):
         self.re_defs = {}
         self.all_named_fields = {}
@@ -406,18 +450,12 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
             prefix_matcher = None
             try:
                 raw_pat = in_hash[fld][rtrpc.INDEX_RE_STRING]
-                comped_re = re.compile(raw_pat, re.X)
-                i = 0
-                pat_len = len(raw_pat)
-                while i < pat_len and raw_pat[i] in r'^ \t\n\r\f\v': i += 1
-                start = i
-                metas = r'.*?+()[]{}|\\'
-                while i < pat_len and raw_pat[i] not in metas: i += 1
-                prefix_str = raw_pat[start:i][:self.PREFIX_LEN]
+                prefix_str = PyReParse.extract_literal_prefix(raw_pat)
                 if len(prefix_str) >= 3:
                     prefix_matcher = lambda line: line.startswith(prefix_str)
                 else:
                     prefix_matcher = None
+                comped_re = re.compile(raw_pat, re.X)
             except re.error as e:
                 raise ValueError(f"Failed to compile regex for pattern '{fld}': {e}")
             except Exception as e:
