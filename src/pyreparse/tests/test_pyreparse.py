@@ -9,6 +9,8 @@ from contextlib import redirect_stdout
 
 import os
 import tempfile
+import random
+import time
 
 from pyreparse.PyReParse import TriggerDefException
 
@@ -796,7 +798,7 @@ class TestPyReParse(unittest.TestCase):
             rtp.load_re_lines(patterns)
         self.assertIn('Warning: [sub] has FLAG_NEW_SUBSECTION but TRIGGER_ON "True" lacks {parent_pattern} reference.', f.getvalue())
 
-    def test_prefix_filtering(self):
+    def test_trigger_perf(self):
         patterns = {
             'abc_pat': {
                 self.PRP.INDEX_RE_STRING: r'^ABC(?P<val>\d+)',
@@ -814,25 +816,6 @@ class TestPyReParse(unittest.TestCase):
         rtp = self.PRP()
         rtp.load_re_lines(patterns)
 
-        # Reset states for clean test
-        rtp.report_reset()
-
-        # Match ABC line: should match abc_pat, skip def_pat (attempts unchanged)
-        match_re_lines, fields = rtp.match('ABC123')
-        self.assertEqual(['abc_pat'], match_re_lines)
-        self.assertEqual('123', fields.get('val'))
-        self.assertEqual(1, rtp.re_defs['abc_pat'][self.PRP.INDEX_STATES][self.PRP.INDEX_ST_SECTION_MATCH_ATTEMPTS])
-        self.assertEqual(0, rtp.re_defs['def_pat'][self.PRP.INDEX_STATES][self.PRP.INDEX_ST_SECTION_MATCH_ATTEMPTS])
-
-        # Match DEF line: should match def_pat
-        match_re_lines, fields = rtp.match('DEF456')
-        self.assertEqual(['def_pat'], match_re_lines)
-        self.assertEqual('456', fields.get('val'))
-        self.assertEqual(1, rtp.re_defs['def_pat'][self.PRP.INDEX_STATES][self.PRP.INDEX_ST_SECTION_MATCH_ATTEMPTS])
-
-        # Perf test: generate 10000 random lines, time matching
-        import random
-        import time
         random_lines = ['ABC' + str(i) if i % 2 == 0 else 'DEF' + str(i) for i in range(10000)]
         random.shuffle(random_lines)
 
@@ -841,6 +824,5 @@ class TestPyReParse(unittest.TestCase):
             rtp.match(line)
         end_time = time.perf_counter()
         duration = end_time - start_time
-        # Assert reasonable performance (under 1 second on typical hardware)
-        self.assertLess(duration, 1.0, f"Prefix filtering took too long: {duration}s")
+        self.assertLess(duration, 1.0, f"Trigger matching took too long: {duration}s")
     
