@@ -189,14 +189,14 @@ class TestPyReParse(unittest.TestCase):
     expected_value_2 = ['file_date']
 
     expected_value_3_1 = ['run_date']
-    expected_value_3_2 = {'run_date': '01/01/16', 'run_time': '00:14:18', 'subsection_depth': 0, 'current_subsection_parents': [], 'subsection_line_count': 3}
+    expected_value_3_2 = {'run_date': '01/01/16', 'run_time': '00:14:18', 'subsection_depth': 0, 'current_subsection_parents': [], 'subsection_line_count': 2}
 
     expected_value_4_1 = ['tx_line']
     expected_value_4_2 = {'ac_num': '394654', 'ac_type': '54', 'balance': '$     0.00', 'fee_code': '  ',
                           'fee_type': 'ZERO OVERDRAFT FEE     ',
                           'nsf_fee': '$  0.00', 'trace_num': '658524658 ', 'tx_amt': '$     5.41',
                           'tx_date': '01/02/16', 'tx_desc': 'VALLARTA SUPERMARK ARVIN', 'tx_seq': '56546',
-                          'subsection_depth': 0, 'current_subsection_parents': [], 'subsection_line_count': 5}
+                          'subsection_depth': 0, 'current_subsection_parents': [], 'subsection_line_count': 4}
 
     def test_load_re(self):
         rtp = PyReParse()

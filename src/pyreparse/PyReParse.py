@@ -327,6 +327,7 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
             except TriggerDefException as e:
                 print(f'*** Exception: \"{e}\", Hit on Compiling trigger_On [{fld}]! ',
                       f'\"\"\"{self.re_defs[fld][rtrpc.INDEX_RE_TRIGGER_ON]}\"\"\"')
+                raise
 
             ''' Compile trigger_off...
             Take the trigger strings and compile them into static functions...
@@ -338,6 +339,7 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
             except TriggerDefException as e:
                 print(f'*** Exception: \"{e}\", Hit on Compiling trigger_Off [{fld}]! ',
                       f'\"\"\"{self.re_defs[fld][rtrpc.INDEX_RE_TRIGGER_OFF]}\"\"\"')
+                raise
 
             # Warn if NEW_SUBSECTION lacks parent trigger
             flags = self.re_defs[fld].get(rtrpc.INDEX_RE_FLAGS, 0)
