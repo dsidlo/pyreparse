@@ -583,6 +583,7 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
         return trig_on_state and (not trig_off_state)
 
     def match(self, in_line, debug=False, limit_matches=None):
+        in_line = in_line.rstrip()
         '''
         Given a text input line, check if any of our regexp(s) match to it.
 
