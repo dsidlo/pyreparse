@@ -149,6 +149,23 @@ if nsf_tot == grand_total:
 ## The PyReParse Data Structure of Patterns
 <br>
 
+## Patterns Validation
+
+PyReParse automatically validates the patterns dictionary in `load_re_lines()` via `validate_re_defs()`:
+
+**Checks Performed:**
+- Each pattern requires `INDEX_RE_STRING` (non-empty string).
+- `INDEX_RE_FLAGS`: Must be non-negative integer using only defined flags.
+- `INDEX_RE_TRIGGER_ON`/`INDEX_RE_TRIGGER_OFF`: Valid Python syntax after symbol/variable replacement (AST-checked).
+- Trigger dependencies: No cycles in `{pattern_name}` graph (DAG enforced).
+- `FLAG_NEW_SUBSECTION`: `trigger_on` must contain `{parent_pattern}` reference.
+
+**Errors:** Raises `ValueError` (structural/flags/cycles/orphan subs) or `TriggerDefException` (syntax).
+
+See `tests/test_pyreparse.py::TestPyReParse.test_validate_re_defs*` for examples.
+
+This ensures robust configuration before compilation/processing.
+
 ## Flags
 
 ## Coding Triggers...
