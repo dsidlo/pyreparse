@@ -47,7 +47,8 @@ class PyReParse:
     INDEX_RE_TRIGGER_ON_TEXT = 'trigger_on_text'     # Entry - Trigger_On Text Created by PyReParse
     INDEX_RE_TRIGGER_OFF_TEXT = 'trigger_off_text'   # Entry - Trigger_OFF Text Created by PyReParse
 
-    INDEX_RE_CALLBACK = 'callback' # Entry containing a patterns assigned callback.
+    INDEX_RE_CALLBACK = 'callback'  # Entry containing a patterns assigned callback.
+    INDEX_RE_FLAGS = 'flags'  # Entry containing a patterns flags`.
 
     INDEX_STATES = 'states'  # Dict of a patterns states.
     INDEX_ST_REPORT_LINES_MATCHED = 'report_lines_matched'
@@ -85,7 +86,7 @@ class PyReParse:
         :param fld_name:
         :return:
         '''
-        return r'\(\?P\<' + fld_name + '\>'
+        return r'\(\?P\<' + fld_name + r'\>'
 
     @staticmethod
     def dict_merge(D1, D2):
@@ -143,25 +144,24 @@ class PyReParse:
 
         An Example: INDEX_RE_TRIGGER_ON: (<REPORT_LINE> >= 2) and [start_tx_lines]
           - "<REPORT_LINE>" is converted to "prp_inst.report_line_count"
-          - "[start_tx_lines]" is converted to 
+          - "[start_tx_lines]" is converted to
             "(prp_inst.re_defs['start_tx_lines'][INDEX_STATES][INDEX_ST_SECTION_LINES_MATCHED] > 0)"
-        
+
         Counter Variables available:
           - <REPORT_LINE>
           - <SECTION_COUNT>
           - <SECTION_LINE>
-          
-        When you reference a pattern-name using brackets '[]', it is tested to see if a match on it has already 
+
+        When you reference a pattern-name using brackets '[]', it is tested to see if a match on it has already
         occurred.
           - [report_id]
           - [run_date]
           - [tx_line]
-                  
+
         And the following function is created:
             def trigger_on_start_tx_lines(prp_inst, pat_name):
                 return (prp_inst.report_line_count >= 2) and \
                        (prp_inst.re_defs['start_tx_lines'][INDEX_STATES][INDEX_ST_SECTION_LINES_MATCHED] > 0)
-            
 
         self.report_line_count = 0
         self.section_count = 0
@@ -171,9 +171,11 @@ class PyReParse:
         :param trigger_name:
         :return:
         '''
+
+        # Dynamic trigger function definition
         # This is our function template.
         def_str = """
-def <trig_func_name>(prp_inst, pat_name, trigger_name): 
+def <trig_func_name>(prp_inst, pat_name, trigger_name):
     PRP = PyReParse
     return <func_body>
         """
@@ -197,19 +199,20 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
                 # We have a variable...
                 var_name = m.group(2)
                 if var_name == prp.TRIG_SYM_REPORT_LINE:
-                    func_body = func_body.replace(m.group(0), f'prp_inst.report_line_count')
+                    func_body = func_body.replace(m.group(0), 'prp_inst.report_line_count')
                 elif var_name == prp.TRIG_SYM_SECTION_COUNT:
-                    func_body = func_body.replace(m.group(0), f'prp_inst.section_count')
+                    func_body = func_body.replace(m.group(0), 'prp_inst.section_count')
                 elif var_name == prp.TRIG_SYM_SECTION_LINE:
-                    func_body = func_body.replace(m.group(0), f'prp_inst.section_line_count')
+                    func_body = func_body.replace(m.group(0), 'prp_inst.section_line_count')
                 else:
                     raise TriggerDefException(f'Unknown variable: {m.group(0)}')
+
             elif m and (m.group(5) is not None):
                 # We have a pattern-name...
                 pn = m.group(5)
                 if pn in self.re_defs:
                     func_body = func_body.replace(m.group(1),
-                                                  f'(prp_inst.re_defs[' + "'" + pn + "'" +
+                                                  '(prp_inst.re_defs[' + "'" + pn + "'" +
                                                   '][PRP.INDEX_STATES][PRP.INDEX_ST_SECTION_LINES_MATCHED] > 0)')
                 else:
                     raise TriggerDefException(f'Unknown pattern-name: {pn}')
@@ -534,8 +537,7 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
         self.section_reset()
 
     def money2float(self, fld, in_str):
-        re_str = re.sub('[\,\s\$]', '', in_str)
-        ret_val = None
+        re_str = re.sub(r'[\,\s\$]', r'', in_str)
         try:
             ret_val = float(re_str)
         except Exception as e:
