@@ -671,6 +671,71 @@ class TestPyReParse(unittest.TestCase):
 
         os.unlink(mock_path)
 
+    def test_parse_file_real_data(self):
+        import tempfile
+        import os
+
+        PRP = self.PRP
+
+        patterns = {
+            'report_start': {
+                PRP.INDEX_RE_STRING: r'^\*\*REPORT(?P<rep_id>\d+)\s*$',
+                PRP.INDEX_RE_FLAGS: PRP.FLAG_NEW_SECTION | PRP.FLAG_RETURN_ON_MATCH,
+                PRP.INDEX_RE_TRIGGER_ON: 'True'
+            },
+            'cust_start': {
+                PRP.INDEX_RE_STRING: r'^CUSTOMER(?P<cust_id>\d+)\s*$',
+                PRP.INDEX_RE_FLAGS: PRP.FLAG_NEW_SUBSECTION | PRP.FLAG_RETURN_ON_MATCH,
+                PRP.INDEX_RE_TRIGGER_ON: '{report_start}'
+            },
+            'tx_line': {
+                PRP.INDEX_RE_STRING: r'^TX(?P<tx_id>\d+)\s+(?P<amt>\$[0-9,]+\.\d\d)',
+                PRP.INDEX_RE_TRIGGER_ON: '{cust_start}'
+            },
+            'cust_total': {
+                PRP.INDEX_RE_STRING: r'^TOTAL\s+(?P<total>\$[0-9,]+\.\d\d)',
+                PRP.INDEX_RE_FLAGS: PRP.FLAG_END_OF_SECTION | PRP.FLAG_RETURN_ON_MATCH,
+                PRP.INDEX_RE_TRIGGER_ON: '{tx_line}'
+            },
+            'report_end': {
+                PRP.INDEX_RE_STRING: r'^END REPORT\s*$',
+                PRP.INDEX_RE_FLAGS: PRP.FLAG_END_OF_SECTION
+            }
+        }
+
+        with tempfile.NamedTemporaryFile(mode='w', delete=False) as f:
+            for rep in range(3):
+                f.write(f'**REPORT{rep+1}\n')
+                for cust in range(2):
+                    f.write(f'CUSTOMER{cust+1}\n')
+                    for tx in range(50):
+                        f.write(f'TX{tx} $10.00\n')
+                    f.write('TOTAL $1000.00\n')
+                f.write('END REPORT\n')
+                f.write('\n' * 10)  # Padding
+            mock_path = f.name
+
+        prp = self.PRP(patterns)
+
+        sections_serial = prp.parse_file(mock_path)
+        self.assertGreaterEqual(len(sections_serial), 3)
+
+        sec0 = sections_serial[0]
+        self.assertEqual(sec0['section_start'], 1)
+
+        tx_count = sum(1 for item in sec0['fields_list'] if 'tx_line' in item['match_def'])
+        self.assertEqual(tx_count, 100)  # 2 cust * 50
+
+        # Subs metadata
+        sub_items = [item['fields']['current_subsection_parents'] for item in sec0['fields_list'] if 'current_subsection_parents' in item['fields']]
+        self.assertTrue(any('cust_start' in parents for parents in sub_items))
+
+        # Parallel equiv
+        sections_parallel = prp.parse_file_parallel(mock_path)
+        self.assertEqual(sections_serial, sections_parallel)  # Same structure/order
+
+        os.unlink(mock_path)
+
     def test_parallel_benchmark(self):
         # Use existing test_re_lines, mock large file or skip heavy, assert speedup >1x or time < serial
         pass  # Stub, use time.perf_counter for real
