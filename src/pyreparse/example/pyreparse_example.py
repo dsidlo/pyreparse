@@ -192,18 +192,28 @@ class PyReParse_Example():
         parser = argparse.ArgumentParser(description='PyReParse Example')
         parser.add_argument('file_path', nargs='?', default='tests/data/NsfPosFees/999-063217-XXXX-PAID-NSF POS FEES CHARGED page 0001 to 0188.TXT')
         parser.add_argument('--parallel-sections', type=int, default=0, help='Parallel depth >0')
+        parser.add_argument('--stream', action='store_true', help='Use streaming mode')
         self.args = parser.parse_args()
         self.file_path = self.args.file_path
 
-        if self.args.parallel_sections > 0:
-            sections = self.prp.parse_file_parallel(self.file_path, max_workers=4, parallel_depth=self.args.parallel_sections)
+        if self.args.stream:
+            print("Streaming mode...")
+            match_count = 0
+            for m, f in self.prp.stream_matches(self.file_path):
+                if m:
+                    match_count += 1
+                    print(f"Match: {m} - {f}")
+            print(f"Total matches: {match_count}")
         else:
-            sections = self.prp.parse_file(self.file_path)  # New serial
+            if self.args.parallel_sections > 0:
+                sections = self.prp.parse_file_parallel(self.file_path, max_workers=4, parallel_depth=self.args.parallel_sections)
+            else:
+                sections = self.prp.parse_file(self.file_path)  # New serial
 
-        # Common processing: print/merge sections
-        total_matches = sum(len(s['fields_list']) for s in sections)
-        print(f"Processed {len(sections)} sections, {total_matches} matches")
-        # TODO aggregate totals/validations
+            # Common processing: print/merge sections
+            total_matches = sum(len(s['fields_list']) for s in sections)
+            print(f"Processed {len(sections)} sections, {total_matches} matches")
+            # TODO aggregate totals/validations
 
 if __name__ == '__main__':
     example = PyReParse_Example()

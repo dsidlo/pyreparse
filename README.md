@@ -166,6 +166,31 @@ for sec in sections:
 
 Perf: 2-4x speedup multi-core. Tests verify serial==parallel.
 
+## Streaming for Large Files
+
+For very large files where loading the entire report into memory is impractical, use streaming methods like `stream_matches()` or `parse_file_stream()` to process line-by-line or section-by-section without buffering the full content.
+
+- `stream_matches(file_path, callback=None)`: Yields individual `(match_def, fields)` tuples for each line, or calls a provided callback. Ideal for real-time processing or low-memory event-driven parsing.
+- `parse_file_stream(file_path, callback=None)`: Yields complete sections as dicts (similar to `parse_file()`), or calls a callback per section. Processes boundaries serially but streams content.
+
+Memory benefits: These methods read the file iteratively (via `open()` and `readlines()` slices or line-by-line), avoiding full file loads. Use for GB-scale reports; memory usage stays constant regardless of file size, unlike `parse_file()` which builds full in-memory lists.
+
+Example:
+```python
+# Stream individual matches
+for match_def, fields in prp.stream_matches('large_report.txt'):
+    if match_def:
+        print(f"Matched {match_def}: {fields}")
+
+# Stream sections with callback
+def process_section(sec):
+    print(f"Section {sec['section_start']}: {len(sec['fields_list'])} items")
+
+list(prp.parse_file_stream('large_report.txt', callback=process_section))
+```
+
+CLI in example: `python src/pyreparse/example/pyreparse_example.py file.txt --stream`
+
 ## The PyReParse Data Structure of Patterns
 <br>
 
