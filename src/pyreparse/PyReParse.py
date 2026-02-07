@@ -44,6 +44,7 @@ class PyReParse:
 
     INDEX_RE_CALLBACK = 'callback'  # Entry containing a patterns assigned callback.
     INDEX_RE_FLAGS = 'flags'  # Entry containing a patterns flags`.
+    INDEX_RE_PREFIX_MATCHER = 'prefix_matcher'  # Entry for prefix matcher configuration.
 
     INDEX_STATES = 'states'  # Dict of a patterns states.
     INDEX_ST_REPORT_LINES_MATCHED = 'report_lines_matched'
