@@ -30,6 +30,8 @@ class PyReParse:
 
     PREFIX_LEN = 12
 
+    special_escape_followers = set('aAbBdDFfNnPpRrSsTtVvWwXxZz0123456789')
+
     @staticmethod
     def extract_literal_prefix(raw_pat, max_len=12):
         i = 0
@@ -41,9 +43,9 @@ class PyReParse:
         while i < length and len(prefix) < max_len:
             c = raw_pat[i]
             if escaped:
-                if c in metas:
-                    prefix += c
                 escaped = False
+                if c not in PyReParse.special_escape_followers:
+                    prefix += c
                 i += 1
                 continue
             if in_comment:
@@ -453,6 +455,7 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
                 comped_re = re.compile(raw_pat, re.X)
 
                 prefix = PyReParse.extract_literal_prefix(raw_pat, rtrpc.PREFIX_LEN)
+                prefix_matcher = None
                 if len(prefix) >= 3:
                     prefix_matcher = lambda line: line.startswith(prefix)
             except re.error as e:
