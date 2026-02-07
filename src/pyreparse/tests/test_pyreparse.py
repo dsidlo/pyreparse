@@ -911,7 +911,6 @@ class TestPyReParse(unittest.TestCase):
                 called.append((m, flds))
 
             called = []
-            global cb_txline_cnt, cb_rptid_cnt
             cb_txline_cnt = 0
             cb_rptid_cnt = 0
             rtp_stream.stream_matches(mock_path, callback=mock_cb)
