@@ -7,6 +7,9 @@ from collections import defaultdict
 import io
 from contextlib import redirect_stdout
 
+import os
+import tempfile
+
 from pyreparse.PyReParse import TriggerDefException
 
 '''
@@ -618,6 +621,58 @@ class TestPyReParse(unittest.TestCase):
         self.assertEqual(0, rtp.get_max_subsection_depth())
         self.assertEqual({}, rtp.get_subsection_depth_counts())
         # Existing tests should still pass unchanged, as verified by running the suite
+
+    def test_parallel_basic(self):
+        # Mock 2-section file
+        mock_content = [
+            '**SEC1\n', 'data1\n', 'END1\n',
+            '**SEC2\n', 'data2\n', 'END2\n'
+        ]
+        with tempfile.NamedTemporaryFile(mode='w', delete=False) as f:
+            f.write(''.join(mock_content))
+            mock_path = f.name
+
+        patterns = {
+            'sec': {
+                self.PRP.INDEX_RE_STRING: r'^\*\*(?P<id>SEC\d+)\s*$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_NEW_SECTION | self.PRP.FLAG_RETURN_ON_MATCH,
+                self.PRP.INDEX_RE_TRIGGER_ON: 'True'
+            },
+            'data': {
+                self.PRP.INDEX_RE_STRING: r'^data(?P<d>\d+)\s*$',
+                self.PRP.INDEX_RE_TRIGGER_ON: '{sec}'
+            },
+            'end': {
+                self.PRP.INDEX_RE_STRING: r'^END\d+\s*$',
+                self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_END_OF_SECTION,
+                self.PRP.INDEX_RE_TRIGGER_ON: 'True'
+            }
+        }
+
+        prp = self.PRP(patterns)
+
+        # Serial
+        serial_data = []
+        with open(mock_path) as f:
+            for line in f:
+                m, flds = prp.match(line)
+                if m:
+                    serial_data.append((m, flds))
+
+        # Parallel
+        parallel_sections = prp.parse_file_parallel(mock_path)
+        parallel_data = []
+        for sec in parallel_sections:
+            for item in sec['fields_list']:
+                parallel_data.append((item['match_def'], item['fields']))
+
+        self.assertEqual(serial_data, parallel_data)
+
+        os.unlink(mock_path)
+
+    def test_parallel_benchmark(self):
+        # Use existing test_re_lines, mock large file or skip heavy, assert speedup >1x or time < serial
+        pass  # Stub, use time.perf_counter for real
 
     def test_validate_re_defs_valid(self):
         rtp = self.PRP()
