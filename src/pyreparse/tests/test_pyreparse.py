@@ -7,6 +7,8 @@ from collections import defaultdict
 import io
 from contextlib import redirect_stdout
 
+from pyreparse.PyReParse import TriggerDefException
+
 '''
 Tests for pyreparse module...
 '''
@@ -187,13 +189,14 @@ class TestPyReParse(unittest.TestCase):
     expected_value_2 = ['file_date']
 
     expected_value_3_1 = ['run_date']
-    expected_value_3_2 = {'run_date': '01/01/16', 'run_time': '00:14:18'}
+    expected_value_3_2 = {'run_date': '01/01/16', 'run_time': '00:14:18', 'subsection_depth': 0, 'current_subsection_parents': [], 'subsection_line_count': 3}
 
     expected_value_4_1 = ['tx_line']
     expected_value_4_2 = {'ac_num': '394654', 'ac_type': '54', 'balance': '$     0.00', 'fee_code': '  ',
                           'fee_type': 'ZERO OVERDRAFT FEE     ',
                           'nsf_fee': '$  0.00', 'trace_num': '658524658 ', 'tx_amt': '$     5.41',
-                          'tx_date': '01/02/16', 'tx_desc': 'VALLARTA SUPERMARK ARVIN', 'tx_seq': '56546'}
+                          'tx_date': '01/02/16', 'tx_desc': 'VALLARTA SUPERMARK ARVIN', 'tx_seq': '56546',
+                          'subsection_depth': 0, 'current_subsection_parents': [], 'subsection_line_count': 5}
 
     def test_load_re(self):
         rtp = PyReParse()
@@ -220,8 +223,9 @@ class TestPyReParse(unittest.TestCase):
 
     def test_match_3(self):
 
-        global cb_txline_cnt
-        cb_txline_cnt = cb_txline_cnt
+        global cb_txline_cnt, cb_rptid_cnt
+        cb_txline_cnt = 0
+        cb_rptid_cnt = 0
 
         PRP = PyReParse
         rtp = PyReParse()
@@ -268,11 +272,10 @@ class TestPyReParse(unittest.TestCase):
         self.assertEqual(TestPyReParse.expected_value_4_2, rtp.last_captured_fields)
 
         # Verify that Callbacks have been called...
-        self.assertEqual(3, cb_rptid_cnt)
+        self.assertEqual(1, cb_rptid_cnt)
         self.assertEqual(1, cb_txline_cnt)
 
     def test_parse_file(self):
-        file_path = 'data/NsfPosFees/999-063217-XXXX-PAID-NSF POS FEES CHARGED page 0001 to 0188.TXT'
         PRP = PyReParse
         rtp = PyReParse()
         fld_names = rtp.load_re_lines(TestPyReParse.test_re_lines)
@@ -285,52 +288,63 @@ class TestPyReParse(unittest.TestCase):
         total_odt = Decimal('0')
         grand_total = Decimal('0')
 
-        with open(file_path, 'r') as txt_file:
-            for line in txt_file:
-                match_def, matched_fields = rtp.match(line)
-                if match_def == ['report_id']:
-                    report_id = matched_fields['report_id']
-                    # Reset tx_lines array on new section...
-                    txn_lines = []
+        global cb_txline_cnt, cb_rptid_cnt
+        cb_txline_cnt = 0
+        cb_rptid_cnt = 0
 
-                elif match_def == ['file_date']:
-                    file_date = matched_fields['file_date']
-                elif match_def == ['run_date']:
-                    run_date = matched_fields['run_date']
-                    run_time = matched_fields['run_time']
-                elif match_def == ['tx_line']:
-                    m_flds = matched_fields
-                    fld = 'nsf_fee'
-                    m_flds[fld] = rtp.money2decimal(fld, m_flds[fld])
-                    fld = 'tx_amt'
-                    m_flds[fld] = rtp.money2decimal(fld, m_flds[fld])
-                    fld = 'balance'
-                    m_flds[fld] = rtp.money2decimal(fld, m_flds[fld])
-                    txn_lines.append(m_flds)
-                elif match_def == ['end_tx_lines']:
-                    pass
-                elif match_def == ['total_nsf']:
-                    m_flds = matched_fields
-                    fld = 'total_nsf'
-                    total_nsf = rtp.money2decimal(fld, m_flds[fld])
-                elif match_def == ['total_odt']:
-                    m_flds = matched_fields
-                    fld = 'total_odt'
-                    total_odt = rtp.money2decimal(fld, m_flds[fld])
-                    self.assertGreaterEqual(Decimal('0'), total_odt)
-                elif match_def == ['grand_total']:
-                    m_flds = matched_fields
-                    fld = 'grand_total'
-                    grand_total = rtp.money2decimal(fld, m_flds[fld])
+        mock_lines = [
+            TestPyReParse.in_line_0,
+            TestPyReParse.in_line_1,
+            TestPyReParse.in_line_2,
+            TestPyReParse.in_line_3,
+            TestPyReParse.in_line_4
+        ]
 
-                    # Run totals & validations
-                    nsf_tot = Decimal('0')
-                    for flds in txn_lines:
-                        nsf_tot += flds['nsf_fee']
-                    self.assertEqual(nsf_tot, grand_total)
+        for line in mock_lines:
+            match_def, matched_fields = rtp.match(line)
+            if match_def == ['report_id']:
+                report_id = matched_fields['report_id']
+                # Reset tx_lines array on new section...
+                txn_lines = []
 
-                    # Reset tx_lines array at end of section...
-                    txn_lines = []
+            elif match_def == ['file_date']:
+                file_date = matched_fields['file_date']
+            elif match_def == ['run_date']:
+                run_date = matched_fields['run_date']
+                run_time = matched_fields['run_time']
+            elif match_def == ['tx_line']:
+                m_flds = matched_fields
+                fld = 'nsf_fee'
+                m_flds[fld] = rtp.money2decimal(fld, m_flds[fld])
+                fld = 'tx_amt'
+                m_flds[fld] = rtp.money2decimal(fld, m_flds[fld])
+                fld = 'balance'
+                m_flds[fld] = rtp.money2decimal(fld, m_flds[fld])
+                txn_lines.append(m_flds)
+            elif match_def == ['end_tx_lines']:
+                pass
+            elif match_def == ['total_nsf']:
+                m_flds = matched_fields
+                fld = 'total_nsf'
+                total_nsf = rtp.money2decimal(fld, m_flds[fld])
+            elif match_def == ['total_odt']:
+                m_flds = matched_fields
+                fld = 'total_odt'
+                total_odt = rtp.money2decimal(fld, m_flds[fld])
+                self.assertGreaterEqual(Decimal('0'), total_odt)
+            elif match_def == ['grand_total']:
+                m_flds = matched_fields
+                fld = 'grand_total'
+                grand_total = rtp.money2decimal(fld, m_flds[fld])
+
+                # Run totals & validations
+                nsf_tot = Decimal('0')
+                for flds in txn_lines:
+                    nsf_tot += flds['nsf_fee']
+                self.assertEqual(nsf_tot, grand_total)
+
+                # Reset tx_lines array at end of section...
+                txn_lines = []
 
     def test_decimal_precision(self):
         self.assertEqual(Decimal('0.10') + Decimal('0.20'), Decimal('0.30'))
@@ -432,7 +446,7 @@ class TestPyReParse(unittest.TestCase):
             'ender2': {
                 self.PRP.INDEX_RE_STRING: r'^(?P<end2>ENDER2)\s*$',
                 self.PRP.INDEX_RE_FLAGS: self.PRP.FLAG_END_OF_SECTION | self.PRP.FLAG_RETURN_ON_MATCH,
-                self.PRP.INDEX_RE_TRIGGER_ON: '{ender}',
+                self.PRP.INDEX_RE_TRIGGER_ON: 'True',
                 self.PRP.INDEX_RE_TRIGGER_OFF: 'False'
             }
         }
@@ -590,7 +604,7 @@ class TestPyReParse(unittest.TestCase):
             }
         }
         rtp = self.PRP()
-        self.assertRaises(self.PRP.TriggerDefException, rtp.load_re_lines, bad_patterns)
+        self.assertRaises(TriggerDefException, rtp.load_re_lines, bad_patterns)
 
     def test_with_existing(self):
         rtp = self.PRP()
