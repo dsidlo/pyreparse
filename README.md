@@ -28,7 +28,6 @@ are needed. So if you know that the pattern for regexp A always occurs before
 regexp B, you can use the data structure to specify that regexp B should not
 be used until after regexp A triggers.
   - All regular expressions and their associated properties are in one data structure.
-  - Automatic Prefix Pre-Filtering: For each pattern, auto-generates a simple prefix matcher from the first ~20 chars of the regex string. Checks line prefix before trigger evaluation and full regex match, providing 10-20% speedup on large reports without changing API.
   - Additional benefits include the ability to cross-check a non-matching line with
 a simpler regexp that can catch lines that should have matched but did not,
 due to a need to tweak the main regexp, or possibly a corrupt input line.
