@@ -671,6 +671,7 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
         self.subsection_depth = 0
         self.current_subsection_parents = []
         self.subsection_line_count = 0
+        self.section_line_count = 0
 
     def report_reset(self):
         rtrpc = PyReParse
