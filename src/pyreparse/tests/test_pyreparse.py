@@ -798,6 +798,45 @@ class TestPyReParse(unittest.TestCase):
             rtp.load_re_lines(patterns)
         self.assertIn('Warning: [sub] has FLAG_NEW_SUBSECTION but TRIGGER_ON "True" lacks {parent_pattern} reference.', f.getvalue())
 
+    def test_parse_file_stream(self):
+        global cb_txline_cnt, cb_rptid_cnt
+        cb_txline_cnt = 0
+        cb_rptid_cnt = 0
+
+        mock_lines = [
+            TestPyReParse.in_line_0 + '\n',
+            TestPyReParse.in_line_1 + '\n',
+            TestPyReParse.in_line_2 + '\n',
+            TestPyReParse.in_line_3 + '\n',
+            TestPyReParse.in_line_4 + '\n'
+        ]
+
+        with tempfile.NamedTemporaryFile(mode='w', delete=False) as f:
+            f.writelines(mock_lines)
+            mock_path = f.name
+
+        try:
+            rtp = self.PRP()
+            rtp.load_re_lines(TestPyReParse.test_re_lines)
+            serial_sections = rtp.parse_file(mock_path)
+
+            stream_sections = list(rtp.parse_file_stream(mock_path))
+            self.assertEqual(stream_sections, serial_sections)
+            self.assertEqual(1, len(stream_sections))
+            self.assertEqual(5, len(stream_sections[0]['fields_list']))
+            self.assertEqual(1, cb_rptid_cnt)
+            self.assertEqual(1, cb_txline_cnt)
+
+            # Test callback
+            def mock_sec_cb(sec):
+                called.append(sec)
+
+            called = []
+            rtp.parse_file_stream(mock_path, callback=mock_sec_cb)
+            self.assertEqual(called, serial_sections)
+        finally:
+            os.unlink(mock_path)
+
     def test_trigger_perf(self):
         patterns = {
             'abc_pat': {
@@ -825,4 +864,47 @@ class TestPyReParse(unittest.TestCase):
         end_time = time.perf_counter()
         duration = end_time - start_time
         self.assertLess(duration, 1.0, f"Trigger matching took too long: {duration}s")
+
+    def test_stream_matches(self):
+        global cb_txline_cnt, cb_rptid_cnt
+        cb_txline_cnt = 0
+        cb_rptid_cnt = 0
+
+        mock_lines = [
+            TestPyReParse.in_line_0 + '\n',
+            TestPyReParse.in_line_1 + '\n',
+            TestPyReParse.in_line_2 + '\n',
+            TestPyReParse.in_line_3 + '\n',
+            TestPyReParse.in_line_4 + '\n'
+        ]
+
+        with tempfile.NamedTemporaryFile(mode='w', delete=False) as f:
+            f.writelines(mock_lines)
+            mock_path = f.name
+
+        try:
+            rtp_serial = self.PRP()
+            rtp_serial.load_re_lines(TestPyReParse.test_re_lines)
+            serial_results = []
+            for line in mock_lines:
+                m, f = rtp_serial.match(line.rstrip('\n'))
+                serial_results.append((m, f))
+
+            rtp_stream = self.PRP()
+            rtp_stream.load_re_lines(TestPyReParse.test_re_lines)
+            stream_results = list(rtp_stream.stream_matches(mock_path))
+
+            self.assertEqual(stream_results, serial_results)
+            self.assertEqual(1, cb_rptid_cnt)
+            self.assertEqual(1, cb_txline_cnt)
+
+            # Test callback
+            def mock_cb(m, flds):
+                called.append((m, flds))
+
+            called = []
+            rtp_stream.stream_matches(mock_path, callback=mock_cb)
+            self.assertEqual(called, stream_results)
+        finally:
+            os.unlink(mock_path)
     
