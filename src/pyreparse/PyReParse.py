@@ -401,8 +401,12 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
             self.re_defs[fld] = in_hash[fld]
 
             # Verify that the regexp compiles...
+            comped_re = None
+            prefix_matcher = None
             try:
                 comped_re = re.compile(in_hash[fld][rtrpc.INDEX_RE_STRING], re.X)
+                prefix_str = self.re_defs[fld][rtrpc.INDEX_RE_STRING][:20]
+                prefix_matcher = re.compile(re.escape(prefix_str)).match
             except Exception as e:
                 print(f'*** Exception: \"{e}\", Hit on Compiling Regexp [{fld}]! ',
                       f'\"\"\"{in_hash[fld][rtrpc.INDEX_RE_STRING]}\"\"\"')
@@ -412,6 +416,10 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
                                                 {
                                                     rtrpc.INDEX_RE_REGEXP:
                                                         comped_re
+                                                        if rtrpc.INDEX_RE_STRING in in_hash[fld]
+                                                        else None,
+                                                    rtrpc.INDEX_RE_PREFIX_MATCHER:
+                                                        prefix_matcher
                                                         if rtrpc.INDEX_RE_STRING in in_hash[fld]
                                                         else None,
                                                     rtrpc.INDEX_STATES: {
