@@ -19,7 +19,7 @@ class PyReParse_Example():
 
     PRP = PyReParse  # An alias to the PyReParse class.
 
-    def cb_rport_id (prp_inst: PyReParse, pattern_name):
+    def cb_rport_id(prp_inst: PyReParse, pattern_name):
         '''
         Callback for report_id pattern.
         Callbacks can be used for editing or transforming captured values.
@@ -70,10 +70,10 @@ class PyReParse_Example():
     This is the data structure that contains a set of RegExp(s) that will be run against a text report.
     It is important to verify the the regular expressions match to expected lines.
     If the regular expression is complex because it contains lots of capture groups, you have the option of adding an
-    associated re_quick_check regular expression that can do a quick check on lines to see if they were possible \
+    associated re_quick_check regular expression that can do a quick check on lines to see if they were possible
     candidates for a match. The quick_check regular expression is tested on lines that did not match to the main
-    regexp, and if a match occurs, is produces a warning indicating that a line may have been missed. 
-    If you get the warning and find that the line should have matched, you can use that information to update the 
+    regexp, and if a match occurs, is produces a warning indicating that a line may have been missed.
+    If you get the warning and find that the line should have matched, you can use that information to update the
     main regexp, such that it can capture the line of interest.
     '''
     test_re_lines = {
@@ -242,13 +242,13 @@ class PyReParse_Example():
                         nsf_tot += flds['nsf_fee']
 
                     if nsf_tot == grand_total:
-                        print (f'*** Section [{prp.section_count}] Parsing Completed.')
+                        print(f'*** Section [{prp.section_count}] Parsing Completed.')
 
                     # Reset tx_lines array at end of section...
                     txn_lines = []
 
         if prp.section_count == 2538:
-            print (f'\n*** All Sections Processed!')
+            print('\n*** All Sections Processed!')
 
 if __name__ == '__main__':
     prg = PyReParse_Example()

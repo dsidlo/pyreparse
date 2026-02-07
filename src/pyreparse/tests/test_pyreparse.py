@@ -1,16 +1,11 @@
 #!/usr/bin/env python3
 
-import sys
-import re
-import os
 import unittest
+from pyreparse import PyReParse
 
 '''
 Tests for pyreparse module...
 '''
-
-import inspect
-from pyreparse import PyReParse
 
 global cb_txline_cnt, cb_rptid_cnt
 cb_txline_cnt = 0
@@ -20,19 +15,13 @@ class TestPyReParse(unittest.TestCase):
 
     PRP = PyReParse
 
-    in_line_0 = r'''**BP0420170101REPOREPOPAID-NSFPOSF00016-95214549
-'''
-    in_line_1 = r'''IPPOSFEE             FILE DATE: 12/31/15              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1
-'''
-    in_line_2 = r'''RUN DATE: 01/01/16   RUN TIME:  00:14:18            Paid-NSF POS Fees Charged
-'''
-    in_line_3 = r'''------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------                                                                  
-'''
-    in_line_4 = r'''   394654-54  $  0.00    VALLARTA SUPERMARK ARVIN  $     5.41  01/02/16    $     0.00  658524658       56546  ZERO OVERDRAFT FEE                                                         
+    in_line_0 = r'''**BP0420170101REPOREPOPAID-NSFPOSF00016-95214549                                                                                     '''
+    in_line_1 = r'''IPPOSFEE             FILE DATE: 12/31/15              SALLY'S EELS AND STEAKS                 RPPOSRPT                    PAGE:    1 '''
+    in_line_2 = r'''RUN DATE: 01/01/16   RUN TIME:  00:14:18            Paid-NSF POS Fees Charged                                                        '''
+    in_line_3 = r'''------------  ------- -- ------------------------  ----------  ---------  -----------  ----------  ---------  ---------              '''
+    in_line_4 = r'''   394654-54  $  0.00    VALLARTA SUPERMARK ARVIN  $     5.41  01/02/16    $     0.00  658524658       56546  ZERO OVERDRAFT FEE     '''
 
-'''
-
-    def cb_rport_id (prp_inst: PyReParse, pattern_name):
+    def cb_rport_id(prp_inst: PyReParse, pattern_name):
         '''
         Callback for report_id pattern.
 
@@ -70,10 +59,10 @@ class TestPyReParse(unittest.TestCase):
     This is the data structure that contains a set of RegExp(s) that will be run against a text report.
     It is important to verify the the regular expressions match to expected lines.
     If the regular expression is complex because it contains lots of capture groups, you have the option of adding an
-    associated re_quick_check regular expression that can do a quick check on lines to see if they were possible \
+    associated re_quick_check regular expression that can do a quick check on lines to see if they were possible
     candidates for a match. The quick_check regular expression is tested on lines that did not match to the main
-    regexp, and if a match occurs, is produces a warning indicating that a line may have been missed. 
-    If you get the warning and find that the line should have matched, you can use that information to update the 
+    regexp, and if a match occurs, is produces a warning indicating that a line may have been missed.
+    If you get the warning and find that the line should have matched, you can use that information to update the
     main regexp, such that it can capture the line of interest.
 
     TODO: Add an "edit" entry (refer to a function that will edit/conert the captured string)
@@ -85,7 +74,7 @@ class TestPyReParse(unittest.TestCase):
         'report_id': {
             PRP.INDEX_RE_STRING:
                 r'''
-                ^\*\*(?P<report_id>[^\ ]+)\s*$
+                ^\*\*(?P<report_id>[^\ \n]+)\s*$
                 ''',
             PRP.INDEX_RE_FLAGS: PRP.FLAG_RETURN_ON_MATCH | PRP.FLAG_NEW_SECTION,
             # Trigger Matching on (dependant fields)...
@@ -191,7 +180,6 @@ class TestPyReParse(unittest.TestCase):
                         'ac_type': '',
                         'ac_num': '', 'total_nsf': '', 'total_odt': '', 'grand_total': ''}
 
-
     expected_value_2 = ['file_date']
 
     expected_value_3_1 = ['run_date']
@@ -199,7 +187,7 @@ class TestPyReParse(unittest.TestCase):
 
     expected_value_4_1 = ['tx_line']
     expected_value_4_2 = {'ac_num': '394654', 'ac_type': '54', 'balance': '$     0.00', 'fee_code': '  ',
-                          'fee_type': 'ZERO OVERDRAFT FEE                                                         ',
+                          'fee_type': 'ZERO OVERDRAFT FEE     ',
                           'nsf_fee': '$  0.00', 'trace_num': '658524658 ', 'tx_amt': '$     5.41',
                           'tx_date': '01/02/16', 'tx_desc': 'VALLARTA SUPERMARK ARVIN', 'tx_seq': '56546'}
 
@@ -211,6 +199,7 @@ class TestPyReParse(unittest.TestCase):
     def test_match_1(self):
         rtp = PyReParse()
         fld_names = rtp.load_re_lines(TestPyReParse.test_re_lines)
+        self.assertEqual(TestPyReParse.expected_value_1, fld_names)
         match_re_lines, last_captured = rtp.match(TestPyReParse.in_line_0)
         self.assertEqual(['report_id'], match_re_lines)
         match_re_lines, last_captured = rtp.match(TestPyReParse.in_line_1)
@@ -323,6 +312,7 @@ class TestPyReParse(unittest.TestCase):
                     m_flds = matched_fields
                     fld = 'total_odt'
                     total_odt = rtp.money2float(fld, m_flds[fld])
+                    self.assertGreaterEqual(0, total_odt)
                 elif match_def == ['grand_total']:
                     m_flds = matched_fields
                     fld = 'grand_total'
@@ -336,4 +326,3 @@ class TestPyReParse(unittest.TestCase):
 
                     # Reset tx_lines array at end of section...
                     txn_lines = []
-
