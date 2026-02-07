@@ -46,6 +46,10 @@ class PyReParse:
                 escaped = False
                 if c not in PyReParse.special_escape_followers:
                     prefix += c
+                    # Hack for literal ** after \*
+                    if c == '*' and i + 1 < length and raw_pat[i + 1] == '*':
+                        prefix += '*'
+                        i += 1
                 i += 1
                 continue
             if in_comment:
@@ -76,7 +80,7 @@ class PyReParse:
                 break
             prefix += c
             i += 1
-        return prefix if len(prefix) >= 3 else ''
+        return prefix
 
     KNOWN_FLAGS_MASK = (FLAG_RETURN_ON_MATCH | FLAG_NEW_SECTION | FLAG_ONCE_PER_SECTION | FLAG_ONCE_PER_REPORT |
                         FLAG_END_OF_SECTION | FLAG_NEW_SUBSECTION)
@@ -456,7 +460,7 @@ def <trig_func_name>(prp_inst, pat_name, trigger_name):
 
                 prefix = PyReParse.extract_literal_prefix(raw_pat, rtrpc.PREFIX_LEN)
                 prefix_matcher = None
-                if len(prefix) >= 3:
+                if len(prefix) >= 2:
                     prefix_matcher = lambda line: line.startswith(prefix)
             except re.error as e:
                 raise ValueError(f"Failed to compile regex for pattern '{fld}': {e}")
