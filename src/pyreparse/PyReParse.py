@@ -9,13 +9,6 @@ from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
 from typing import Iterator, List, Optional, Tuple, Dict, Any, Union
 
-'''
-
-# TODO: add call to self.validate_re_defs()
-
-'''
-
-
 class TriggerDefException(Exception):
     pass
 
