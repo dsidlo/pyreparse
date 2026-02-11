@@ -492,4 +492,13 @@ Here's a step-by-step integration for the NSF fees example (extract tx_lines/tot
 
 This setup turns PyReParse into a "Pandas feeder" for analytics on tricky text data.
 
+## TODO: Create release.sh script
 
+Similar to pypy-search-caching...
+- Check release-tag
+- Run Tests
+- Run flake8
+- Test build
+- Run act
+- Update release tags (use n.n.n(a|b|rc)n for release tags)
+- Final message

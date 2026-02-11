@@ -23,7 +23,7 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/dsidlo/pyreparse"
+Homepage = "https://github.com/dsidlo/pyreparse/blob/main/README.md"
 "Source Code" = "https://github.com/dsidlo/pyreparse"
 Repository = "https://github.com/dsidlo/pyreparse"
 "Issue Tracker" = "https://github.com/dsidlo/pyreparse/issues"
